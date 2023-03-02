@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
+  appId: 'com.swapcircle.app',
   appName: 'swapcircle',
   webDir: 'www',
   bundledWebRuntime: false,
