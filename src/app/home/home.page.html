@@ -1,0 +1,229 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar style="--background: #e9f5ec;">
+    <ion-row style="width: 96%;
+    margin: 0% auto;">
+      <ion-col size="3">
+        <img src="assets/signup/user.svg">
+      </ion-col>
+      <ion-col size="6">
+        <div style="margin-top: 10%;">
+          <p style="font-style: normal;
+          font-weight: 700;
+          font-size: 18px;
+          color: #121826;" class="EudoxusSansReg">Hi, Jerome Bell</p>
+          <div style="display: flex;
+          align-items: center;
+          margin-top: 5%;">
+            <img src="assets/imgs/sun.svg">
+            <p style="font-weight: 400;
+            font-size: 14px;
+            color: #6C727F;" class="EudoxusSansReg">Good Morning</p>
+          </div>
+
+        </div>
+      </ion-col>
+      <ion-col size="3">
+        <div style="display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        margin-top: 18%;">
+          <img src="assets/imgs/messages-2.svg" (click)="chat()">
+          <img src="assets/imgs/notification.svg" (click)="noti()">
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="--background: #e9f5ec">
+  <div style="padding-left: 11px;">
+
+  </div>
+  <div class="wrapper EudoxusSansReg">
+    <div style="display:flex;align-items: center;">
+      <div class="carItem_boxfixed">
+        <img src="assets/imgs/add-circle.svg" width="17">
+        <div class="label EudoxusSansReg">Create Wallet</div>
+      </div>
+      <swiper [config]="{slidesPerView:3.5, spaceBetween:9, initialSlide:0, speed:400}" [pagination]="false"
+        style="padding: 8px;">
+        <ng-template swiperSlide>
+          <div class="carItem_box">
+            <div style="display: flex;
+            align-items: center;">
+              <img src="assets/imgs/flag.svg">
+              <div class="s-text EudoxusSansReg">NGN</div>
+            </div>
+
+            <div class="cars_label EudoxusSansReg">₦890.00</div>
+
+          </div>
+        </ng-template>
+        <ng-template swiperSlide>
+          <div class="carItem_box">
+            <div style="display: flex;
+            align-items: center;">
+              <img src="assets/imgs/flag.svg">
+              <div class="s-text EudoxusSansReg">NGN</div>
+            </div>
+
+            <div class="cars_label EudoxusSansReg">₦890.00</div>
+          </div>
+        </ng-template>
+        <ng-template swiperSlide>
+          <div class="carItem_box">
+            <div style="display: flex;
+            align-items: center;">
+              <img src="assets/imgs/flag.svg">
+              <div class="s-text EudoxusSansReg">NGN</div>
+            </div>
+
+            <div class="cars_label EudoxusSansReg">₦890.00</div>
+          </div>
+        </ng-template>
+        <ng-template swiperSlide>
+          <div class="carItem_box">
+            <div style="display: flex;
+            align-items: center;">
+              <img src="assets/imgs/flag.svg">
+              <div class="s-text EudoxusSansReg">NGN</div>
+            </div>
+
+            <div class="cars_label EudoxusSansReg">₦890.00</div>
+          </div>
+        </ng-template>
+        <ng-template swiperSlide>
+          <div class="carItem_box">
+            <div style="display: flex;
+            align-items: center;">
+              <img src="assets/imgs/flag.svg">
+              <div class="s-text EudoxusSansReg">NGN</div>
+            </div>
+
+            <div class="cars_label EudoxusSansReg">₦890.00</div>
+          </div>
+        </ng-template>
+      </swiper>
+    </div>
+
+
+
+    <ion-segment [scrollable]="true" (ionChange)="segmentChanged($event)" #mySegment SwipedTabs>
+      <ion-segment-button mode="ios" value="AllTransactions">
+        <ion-label>All Transactions</ion-label>
+      </ion-segment-button>
+      <ion-segment-button checked mode="ios" value="HotSwapOffers">
+        <ion-label>🔥 Hot Swap Offers</ion-label>
+      </ion-segment-button>
+      <ion-segment-button checked mode="ios" value="RateTable">
+        <ion-label>Rate Table</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <div *ngIf="requestsType=='AllTransactions'">
+      <ion-row *ngFor="let item of trans" class="rowcls">
+        <ion-col size="2.5">
+          <img src="{{item.img}}">
+        </ion-col>
+        <ion-col size="6.5">
+          <div class="text1">{{item.name}}</div>
+          <div class="text2">{{item.time}}</div>
+        </ion-col>
+        <ion-col size="3" style="text-align: end;
+        right: 10px;">
+          <div class="price" [class.red]="item.status=='to'">{{item.price}}</div>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div *ngIf="requestsType=='HotSwapOffers'">
+      <ion-row *ngFor="let item of trans1" class="rowcls">
+        <ion-col size="2.5">
+          <img src="{{item.img}}">
+        </ion-col>
+        <ion-col size="6.5">
+          <div class="text1">{{item.name}}</div>
+          <div class="text2">{{item.time}}</div>
+        </ion-col>
+        <ion-col size="3" style="text-align: end;
+        right: 10px;">
+          <div class="price" [class.red]="item.status=='to'">{{item.price}}</div>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div *ngIf="requestsType=='RateTable'">
+      <div class="box EudoxusSansReg">
+        <ion-row>
+          <ion-col size="6">
+            <div class="flex-c">
+              <div class="ftext1">£1</div>
+              <img src="assets/imgs/reset.svg">
+              <div class="ftext1">₦890.00</div>
+            </div>
+          </ion-col>
+          <ion-col size="6">
+          </ion-col>
+        </ion-row>
+        <hr style="background: #E9F5EC;
+        width: 92%;">
+        <div style="display: flex;align-items: center;
+        justify-content: space-around;margin:4% 0%;">
+          <div class="c-flex">
+            <img src="assets/imgs/curricon.svg">
+            <div class="label1 EudoxusSansReg">₦889.00</div>
+          </div>
+          <div class="c-flex">
+            <img src="assets/imgs/curricon2.svg">
+            <div class="label2 EudoxusSansReg">₦889.00</div>
+          </div>
+          <div class="c-flex">
+            <img src="assets/imgs/curricon3.svg">
+            <div class="label3 EudoxusSansReg">₦889.00</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <ion-tabs style="top: 10px !important">
+    <ion-fab vertical="bottom" horizontal="center" translucent="true">
+      <ion-fab-button (click)="tabClick()">
+        <img class="fabimg" src="assets/imgs/action.svg" />
+      </ion-fab-button>
+    </ion-fab>
+
+    <ion-tab-bar slot="bottom" class="ion-no-border">
+      <ion-tab-button (click)="tab1Click()">
+        <img src="assets/imgs/homea.svg">
+        <ion-label class="tabtextActive EudoxusSansReg">Home</ion-label>
+        <img class="tabline" src="assets/imgs/tabline.svg">
+      </ion-tab-button>
+
+      <ion-tab-button (click)="tab2Click()">
+        <img src="assets/imgs/activity.svg" style="opacity: 46%" />
+        <ion-label class="tabtext EudoxusSansReg">Offers</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button (click)="tab2Click()">
+        <ion-label class="tacttext EudoxusSansReg">Track</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button (click)="tab3Click()">
+        <img src="assets/imgs/contact.svg" style="opacity: 46%" />
+        <ion-label class="tabtext EudoxusSansReg">Connect</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button (click)="tab4Click()">
+        <img src="assets/imgs/profile.svg" style="opacity: 46%" />
+        <ion-label class="tabtext EudoxusSansReg">Profile</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-footer>

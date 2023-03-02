@@ -1,0 +1,71 @@
+.textcenter{
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #03045E;
+    text-align: center;
+    margin-left: 5%;
+  }
+  
+  .container {
+    width: 90%;
+    margin: auto;
+  }
+  
+  
+  .chat {
+    margin-top: 20px;
+  }
+  .reciever {
+    color: #21333B;
+    font-size: 14px;
+    border-radius: 25px 25px 25px 0px;
+    width: auto;
+    padding: 15px;
+    text-align: justify;
+    max-width:250px;
+    white-space: pre-line;
+    background: #fff;
+    font-weight: 400;
+  }
+  .messageTime {
+    font-size: 10px;
+    color: #969D9F;
+    margin-top: 4%;
+  }
+  .messageTimeSender {
+    font-size: 10px;
+    color: #3C3744;
+    text-align: end;
+  }
+  .sender_message_container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  .senderMessage {
+    color: #21333B;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 25px 25px 0px 25px;
+    width: auto;
+    padding: 15px;
+    text-align: justify;
+    max-width:250px;
+    white-space: pre-line;
+    background: #fff;
+    margin-top: 20px;
+  }
+  
+  
+  .reciever_message_cont {
+    display: grid;
+    justify-content: flex-start;
+  }
+  .input{
+    color: #CCD9CF;
+    font-size: 14px;
+    font-weight:400;
+    --placeholder-color:#CCD9CF;
+  }
+  

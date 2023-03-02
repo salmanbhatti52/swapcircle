@@ -1,0 +1,70 @@
+.wrapper{
+  width: 90%;
+  margin:15% auto 0%;
+}
+.text1{
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  color: #4BD16F;
+  display: flex;
+  justify-content: center;
+}
+
+.flex-c{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5%;
+}
+.text2{
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  color: #969D9F;
+  display: flex;
+  justify-content: center;
+  margin-top: 2%;
+}
+
+ion-segment {
+  padding: 6px 8px;
+  border-radius: 16px;
+  --background: #E9F5EC;
+  width: 70%;
+  margin: 5% auto;
+  font-family: "EudoxusSansReg" !important;
+  ion-segment-button {
+    --border-width: 0;
+    --margin-bottom: 5px;
+    --margin-top: 5px;
+    border-radius: 8px;
+    --background-checked: #fff;
+    --indicator-color: transparent !important;
+    --color: #969D9F;
+    --color-checked:#4BD16F;
+    font-size: 14px;
+    font-weight: 700;
+    --indicator-box-shadow: none;
+  }
+}
+.desc{
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 140%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #969D9F;
+}
+.p1{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 140%;
+    display: flex;
+    color: #4BD16F;
+    justify-content: flex-end;
+    margin-top: 5%;
+}

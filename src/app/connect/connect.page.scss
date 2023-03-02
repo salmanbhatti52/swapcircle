@@ -1,0 +1,170 @@
+.carItem_box img{
+    border-radius: 40px;
+    text-align: center;
+    background-color: white;
+    padding: 10px;
+    height: 41px;
+    width: 45px;
+    // box-shadow: 0px 0px 20px rgb(0 0 0 / 9%);
+    // margin-right: 8px;
+  }
+  .s-text{
+    font-weight: 400;
+    font-size: 10px;
+    padding-top: 4px;
+  
+    color: #21333B;
+  }
+ .htext{
+    font-weight: 700;
+    font-size: 16px;
+    color: #21333B;
+    margin: 10px 0px 5px 15px;
+ }
+ .cars_label{
+    font-weight: 700;
+    font-size: 14px;
+    color: #000000;
+    text-align: left;
+  }
+ .carItem_box2{
+    border-radius: 10px;
+    text-align: center;
+    background-color: white;
+    box-shadow: 0px 0px 20px rgb(0 0 0 / 9%);
+    // margin-right: 8px;
+  }
+
+  .wrapper{
+    width: 92%;
+    margin: 2% auto 35%;
+  }
+  .box1{
+    background: #FFFFFF;
+    border-radius: 16px;
+    margin-top: 3%;
+    padding: 8px;
+  }
+
+
+
+
+
+
+
+  ///////////////////////
+ion-tabs{
+	ion-fab {
+		margin-bottom: env(safe-area-inset-bottom); /* fix notch ios*/
+    // top: 88%;
+    bottom: 35px;
+		ion-fab-button {
+      --box-shadow: rgba(100, 100, 111, 0.2) 0px 0px 10px 0px;
+      --background: #4bd16f;
+      height: 64px;
+      width: 64px;
+      position: absolute;
+      bottom: 8px;
+      left: -7px;
+		}
+	}
+	ion-tab-bar {
+    --border: 0;
+    --background: transparent;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    padding-bottom: 10px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    max-height: 105px;
+    height: 63px;
+		&:after{
+			content: " ";
+			width: 100%;
+			bottom: 0;
+			background: var(--ion-color-light);
+			height: env(safe-area-inset-bottom);
+			position: absolute;
+		}
+		ion-tab-button {
+      background:#fff;
+      ion-icon{
+        color:#42474F;
+      }
+		}
+		ion-tab-button.comments {
+			margin-right: 0px;
+			border-top-right-radius: 18px;
+		}
+		ion-tab-button.notifs {
+			margin-left: 0px;
+			border-top-left-radius: 18px;
+		}
+		svg {
+			width: 72px;
+			margin-top: 19px;
+			path{
+        fill:#fff;
+			}
+		}
+	}
+
+}
+
+.fabimg{
+  height: 125px;
+  width: 28px;
+  margin-bottom: -47px;
+  object-fit: cover;
+}
+
+.tabtext{
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.481818px;
+  color: #BED6C4;
+}
+.tacttext{
+  display: flex;
+  flex-direction: column;
+  padding-top: 25px;
+  align-items: center;
+  font-size: 14px;
+  color: #BED6C4;
+}
+.tabtextActive{
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.481818px;
+  color: #000000;
+}
+
+.tabline{
+  width: 18px;
+  height: 4px;
+}
+
+.header-md::after {
+  left: 0;
+  bottom: -5px;
+  background-position: left 0 top -2px;
+  position: absolute;
+  width: 100%;
+  height: 5px;
+  background-image: none;
+  background-repeat: repeat-x;
+  content: "";
+}

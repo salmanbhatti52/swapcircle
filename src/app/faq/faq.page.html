@@ -1,0 +1,65 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar style="--background: #e9f5ec;">
+    <ion-row style="width:95%;margin: 0% auto;">
+      <ion-col size="2">
+        <img src="assets/imgs/arrow_back_ios_new.svg" style="margin-top: 3px" (click)="goback()">
+      </ion-col>
+      <ion-col size="8">
+        <div style="font-weight: 700;
+      font-size: 20px;color: #21333B;text-align: center;" class="EudoxusSansReg">FAQ</div>
+      </ion-col>
+      <ion-col size="2"></ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="--background: #e9f5ec;">
+  <div class="wrapper">
+    <div class="box">
+      <div style="display: flex;justify-content: space-between;">
+        <div class="text EudoxusSansReg">Fusce volutpat lectus et nisl consecte?</div>
+        <img src="assets/imgs/remove.svg" (click)="openclose()" *ngIf="show==false">
+        <img src="assets/imgs/add.svg" (click)="openclose()" *ngIf="show==true">
+      </div>
+      <p class="EudoxusSansReg" *ngIf="show==false">Fusce volutpat lectus et nisl consectetur finibus. In vitae
+        scelerisque augue, in varius
+        eros.......
+      </p>
+      <p class="EudoxusSansReg" *ngIf="show==true">Fusce volutpat lectus et nisl consectetur finibus. In vitae
+        scelerisque augue, in
+        varius
+        eros. Nunc sapien diam, euismod et pretium id, volutpat et tortor. In vulputate lorem quis dui vestibulum,
+        vitae
+        imperdiet diam bibendum. Maecenas scelerisque orci a dolor vestibulum sagittis. Etiam quis finibus arcu, vel
+        efficitur diam. Curabitur felis eros, vestibulum sed nisi eu, sodales aliquet lacus. Mauris lacinia quam quis
+        feugiat laoreet. Etiam lobortis aliquet euismod. Nunc dictum, sapien at egestas rutrum, dui dui fringilla
+        erat,
+        a commodo augue augue vel magna. Sed tincidunt ante turpis, rhoncus commodo risus fringilla vel. Maecenas
+        lacinia nisl a sem ornare pharetra. Donec imperdiet justo et elementum iaculis.</p>
+    </div>
+
+    <div class="box">
+      <div style="display: flex;justify-content: space-between;">
+        <div class="text EudoxusSansReg">Fusce volutpat lectus et nisl consecte?</div>
+        <img src="assets/imgs/remove.svg" (click)="openclose1()" *ngIf="show1==false">
+        <img src="assets/imgs/add.svg" (click)="openclose1()" *ngIf="show1==true">
+      </div>
+      <p class="EudoxusSansReg" *ngIf="show1==false">Fusce volutpat lectus et nisl consectetur finibus. In vitae
+        scelerisque augue, in varius
+        eros.......
+      </p>
+      <p class="EudoxusSansReg" *ngIf="show1==true">Fusce volutpat lectus et nisl consectetur finibus. In vitae
+        scelerisque augue, in
+        varius
+        eros. Nunc sapien diam, euismod et pretium id, volutpat et tortor. In vulputate lorem quis dui vestibulum,
+        vitae
+        imperdiet diam bibendum. Maecenas scelerisque orci a dolor vestibulum sagittis. Etiam quis finibus arcu, vel
+        efficitur diam. Curabitur felis eros, vestibulum sed nisi eu, sodales aliquet lacus. Mauris lacinia quam quis
+        feugiat laoreet. Etiam lobortis aliquet euismod. Nunc dictum, sapien at egestas rutrum, dui dui fringilla
+        erat,
+        a commodo augue augue vel magna. Sed tincidunt ante turpis, rhoncus commodo risus fringilla vel. Maecenas
+        lacinia nisl a sem ornare pharetra. Donec imperdiet justo et elementum iaculis.</p>
+    </div>
+  </div>
+
+</ion-content>

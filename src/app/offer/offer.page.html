@@ -1,0 +1,346 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar style="--background: #e9f5ec">
+    <ion-row style="width: 95%;
+    margin:0% auto 0%;">
+      <ion-col size="2.5"></ion-col>
+      <ion-col size="6.5" style="text-align:center;">
+        <div style="font-weight: 700;
+        font-size: 20px;
+        color:#21333B;" class="EudoxusSansReg">Marketplace</div>
+      </ion-col>
+      <ion-col size="3" style="display: flex;
+      align-items: center;
+      justify-content: space-around;">
+        <img src="assets/imgs/filter1.svg" (click)="setting()">
+        <img src="assets/imgs/notification.svg" (click)="noti()">
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="--background: #e9f5ec;">
+  <div class="wrapper">
+    <ion-segment mode="ios" (ionChange)="segmentChanged($event)" #mySegment>
+      <ion-segment-button mode="ios" value="AllOffers">
+        <ion-label>All Offers</ion-label>
+      </ion-segment-button>
+      <ion-segment-button mode="ios" value="Favorite">
+        <ion-label>Favorite </ion-label>
+      </ion-segment-button>
+      <ion-segment-button mode="ios" value="MyOffers">
+        <ion-label>My Offers</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <div *ngIf="requestsType=='AllOffers'">
+      <div class="box EudoxusSansReg">
+        <ion-row>
+          <ion-col size="6">
+            <div class="flex-c">
+              <div class="text1">£1</div>
+              <img src="assets/imgs/reset.svg">
+              <div class="text1">₦890.00</div>
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <div class="flex-c" style="margin-left: 30px;">
+              <div style="display: flex; align-items: center;">
+                <img src="assets/imgs/clock.svg" style="margin-right: 4px;">
+                <div class="text2">24 hrs ago</div>
+              </div>
+              <img src="assets/imgs/heart.svg">
+            </div>
+          </ion-col>
+        </ion-row>
+        <hr style="background: #E9F5EC;
+        width: 92%;">
+        <ion-row style="align-items: center;
+        width: 95%;
+        margin: 0% auto;">
+          <ion-col size="3.5">
+            <div>
+              <div class="text3">You Pay</div>
+              <div class="text4"><span style="color: #4BD16F;">£</span>1000.00</div>
+            </div>
+          </ion-col>
+          <ion-col size="4.5">
+            <div style="display: flex;
+            align-items: center;
+            justify-content: space-evenly;">
+              <img src="assets/imgs/flagicon.svg">
+              <div style="font-weight: 500;
+                font-size: 10px;color: #21333B;">GBP/NGN</div>
+              <img src="assets/imgs/flagicon1.svg">
+            </div>
+          </ion-col>
+          <ion-col size="4">
+            <div>
+              <div class="text3" style="text-align: end;">You Pay</div>
+              <div class="text4"><span style="color: #4BD16F;">₦</span>890,000.00</div>
+            </div>
+          </ion-col>
+          <p class="para">(Inc. Service charges £10.00)</p>
+
+        </ion-row>
+      </div>
+      <div class="box EudoxusSansReg">
+        <ion-row>
+          <ion-col size="6">
+            <div class="flex-c">
+              <div class="text1">£1</div>
+              <img src="assets/imgs/reset.svg">
+              <div class="text1">₦890.00</div>
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <div class="flex-c" style="margin-left: 30px;">
+              <div style="display: flex; align-items: center;">
+                <img src="assets/imgs/clock.svg" style="margin-right: 4px;">
+                <div class="text2">24 hrs ago</div>
+              </div>
+              <img src="assets/imgs/heart.svg">
+            </div>
+          </ion-col>
+        </ion-row>
+        <hr style="background: #E9F5EC;
+        width: 92%;">
+        <ion-row style="align-items: center;
+        width: 95%;
+        margin: 0% auto;">
+          <ion-col size="3.5">
+            <div>
+              <div class="text3">You Pay</div>
+              <div class="text4"><span style="color: #4BD16F;">£</span>1000.00</div>
+            </div>
+          </ion-col>
+          <ion-col size="4.5">
+            <div style="display: flex;
+            align-items: center;
+            justify-content: space-evenly;">
+              <img src="assets/imgs/flagicon.svg">
+              <div style="font-weight: 500;
+                font-size: 10px;color: #21333B;">GBP/NGN</div>
+              <img src="assets/imgs/flagicon1.svg">
+            </div>
+          </ion-col>
+          <ion-col size="4">
+            <div>
+              <div class="text3" style="text-align: end;">You Pay</div>
+              <div class="text4"><span style="color: #4BD16F;">₦</span>890,000.00</div>
+            </div>
+          </ion-col>
+          <p class="para">(Inc. Service charges £10.00)</p>
+
+        </ion-row>
+      </div>
+    </div>
+
+
+    <div *ngIf="requestsType=='Favorite'">
+      <div class="box EudoxusSansReg">
+        <ion-row>
+          <ion-col size="6">
+            <div class="flex-c">
+              <div class="text1">£1</div>
+              <img src="assets/imgs/reset.svg">
+              <div class="text1">₦890.00</div>
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <div class="flex-c" style="margin-left: 30px;">
+              <div style="display: flex; align-items: center;">
+                <img src="assets/imgs/clock.svg" style="margin-right: 4px;">
+                <div class="text2">24 hrs ago</div>
+              </div>
+              <img src="assets/imgs/redheart.svg">
+            </div>
+          </ion-col>
+        </ion-row>
+        <hr style="background: #E9F5EC;
+        width: 92%;">
+        <ion-row style="align-items: center;
+        width: 95%;
+        margin: 0% auto;">
+          <ion-col size="3.5">
+            <div>
+              <div class="text3">You Pay</div>
+              <div class="text4"><span style="color: #4BD16F;">£</span>1000.00</div>
+            </div>
+          </ion-col>
+          <ion-col size="4.5">
+            <div style="display: flex;
+            align-items: center;
+            justify-content: space-evenly;">
+              <img src="assets/imgs/flagicon.svg">
+              <div style="font-weight: 500;
+                font-size: 10px;color: #21333B;">GBP/NGN</div>
+              <img src="assets/imgs/flagicon1.svg">
+            </div>
+          </ion-col>
+          <ion-col size="4">
+            <div>
+              <div class="text3" style="text-align: end;">You Pay</div>
+              <div class="text4"><span style="color: #4BD16F;">₦</span>890,000.00</div>
+            </div>
+          </ion-col>
+          <p class="para">(Inc. Service charges £10.00)</p>
+
+        </ion-row>
+      </div>
+      <div class="box EudoxusSansReg">
+        <ion-row>
+          <ion-col size="6">
+            <div class="flex-c">
+              <div class="text1">£1</div>
+              <img src="assets/imgs/reset.svg">
+              <div class="text1">₦890.00</div>
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <div class="flex-c" style="margin-left: 30px;">
+              <div style="display: flex; align-items: center;">
+                <img src="assets/imgs/clock.svg" style="margin-right: 4px;">
+                <div class="text2">24 hrs ago</div>
+              </div>
+              <img src="assets/imgs/redheart.svg">
+            </div>
+          </ion-col>
+        </ion-row>
+        <hr style="background: #E9F5EC;
+        width: 92%;">
+        <ion-row style="align-items: center;
+        width: 95%;
+        margin: 0% auto;">
+          <ion-col size="3.5">
+            <div>
+              <div class="text3">You Pay</div>
+              <div class="text4"><span style="color: #4BD16F;">£</span>1000.00</div>
+            </div>
+          </ion-col>
+          <ion-col size="4.5">
+            <div style="display: flex;
+            align-items: center;
+            justify-content: space-evenly;">
+              <img src="assets/imgs/flagicon.svg">
+              <div style="font-weight: 500;
+                font-size: 10px;color: #21333B;">GBP/NGN</div>
+              <img src="assets/imgs/flagicon1.svg">
+            </div>
+          </ion-col>
+          <ion-col size="4">
+            <div>
+              <div class="text3" style="text-align: end;">You Pay</div>
+              <div class="text4"><span style="color: #4BD16F;">₦</span>890,000.00</div>
+            </div>
+          </ion-col>
+          <p class="para">(Inc. Service charges £10.00)</p>
+
+        </ion-row>
+      </div>
+    </div>
+
+
+    <div *ngIf="requestsType=='MyOffers'">
+      <div class="box EudoxusSansReg">
+        <ion-row>
+          <ion-col size="6">
+            <div class="flex-c">
+              <div class="text1">£1</div>
+              <img src="assets/imgs/reset.svg">
+              <div class="text1">₦890.00</div>
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <div class="flex-c" style="margin-left: 30px;">
+              <div style="display: flex; align-items: center;">
+                <img src="assets/imgs/clock.svg" style="margin-right: 4px;">
+                <div class="text2">24 hrs ago</div>
+              </div>
+              <img src="assets/imgs/heart.svg">
+            </div>
+          </ion-col>
+        </ion-row>
+        <hr style="background: #E9F5EC;
+        width: 92%;">
+        <ion-row style="align-items: center;
+        width: 95%;
+        margin: 0% auto;">
+          <ion-col size="3.5">
+            <div>
+              <div class="text3">You Pay</div>
+              <div class="text4"><span style="color: #4BD16F;">£</span>1000.00</div>
+            </div>
+          </ion-col>
+          <ion-col size="4.5">
+            <div style="display: flex;
+            align-items: center;
+            justify-content: space-evenly;">
+              <img src="assets/imgs/flagicon.svg">
+              <div style="font-weight: 500;
+                font-size: 10px;color: #21333B;">GBP/NGN</div>
+              <img src="assets/imgs/flagicon1.svg">
+            </div>
+          </ion-col>
+          <ion-col size="4">
+            <div>
+              <div class="text3" style="text-align: end;">You Pay</div>
+              <div class="text4"><span style="color: #4BD16F;">₦</span>890,000.00</div>
+            </div>
+          </ion-col>
+          <p class="para">(Inc. Service charges £10.00)</p>
+
+        </ion-row>
+      </div>
+    </div>
+
+  </div>
+
+</ion-content>
+<ion-footer>
+  <ion-tabs style="top: 10px !important">
+    <ion-fab vertical="bottom" horizontal="center" translucent="true">
+      <ion-fab-button (click)="tabClick()">
+        <img class="fabimg" src="assets/imgs/action.svg" />
+      </ion-fab-button>
+    </ion-fab>
+
+    <ion-tab-bar slot="bottom" class="ion-no-border">
+      <ion-tab-button (click)="tab1Click()">
+        <img src="assets/imgs/home.svg">
+        <ion-label class="tabtext EudoxusSansReg">Home</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button (click)="tab2Click()">
+        <img src="assets/imgs/activityactive.svg">
+        <ion-label class="tabtextActive EudoxusSansReg">Offers</ion-label>
+        <img class="tabline" src="assets/imgs/tabline.svg">
+      </ion-tab-button>
+
+      <ion-tab-button (click)="tab2Click()">
+        <ion-label class="tacttext EudoxusSansReg">Track</ion-label>
+      </ion-tab-button>
+      <!-- <div style="
+          background: white;
+          display: flex;
+          flex-direction: column;
+          padding-top: 42px;
+          align-items: center;
+          padding-bottom: 17.2px;
+        ">
+        <ion-label *ngIf="!tact" class="tabtext EudoxusSansReg">Track</ion-label>
+        <ion-label *ngIf="tact" class="tabtextActive EudoxusSansReg">Track</ion-label>
+       
+      </div> -->
+
+      <ion-tab-button (click)="tab3Click()">
+        <img src="assets/imgs/contact.svg" style="opacity: 46%" />
+        <ion-label class="tabtext EudoxusSansReg">Connect</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button (click)="tab4Click()">
+        <img src="assets/imgs/profile.svg" style="opacity: 46%" />
+        <ion-label class="tabtext EudoxusSansReg">Profile</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-footer>

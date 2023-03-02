@@ -1,0 +1,28 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>loginscreen</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content>
+  <div class="wrapper">
+    <div style="margin-top: 10px; width: 100%; text-align: center">
+      <img style="height: 72px; width: 176px" src="assets/imgs/logo.svg" />
+    </div>
+    <div class="text1 EudoxusSansReg">Forgot Password?</div>
+    <div class="text2 EudoxusSansReg">Please enter 4 digit code you received on {{userEmail}}</div>
+
+    <ion-row style="display: flex;
+      justify-content: center;
+      margin-top: 20%;">
+      <ng-otp-input (onInputChange)="onOtpChange($event)" [config]="{length:4,allowNumbersOnly:true}"></ng-otp-input>
+    </ion-row>
+
+
+    <ion-button style="margin: 50px 0px 15px 0px" class="btnbggreen EudoxusSansReg"
+      (click)="goNext()">Reset</ion-button>
+
+
+  </div>
+
+</ion-content>

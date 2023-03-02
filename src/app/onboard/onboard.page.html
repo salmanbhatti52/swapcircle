@@ -1,0 +1,63 @@
+<ion-content>
+  <ion-row style="margin-top: 35px">
+    <ion-col class="slider_main">
+      <ion-slides pager="true" style="height: 390px">
+        <ion-slide>
+          <div class="slide">
+            <img class="s_img" src="assets/imgs/ob1.svg" />
+
+            <div style="display: flex; flex-direction: column; align-items: center;margin-top: 60px;">
+              <p class="desc EudoxusSansReg">Buy and sell from</p>
+              <p class="desc EudoxusSansReg">validated members</p>
+            </div>
+          </div>
+        </ion-slide>
+
+        <ion-slide>
+          <div class="slide">
+            <img class="s_img" src="assets/imgs/ob2.svg" />
+
+            <div style="display: flex; flex-direction: column; align-items: center;margin-top: 60px;">
+              <p class="desc EudoxusSansReg">Your closed community</p>
+              <p class="desc EudoxusSansReg">peer to peer swap</p>
+              <p class="desc EudoxusSansReg">trading platform</p>
+            </div>
+          </div>
+        </ion-slide>
+
+        <ion-slide>
+          <div class="slide">
+            <img class="s_img" src="assets/imgs/ob3.svg" />
+
+            <div style="display: flex; flex-direction: column; align-items: center">
+              <p style="margin: 25px 0px" class="title EudoxusSansReg">
+                Worldwide..!
+              </p>
+              <p class="desc2 EudoxusSansReg">Transparent market</p>
+              <p class="desc2 EudoxusSansReg">place for the users</p>
+            </div>
+          </div>
+        </ion-slide>
+
+      </ion-slides>
+    </ion-col>
+  </ion-row>
+
+  <div style="
+      z-index: 999;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      position: absolute;
+      bottom: 20px;
+      justify-content: space-evenly;
+    ">
+    <ion-button (click)="goToSignup()" class="btnsimple EudoxusSansReg">Sign Up</ion-button>
+    <img style="width: 123px" src="assets/imgs/skip.svg" />
+    <ion-button class="btnsimple EudoxusSansReg" (click)="goToSignin()">Sign In</ion-button>
+  </div>
+
+  <div style="position: absolute; width: 100%; bottom: 0px; z-index: 0000">
+    <img style="width: 100%" src="assets/imgs/obbg.svg" />
+  </div>
+</ion-content>

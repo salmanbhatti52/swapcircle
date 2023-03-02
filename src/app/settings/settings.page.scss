@@ -1,0 +1,35 @@
+.wrapper{
+	width: 95%;
+	margin: 5% auto;
+}
+.flex-c{
+	display: flex;
+	background: #FFFFFF;
+	border-radius: 25px;
+	padding: 10px 20px;
+	justify-content: space-between;
+	align-items: center;
+}
+.text1{
+	font-size: 16px;
+	font-weight: 700;
+	color: #121826;
+}
+.text2{
+	font-style: normal;
+	font-weight: 700;
+	font-size: 12px;
+	color: #121826;
+}
+.ctoggle{
+  --background:#e9f5ec;
+  --handle-background:#DEDEDE;
+  --background-checked:#4BD16F;
+  --handle-height: 22px;
+    --handle-width: 22px;
+    --handle-box-shadow: none;
+    height: 25px;
+    width: 42px;
+    --handle-background-checked: #fff;
+    --handle-spacing: 2px;
+}

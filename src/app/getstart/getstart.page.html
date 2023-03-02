@@ -1,0 +1,61 @@
+<ion-content>
+  <img style="width: 100%; position: absolute" src="assets/imgs/getstart.svg" />
+
+  <div style="position: absolute; width: 100%; text-align: center; top: 56px">
+    <img style="height: 148px; width: 194px" src="assets/imgs/getstartrocket.svg" />
+  </div>
+
+  <div style="
+      display: flex;
+      margin-top: 320px;
+      text-align: center;
+      /* width: 100%; */
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      width: 90%;
+      margin-left: 5%;
+      position: fixed;
+    bottom: 30px;
+    ">
+    <p class="title EudoxusSansReg">Get Started with</p>
+
+    <div style="width: 100%; text-align: center;margin-top:7%;">
+      <img style="height: 72px; width: 176px" src="assets/imgs/logo.svg" />
+    </div>
+
+    <ion-button style="margin: 40px 0px 15px 0px" class="btnbggreen EudoxusSansReg" (click)="goToIndividual()">As a
+      Individual</ion-button>
+    <ion-button class="btnsimplegreen EudoxusSansReg" (click)="goToCorporate()">As a Corporate</ion-button>
+
+    <div style="margin-top: 5%;">
+      <p style="
+          font-style: normal;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 140%;
+          display: flex;
+          align-items: center;
+          color: #969d9f;
+          flex: none;
+          order: 0;
+          flex-grow: 0;
+        " class="EudoxusSansReg">
+        Already User?
+        <span (click)="goToSignin()" style="
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 140%;
+            display: flex;
+            align-items: center;
+            color: #4bd16f;
+            flex: none;
+            order: 1;
+            flex-grow: 0;
+          ">
+          Sign In</span>
+      </p>
+    </div>
+  </div>
+</ion-content>

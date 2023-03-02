@@ -1,0 +1,191 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar style="--background: #e9f5ec">
+    <ion-row style="width: 95%;
+    margin:0% auto 0%;">
+      <ion-col size="2" style="text-align: start;">
+        <img src="assets/imgs/gheart.svg" (click)="goto()">
+      </ion-col>
+      <ion-col size="8">
+        <div style="font-weight: 700;
+        font-size: 20px;
+        color:#21333B;text-align: center;"><span style="color: #4BD16F;">Swap Circle </span>Connect</div>
+      </ion-col>
+      <ion-col size="2" style="text-align: end;">
+        <img src="assets/imgs/search-normal.svg" />
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="--background: #e9f5ec;">
+  <swiper [config]="{slidesPerView:4.6, spaceBetween:6, initialSlide:0, speed:400}" [pagination]="false"
+    style="padding: 8px;">
+    <ng-template swiperSlide>
+      <div>
+        <div class="carItem_box">
+          <img src="assets/imgs/gift.svg">
+
+        </div>
+        <div class="s-text EudoxusSansReg">All Items</div>
+      </div>
+
+    </ng-template>
+    <ng-template swiperSlide>
+      <div>
+        <div class="carItem_box">
+          <img src="assets/imgs/gift.svg">
+        </div>
+        <div class="s-text EudoxusSansReg">Bill payments</div>
+      </div>
+
+    </ng-template>
+    <ng-template swiperSlide>
+      <div>
+        <div class="carItem_box">
+          <img src="assets/imgs/gift.svg">
+        </div>
+        <div class="s-text EudoxusSansReg">Travel</div>
+      </div>
+
+    </ng-template>
+    <ng-template swiperSlide>
+      <div>
+        <div class="carItem_box">
+          <img src="assets/imgs/gift.svg">
+        </div>
+        <div class="s-text EudoxusSansReg">Food & Drinks</div>
+      </div>
+
+    </ng-template>
+    <ng-template swiperSlide>
+      <div>
+        <div class="carItem_box">
+          <img src="assets/imgs/gift.svg">
+        </div>
+        <div class="s-text EudoxusSansReg">Entertainment</div>
+      </div>
+
+    </ng-template>
+    <ng-template swiperSlide>
+      <div>
+        <div class="carItem_box">
+          <img src="assets/imgs/gift.svg">
+        </div>
+        <div class="s-text EudoxusSansReg">Health</div>
+      </div>
+
+    </ng-template>
+  </swiper>
+
+  <div class="htext EudoxusSansReg">Most Popular</div>
+  <swiper [config]="{slidesPerView:2.3, spaceBetween:9, initialSlide:0, speed:400}" [pagination]="false"
+    style="padding: 8px 8px 8px 12px;">
+    <ng-template swiperSlide>
+      <div class="carItem_box2">
+        <div style="padding: 4px 8px 8px">
+          <img src="assets/imgs/demo.png">
+          <div class="cars_label EudoxusSansReg">Mobile Airtime</div>
+          <div class="s-text EudoxusSansReg" style="text-align: left;">Get discount form VTU airtime recharge on all
+            networks.</div>
+        </div>
+        <hr style="background: #E9F5EC;width: 100%;">
+        <div>
+          <img src="assets/imgs/heartround.svg">
+          <img src="assets/imgs/bookmark.svg" style="padding-left: 8px;">
+        </div>
+      </div>
+    </ng-template>
+    <ng-template swiperSlide>
+      <div class="carItem_box2">
+        <div style="padding: 4px 8px 8px">
+          <img src="assets/imgs/demo.png">
+          <div class="cars_label EudoxusSansReg">Mobile Airtime</div>
+          <div class="s-text EudoxusSansReg" style="text-align: left;">Get discount form VTU airtime recharge on all
+            networks.</div>
+        </div>
+        <hr style="background: #E9F5EC;width: 100%;">
+        <div>
+          <img src="assets/imgs/heartround.svg">
+          <img src="assets/imgs/bookmark.svg" style="padding-left: 8px;">
+        </div>
+      </div>
+    </ng-template>
+    <ng-template swiperSlide>
+      <div class="carItem_box2">
+        <div style="padding: 4px 8px 8px">
+          <img src="assets/imgs/demo.png">
+          <div class="cars_label EudoxusSansReg">Mobile Airtime</div>
+          <div class="s-text EudoxusSansReg" style="text-align: left;">Get discount form VTU airtime recharge on all
+            networks.</div>
+        </div>
+        <hr style="background: #E9F5EC;width: 100%;">
+        <div>
+          <img src="assets/imgs/heartround.svg">
+          <img src="assets/imgs/bookmark.svg" style="padding-left: 8px;">
+        </div>
+      </div>
+    </ng-template>
+  </swiper>
+  <div class="wrapper">
+    <div style=" font-weight: 700;
+    font-size: 16px;
+    color: #21333B;" class="EudoxusSansReg">Others</div>
+    <div class="box1">
+      <div style="position: relative;">
+        <img src="assets/imgs/banner.png" style="width: 100%;">
+        <div style="position: absolute;
+            top: 10px;
+            right: 10px;">
+          <img src="assets/imgs/bookmark1.svg">
+          <img src="assets/imgs/fillheart.svg" style="padding-left: 8px;">
+        </div>
+      </div>
+      <div style=" font-weight: 700;
+      font-size: 14px;
+      color: #21333B;margin: 2px 2px;" class="EudoxusSansReg">Mobile Airtime</div>
+      <div style=" font-weight: 500;
+        font-size: 12px;
+        color: #21333B;margin: 0px 2px;" class="EudoxusSansReg">Get discount form VTU airtime recharge on all networks.
+      </div>
+    </div>
+
+  </div>
+
+</ion-content>
+<ion-footer>
+  <ion-tabs style="top: 10px !important">
+    <ion-fab vertical="bottom" horizontal="center" translucent="true">
+      <ion-fab-button (click)="tabClick()">
+        <img class="fabimg" src="assets/imgs/action.svg" />
+      </ion-fab-button>
+    </ion-fab>
+
+    <ion-tab-bar slot="bottom" class="ion-no-border">
+      <ion-tab-button (click)="tab1Click()">
+        <img src="assets/imgs/home.svg">
+        <ion-label class="tabtext EudoxusSansReg">Home</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button (click)="tab2Click()">
+        <img src="assets/imgs/activity.svg">
+        <ion-label class="tabtext EudoxusSansReg">Offers</ion-label>
+
+      </ion-tab-button>
+
+      <ion-tab-button (click)="tab2Click()">
+        <ion-label class="tacttext EudoxusSansReg">Track</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button (click)="tab3Click()">
+        <img src="assets/imgs/contacta.svg">
+        <ion-label class="tabtextActive EudoxusSansReg">Connect</ion-label>
+        <img class="tabline" src="assets/imgs/tabline.svg">
+      </ion-tab-button>
+
+      <ion-tab-button (click)="tab4Click()">
+        <img src="assets/imgs/profile.svg" style="opacity: 46%" />
+        <ion-label class="tabtext EudoxusSansReg">Profile</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-footer>

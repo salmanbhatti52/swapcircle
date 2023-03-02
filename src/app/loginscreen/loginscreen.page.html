@@ -1,0 +1,87 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>loginscreen</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content>
+  <div class="wrapper">
+    <div style="margin-top: 10px; width: 100%; text-align: center">
+      <img style="height: 72px; width: 176px" src="assets/imgs/logo.svg" />
+    </div>
+    <div class="flex-c">
+      <p class="text1 EudoxusSansReg">Hi,</p>
+      <img src="assets/signup/hi.svg">
+    </div>
+    <div class="text1 EudoxusSansReg">Welcome Back..!</div>
+    <div class="text2 EudoxusSansReg">Sign In to your Swap Circle account.</div>
+
+    <ion-segment mode="ios" (ionChange)="segmentChanged($event)" #mySegment>
+      <ion-segment-button mode="ios" value="Individual">
+        <ion-label>Individual</ion-label>
+      </ion-segment-button>
+      <ion-segment-button checked mode="ios" value="Corporate">
+        <ion-label>Corporate</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <!-- input 1 -->
+    <div class="inputfieldtransparent" style="width: 100%; height: 64px; margin-top: 40px; display: flex">
+      <img style="margin: 17px 10px 17px 15px" src="/assets/signup/email.svg" />
+      <input [(ngModel)]="email" class="input EudoxusSansReg" type="email" placeholder="Email address" />
+    </div>
+
+    <!-- input 1 -->
+
+    <!-- input 2 -->
+    <div class="inputfieldtransparent" style="width: 100%; height: 64px; margin-top: 20px; display: flex">
+      <img style="margin: 17px 10px 17px 15px" src="/assets/signup/lock.svg" />
+      <input [(ngModel)]="pass1" type="{{showPass ? 'text':'password' }}" class="input EudoxusSansReg" type="password"
+        placeholder="Enter password" />
+      <img style="margin: 17px 17px 17px 15px" src="/assets/signup/closeeye.svg" *ngIf="!showPass"
+        (click)="togglePass()" />
+      <img style="margin: 17px 17px 17px 15px" src="/assets/signup/eye.svg" *ngIf="showPass" (click)="togglePass()" />
+    </div>
+
+    <!-- input 2 -->
+
+    <p class="p1 EudoxusSansReg" (click)="forgot()">Forgot password?</p>
+    <ion-button style="margin: 50px 0px 15px 0px" class="btnbggreen EudoxusSansReg"
+      (click)="goNext()">Login</ion-button>
+
+
+  </div>
+
+</ion-content>
+<ion-footer class="ion-no-border" style="margin-bottom: 4%;">
+  <div>
+    <p style="
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 140%;
+      display: flex;
+      align-items: center;
+      color: #969d9f;
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+      justify-content: center;
+    " class="EudoxusSansReg">
+      New User?
+      <span (click)="goback()" style="
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 140%;
+        display: flex;
+        align-items: center;
+        color: #4bd16f;
+        flex: none;
+        order: 1;
+        flex-grow: 0;
+      ">
+        Get start here!</span>
+    </p>
+  </div>
+</ion-footer>

@@ -1,0 +1,7 @@
+{
+  "name": "swapcircle",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

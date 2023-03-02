@@ -1,0 +1,110 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <div style="width: 90%; margin:40px auto 0px; ">
+      <img style="width: 100%" src="assets/imgs/d2.svg" />
+
+    </div>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div style="width: 90%; margin: 40px 5%">
+
+    <div style="
+        display: flex;
+        margin-top: 30px;
+        text-align: center;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+      ">
+      <div style="margin-top: 10px; width: 100%; text-align: center">
+        <img style="height: 72px; width: 176px" src="assets/imgs/logo.svg" />
+      </div>
+
+      <div style="margin-top: 30px; width: 100%; text-align: center">
+        <img style="height: 130px; width: 100%" src="assets/signup/map.svg" />
+      </div>
+      <form [formGroup]="RegisterForm">
+        <!-- input 1 -->
+        <div class="inputfieldtransparent" style="width: 100%; height: 64px; margin-top: 40px; display: flex">
+          <img style="margin: 17px 17px 17px 15px" src="/assets/signup/pin.svg" />
+          <input [(ngModel)]="adress" class="input EudoxusSansReg" type="text" placeholder="Enter your address"
+            formControlName="address" />
+        </div>
+        <div class="validation"
+          *ngIf="RegisterForm.get('address').hasError('required') && RegisterForm.get('address').touched">
+          <span class="error-msg">Enter your address</span>
+        </div>
+        <!-- input 1 -->
+
+        <!-- input 2 -->
+        <div class="inputfieldtransparent" style="width: 100%; height: 64px; margin-top: 20px; display: flex">
+          <img style="margin: 17px 17px 17px 15px" src="/assets/signup/lock.svg" />
+          <input [(ngModel)]="pass1" class="input EudoxusSansReg" type="{{showPass ? 'text':'password' }}"
+            type="password" placeholder="Create password" formControlName="password" />
+          <img style="margin: 17px 17px 17px 15px" src="/assets/signup/closeeye.svg" *ngIf="!showPass"
+            (click)="togglePass()" />
+          <img style="margin: 17px 17px 17px 15px" src="/assets/signup/eye.svg" *ngIf="showPass"
+            (click)="togglePass()" />
+        </div>
+        <div class="validation"
+          *ngIf="RegisterForm.get('password').hasError('pattern') && RegisterForm.get('password').touched">
+
+          <span class="error-msg">Password must be at least 6 characters long and should contain
+            uppercase and lowercase letters, special characters and numbers</span><br />
+
+        </div>
+        <!-- input 2 -->
+
+        <!-- input 3 -->
+        <div class="inputfieldtransparent" style="width: 100%; height: 64px; margin-top: 20px; display: flex">
+          <img style="margin: 17px 17px 17px 15px" src="/assets/signup/lock.svg" />
+          <input [(ngModel)]="pass2" class="input EudoxusSansReg" type="{{showcPass ? 'text':'password' }}"
+            type="password" placeholder="Confirm password" formControlName="cpassword" />
+          <img style="margin: 17px 17px 17px 15px" src="/assets/signup/closeeye.svg" *ngIf="!showcPass"
+            (click)="togglecPass()" />
+          <img style="margin: 17px 17px 17px 15px" src="/assets/signup/eye.svg" *ngIf="showcPass"
+            (click)="togglecPass()" />
+        </div>
+        <div class="validation"
+          *ngIf="RegisterForm.get('cpassword').hasError('required') && RegisterForm.get('cpassword').touched">
+
+          <span class="error-msg">Confirm your password</span>
+        </div>
+        <!-- input 3 -->
+
+        <ion-button style="margin: 50px 0px 15px 0px" class="btnbggreen EudoxusSansReg" (click)="goNext()"
+          [disabled]="RegisterForm.invalid">Next</ion-button>
+      </form>
+      <div>
+        <p style="
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 140%;
+            display: flex;
+            align-items: center;
+            color: #969d9f;
+            flex: none;
+            order: 0;
+            flex-grow: 0;
+          " class="EudoxusSansReg">
+          Already User?
+          <span (click)="goToSignin()" style="
+              font-style: normal;
+              font-weight: 500;
+              font-size: 14px;
+              line-height: 140%;
+              display: flex;
+              align-items: center;
+              color: #4bd16f;
+              flex: none;
+              order: 1;
+              flex-grow: 0;
+            ">
+            Sign In</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,29 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>loginscreen</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content>
+  <div class="wrapper">
+    <div style="margin-top: 10px; width: 100%; text-align: center">
+      <img style="height: 72px; width: 176px" src="assets/imgs/logo.svg" />
+    </div>
+    <div class="text1 EudoxusSansReg">Forgot Password?</div>
+    <div class="text2 EudoxusSansReg">Enter your registered email to reset
+      your password.</div>
+
+    <!-- input 1 -->
+    <div class="inputfieldtransparent" style="width: 100%; height: 64px; margin-top: 40px; display: flex">
+      <img style="margin: 17px 10px 17px 15px" src="/assets/signup/email.svg" />
+      <input [(ngModel)]="email" class="input EudoxusSansReg" type="text" placeholder="Email address" />
+    </div>
+
+    <!-- input 1 -->
+    <ion-button style="margin: 50px 0px 15px 0px" class="btnbggreen EudoxusSansReg"
+      (click)="goNext()">Reset</ion-button>
+
+
+  </div>
+
+</ion-content>

@@ -1,0 +1,185 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar style="--background: #e9f5ec;">
+    <ion-row>
+      <ion-col size="4">
+
+      </ion-col>
+      <ion-col size="4">
+        <div class="text EudoxusSansReg">Profile</div>
+      </ion-col>
+      <ion-col size="4">
+        <div class="text1 EudoxusSansReg" (click)="goto()">Edit Profile</div>
+      </ion-col>
+    </ion-row>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="--background: #e9f5ec;">
+  <div style="margin-bottom: 30%;">
+    <ion-row style=" width: 95%;
+    margin: 0% auto;">
+      <ion-col size="3">
+        <img src="assets/signup/user.svg">
+      </ion-col>
+      <ion-col size="9">
+        <div style="margin-top:7%;">
+          <p style="font-style: normal;
+          font-weight: 700;
+          font-size: 18px;
+          color: #121826;" class="EudoxusSansReg">Hi, Jerome Bell</p>
+          <div style="display: flex;
+          align-items: center;
+          margin-top:3%;">
+            <img src="assets/imgs/sms.svg">
+            <p style="font-weight: 400;
+            font-size: 14px;
+            color: #969D9F;
+            margin-left: 2%;" class="EudoxusSansReg">nathan.roberts@example.com</p>
+          </div>
+
+        </div>
+      </ion-col>
+
+    </ion-row>
+
+    <ion-row style="background: #fff;
+    padding: 10px;
+    border-radius: 16px;
+    width: 92%;
+    margin: 0% auto;">
+      <ion-col size="2">
+        <img src="assets/imgs/gift1.svg">
+      </ion-col>
+      <ion-col size="10" style="padding-left: 0px;">
+        <div>
+          <p style="font-style: normal;
+          font-weight: 700;
+          font-size: 14px;
+          color: #4BD16F;" class="EudoxusSansReg">Referral Code</p>
+
+
+          <p style="font-weight: 500;
+            font-size: 12px;
+            color: #4BD16F;
+            margin-top: 2%;" class="EudoxusSansReg">Share your friend get $20 of free stocks</p>
+
+
+        </div>
+      </ion-col>
+
+    </ion-row>
+
+    <div style="margin-top: 8%;" class="EudoxusSansReg">
+      <ion-row style="align-items: center;
+    width: 95%;
+    margin: 4% auto;" (click)="billing()">
+        <ion-col size="10" class="textimgdiv">
+          <img src="assets/imgs/picon1.svg">
+          <p class="p1">Billing/Payment</p>
+        </ion-col>
+        <ion-col size="2" class="icon-right">
+          <img src="assets/imgs/chevron-right.svg">
+        </ion-col>
+      </ion-row>
+      <ion-row style="align-items: center;
+    width: 95%;
+    margin: 4% auto;">
+        <ion-col size="9" class="textimgdiv">
+          <img src="assets/imgs/picon2.svg">
+          <p class="p1">Language</p>
+        </ion-col>
+        <ion-col size="2" style="padding-bottom: 0px;">
+          <div style="font-weight: 700;
+        font-size: 14px;color: #969D9F;">English</div>
+        </ion-col>
+        <ion-col size="1" class="icon-right">
+          <img src="assets/imgs/chevron-right.svg">
+        </ion-col>
+      </ion-row>
+      <ion-row style="align-items: center;
+    width: 95%;
+    margin: 4% auto;" (click)="settings()">
+        <ion-col size="10" class="textimgdiv">
+          <img src="assets/imgs/picon3.svg">
+          <p class="p1">Settings</p>
+        </ion-col>
+        <ion-col size="2" class="icon-right">
+          <img src="assets/imgs/chevron-right.svg">
+        </ion-col>
+      </ion-row>
+      <ion-row style="align-items: center;
+    width: 95%;
+    margin: 4% auto;" (click)="faq()">
+        <ion-col size="10" class="textimgdiv">
+          <img src="assets/imgs/picon4.svg">
+          <p class="p1">FAQ</p>
+        </ion-col>
+        <ion-col size="2" class="icon-right">
+          <img src="assets/imgs/chevron-right.svg">
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <ion-row style="background: #4BD16F;
+    padding: 10px;
+    border-radius: 24px;
+    width: 92%;
+    margin: 10% auto;
+    align-items: center;">
+      <ion-col size="2.5">
+        <img src="assets/imgs/headphone.svg">
+      </ion-col>
+      <ion-col size="7.5">
+        <div>
+          <p style="font-style: normal;
+          font-weight: 500;
+          font-size: 12px;
+          color: #FFFFFF;" class="EudoxusSansReg">We'd love to hear your feedback on threads, if you have any?</p>
+        </div>
+      </ion-col>
+      <ion-col size="2" style="text-align: end;">
+        <img src="assets/imgs/chevron-right.svg">
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-tabs style="top: 10px !important">
+    <ion-fab vertical="bottom" horizontal="center" translucent="true">
+      <ion-fab-button (click)="tabClick()">
+        <img class="fabimg" src="assets/imgs/action.svg" />
+      </ion-fab-button>
+    </ion-fab>
+
+    <ion-tab-bar slot="bottom" class="ion-no-border">
+      <ion-tab-button (click)="tab1Click()">
+        <img src="assets/imgs/home.svg">
+        <ion-label class="tabtext EudoxusSansReg">Home</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button (click)="tab2Click()">
+        <img src="assets/imgs/activity.svg">
+        <ion-label class="tabtext EudoxusSansReg">Offers</ion-label>
+
+      </ion-tab-button>
+
+      <ion-tab-button (click)="tab2Click()">
+        <ion-label class="tacttext EudoxusSansReg">Track</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button (click)="tab3Click()">
+        <img src="assets/imgs/contact.svg">
+        <ion-label class="tabtextActive EudoxusSansReg">Connect</ion-label>
+
+      </ion-tab-button>
+
+      <ion-tab-button (click)="tab4Click()">
+        <img src="assets/imgs/profilea.svg">
+        <ion-label class="tabtextActive EudoxusSansReg">Profile</ion-label>
+        <img class="tabline" src="assets/imgs/tabline.svg">
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-footer>
