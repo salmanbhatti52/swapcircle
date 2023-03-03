@@ -26,11 +26,13 @@
 		<string>LaunchScreen</string>
 		<key>UIMainStoryboardFile</key>
 		<string>Main</string>
-		<key>UIRequiredDeviceCapabilities</key>
 
 		<key>NSPhotoLibraryUsageDescription</key>
 		<string>Need to access photo library to allow user to upload profile picture. User profile
 			is user identity and user can see it's profile on profile page.</string>
+
+
+		<key>UIRequiredDeviceCapabilities</key>
 		<array>
 			<string>armv7</string>
 		</array>
