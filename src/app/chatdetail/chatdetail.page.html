@@ -23,24 +23,24 @@
 <ion-content style="--background: #e9f5ec;">
   <div class="container">
     <ng-container>
-      <div class="chat" style="display: grid; grid-row-gap: 4px">
+      <div class="chat" style="display: grid; grid-row-gap: 4px" no-lines *ngFor="let chat of messages">
         <ng-container>
-          <div class="reciever_message_cont">
+          <div class="reciever_message_cont" *ngIf="chat.userloggedId!=loggedid">
             <div class="reciever">
               <div class="textMessage EudoxusSansReg">
-                Good morning, did you sleep well?
+                {{chat.message}}
               </div>
-              <div class="messageTime EudoxusSansReg">4:00</div>
+              <div class="messageTime EudoxusSansReg">{{chat.time}}</div>
             </div>
 
           </div>
 
-          <div class="sender_message_container">
+          <div class="sender_message_container" *ngIf="chat.userloggedId==loggedid">
             <div class="senderMessage">
               <div class="textMessage EudoxusSansReg">
-                Yes, I did. Thankyou!
+                {{chat.message}}
               </div>
-              <div class="messageTime EudoxusSansReg">9:00</div>
+              <div class="messageTime EudoxusSansReg">{{chat.time}}</div>
             </div>
 
           </div>
@@ -63,12 +63,13 @@ background: #e9f5ec;" class="ion-no-margin ion-no-padding ion-no-border">
 
     <ion-row>
       <ion-col size="10" style="padding-top: 0px;">
-        <ion-textarea class="input" rows="1" cols="20" placeholder="Enter message here">
+        <ion-textarea class="input" rows="1" cols="20" placeholder="Enter message here" (keypress)="userTyping($event)"
+          [(ngModel)]="message">
         </ion-textarea>
       </ion-col>
 
       <ion-col size="2" style="text-align: right; padding-right: 13px;padding-top: 23px">
-        <img src="assets/imgs/send.svg">
+        <img src="assets/imgs/send.svg" (click)="sendMessage()">
       </ion-col>
     </ion-row>
   </div>

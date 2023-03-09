@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Countries, Country } from "./interface";
 import { SafeResourceUrl } from '@angular/platform-browser';
+import { ApiService } from '../services/api.service';
 @Component({
   selector: 'app-signup1',
   templateUrl: './signup1.page.html',
@@ -30,6 +31,7 @@ export class Signup1Page implements OnInit {
   nationality: any;
   customertype: any;
   constructor(public router: Router,
+    public api: ApiService,
     private http: HttpClient,
     public rest: ExtraService,
     public navCtrl: NavController) { }
@@ -113,12 +115,19 @@ export class Signup1Page implements OnInit {
       if (!this.validateEmail(this.email)) {
         this.rest.presentToast('Invalid Email address')
       } else {
+        alert('hellow')
         localStorage.setItem('fname', this.fname)
         localStorage.setItem('sname', this.sname)
         localStorage.setItem('num', this.num)
         localStorage.setItem('email', this.email)
+        this.api.sendRequest('email_exist', { email: this.email }).subscribe((res: any) => {
+          if (res.status == 'success') {
+            this.navCtrl.navigateForward('signup2');
+          } else {
+            this.rest.presentToast(res.message)
+          }
+        })
 
-        this.navCtrl.navigateForward('signup2');
       }
 
     }

@@ -30,6 +30,7 @@
     "@ionic/angular": "^6.1.9",
     "angular4-paystack": "^3.0.2",
     "ionicons": "^6.0.3",
+    "moment": "^2.29.4",
     "ng-otp-input": "^1.8.5",
     "rxjs": "~7.5.0",
     "swiper": "^8.4.6",

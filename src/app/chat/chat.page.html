@@ -16,15 +16,15 @@
 <ion-content style="--background: #e9f5ec">
   <div class="wrapper">
     <ion-row class="rowcls" *ngFor="let item of chat" (click)="goto()">
-      <ion-col size="2.5">
-        <img src="{{item.image}}">
+      <ion-col size="2">
+        <img src="https://swap.eigix.net/public/{{item.user_image}}" style="border-radius: 90%;">
       </ion-col>
-      <ion-col size="6.5">
-        <div class="text1 EudoxusSansReg">{{item.name}}</div>
-        <div class="text2 EudoxusSansReg">{{item.msg}}</div>
+      <ion-col size="7">
+        <div class="text1 EudoxusSansReg">{{item.first_name}}</div>
+        <div class="text2 EudoxusSansReg">{{item.last_message}}</div>
       </ion-col>
       <ion-col size="3">
-        <div class="text3 EudoxusSansReg">{{item.time}}</div>
+        <div class="text3 EudoxusSansReg">{{item.date}}</div>
         <ion-badge *ngIf="item.chatopen==0">2</ion-badge>
       </ion-col>
     </ion-row>
