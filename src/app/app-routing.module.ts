@@ -125,6 +125,10 @@ const routes: Routes = [
     path: 'adminslist',
     loadChildren: () => import('./adminslist/adminslist.module').then( m => m.AdminslistPageModule)
   },
+  {
+    path: 'userslist',
+    loadChildren: () => import('./userslist/userslist.module').then( m => m.UserslistPageModule)
+  },
 ];
 
 @NgModule({

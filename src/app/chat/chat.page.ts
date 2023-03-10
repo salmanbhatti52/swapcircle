@@ -31,14 +31,17 @@ export class ChatPage implements OnInit {
 
   getchat() {
     // 2
-    this.extra.loadershow()
+    // localStorage.getItem('user_id')
+    // this.extra.loadershow()
     let data = {
-      "users_customers_id": localStorage.getItem('user_id')
+      "users_customers_id": 2
     }
     this.api.sendRequest('getAllChatLive', data).subscribe((res: any) => {
       console.log('res---', res);
       this.extra.hideLoader()
       this.chat = res.data
+    }, err => {
+      // this.extra.hideLoader()
     })
   }
   goto() {

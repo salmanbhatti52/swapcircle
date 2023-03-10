@@ -8,9 +8,20 @@ import { NavController } from '@ionic/angular';
 })
 export class ProfilePage implements OnInit {
   tact = false;
+  userdetail: any;
+  user: any;
+  userprofile: any;
   constructor(public navCtrl: NavController) { }
 
   ngOnInit() {
+    this.userdetail = localStorage.getItem('userdeatil')
+    console.log(this.userdetail);
+
+    this.user = JSON.parse(this.userdetail)
+
+  }
+  ionViewWillEnter() {
+    this.userprofile = localStorage.getItem('userprofile')
   }
 
   billing() {

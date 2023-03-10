@@ -20,14 +20,16 @@
     <ion-row style=" width: 95%;
     margin: 0% auto;">
       <ion-col size="3">
-        <img src="assets/signup/user.svg">
+        <img src="assets/signup/user.svg" *ngIf="userprofile==null">
+        <img src="https://swap.eigix.net/public/{{userprofile}}" *ngIf="userprofile!=null" width="80" height="80"
+          style="border-radius: 90%;">
       </ion-col>
       <ion-col size="9">
         <div style="margin-top:7%;">
           <p style="font-style: normal;
           font-weight: 700;
           font-size: 18px;
-          color: #121826;" class="EudoxusSansReg">Hi, Jerome Bell</p>
+          color: #121826;" class="EudoxusSansReg">Hi, {{user.first_name}} {{user.last_name}}</p>
           <div style="display: flex;
           align-items: center;
           margin-top:3%;">
@@ -35,7 +37,7 @@
             <p style="font-weight: 400;
             font-size: 14px;
             color: #969D9F;
-            margin-left: 2%;" class="EudoxusSansReg">nathan.roberts@example.com</p>
+            margin-left: 2%;" class="EudoxusSansReg">{{user.email}}</p>
           </div>
 
         </div>

@@ -74,7 +74,7 @@ export class ChatdetailPage implements OnInit {
   }
 
   getMessages() {
-    this.extra.loadershow()
+    // this.extra.loadershow()
     let data = {
       "requestType": "getMessages",
       "users_customers_id": localStorage.getItem('user_id'),
@@ -83,15 +83,21 @@ export class ChatdetailPage implements OnInit {
     this.api.sendRequest('user_chat_live', data).subscribe((res: any) => {
       console.log("get msgs response----", res);
       this.extra.hideLoader()
-      res.data.forEach((ele: any) => {
+      if (res.status == 'success') {
+        res.data.forEach((ele: any) => {
 
-        let data = {
-          userloggedId: ele.users_data.users_customers_id,
-          message: ele.message,
-          time: ele.time
-        }
-        this.messages.push(data)
-      });
+          let data = {
+            userloggedId: ele.users_data.users_customers_id,
+            message: ele.message,
+            time: ele.time
+          }
+          this.messages.push(data)
+        });
+      } else {
+        this.extra.presentToast(res.message)
+        this.extra.hideLoader()
+      }
+
     });
   }
   sendMessage() {

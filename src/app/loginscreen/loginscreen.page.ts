@@ -59,6 +59,7 @@ export class LoginscreenPage implements OnInit {
 
   goNext() {
     let data = {
+      "one_signal_id": localStorage.getItem('onesignalId'),
       "email": this.email,
       "password": this.pass1
     }
@@ -70,6 +71,7 @@ export class LoginscreenPage implements OnInit {
       this.api.sendRequest('signin', data).subscribe((res: any) => {
         console.log('response--', res);
         if (res.status == 'success') {
+          localStorage.setItem('userdeatil', JSON.stringify(res.data))
           localStorage.setItem('user_id', res.data.users_customers_id);
           this.navCtrl.navigateRoot('home');
         } else {

@@ -17,16 +17,30 @@ export class EditprofilePage implements OnInit {
   confirmpass: any = '';
 
   picurl: any;
-  profileimage: any = 'assets/imgs/userprofile.svg';
+  profileimage: any = '';
   picurl1: any;
   userprofile: any;
   validdocument: any;
+  userdetail: any;
+  user: any;
   constructor(public location: Location,
     public alertCtrl: AlertController,
     public rest: ApiService,
     public extra: ExtraService) { }
 
   ngOnInit() {
+    let userimage = localStorage.getItem('userprofile')
+    if (userimage == null) {
+      this.profileimage = 'assets/imgs/userprofile.svg'
+
+    } else {
+      this.profileimage = 'https://swap.eigix.net/public/' + userimage
+
+    }
+    this.userdetail = localStorage.getItem('userdeatil')
+
+    this.user = JSON.parse(this.userdetail)
+
   }
 
   async chooseImage() {
@@ -115,10 +129,10 @@ export class EditprofilePage implements OnInit {
 
       datasend = {
         "users_customers_id": localStorage.getItem('user_id'),
-        "first_name": localStorage.getItem('fname'),
-        "last_name": localStorage.getItem('sname'),
-        "phone": localStorage.getItem('num'),
-        "email": localStorage.getItem('email'),
+        "first_name": this.user.first_name,
+        "last_name": this.user.last_name,
+        "phone": this.user.phone,
+        "email": this.user.email,
         "location": localStorage.getItem('address'),
         "notifications": "Yes",
         "valid_document": this.validdocument,
@@ -129,7 +143,9 @@ export class EditprofilePage implements OnInit {
 
     this.rest.sendRequest('update_profile', datasend).subscribe((res: any) => {
       console.log('response--', res);
-      this.extra.hideLoader()
+      localStorage.setItem('userprofile', res.data[0].profile_pic)
+      this.extra.hideLoader();
+      this.extra.presentToast('profile update');
       if (res.status == 'success') {
 
       } else {

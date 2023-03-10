@@ -99,7 +99,7 @@ export class Signup3Page implements OnInit {
       }
     } else {
       datasend = {
-        "one_signal_id": "123456",
+        "one_signal_id": localStorage.getItem('onesignalId'),
         "users_customers_type": localStorage.getItem('customertype'),
         "first_name": localStorage.getItem('fname'),
         "last_name": localStorage.getItem('sname'),
