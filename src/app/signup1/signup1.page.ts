@@ -1,4 +1,4 @@
-import { NavController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { ExtraService } from './../services/extra.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -6,6 +6,8 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Countries, Country } from "./interface";
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { ApiService } from '../services/api.service';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import parsePhoneNumber from 'libphonenumber-js'
 @Component({
   selector: 'app-signup1',
   templateUrl: './signup1.page.html',
@@ -27,18 +29,26 @@ export class Signup1Page implements OnInit {
   flagimage: any;
   showimage = false;
   upicon = false;
-  callingcode: any;
+  callingcode: any = '+1';
   nationality: any;
   customertype: any;
+  numberhave: any;
+  profileimage: any = 'assets/signup/user.svg';
+  picurl1: any;
+  userprofile: any;
+  countrycode: any = 'US';
+  validnumber: any;
   constructor(public router: Router,
     public api: ApiService,
     private http: HttpClient,
     public rest: ExtraService,
-    public navCtrl: NavController) { }
+    public navCtrl: NavController,
+    public alertCtrl: AlertController) { }
 
   ngOnInit() {
     this.customertype = localStorage.getItem('customertype')
     console.log(this.customertype);
+    this.setItems();
 
   }
 
@@ -53,14 +63,14 @@ export class Signup1Page implements OnInit {
     }
 
     this.showflags = true
-    this.setItems();
+    // this.setItems();
   }
   setItems() {
     this.http.get('assets/countries.json').toPromise().then(
       (res: any) => {
         this.allItems = res.countries;
         this.items = this.allItems;
-        // console.log('items', this.items);
+        console.log(this.items);
 
       }
     );
@@ -90,47 +100,130 @@ export class Signup1Page implements OnInit {
     this.nationality = item.name
     this.callingcode = '+' + item.callingCodes[0];
     console.log('code===', this.callingcode)
+    this.countrycode = item.alpha2Code
   }
-  goNext() {
-    if (this.fname == '') {
-      if (this.customertype == 'Individual') {
-        this.rest.presentToast('First Name Required')
-      } else {
-        this.rest.presentToast('Company Name Required')
-      }
-    }
-    else if (this.sname == '') {
-      if (this.customertype == 'Individual') {
-        this.rest.presentToast('Surname Name Required')
-      } else {
-        this.rest.presentToast('Representative Name Required')
-      }
-    }
-    else if (this.num == '') {
-      this.rest.presentToast('Phone Number Required')
-    }
-    else if (this.email == '') {
-      this.rest.presentToast('Email Required')
-    } else {
-      if (!this.validateEmail(this.email)) {
-        this.rest.presentToast('Invalid Email address')
-      } else {
-        alert('hellow')
-        localStorage.setItem('fname', this.fname)
-        localStorage.setItem('sname', this.sname)
-        localStorage.setItem('num', this.num)
-        localStorage.setItem('email', this.email)
-        this.api.sendRequest('email_exist', { email: this.email }).subscribe((res: any) => {
-          if (res.status == 'success') {
-            this.navCtrl.navigateForward('signup2');
-          } else {
-            this.rest.presentToast(res.message)
+
+  updateList(ev: any) {
+    console.log(ev);
+
+    let num11 = this.num.formatInternational()
+    console.log(num11);
+
+  }
+  async chooseImage() {
+
+    let confirm = await this.alertCtrl.create({
+      header: 'Upload Image',
+      cssClass: 'camera-alert',
+      buttons: [
+        {
+          text: 'Camera',
+          handler: async () => {
+            console.log('came inside Camera');
+            const image = await Camera.getPhoto({
+              quality: 75,
+              allowEditing: false,
+              resultType: CameraResultType.DataUrl,
+              source: CameraSource.Camera
+            }).then(res => {
+              this.profileimage = res.dataUrl
+              this.picurl1 = res.dataUrl
+              // console.log('image uri==', res.dataUrl);
+              let picurl2 = this.picurl1.split(',');
+
+
+              this.userprofile = picurl2[1];
+              this.rest.imgbaseURl = this.userprofile
+
+
+            })
           }
-        })
+        },
+        {
+          text: 'Gallery',
+          handler: async () => {
+            console.log('came inside yes');
+
+            const image = await Camera.getPhoto({
+              quality: 75,
+              allowEditing: false,
+              resultType: CameraResultType.DataUrl,
+              source: CameraSource.Photos,
+            }).then(res => {
+              this.profileimage = res.dataUrl
+              this.picurl1 = res.dataUrl
+
+              let picurl2 = this.picurl1.split(',');
+
+
+
+              this.userprofile = picurl2[1];
+
+              this.rest.imgbaseURl = this.userprofile
+
+            })
+
+
+
+          }
+        },
+      ]
+    })
+    await confirm.present();
+
+  }
+
+
+  goNext() {
+    const phoneNumber = parsePhoneNumber(this.num, this.countrycode)
+    this.validnumber = phoneNumber!.isValid()
+    console.log(this.validnumber);
+
+    if (this.profileimage == 'assets/signup/user.svg') {
+      this.rest.presentToast('Profile image Required')
+    } else
+      if (this.fname == '') {
+        if (this.customertype == 'Individual') {
+          this.rest.presentToast('First Name Required')
+        } else {
+          this.rest.presentToast('Company Name Required')
+        }
+      }
+      else if (this.sname == '') {
+        if (this.customertype == 'Individual') {
+          this.rest.presentToast('Surname Name Required')
+        } else {
+          this.rest.presentToast('Representative Name Required')
+        }
+      }
+      else if (this.num == '') {
+        this.rest.presentToast('Phone Number Required')
+      }
+      else if (this.email == '') {
+        this.rest.presentToast('Email Required')
+      } else {
+        if (!this.validateEmail(this.email)) {
+          this.rest.presentToast('Invalid Email address')
+        } else if (this.validnumber == false) {
+
+          this.rest.presentToast("Phone number does't match with the country code")
+        } else {
+          localStorage.setItem('fname', this.fname);
+          localStorage.setItem('sname', this.sname);
+          localStorage.setItem('num', this.num);
+          localStorage.setItem('email', this.email);
+
+          this.api.sendRequest('email_exist', { email: this.email }).subscribe((res: any) => {
+            if (res.status == 'success') {
+              this.navCtrl.navigateForward('signup2');
+            } else {
+              this.rest.presentToast(res.message)
+            }
+          })
+
+        }
 
       }
-
-    }
 
   }
   goToSignin() {

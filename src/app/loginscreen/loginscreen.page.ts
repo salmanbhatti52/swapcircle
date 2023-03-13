@@ -59,7 +59,8 @@ export class LoginscreenPage implements OnInit {
 
   goNext() {
     let data = {
-      "one_signal_id": localStorage.getItem('onesignalId'),
+      // localStorage.getItem('onesignalId')
+      "one_signal_id": '123456',
       "email": this.email,
       "password": this.pass1
     }

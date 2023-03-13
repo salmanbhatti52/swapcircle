@@ -4,6 +4,7 @@ import { ApiService } from '../services/api.service';
 import { NavController, IonContent } from '@ionic/angular';
 import * as moment from 'moment';
 import { ExtraService } from '../services/extra.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-chatdetail',
@@ -16,13 +17,21 @@ export class ChatdetailPage implements OnInit {
   message: any;
   messages: any = [];
   loggedid: any;
+  other_users_customers_id: any;
+  otherusername: any;
   constructor(public location: Location,
     public api: ApiService,
-    public extra: ExtraService) { }
+    public extra: ExtraService,
+    public route: ActivatedRoute) { }
 
   ngOnInit() {
     this.loggedid = localStorage.getItem('user_id')
     console.log('users_customers_id', localStorage.getItem('user_id'));
+
+    this.other_users_customers_id = this.route.snapshot.params['otheruserid'];
+    console.log('other_users_customers_id', this.other_users_customers_id);
+    this.otherusername = this.route.snapshot.params['otherusername'];
+    console.log('otherusername', this.otherusername);
 
   }
 
@@ -53,7 +62,7 @@ export class ChatdetailPage implements OnInit {
     let data = {
       "requestType": "updateMessages",
       "users_customers_id": localStorage.getItem('user_id'),
-      "other_users_customers_id": "1"
+      "other_users_customers_id": this.other_users_customers_id
     }
     this.api.sendRequest('user_chat_live', data).subscribe((res: any) => {
       // console.log("get msgs response----", res);
@@ -78,7 +87,7 @@ export class ChatdetailPage implements OnInit {
     let data = {
       "requestType": "getMessages",
       "users_customers_id": localStorage.getItem('user_id'),
-      "other_users_customers_id": "1"
+      "other_users_customers_id": this.other_users_customers_id
     }
     this.api.sendRequest('user_chat_live', data).subscribe((res: any) => {
       console.log("get msgs response----", res);
@@ -107,7 +116,7 @@ export class ChatdetailPage implements OnInit {
       "requestType": "sendMessage",
       "sender_type": "Users",
       "users_customers_id": localStorage.getItem('user_id'),
-      "other_users_customers_id": "1",
+      "other_users_customers_id": this.other_users_customers_id,
       "content": this.message,
       "messageType": "1"
     }

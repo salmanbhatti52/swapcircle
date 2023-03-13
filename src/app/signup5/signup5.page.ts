@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { ExtraService } from '../services/extra.service';
 
 @Component({
   selector: 'app-signup5',
@@ -13,7 +14,8 @@ export class Signup5Page implements OnInit {
   email: any;
   number: any;
 
-  constructor(public navCtrl: NavController) { }
+  constructor(public navCtrl: NavController,
+    public extra: ExtraService) { }
 
   ngOnInit() {
     if (localStorage.getItem('customertype') == 'Company') {

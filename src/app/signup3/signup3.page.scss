@@ -35,4 +35,21 @@
   line-height: 140%;
   color: #969D9F;
 }
-
+ion-item{
+  background: rgba(0, 0, 0, 0);
+  border: 1.5px solid #F4F4F6;
+  border-radius: 24px;
+  color: #969D9F !important
+}
+.ftxt{
+  margin-bottom: 10px;
+  font-size: 15px;
+  color: #969D9F;
+}
+.imgc{
+  height: 104px;
+  width: 104px;
+  left: 0px;
+  top: 0px;
+  border-radius: 90%;
+}

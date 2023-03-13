@@ -44,7 +44,7 @@ export class ChatPage implements OnInit {
       // this.extra.hideLoader()
     })
   }
-  goto() {
+  goto(user: any) {
     // let data = {
     //   "requestType": "startChat",
     //   "users_customers_id": "2",
@@ -59,7 +59,14 @@ export class ChatPage implements OnInit {
     //   }
     // })
 
-    this.navCtrl.navigateForward('chatdetail')
+    this.navCtrl.navigateForward(['chatdetail', {
+      otheruserid: user.receiver_id,
+      otherusername: user.first_name
+    }])
+  }
+
+  seeuser() {
+    this.navCtrl.navigateForward('userslist')
   }
 
 

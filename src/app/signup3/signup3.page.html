@@ -23,31 +23,74 @@
         for User Validation
       </p>
 
-      <div style="width: 100%; text-align: center" (click)="chooseImage()">
+
+      <!-- <div style="width: 100%; text-align: center" (click)="chooseImage()">
         <img style="height: 104px; width: 104px;border-radius: 90px;" src="{{profileimage}}" />
-      </div>
+      </div> -->
     </div>
     <div>
-      <p style="margin-top: 20px; text-align: left" class="desc2 EudoxusSansReg">
-        <span style="color: #ef3c3c">*</span> Acceptable IDs will be <br />
+      <!-- <p style="margin-top: 20px; text-align: left" class="desc2 EudoxusSansReg">
+        <span style="color: #ef3c3c">*</span> Choose ID <br />
         1- Drivers License <br />
         2- Passport <br />
         3- National Identity Card <br />
         4- Voters Card
-      </p>
+      </p> -->
 
-      <!-- input 1 -->
-      <div class="inputfieldtransparent" style="width: 100%; height: 64px; margin-top: 40px; display: flex">
+      <div class="inputfieldtransparent" style="width: 100%; height: 64px; margin-bottom:10px; display: flex;">
         <img style="margin: 17px 17px 17px 15px" src="/assets/signup/expiry.svg" />
-        <input [(ngModel)]="expiry" class="input EudoxusSansReg" type="text" placeholder="Enter Expiry date of ID" />
+        <input [(ngModel)]="Id" class="input EudoxusSansReg" type="text" placeholder="Enter ID" />
+      </div>
+
+      <div style="margin-top: 3%;
+      margin-left: 3%;font-size: 16px;
+      color: #969D9F" class="EudoxusSansReg">Choose ID</div>
+      <ion-list lines="none">
+        <ion-item lines="none" class="EudoxusSansReg">
+          <ion-select interface="action-sheet" placeholder="Choose ID" style="width: 100%;
+          height: 64px;" (ionChange)="handleChange($event)">
+            <ion-select-option value="DriversLicense">Drivers License</ion-select-option>
+            <ion-select-option value="Passport">Passport</ion-select-option>
+            <ion-select-option value="NID">National Identity Card</ion-select-option>
+            <ion-select-option value="VotersCard">Voters Card</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+
+
+      <div style="display: flex;
+        align-items: center;
+        justify-content: space-between;
+        text-align: center;margin-top: 5%;" *ngIf="show==true">
+        <div>
+          <div class="ftxt EudoxusSansReg">Front Side</div>
+          <img src="{{frontimage}}" (click)="chooseImage('frontside')" class="imgc">
+        </div>
+        <div>
+          <div class="ftxt EudoxusSansReg">Back Side</div>
+          <img src="{{backimage}}" (click)="chooseImage('backside')" class="imgc">
+        </div>
       </div>
 
       <!-- input 1 -->
+      <div style="margin-top: 3%;
+      margin-left: 3%;font-size: 16px;
+    color: #969D9F" class="EudoxusSansReg">Enter Expiry date of ID</div>
+      <div class="inputfieldtransparent" style="width: 100%; height: 64px; margin-top:13px; display: flex">
+        <img style="margin: 17px 17px 17px 15px" src="/assets/signup/expiry.svg" />
+        <input [(ngModel)]="expiry" class="input EudoxusSansReg" type="text" placeholder="dd/mm/yyyy"
+          (click)="showPicker = !showPicker" readonly>
+      </div>
+
+      <!-- input 1 -->
+      <ion-datetime class="item-picker" style="margin: 10px auto 8px; color: black" presentation="date"
+        *ngIf="showPicker" #datetime [value]="dateValue" min="{{displayDate}}" size="cover"
+        (ionChange)="DChanged(datetime.value)" showDefaultButtons="true" (ionCancel)="showPicker=false"></ion-datetime>
 
       <p style="margin-top: 20px; text-align: left" class="desc3 EudoxusSansReg">
-        <span style="color: #ef3c3c">*</span> After expiration of current id,
-        <br />
-        re-verification process will need.
+        <span style="color: #ef3c3c">*</span> After expiration
+        of the current ID, user will have to
+        undergo a re-verification process
       </p>
 
       <ion-button style="margin: 50px 0px 15px 0px" class="btnbggreen EudoxusSansReg"

@@ -129,6 +129,14 @@ const routes: Routes = [
     path: 'userslist',
     loadChildren: () => import('./userslist/userslist.module').then( m => m.UserslistPageModule)
   },
+  {
+    path: 'createsawap',
+    loadChildren: () => import('./createsawap/createsawap.module').then( m => m.CreatesawapPageModule)
+  },
+  {
+    path: 'createwallet',
+    loadChildren: () => import('./createwallet/createwallet.module').then( m => m.CreatewalletPageModule)
+  },
 ];
 
 @NgModule({

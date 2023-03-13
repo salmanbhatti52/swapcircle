@@ -30,7 +30,14 @@ export class HomePage {
     { img: '/assets/imgs/hlogo.svg', name: 'From James Anderson', time: 'Swap - 2:26pm', price: '$63.98', status: 'from' },
     { img: '/assets/imgs/hlogo1.svg', name: 'To James Anderson', time: 'Swap - 2:26pm', price: '-₦63.98', status: 'to' }
   ]
-  constructor(public navCtrl: NavController) { }
+  userdetail: any;
+  user: any;
+  constructor(public navCtrl: NavController) {
+    this.userdetail = localStorage.getItem('userdeatil')
+    console.log(this.userdetail);
+
+    this.user = JSON.parse(this.userdetail)
+  }
 
 
   ionViewWillEnter() {
@@ -68,6 +75,10 @@ export class HomePage {
     localStorage.setItem('requestType', this.requestsType);
   }
 
+
+  goNext() {
+    this.navCtrl.navigateForward('createsawap')
+  }
   noti() {
     this.navCtrl.navigateForward('notification');
   }

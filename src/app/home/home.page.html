@@ -3,14 +3,16 @@
     <ion-row style="width: 96%;
     margin: 0% auto;">
       <ion-col size="3">
-        <img src="assets/signup/user.svg">
+        <img src="assets/signup/user.svg" *ngIf="user.profile_pic==null">
+        <img src="https://swap.eigix.net/public/{{user.profile_pic}}" *ngIf="user.profile_pic!=null" width="48"
+          height="48" style="border-radius: 90%;">
       </ion-col>
       <ion-col size="6">
         <div style="margin-top: 10%;">
           <p style="font-style: normal;
           font-weight: 700;
           font-size: 18px;
-          color: #121826;" class="EudoxusSansReg">Hi, Jerome Bell</p>
+          color: #121826;" class="EudoxusSansReg">Hi, {{user.first_name}} {{user.last_name}}</p>
           <div style="display: flex;
           align-items: center;
           margin-top: 5%;">
@@ -150,6 +152,7 @@
           <div class="price" [class.red]="item.status=='to'">{{item.price}}</div>
         </ion-col>
       </ion-row>
+      <ion-button style="margin-top: 5%;" class="btnbggreen EudoxusSansReg" (click)="goNext()">Create Swap</ion-button>
     </div>
 
     <div *ngIf="requestsType=='RateTable'">

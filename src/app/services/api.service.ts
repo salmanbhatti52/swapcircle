@@ -26,4 +26,24 @@ export class ApiService {
       headers: header,
     });
   }
+
+  getRequest(action: any, data?: any) {
+
+    let header;
+
+    header = new HttpHeaders({
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    });
+    header.append("Access-Control-Allow-Origin", "*");
+    header.append(
+      "Access-Control-Allow-Methods",
+      "POST, GET, DELETE, PUT,OPTIONS"
+    );
+    let dataToPost = data;
+    let url = `${this.baseURL}/${action}`;
+    return this.http.get(url, {
+      headers: header,
+    });
+  }
 }

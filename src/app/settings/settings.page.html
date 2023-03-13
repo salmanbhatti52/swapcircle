@@ -21,7 +21,8 @@
         <div class="text2">Enable Notification</div>
       </div>
 
-      <ion-toggle class="ctoggle"></ion-toggle>
+      <ion-toggle class="ctoggle" (ionChange)="changed($event)" *ngIf="notichecked=='false'"></ion-toggle>
+      <ion-toggle class="ctoggle" (ionChange)="changed($event)" *ngIf="notichecked=='true'" checked></ion-toggle>
     </div>
   </div>
 

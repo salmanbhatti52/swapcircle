@@ -1,9 +1,35 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>userslist</ion-title>
+<ion-header class="ion-no-border">
+  <ion-toolbar style="--background: #e9f5ec;">
+    <ion-row style="width:95%;margin: 0% auto;">
+      <ion-col size="2">
+        <img src="assets/imgs/arrow_back_ios_new.svg" style="margin-top: 3px" (click)="goback()">
+      </ion-col>
+      <ion-col size="8">
+        <div style="font-weight: 700;
+      font-size: 20px;color: #21333B;text-align: center;" class="EudoxusSansReg">Users</div>
+      </ion-col>
+      <ion-col size="2"></ion-col>
+    </ion-row>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content style="--background: #e9f5ec">
+  <div class="wrapper">
+    <ion-row class="rowcls" *ngFor="let item of userlist" (click)="goto(item)">
+      <ion-col size="2">
+        <img src="https://swap.eigix.net/public/{{item.profile_pic}}" style="border-radius: 90%;height: 45px;
+        width: 48px;
+        object-fit: cover;" *ngIf="item.profile_pic!=null" (error)="handleImgError($event)">
+        <img src="assets/imgs/user.png" style="border-radius: 90%;
+        width: 48px;" *ngIf="item.profile_pic==null">
+      </ion-col>
+      <ion-col size="7">
+        <div class="text1 EudoxusSansReg">{{item.first_name}}</div>
+      </ion-col>
+      <ion-col size="3">
+      </ion-col>
+    </ion-row>
+
+  </div>
 
 </ion-content>

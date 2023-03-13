@@ -26,8 +26,18 @@
 
       <p class="desc EudoxusSansReg">Create your Swap Circle account.</p>
 
+      <div style="margin-top:10%;">
+        <div style="position: relative;">
+          <img src="{{profileimage}}" style=" border-radius: 90%;width: 120px;
+          height: 120px;">
+          <img style="position: absolute;
+        bottom: 0px;
+        right: 0px;
+        width: 40px;" src="assets/imgs/addicon.svg" (click)="chooseImage()">
+        </div>
+      </div>
       <!-- input 1 -->
-      <div class="inputfieldtransparent" style="width: 100%; height: 64px; margin-top: 40px; display: flex"
+      <div class="inputfieldtransparent" style="width: 100%; height: 64px; margin-top:30px; display: flex"
         *ngIf="customertype=='Individual'">
         <img style="margin: 17px 17px 17px 15px" src="/assets/signup/human.svg" />
         <input [(ngModel)]="fname" class="input EudoxusSansReg" type="text" placeholder="First Name" />
@@ -68,16 +78,22 @@
             <ion-icon name="caret-up-outline" class="cicon"></ion-icon>
           </div>
         </div>
-        <input [(ngModel)]="num" class="input EudoxusSansReg" type="tel" placeholder="Phone number" />
+        <input [(ngModel)]="callingcode" class="input EudoxusSansReg" type="tel" style="width: 50px!important;">
+        <input [(ngModel)]="num" class="input EudoxusSansReg" type="tel" placeholder="Phone number" id="fname"
+          (ionChange)="updateList($event)">
       </div>
       <!-- flag list shown -->
       <div *ngIf="flaglist==true" style="width: 100%;">
-        <ion-list style="height: 150px;overflow: scroll;width:58px;">
+        <ion-list style="height: 150px;overflow: scroll;">
           <ion-item *ngFor="let item of items" (click)="viewDetails(item)">
             <ion-avatar item-start>
               <img [src]="item.flag" style="width: 30px;
               height: 30px;">
+
             </ion-avatar>
+            <div style="font-size: 13px;
+            color: #969D9F !important;
+            margin-top: -6px;">{{item.callingCodes[0]}}</div>
           </ion-item>
         </ion-list>
       </div>
@@ -108,7 +124,7 @@
             order: 0;
             flex-grow: 0;
           " class="EudoxusSansReg">
-          Already User?
+          Have an account?
           <span (click)="goToSignin()" style="
               font-style: normal;
               font-weight: 500;
@@ -120,6 +136,7 @@
               flex: none;
               order: 1;
               flex-grow: 0;
+              margin-left: 5px;
             ">
             Sign In</span>
         </p>
