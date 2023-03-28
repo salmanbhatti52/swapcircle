@@ -16,21 +16,28 @@
 <ion-content style="--background: #e9f5ec;">
   <div class="wrapper">
 
-    <div class="text EudoxusSansReg">Base Currency</div>
+    <div style="display: flex;align-items: center;
+    justify-content: space-between;margin-bottom: 10px;">
+      <div class="ftext EudoxusSansReg">Base Currency</div>
+      <div class="EudoxusSansReg" style="font-weight: 500;
+      font-size: 14px;
+      color: #000;">{{basecurrency}}</div>
+    </div>
+
+    <div class="text EudoxusSansReg">From Account</div>
     <div class="inputfieldtransparent " style="width:100%;border: 1.5px solid #969D9F !important;" (click)="openList()"
       [class.active]="showcurr==true">
       <div style="display: flex;">
-        <input [(ngModel)]="basecurrency" class="input EudoxusSansReg" type="text" placeholder="EURO" readonly>
+        <input [(ngModel)]="fromcurrency" class="input EudoxusSansReg" type="text" placeholder="Select" readonly>
         <ion-icon style="margin: 17px 17px 17px 15px;color: #4BD16F;font-size: 30px;"
           name="chevron-down-outline"></ion-icon>
       </div>
-      <!-- <img style="margin: 17px 17px 17px 15px" src="/assets/signup/closeeye.svg" /> -->
     </div>
-
+    <div class="price EudoxusSansReg" *ngIf="fromamount==true">{{fromwalletamount}}</div>
     <div *ngIf="showcurr==true" class="sublist">
-      <div *ngFor="let list of currencies; let i=index" (click)="selectcurrency(list,i)">
+      <div *ngFor="let list of walletslist; let i=index" (click)="selectcurrency(list,i)">
         <div class="euro-text1 EudoxusSansReg">
-          {{list.curr}}
+          {{list.currency.name}} <span style="font-size: 12px;padding-left: 2px;">({{list.currency.code}})</span>
         </div>
       </div>
     </div>
@@ -41,7 +48,7 @@
       <input [(ngModel)]="totalamount" class="input EudoxusSansReg" type="text" placeholder="Enter Amount" />
     </div>
 
-    <div class="text EudoxusSansReg">Exchange Currency</div>
+    <div class="text EudoxusSansReg">To Account</div>
     <div class="inputfieldtransparent " style="width:100%;border: 1.5px solid #969D9F !important;"
       (click)="openexcList()" [class.active]="showexccurr==true">
       <div style="display: flex;">
@@ -49,22 +56,21 @@
         <ion-icon style="margin: 17px 17px 17px 15px;color: #4BD16F;font-size: 30px;"
           name="chevron-down-outline"></ion-icon>
       </div>
-      <!-- <img style="margin: 17px 17px 17px 15px" src="/assets/signup/closeeye.svg" /> -->
     </div>
-
+    <div class="price EudoxusSansReg" *ngIf="Toamount==true">{{towalletamount}}</div>
     <div *ngIf="showexccurr==true" class="sublist">
-      <div *ngFor="let list of currencies; let i=index" (click)="selectexcurrency(list,i)">
+      <div *ngFor="let list of walletslist; let i=index" (click)="selectexcurrency(list,i)">
         <div class="euro-text1 EudoxusSansReg">
-          {{list.curr}}
+          {{list.currency.name}} <span style="font-size: 12px;padding-left: 2px;">({{list.currency.code}})</span>
         </div>
       </div>
     </div>
 
-    <div class="text1 EudoxusSansReg">Exchange Rate</div>
+    <!-- <div class="text1 EudoxusSansReg">Exchange Rate</div>
     <div class="inputfieldtransparent"
       style="width: 100%; height: 64px; margin-bottom:20px; display: flex;border: 1.5px solid #969D9F !important;">
       <input [(ngModel)]="excahngerate" class="input EudoxusSansReg" type="text" placeholder="Enter Amount" />
-    </div>
+    </div> -->
   </div>
 </ion-content>
 
