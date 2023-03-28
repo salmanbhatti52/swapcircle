@@ -30,13 +30,11 @@ export class AppComponent {
     // if (localStorage.getItem('user_id') == '' || localStorage.getItem('user_id') == null) {
     //   this.navCtrl.navigateRoot('getstart')
     // } else {
-    //   if (localStorage.getItem('status') == 'Active') {
-    //     this.navCtrl.navigateRoot('home');
-    //   } else {
-    //     this.navCtrl.navigateRoot('loginscreen');
-    //   }
 
+    //   this.navCtrl.navigateRoot('loginscreen');
     // }
+
+
     this.pushNotification()
   }
   pushNotification() {

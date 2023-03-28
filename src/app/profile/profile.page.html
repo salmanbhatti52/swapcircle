@@ -20,9 +20,9 @@
     <ion-row style=" width: 95%;
     margin: 0% auto;">
       <ion-col size="3">
-        <img src="assets/signup/user.svg" *ngIf="userprofile==null">
-        <img src="https://swap.eigix.net/public/{{userprofile}}" *ngIf="userprofile!=null" width="80" height="80"
-          style="border-radius: 90%;">
+        <img src="assets/signup/user.svg" *ngIf="user.profile_pic==null">
+        <img src="https://swap.eigix.net/public/{{user.profile_pic}}" *ngIf="user.profile_pic!=null" width="80"
+          height="80" style="border-radius: 90%;">
       </ion-col>
       <ion-col size="9">
         <div style="margin-top:7%;">
@@ -74,8 +74,8 @@
 
     <div style="margin-top: 8%;" class="EudoxusSansReg">
       <ion-row style="align-items: center;
-    width: 95%;
-    margin: 4% auto;" (click)="billing()">
+        width: 95%;
+        margin: 4% auto;" (click)="billing()">
         <ion-col size="10" class="textimgdiv">
           <img src="assets/imgs/picon1.svg">
           <p class="p1">Billing/Payment</p>
@@ -85,8 +85,19 @@
         </ion-col>
       </ion-row>
       <ion-row style="align-items: center;
-    width: 95%;
-    margin: 4% auto;">
+        width: 95%;
+        margin: 4% auto;" (click)="transaction()">
+        <ion-col size="10" class="textimgdiv">
+          <img src="assets/imgs/transaction.svg">
+          <p class="p1">Transactions</p>
+        </ion-col>
+        <ion-col size="2" class="icon-right">
+          <img src="assets/imgs/chevron-right.svg">
+        </ion-col>
+      </ion-row>
+      <ion-row style="align-items: center;
+        width: 95%;
+        margin: 4% auto;">
         <ion-col size="9" class="textimgdiv">
           <img src="assets/imgs/picon2.svg">
           <p class="p1">Language</p>
@@ -100,8 +111,8 @@
         </ion-col>
       </ion-row>
       <ion-row style="align-items: center;
-    width: 95%;
-    margin: 4% auto;" (click)="settings()">
+        width: 95%;
+        margin: 4% auto;" (click)="settings()">
         <ion-col size="10" class="textimgdiv">
           <img src="assets/imgs/picon3.svg">
           <p class="p1">Settings</p>
@@ -111,8 +122,8 @@
         </ion-col>
       </ion-row>
       <ion-row style="align-items: center;
-    width: 95%;
-    margin: 4% auto;" (click)="faq()">
+        width: 95%;
+        margin: 4% auto;" (click)="faq()">
         <ion-col size="10" class="textimgdiv">
           <img src="assets/imgs/picon4.svg">
           <p class="p1">FAQ</p>
@@ -121,14 +132,36 @@
           <img src="assets/imgs/chevron-right.svg">
         </ion-col>
       </ion-row>
+      <ion-row style="align-items: center;
+      width: 95%;
+      margin: 4% auto;" (click)="logout()">
+        <ion-col size="10" class="textimgdiv">
+          <img src="assets/imgs/picon3.svg">
+          <p class="p1">Logout</p>
+        </ion-col>
+        <ion-col size="2" class="icon-right">
+          <img src="assets/imgs/chevron-right.svg">
+        </ion-col>
+      </ion-row>
+      <!-- <ion-row style="align-items: center;
+        width: 95%;
+        margin: 4% auto;" (click)="feedback()">
+        <ion-col size="10" class="textimgdiv">
+          <img src="assets/imgs/picon4.svg">
+          <p class="p1">FeedBack</p>
+        </ion-col>
+        <ion-col size="2" class="icon-right">
+          <img src="assets/imgs/chevron-right.svg">
+        </ion-col>
+      </ion-row> -->
     </div>
 
     <ion-row style="background: #4BD16F;
-    padding: 10px;
-    border-radius: 24px;
-    width: 92%;
-    margin: 10% auto;
-    align-items: center;">
+      padding: 10px;
+      border-radius: 24px;
+      width: 92%;
+      margin: 10% auto;
+      align-items: center;">
       <ion-col size="2.5">
         <img src="assets/imgs/headphone.svg">
       </ion-col>
@@ -149,11 +182,11 @@
 
 <ion-footer>
   <ion-tabs style="top: 10px !important">
-    <ion-fab vertical="bottom" horizontal="center" translucent="true">
+    <!-- <ion-fab vertical="bottom" horizontal="center" translucent="true">
       <ion-fab-button (click)="tabClick()">
         <img class="fabimg" src="assets/imgs/action.svg" />
       </ion-fab-button>
-    </ion-fab>
+    </ion-fab> -->
 
     <ion-tab-bar slot="bottom" class="ion-no-border">
       <ion-tab-button (click)="tab1Click()">
@@ -167,13 +200,14 @@
 
       </ion-tab-button>
 
-      <ion-tab-button (click)="tab2Click()">
-        <ion-label class="tacttext EudoxusSansReg">Track</ion-label>
+      <ion-tab-button (click)="tabClick()">
+        <img src="assets/imgs/track1.svg">
+        <ion-label class="tabtext EudoxusSansReg">Track</ion-label>
       </ion-tab-button>
 
       <ion-tab-button (click)="tab3Click()">
         <img src="assets/imgs/contact.svg">
-        <ion-label class="tabtextActive EudoxusSansReg">Connect</ion-label>
+        <ion-label class="tabtext EudoxusSansReg">Connect</ion-label>
 
       </ion-tab-button>
 

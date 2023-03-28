@@ -12,6 +12,7 @@ export class NotificationPage implements OnInit {
   // { image: 'assets/imgs/picon.svg', name: 'James Anderson', price: '120', time: '20 minute ago' },
   // { image: 'assets/imgs/picon.svg', name: 'James Anderson', price: '120', time: '20 minute ago' }]
   noti: any = [];
+  notilength: any;
   constructor(public location: Location,
     public api: ApiService) { }
 
@@ -22,6 +23,7 @@ export class NotificationPage implements OnInit {
   getnotification() {
     this.api.sendRequest('notifications', { "users_customers_id": localStorage.getItem('user_id') }).subscribe((res: any) => {
       console.log('response', res);
+      this.notilength = res.data.length
       if (res.status == 'success') {
         let dd = moment(res.data.date_added).format('YYYY-MM-DD')
         const d = new Date(dd);

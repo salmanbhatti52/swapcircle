@@ -1,0 +1,63 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar style="--background: #e9f5ec;">
+    <ion-row style="width:95%;margin: 0% auto;">
+      <ion-col size="2">
+        <img src="assets/imgs/arrow_back_ios_new.svg" style="margin-top: 3px" (click)="goback()">
+      </ion-col>
+      <ion-col size="8">
+        <div style="font-weight: 700;
+      font-size: 20px;color: #21333B;text-align: center;" class="EudoxusSansReg">Send Currency</div>
+      </ion-col>
+      <ion-col size="2"></ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content style="--background: #e9f5ec;">
+  <div class="wrapper">
+    <div class="text EudoxusSansReg">Total Amount</div>
+    <div style="display: flex;align-items: center;
+      margin-top: 4%;margin-bottom: 6%">
+      <div class="btxt">{{amount.basecurrsymbol}} {{amount.totalamount}}.<span
+          style="opacity:47%;font-size: 18px;">00</span></div>
+      <img src="assets/imgs/Rest.svg" style="margin: 0 5%;">
+      <div class="btxt">{{amount.excurrsymbol}} {{amount.convertedamount}}.<span
+          style="opacity:47%;font-size: 18px;">{{amount.amountafterpoint}}</span></div>
+    </div>
+
+    <div class="text EudoxusSansReg">Receiver</div>
+    <div style="display: flex;align-items: center;
+      margin-top: 4%;">
+
+      <img src="https://swap.eigix.net/public/{{reciever.profile_pic}}" width="48" height="48"
+        style="border-radius: 90%;">
+
+      <div style="margin-left: 3%;">
+        <div class="utxt">{{reciever.first_name}} {{reciever.last_name}}</div>
+        <div class="para">{{reciever.email}}</div>
+      </div>
+
+    </div>
+
+    <div style="display: flex;align-items: center;
+    margin-top:6%;justify-content: space-between;">
+      <div>
+        <div class="text">Country</div>
+        <div class="btxt" style="margin-top:5%;">{{country}}</div>
+      </div>
+      <div>
+        <div class="text">Date</div>
+        <div class="btxt" style="margin-top:5%;">{{currentdate}}</div>
+      </div>
+    </div>
+  </div>
+
+</ion-content>
+<ion-footer class="ion-no-border" style="background: #e9f5ec;">
+  <div style="width:93%;margin:0% auto 5%;">
+    <ion-button style="margin-top: 5%;" class="btnbggreen EudoxusSansReg" (click)="next()">
+      Send</ion-button>
+  </div>
+
+</ion-footer>

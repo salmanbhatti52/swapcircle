@@ -137,6 +137,34 @@ const routes: Routes = [
     path: 'createwallet',
     loadChildren: () => import('./createwallet/createwallet.module').then( m => m.CreatewalletPageModule)
   },
+  {
+    path: 'sendcurrency',
+    loadChildren: () => import('./sendcurrency/sendcurrency.module').then( m => m.SendcurrencyPageModule)
+  },
+  {
+    path: 'sendcurrency2',
+    loadChildren: () => import('./sendcurrency2/sendcurrency2.module').then( m => m.Sendcurrency2PageModule)
+  },
+  {
+    path: 'createoffer',
+    loadChildren: () => import('./createoffer/createoffer.module').then( m => m.CreateofferPageModule)
+  },
+  {
+    path: 'offerpopup',
+    loadChildren: () => import('./offerpopup/offerpopup.module').then( m => m.OfferpopupPageModule)
+  },
+  {
+    path: 'feedback',
+    loadChildren: () => import('./feedback/feedback.module').then( m => m.FeedbackPageModule)
+  },
+  {
+    path: 'transaction',
+    loadChildren: () => import('./transaction/transaction.module').then( m => m.TransactionPageModule)
+  },
+  {
+    path: 'sawappopup',
+    loadChildren: () => import('./sawappopup/sawappopup.module').then( m => m.SawappopupPageModule)
+  },
 ];
 
 @NgModule({

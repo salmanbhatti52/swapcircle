@@ -27,11 +27,21 @@ export class ProfilePage implements OnInit {
   billing() {
     this.navCtrl.navigateForward('billingpayment');
   }
+  transaction() {
+    this.navCtrl.navigateForward('transaction');
+  }
   settings() {
     this.navCtrl.navigateForward('settings');
   }
   faq() {
     this.navCtrl.navigateForward('faq');
+  }
+  feedback() {
+    this.navCtrl.navigateForward('feedback');
+  }
+  logout() {
+    localStorage.removeItem('user_id');
+    this.navCtrl.navigateRoot('loginscreen')
   }
   goto() {
     this.navCtrl.navigateForward('editprofile');

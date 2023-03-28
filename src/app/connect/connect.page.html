@@ -154,11 +154,11 @@
 </ion-content>
 <ion-footer>
   <ion-tabs style="top: 10px !important">
-    <ion-fab vertical="bottom" horizontal="center" translucent="true">
+    <!-- <ion-fab vertical="bottom" horizontal="center" translucent="true">
       <ion-fab-button (click)="tabClick()">
         <img class="fabimg" src="assets/imgs/action.svg" />
       </ion-fab-button>
-    </ion-fab>
+    </ion-fab> -->
 
     <ion-tab-bar slot="bottom" class="ion-no-border">
       <ion-tab-button (click)="tab1Click()">
@@ -172,8 +172,9 @@
 
       </ion-tab-button>
 
-      <ion-tab-button (click)="tab2Click()">
-        <ion-label class="tacttext EudoxusSansReg">Track</ion-label>
+      <ion-tab-button (click)="tabClick()">
+        <img src="assets/imgs/track1.svg">
+        <ion-label class="tabtext EudoxusSansReg">Track</ion-label>
       </ion-tab-button>
 
       <ion-tab-button (click)="tab3Click()">
@@ -183,7 +184,7 @@
       </ion-tab-button>
 
       <ion-tab-button (click)="tab4Click()">
-        <img src="assets/imgs/profile.svg" style="opacity: 46%" />
+        <img src="assets/imgs/profile.svg">
         <ion-label class="tabtext EudoxusSansReg">Profile</ion-label>
       </ion-tab-button>
     </ion-tab-bar>

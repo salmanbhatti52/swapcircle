@@ -228,3 +228,52 @@ p {
 // .otp-input:focus-within {
 //   background: #ffffff !important;
 // }
+
+///// modal
+ion-modal#example-modal {
+  --width: fit-content;
+  --min-width: 290px;
+  --height: fit-content;
+  --border-radius:17px;
+  --box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.6) !important;
+}
+
+ion-modal#example-modal h1 {
+  margin: 20px 20px 10px 20px;
+}
+
+// ion-modal#example-modal ion-icon {
+//   margin-right: 6px;
+
+//   width: 48px;
+//   height: 48px;
+
+//   padding: 4px 0;
+
+//   color: #aaaaaa;
+// }
+
+ion-modal#example-modal .container {
+  padding: 20px 15px;
+}
+.btnmodal{
+  text-transform:none !important;
+  height: 64px;
+  --background: #4BD16F;
+
+  --background-activated: #43af60;
+  --background-focused: #43af60;
+  --background-hover: #43af60;
+
+    opacity: 0.8;
+    --border-radius: 24px;
+    width:236px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 21px;
+    text-align: center;
+    letter-spacing: -0.3px;
+    color: #FFFFFF;
+}

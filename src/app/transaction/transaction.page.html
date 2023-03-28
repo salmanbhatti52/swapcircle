@@ -1,0 +1,33 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar style="--background: #e9f5ec;">
+    <ion-row style="width:95%;margin: 0% auto;">
+      <ion-col size="2">
+        <img src="assets/imgs/arrow_back_ios_new.svg" style="margin-top: 3px" (click)="goback()">
+      </ion-col>
+      <ion-col size="8">
+        <div style="font-weight: 700;
+    font-size: 20px;color: #21333B;text-align: center;" class="EudoxusSansReg">Transactions</div>
+      </ion-col>
+      <ion-col size="2"></ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="--background: #e9f5ec">
+  <div class="wrapper">
+    <ion-row *ngFor="let item of trans" class="rowcls EudoxusSansReg">
+      <ion-col size="2">
+        <img src="{{item.img}}">
+      </ion-col>
+      <ion-col size="7">
+        <div class="text1">{{item.name}}</div>
+        <div class="text2">{{item.time}}</div>
+      </ion-col>
+      <ion-col size="3" style="text-align: end;
+      right: 10px;">
+        <div class="price" [class.red]="item.status=='to'">{{item.price}}</div>
+      </ion-col>
+    </ion-row>
+  </div>
+
+</ion-content>

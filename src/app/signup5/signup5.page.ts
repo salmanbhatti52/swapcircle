@@ -13,9 +13,13 @@ export class Signup5Page implements OnInit {
   username: any;
   email: any;
   number: any;
+  userdetail: any;
+  user: any;
 
   constructor(public navCtrl: NavController,
-    public extra: ExtraService) { }
+    public extra: ExtraService) {
+    console.log(this.extra.imgbaseURl);
+  }
 
   ngOnInit() {
     if (localStorage.getItem('customertype') == 'Company') {
@@ -27,11 +31,15 @@ export class Signup5Page implements OnInit {
 
     this.username = this.fname + this.sname
     this.number = localStorage.getItem('num')
-    this.email = localStorage.getItem('email')
+    this.email = localStorage.getItem('email');
+    this.userdetail = localStorage.getItem('userdeatil')
+    console.log(this.userdetail);
+
+    this.user = JSON.parse(this.userdetail)
   }
 
   goNext() {
-    this.navCtrl.navigateRoot('loginscreen');
+    this.navCtrl.navigateRoot('home');
   }
 
 }

@@ -61,7 +61,7 @@ ion-segment {
   border-radius: 10px;
   text-align: center;
   background-color: white;
-  padding: 6px 8px 5px 5px;
+  padding: 8px 8px 8px 5px;
   box-shadow: 0px 0px 20px rgb(0 0 0 / 9%);
 }
 .cars_label{
@@ -78,7 +78,7 @@ ion-segment {
   text-align: left;
 
   color: #21333B;
-  margin-left: 5px;
+  margin-left: 3px;
 }
 .carItem_box img{
   border-radius: 5px;
@@ -145,6 +145,76 @@ ion-segment {
     display: flex;
     align-items: center;
   }
+
+  ion-badge{
+    float: right;
+    border-radius: 90px;
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
+    padding: 4px 5px;
+    background: #4BD16F;
+    color: #fff;
+    margin-top: 12px;
+    margin-right: 2px;
+}
+.clear{
+  clear: both;
+}
+ion-fab{
+    bottom: 80px;
+    right: 20px
+}
+ion-fab-button{
+    --background: #4BD16F;
+    --color: #fff;
+}
+  ///modal css///
+  .mtxt{
+    font-weight: 500;
+    font-size: 27px;
+    color: #4BD16F;
+    text-align: center;
+    margin-bottom: 5%;
+  }
+  .text{
+    font-weight: 500;
+    font-size: 15px;
+    color: #000;
+    margin-bottom: 10px;
+    margin-left: 3px;
+  }
+  .text11{
+      font-weight: 500;
+      font-size: 15px;
+      color: #000;
+      margin-bottom: 10px;
+      margin-left: 3px;
+      margin-top: 20px;
+  }
+  .sublist{
+      padding-left: 20px;
+      height: auto;
+      overflow: scroll;
+      border-radius: 0px;
+      border: 1.5px solid #969D9F !important;
+      padding-bottom: 10px;
+  }
+  input{
+      padding-left: 20px;
+  }
+  input::placeholder {
+      color: #21333B !important;
+      opacity: 0.5;
+    }
+    .euro-text1 {
+      color: #21333B;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+    .active{
+      border-radius: 24px 24px 0px 0px
+    }
 ////////////////////////
 /// /////////
 /// ///////

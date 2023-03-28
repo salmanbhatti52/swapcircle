@@ -125,7 +125,7 @@ export class Signup3Page implements OnInit {
       if (localStorage.getItem('customertype') == 'Company') {
         datasend = {
           "one_signal_id": "123456",
-          id_number: this.Id,
+          "id_number": this.Id,
           "users_customers_type": localStorage.getItem('customertype'),
           "company_name": localStorage.getItem('fname'),
           "first_name": localStorage.getItem('sname'),
@@ -162,22 +162,22 @@ export class Signup3Page implements OnInit {
       }
 
 
-      // this.rest.sendRequest('signup', datasend).subscribe((res: any) => {
-      //   console.log('response--', res);
-      //   this.extra.hideLoader()
-      //   if (res.status == 'success') {
-      //     localStorage.setItem('userdeatil', JSON.stringify(res.data[0]));
-      //     localStorage.setItem('user_id', res.data[0].users_customers_id);
-      //     localStorage.setItem('status', res.data[0].status);
-      //     this.openmodal()
-      //   } else {
-      //     this.extra.presentToast(res.message)
-      //   }
+      this.rest.sendRequest('signup', datasend).subscribe((res: any) => {
+        console.log('response--', res);
+        this.extra.hideLoader()
+        if (res.status == 'success') {
+          localStorage.setItem('userdeatil', JSON.stringify(res.data));
+          localStorage.setItem('user_id', res.data.users_customers_id);
+          localStorage.setItem('status', res.data.status);
+          this.navCtrl.navigateForward('signup5')
+        } else {
+          this.extra.presentToast(res.message)
+        }
 
-      // }, err => {
-      //   console.log('error response--', err);
-      //   this.extra.hideLoader()
-      // })
+      }, err => {
+        console.log('error response--', err);
+        this.extra.hideLoader()
+      })
     }
 
 

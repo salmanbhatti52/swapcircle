@@ -9,8 +9,8 @@
         color:#21333B;" class="EudoxusSansReg">Marketplace</div>
       </ion-col>
       <ion-col size="3" style="display: flex;
-      align-items: center;
-      justify-content: space-around;">
+        align-items: center;
+        justify-content: space-around;">
         <img src="assets/imgs/filter1.svg" (click)="setting()">
         <img src="assets/imgs/notification.svg" (click)="noti()">
       </ion-col>
@@ -241,7 +241,7 @@
 
 
     <div *ngIf="requestsType=='MyOffers'">
-      <div class="box EudoxusSansReg">
+      <div class="box EudoxusSansReg" id="open-modal">
         <ion-row>
           <ion-col size="6">
             <div class="flex-c">
@@ -290,19 +290,61 @@
           <p class="para">(Inc. Service charges £10.00)</p>
 
         </ion-row>
+
+
+
       </div>
+      <div style="width:93%;margin:0% auto 5%;">
+        <ion-button style="margin-top: 5%;" class="btnbggreen EudoxusSansReg" (click)="createoffer()">
+          Create Offer</ion-button>
+      </div>
+
+      <ion-modal trigger="open-modal" id="example-modal" #modal>
+        <ng-template>
+          <div class="container">
+            <div style="display: flex;align-items: center;
+            justify-content: center;">
+              <div class="mtxt EudoxusSansReg">£1</div>
+              <img src="assets/imgs/reset1.svg" style="width: 40px;
+              height: 40px;
+              margin: 0% 5%;">
+              <div class="mtxt EudoxusSansReg">₦890.00</div>
+            </div>
+            <div style="display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 8%;">
+              <div class="c-flex"><img src="assets/imgs/curricon.svg">
+                <div class="label1 EudoxusSansReg">₦889.00</div>
+              </div>
+              <div class="c-flex"><img src="assets/imgs/curricon2.svg">
+                <div class="label2 EudoxusSansReg">₦889.00</div>
+              </div>
+              <div class="c-flex"><img src="assets/imgs/curricon3.svg">
+                <div class="label3 EudoxusSansReg">₦889.00</div>
+              </div>
+            </div>
+            <div style="text-align: center;">
+              <ion-button style="margin-top: 5%;" class="btnmodal EudoxusSansReg" (click)="dismiss()">
+                Accept Offer</ion-button>
+            </div>
+
+          </div>
+        </ng-template>
+      </ion-modal>
     </div>
 
   </div>
 
+
 </ion-content>
 <ion-footer>
   <ion-tabs style="top: 10px !important">
-    <ion-fab vertical="bottom" horizontal="center" translucent="true">
+    <!-- <ion-fab vertical="bottom" horizontal="center" translucent="true">
       <ion-fab-button (click)="tabClick()">
         <img class="fabimg" src="assets/imgs/action.svg" />
       </ion-fab-button>
-    </ion-fab>
+    </ion-fab> -->
 
     <ion-tab-bar slot="bottom" class="ion-no-border">
       <ion-tab-button (click)="tab1Click()">
@@ -316,29 +358,19 @@
         <img class="tabline" src="assets/imgs/tabline.svg">
       </ion-tab-button>
 
-      <ion-tab-button (click)="tab2Click()">
-        <ion-label class="tacttext EudoxusSansReg">Track</ion-label>
+      <ion-tab-button (click)="tabClick()">
+        <img src="assets/imgs/track1.svg">
+        <ion-label class="tabtext EudoxusSansReg">Track</ion-label>
       </ion-tab-button>
-      <!-- <div style="
-          background: white;
-          display: flex;
-          flex-direction: column;
-          padding-top: 42px;
-          align-items: center;
-          padding-bottom: 17.2px;
-        ">
-        <ion-label *ngIf="!tact" class="tabtext EudoxusSansReg">Track</ion-label>
-        <ion-label *ngIf="tact" class="tabtextActive EudoxusSansReg">Track</ion-label>
-       
-      </div> -->
+
 
       <ion-tab-button (click)="tab3Click()">
-        <img src="assets/imgs/contact.svg" style="opacity: 46%" />
+        <img src="assets/imgs/contact.svg">
         <ion-label class="tabtext EudoxusSansReg">Connect</ion-label>
       </ion-tab-button>
 
       <ion-tab-button (click)="tab4Click()">
-        <img src="assets/imgs/profile.svg" style="opacity: 46%" />
+        <img src="assets/imgs/profile.svg">
         <ion-label class="tabtext EudoxusSansReg">Profile</ion-label>
       </ion-tab-button>
     </ion-tab-bar>

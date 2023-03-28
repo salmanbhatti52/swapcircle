@@ -29,17 +29,20 @@ export class EditprofilePage implements OnInit {
     public extra: ExtraService) { }
 
   ngOnInit() {
-    let userimage = localStorage.getItem('userprofile')
-    if (userimage == null) {
-      this.profileimage = 'assets/imgs/userprofile.svg'
-
-    } else {
-      this.profileimage = 'https://swap.eigix.net/public/' + userimage
-
-    }
     this.userdetail = localStorage.getItem('userdeatil')
 
     this.user = JSON.parse(this.userdetail)
+    console.log(this.user);
+
+
+    if (this.user.profile_pic == null) {
+      this.profileimage = 'assets/imgs/userprofile.svg'
+
+    } else {
+      this.profileimage = 'https://swap.eigix.net/public/' + this.user.profile_pic
+
+    }
+
 
   }
 
@@ -143,7 +146,8 @@ export class EditprofilePage implements OnInit {
 
     this.rest.sendRequest('update_profile', datasend).subscribe((res: any) => {
       console.log('response--', res);
-      localStorage.setItem('userprofile', res.data[0].profile_pic)
+      localStorage.setItem('userprofile', res.data[0].profile_pic);
+      localStorage.setItem('userdeatil', JSON.stringify(res.data[0]))
       this.extra.hideLoader();
       this.extra.presentToast('profile update');
       if (res.status == 'success') {

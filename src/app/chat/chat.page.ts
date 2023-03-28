@@ -34,7 +34,7 @@ export class ChatPage implements OnInit {
     // localStorage.getItem('user_id')
     // this.extra.loadershow()
     let data = {
-      "users_customers_id": 2
+      "users_customers_id": localStorage.getItem('user_id')
     }
     this.api.sendRequest('getAllChatLive', data).subscribe((res: any) => {
       console.log('res---', res);

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { NavController } from '@ionic/angular';
-
+import { OverlayEventDetail } from '@ionic/core/components';
+import { IonModal } from '@ionic/angular';
 @Component({
   selector: 'app-offer',
   templateUrl: './offer.page.html',
@@ -9,6 +10,8 @@ import { NavController } from '@ionic/angular';
 export class OfferPage implements OnInit {
   @ViewChild('mySegment', { read: ElementRef })
   private mySegment!: ElementRef;
+  @ViewChild(IonModal) modal!: IonModal;
+
   requestsType: any;
   tact = false;
   title: any;
@@ -57,24 +60,20 @@ export class OfferPage implements OnInit {
     this.reference = `ref-${Math.ceil(Math.random() * 10e13)}`;
   }
 
-  paymentInit() {
-    console.log('Payment initialized');
+  dismiss() {
+    this.modal.dismiss()
   }
 
-  paymentDone(ref: any) {
-    this.title = 'Payment successfull';
-    console.log(this.title, ref);
-  }
-
-  paymentCancel() {
-    console.log('payment failed');
-  }
 
   setting() {
     this.navCtrl.navigateForward('settings');
   }
   noti() {
     this.navCtrl.navigateForward('notification');
+  }
+
+  createoffer() {
+    this.navCtrl.navigateForward('createoffer');
   }
   tabClick() {
     this.navCtrl.navigateRoot('track');

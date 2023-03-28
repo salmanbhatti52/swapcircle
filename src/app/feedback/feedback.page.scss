@@ -1,0 +1,29 @@
+.wrapper{
+    width: 93%;
+    margin:10% auto;
+}   
+
+.text1{
+    font-weight: 500;
+    font-size: 15px;
+    color: #000;
+    margin-bottom: 10px;
+    margin-left: 3px;
+    margin-top: 20px;
+}
+
+input{
+    padding-left: 20px;
+}
+input::placeholder {
+    color: #21333B !important;
+    opacity: 0.5;
+  }
+  .euro-text1 {
+    color: #21333B;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  .active{
+    border-radius: 24px 24px 0px 0px
+  }

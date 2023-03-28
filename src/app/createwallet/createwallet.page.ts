@@ -1,5 +1,8 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
+import { ApiService } from '../services/api.service';
+import { ExtraService } from '../services/extra.service';
 
 @Component({
   selector: 'app-createwallet',
@@ -12,9 +15,15 @@ export class CreatewalletPage implements OnInit {
   showcurr = false;
   showexccurr = false;
   currencies = [{ curr: 'Euro' }, { curr: 'Dollar' }, { curr: 'INR' }]
-  constructor(public location: Location) { }
+  exchangecurr: any;
+  currencyID: any;
+  constructor(public location: Location,
+    public api: ApiService,
+    public extra: ExtraService,
+    public navCtrl: NavController) { }
 
   ngOnInit() {
+    this.getcurrencies()
   }
 
   goback() {
@@ -42,8 +51,35 @@ export class CreatewalletPage implements OnInit {
   }
 
   selectexcurrency(list: any, index: any) {
-    this.excurrency = list.curr
+    this.excurrency = list.name
+    this.currencyID = list.system_currencies_id
     this.showexccurr = false;
+  }
+
+  getcurrencies() {
+    this.api.getRequest('all_currencies').subscribe((res: any) => {
+      console.log(res);
+      this.exchangecurr = res.data
+      this.exchangecurr.sort((a: any, b: any) => a.name.localeCompare(b.name))
+
+      // console.log(this.exchangecurr);
+
+    })
+  }
+
+  save() {
+    let datasend = {
+      "users_customers_id": localStorage.getItem('user_id'),
+      "system_currencies_id": this.currencyID
+    }
+    this.api.sendRequest('create_wallet', datasend).subscribe((response: any) => {
+      console.log(response);
+      if (response.status == "success") {
+        this.extra.presentToast('Wallet create successfully')
+        this.navCtrl.navigateRoot('home')
+      }
+
+    })
   }
 
 }

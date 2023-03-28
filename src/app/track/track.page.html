@@ -160,11 +160,11 @@
 
 <ion-footer>
   <ion-tabs style="top: 10px !important">
-    <ion-fab vertical="bottom" horizontal="center" translucent="true">
+    <!-- <ion-fab vertical="bottom" horizontal="center" translucent="true">
       <ion-fab-button (click)="tabClick()">
         <img class="fabimg" src="assets/imgs/action.svg" />
       </ion-fab-button>
-    </ion-fab>
+    </ion-fab> -->
 
     <ion-tab-bar slot="bottom" class="ion-no-border">
       <ion-tab-button (click)="tab1Click()">
@@ -178,20 +178,21 @@
 
       </ion-tab-button>
 
-      <ion-tab-button (click)="tab2Click()">
-        <ion-label class="tacttextactive EudoxusSansReg">Track</ion-label>
+      <ion-tab-button (click)="tabClick()">
+        <img src="assets/imgs/tracka.svg">
+        <ion-label class="tabtextActive EudoxusSansReg">Track</ion-label>
         <img class="tabline" src="assets/imgs/tabline.svg">
       </ion-tab-button>
 
       <ion-tab-button (click)="tab3Click()">
         <img src="assets/imgs/contact.svg">
-        <ion-label class="tabtextActive EudoxusSansReg">Connect</ion-label>
+        <ion-label class="tabtext EudoxusSansReg">Connect</ion-label>
 
       </ion-tab-button>
 
       <ion-tab-button (click)="tab4Click()">
         <img src="assets/imgs/profile.svg">
-        <ion-label class="tabtextActive EudoxusSansReg">Profile</ion-label>
+        <ion-label class="tabtext EudoxusSansReg">Profile</ion-label>
       </ion-tab-button>
     </ion-tab-bar>
   </ion-tabs>
