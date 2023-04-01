@@ -60,7 +60,7 @@ export class LoginscreenPage implements OnInit {
   goNext() {
     let data = {
       // localStorage.getItem('onesignalId')
-      "one_signal_id": '123456',
+      "one_signal_id": '123',
       "email": this.email,
       "password": this.pass1
     }
@@ -69,9 +69,11 @@ export class LoginscreenPage implements OnInit {
     } else if (this.pass1 == '') {
       this.rest.presentToast('Password is Required')
     } else {
+      this.rest.loadershow()
       this.api.sendRequest('signin', data).subscribe((res: any) => {
         console.log('response--', res);
         if (res.status == 'success') {
+          this.rest.hideLoader()
           localStorage.setItem('userdeatil', JSON.stringify(res.data))
           localStorage.setItem('user_id', res.data.users_customers_id);
           this.navCtrl.navigateRoot('home');
@@ -79,6 +81,8 @@ export class LoginscreenPage implements OnInit {
           this.rest.presentToast(res.message)
         }
 
+      }, err => {
+        this.rest.hideLoader()
       })
 
     }

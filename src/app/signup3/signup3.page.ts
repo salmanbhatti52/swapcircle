@@ -124,7 +124,7 @@ export class Signup3Page implements OnInit {
       this.extra.loadershow()
       if (localStorage.getItem('customertype') == 'Company') {
         datasend = {
-          "one_signal_id": "123456",
+          "one_signal_id": '123',
           "id_number": this.Id,
           "users_customers_type": localStorage.getItem('customertype'),
           "company_name": localStorage.getItem('fname'),
@@ -143,7 +143,7 @@ export class Signup3Page implements OnInit {
         }
       } else {
         datasend = {
-          "one_signal_id": "123456",
+          "one_signal_id": "123",
           "id_number": this.Id,
           "users_customers_type": localStorage.getItem('customertype'),
           "first_name": localStorage.getItem('fname'),

@@ -34,7 +34,7 @@
       </div>
     </div>
     <div class="price EudoxusSansReg" *ngIf="fromamount==true">{{fromwalletamount}}</div>
-    <div *ngIf="showcurr==true" class="sublist">
+    <div *ngIf="showcurr==true" class="sublist" style="height: 150px;overflow: scroll;">
       <div *ngFor="let list of walletslist; let i=index" (click)="selectcurrency(list,i)">
         <div class="euro-text1 EudoxusSansReg">
           {{list.currency.name}} <span style="font-size: 12px;padding-left: 2px;">({{list.currency.code}})</span>
@@ -45,20 +45,21 @@
     <div class="text1 EudoxusSansReg">Total Amount</div>
     <div class="inputfieldtransparent"
       style="width: 100%; height: 64px; margin-bottom:20px; display: flex;border: 1.5px solid #969D9F !important;">
-      <input [(ngModel)]="totalamount" class="input EudoxusSansReg" type="text" placeholder="Enter Amount" />
+      <ion-input [(ngModel)]="totalamount" class="input EudoxusSansReg" type="number" placeholder="Enter Amount"
+        (ionInput)="Enteramount($event)"></ion-input>
     </div>
 
     <div class="text EudoxusSansReg">To Account</div>
     <div class="inputfieldtransparent " style="width:100%;border: 1.5px solid #969D9F !important;"
       (click)="openexcList()" [class.active]="showexccurr==true">
       <div style="display: flex;">
-        <input [(ngModel)]="excurrency" class="input EudoxusSansReg" type="text" placeholder="EURO" readonly>
+        <input [(ngModel)]="excurrency" class="input EudoxusSansReg" type="text" placeholder="Select" readonly>
         <ion-icon style="margin: 17px 17px 17px 15px;color: #4BD16F;font-size: 30px;"
           name="chevron-down-outline"></ion-icon>
       </div>
     </div>
     <div class="price EudoxusSansReg" *ngIf="Toamount==true">{{towalletamount}}</div>
-    <div *ngIf="showexccurr==true" class="sublist">
+    <div *ngIf="showexccurr==true" class="sublist" style="height: 150px;overflow: scroll;">
       <div *ngFor="let list of walletslist; let i=index" (click)="selectexcurrency(list,i)">
         <div class="euro-text1 EudoxusSansReg">
           {{list.currency.name}} <span style="font-size: 12px;padding-left: 2px;">({{list.currency.code}})</span>
@@ -76,7 +77,7 @@
 
 <ion-footer class="ion-no-border" style="background: #e9f5ec;">
   <div style="width:93%;margin:0% auto 5%;">
-    <ion-button style="margin-top: 5%;" class="btnbggreen EudoxusSansReg">
+    <ion-button style="margin-top: 5%;" class="btnbggreen EudoxusSansReg" (click)="save()">
       Save</ion-button>
   </div>
 

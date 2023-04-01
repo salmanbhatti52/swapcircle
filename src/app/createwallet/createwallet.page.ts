@@ -51,7 +51,7 @@ export class CreatewalletPage implements OnInit {
   }
 
   selectexcurrency(list: any, index: any) {
-    this.excurrency = list.name
+    this.excurrency = list.code
     this.currencyID = list.system_currencies_id
     this.showexccurr = false;
   }

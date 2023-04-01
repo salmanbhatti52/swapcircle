@@ -15,7 +15,32 @@
 
 <ion-content style="--background: #e9f5ec">
   <div class="wrapper">
-    <ion-row *ngFor="let item of trans" class="rowcls EudoxusSansReg">
+    <ion-row *ngFor="let item of transarr" class="rowcls">
+      <ion-col size="2.5">
+        <img src="/assets/imgs/hlogo.svg" *ngIf="userloginId!=item.from_users_customers_id">
+        <img src="/assets/imgs/hlogo1.svg" *ngIf="userloginId==item.from_users_customers_id">
+      </ion-col>
+      <ion-col size="6.5">
+        <div *ngIf="userloginId!=item.from_users_customers_id">
+          <div class="text1">From {{item.from_users_customers.first_name}} {{item.from_users_customers.last_name}}
+          </div>
+        </div>
+        <div *ngIf="userloginId==item.from_users_customers_id">
+          <div class="text1">To {{item.from_users_customers.first_name}} {{item.from_users_customers.last_name}}</div>
+        </div>
+      </ion-col>
+      <ion-col size="3" style="text-align: end;
+      right: 10px;">
+        <div class="price">{{bcurrsymbol}}{{item.base_amount}}</div>
+        <div style="color: #969D9F;
+        font-size: 13px;" *ngIf="userloginId!=item.from_users_customers_id">
+          ({{item.to_system_currencies}}{{item.to_amount}})</div>
+        <div class="price" *ngIf="userloginId==item.from_users_customers_id"
+          [class.red]="userloginId==item.from_users_customers_id">
+          -({{item.from_system_currencies}}{{item.from_amount}})</div>
+      </ion-col>
+    </ion-row>
+    <!-- <ion-row *ngFor="let item of trans" class="rowcls EudoxusSansReg">
       <ion-col size="2">
         <img src="{{item.img}}">
       </ion-col>
@@ -27,7 +52,7 @@
       right: 10px;">
         <div class="price" [class.red]="item.status=='to'">{{item.price}}</div>
       </ion-col>
-    </ion-row>
+    </ion-row> -->
   </div>
 
 </ion-content>

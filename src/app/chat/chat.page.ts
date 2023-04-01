@@ -39,7 +39,13 @@ export class ChatPage implements OnInit {
     this.api.sendRequest('getAllChatLive', data).subscribe((res: any) => {
       console.log('res---', res);
       this.extra.hideLoader()
-      this.chat = res.data
+      if (res.status == 'success') {
+        this.chat = res.data
+      } else {
+        this.extra.presentToast(res.message)
+      }
+
+
     }, err => {
       // this.extra.hideLoader()
     })

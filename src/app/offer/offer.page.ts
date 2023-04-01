@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { IonModal } from '@ionic/angular';
+import { ApiService } from '../services/api.service';
+import { ExtraService } from '../services/extra.service';
 @Component({
   selector: 'app-offer',
   templateUrl: './offer.page.html',
@@ -16,7 +18,9 @@ export class OfferPage implements OnInit {
   tact = false;
   title: any;
   reference = '';
-  constructor(public navCtrl: NavController) { }
+  constructor(public navCtrl: NavController,
+    public api: ApiService,
+    public extra: ExtraService) { }
 
   ionViewWillEnter() {
     if (this.requestsType) {
@@ -33,6 +37,7 @@ export class OfferPage implements OnInit {
 
       }
     } else {
+      this.alloffers()
       this.requestsType = 'AllOffers';
       this.mySegment.nativeElement.children[0].click();
 
@@ -64,6 +69,12 @@ export class OfferPage implements OnInit {
     this.modal.dismiss()
   }
 
+  alloffers() {
+    this.api.sendRequest('all_swap_offers', { "users_customers_id": localStorage.getItem('user_id') }).subscribe((res: any) => {
+      console.log(res);
+
+    })
+  }
 
   setting() {
     this.navCtrl.navigateForward('settings');

@@ -23,6 +23,9 @@ export class EditprofilePage implements OnInit {
   validdocument: any;
   userdetail: any;
   user: any;
+  showPass = false;
+  shownewPass = false;
+  showconfirmPass = false;
   constructor(public location: Location,
     public alertCtrl: AlertController,
     public rest: ApiService,
@@ -44,6 +47,19 @@ export class EditprofilePage implements OnInit {
     }
 
 
+  }
+  togglePass() {
+
+    this.showPass = !this.showPass;
+
+  }
+  togglenewPass() {
+
+    this.shownewPass = !this.shownewPass;
+
+  }
+  toggleconfirmPass() {
+    this.showconfirmPass = !this.showconfirmPass
   }
 
   async chooseImage() {

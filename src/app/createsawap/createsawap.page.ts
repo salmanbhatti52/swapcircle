@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
 import { ExtraService } from '../services/extra.service';
 
@@ -10,8 +11,8 @@ import { ExtraService } from '../services/extra.service';
 })
 export class CreatesawapPage implements OnInit {
   basecurrency: any;
-  excurrency: any;
-  totalamount: any;
+  excurrency: any = '';
+  totalamount: any = '';
   excahngerate: any;
 
   showcurr = false;
@@ -20,14 +21,17 @@ export class CreatesawapPage implements OnInit {
   walletslist: any;
   currsymbol: any;
   currID: any;
-  fromcurrency: any;
+  fromcurrency: any = '';
   fromwalletamount: any;
   towalletamount: any;
   fromamount = false;
   Toamount = false;
+  fromwalletId: any;
+  towalletId: any;
   constructor(public location: Location,
     public api: ApiService,
-    public extra: ExtraService) { }
+    public extra: ExtraService,
+    public navCtrl: NavController) { }
 
   ngOnInit() {
     this.getbasecurr()
@@ -82,6 +86,7 @@ export class CreatesawapPage implements OnInit {
 
     this.fromcurrency = list.currency.code
     this.fromwalletamount = list.wallet_amount
+    this.fromwalletId = list.users_customers_wallets_id
     this.showcurr = false;
     this.fromamount = true;
   }
@@ -91,6 +96,61 @@ export class CreatesawapPage implements OnInit {
     this.towalletamount = list.wallet_amount
     this.showexccurr = false;
     this.Toamount = true;
+    this.towalletId = list.users_customers_wallets_id
+    if (parseFloat(this.totalamount) > parseFloat(this.fromwalletamount)) {
+
+      this.extra.presentalert("The amount you're trying to transfer exceeds your available balance")
+
+
+    }
+  }
+
+  Enteramount(ev: any) {
+    console.log(ev);
+
+    this.totalamount = ev.target.value
+
+    if (parseFloat(this.totalamount) > parseFloat(this.fromwalletamount)) {
+      if (ev.detail.inputType != 'deleteContentBackward') {
+        this.extra.presentalert("The amount you're trying to transfer exceeds your available balance").then(() => {
+          if (this.extra.data.role == "confirm") {
+
+            this.totalamount = ''
+          }
+        })
+      }
+
+    }
+  }
+
+  save() {
+    if (this.fromcurrency == '') {
+      this.extra.presentToast('Select currency from account')
+    }
+    else if (this.totalamount == '') {
+      this.extra.presentToast('Select amount to transfer')
+    } else if (this.excurrency == '') {
+      this.extra.presentToast('Select currency for To account')
+    } else {
+      let data = {
+        "users_customers_id": localStorage.getItem('user_id'),
+        "from_users_customers_wallets_id": this.fromwalletId,
+        "to_users_customers_wallets_id": this.towalletId,
+        "amount_from": this.totalamount,
+        "system_currencies_id": localStorage.getItem('systemcurr')
+      }
+      this.api.sendRequest('wallet_swap', data).subscribe((res: any) => {
+        console.log('wallet response=====', res);
+        if (res.status == 'success') {
+          this.extra.presentToast('Amount transfer successfully');
+          this.navCtrl.navigateForward('home')
+        } else {
+          this.extra.presentToast(res.message)
+        }
+      }, err => {
+        this.extra.presentToast('Something went wrong')
+      })
+    }
   }
 
 }

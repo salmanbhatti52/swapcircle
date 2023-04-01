@@ -277,3 +277,13 @@ ion-modal#example-modal .container {
     letter-spacing: -0.3px;
     color: #FFFFFF;
 }
+
+.loading-wrapper.sc-ion-loading-md {
+  border-radius: 2px;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  background: none !important;
+  box-shadow: none !important;
+}

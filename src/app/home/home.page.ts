@@ -4,6 +4,8 @@ import { IonicSlides, IonSlides, NavController } from '@ionic/angular';
 SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, IonicSlides]);
 import { IonModal } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
+import { ExtraService } from '../services/extra.service';
+import * as moment from 'moment';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -40,19 +42,25 @@ export class HomePage {
   showcurr = false;
   currencies = [{ curr: 'Euro' }, { curr: 'Dollar' }, { curr: 'INR' }];
   walletslist: any;
-  transarr: any;
-  userloginId = 18;
+  transarr: any = [];
+  // 18 loginid
+  userloginId: any;
   currID: any;
   bcurrsymbol: any;
   constructor(public navCtrl: NavController,
-    public api: ApiService) {
+    public api: ApiService,
+    public extra: ExtraService) {
     this.userdetail = localStorage.getItem('userdeatil')
     console.log(this.userdetail);
 
     this.user = JSON.parse(this.userdetail);
-
+    this.userloginId = this.user.users_customers_id
     this.systemsettings()
     this.bcurrsymbol = localStorage.getItem('basecurrsymbol')
+
+    let date = moment('2023-03-27 05:00:19').format('LT');
+    console.log(date);
+
   }
 
 
@@ -142,9 +150,29 @@ export class HomePage {
   }
 
   gettransaction() {
-    this.api.sendRequest('all_transactions', { "users_customers_id": 18 }).subscribe((resp: any) => {
+    this.api.sendRequest('all_transactions', { "users_customers_id": localStorage.getItem('user_id') }).subscribe((resp: any) => {
       console.log('trans----', resp);
-      this.transarr = resp.data
+      if (resp.status == 'success') {
+        resp.data.forEach((ele: any) => {
+          // console.log(ele);
+          let obj = {
+            from_users_customers_id: ele.from_users_customers_id,
+            first_name: ele.from_users_customers.first_name,
+            last_name: ele.from_users_customers.last_name,
+            base_amount: ele.base_amount,
+            to_system_currencies: ele.to_system_currencies,
+            to_amount: ele.to_amount,
+            from_system_currencies: ele.from_system_currencies,
+            from_amount: ele.from_amount,
+            time: moment(ele.date_added).format('LT')
+          }
+          this.transarr.push(obj)
+        });
+
+      }
+      else {
+        // this.extra.presentToast(resp.message)
+      }
     })
   }
 

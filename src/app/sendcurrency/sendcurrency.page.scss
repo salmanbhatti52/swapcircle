@@ -17,6 +17,12 @@
     margin-left: 3px;
     margin-top: 20px;
 }
+.ftext{
+  font-weight: 500;
+  font-size: 15px;
+  color: #000;
+  margin-left: 3px;
+}
 .sublist{
     padding-left: 20px;
     height: auto;
@@ -27,7 +33,9 @@
 }
 input{
     padding-left: 20px;
-}
+} 
+
+
 input::placeholder {
     color: #21333B !important;
     opacity: 0.5;

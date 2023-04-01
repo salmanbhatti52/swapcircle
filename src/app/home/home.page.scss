@@ -163,7 +163,8 @@ ion-segment {
 }
 ion-fab{
     bottom: 80px;
-    right: 20px
+    right: 20px;
+    position: fixed;
 }
 ion-fab-button{
     --background: #4BD16F;

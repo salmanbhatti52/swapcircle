@@ -42,6 +42,7 @@ export class SendcurrencyPage implements OnInit {
 
   amountshow = false;
   currID: any;
+  walletslist: any;
 
   constructor(public location: Location,
     private http: HttpClient,
@@ -51,33 +52,15 @@ export class SendcurrencyPage implements OnInit {
     private alertController: AlertController) { }
 
   ngOnInit() {
+    this.getbasecurr()
+    this.walletlist()
     this.getcurrencies()
     this.getcountries()
-    this.getbasecurr()
+
   }
 
   goback() {
     this.location.back()
-  }
-
-  getcountries() {
-    this.api.getRequest('all_countries').subscribe((res: any) => {
-      console.log(res);
-      this.items = res.data
-      this.items.sort((a: any, b: any) => a.name.localeCompare(b.name))
-    })
-
-  }
-
-  getcurrencies() {
-    this.api.getRequest('all_currencies').subscribe((res: any) => {
-      console.log(res);
-      this.currencies = res.data
-      this.currencies.sort((a: any, b: any) => a.name.localeCompare(b.name))
-
-      // console.log(this.exchangecurr);
-
-    })
   }
   getbasecurr() {
     this.api.sendRequest('get_currencies_by_id', { "system_currencies_id": localStorage.getItem('systemcurr') }).subscribe((curr: any) => {
@@ -88,6 +71,38 @@ export class SendcurrencyPage implements OnInit {
       localStorage.setItem('basecurrsymbol', this.currsymbol)
     })
   }
+  walletlist() {
+    let datasend = {
+      "users_customers_id": localStorage.getItem('user_id'),
+    }
+    this.api.sendRequest('get_wallet', datasend).subscribe((response: any) => {
+      console.log('get_wallet=========', response);
+      this.walletslist = response.data
+    })
+  }
+  getcurrencies() {
+    this.api.getRequest('all_currencies').subscribe((res: any) => {
+      console.log(res);
+      this.currencies = res.data
+      this.currencies.sort((a: any, b: any) => a.name.localeCompare(b.name))
+
+      // console.log(this.exchangecurr);
+
+    })
+  }
+  getcountries() {
+    this.api.getRequest('all_countries').subscribe((res: any) => {
+      console.log(res);
+      this.items = res.data
+      this.items.sort((a: any, b: any) => a.name.localeCompare(b.name))
+    })
+
+  }
+
+
+
+
+
 
   openList() {
 
@@ -108,8 +123,8 @@ export class SendcurrencyPage implements OnInit {
   }
   selectcurrency(list: any, index: any) {
 
-    this.fromcurrency = list.name
-    this.currsymbol = list.symbol
+    this.fromcurrency = list.currency.code
+    this.currsymbol = list.currency.symbol
     this.basecurrId = list.system_currencies_id
     this.showcurr = false;
     if (this.fromcurrency != '') {
@@ -186,8 +201,9 @@ export class SendcurrencyPage implements OnInit {
 
   Examount(ev: any) {
     console.log(ev.target.value);
-    this.exchangerate()
     this.totalamount = ev.target.value
+    this.exchangerate()
+
   }
 
   exchangerate() {
@@ -200,19 +216,25 @@ export class SendcurrencyPage implements OnInit {
       this.api.sendRequest('currency_converter', datasend).subscribe((p: any) => {
         console.log(p);
         if (p.status == 'success') {
+
           this.amountshow = true;
           let p1 = p.data.converted_rate
-          let p2 = p1.split('.')
+          let pp = p1.toFixed(2)
+          let instr = String(pp)
+          let p2 = instr.split('.')
           console.log(p2);
           this.convertedrate = p2[0]
+          let fixedto = p2[1]
           this.rateafterpoint = p2[1]
 
 
           let p3 = p.data.converted_amount
-          let p4 = p3.split('.')
+          let pp3 = p3.toFixed(2)
+          let p3str = String(pp3)
+          let p4 = p3str.split('.')
           console.log(p4);
           this.convertedamount = p4[0]
-          this.amountafterpoint = p2[1]
+          this.amountafterpoint = p4[1]
         }
 
 
@@ -223,44 +245,44 @@ export class SendcurrencyPage implements OnInit {
 
   }
   next() {
-    // if (this.fromcurrency == '') {
-    //   this.extra.presentToast('Select from currency')
-    // } else if (this.totalamount == '') {
-    //   this.extra.presentToast('Select total amount')
-    // }
-    // else if (this.excurrency == '') {
-    //   this.extra.presentToast('Select exchange amount')
-    // }
-    // else if (this.email == '') {
-    //   this.extra.presentToast('Select email to send')
-    // }
-    // else if (this.country == '') {
-    //   this.extra.presentToast('Select country')
-    // } 
-    // else {
-    let data = {
-
-      "from_users_customers_id": localStorage.getItem('user_id'),
-      "from_system_currencies_id": this.basecurrId,
-      "from_amount": this.totalamount,
-      "to_users_customers_id": this.users_customers_id,
-      "to_system_currencies_id": this.exchangecurrId,
-      "payment_method_id": 1,
-      "system_countries_id": this.countryID,
-      "system_currencies_id": this.currID
+    if (this.fromcurrency == '') {
+      this.extra.presentToast('Select from currency')
+    } else if (this.totalamount == '') {
+      this.extra.presentToast('Select total amount')
     }
-    localStorage.setItem('transfer_currency', JSON.stringify(data));
-    let amounts = {
-      basecurrsymbol: this.currsymbol,
-      totalamount: this.totalamount,
-      excurrsymbol: this.excurrsymbol,
-      convertedamount: this.convertedamount,
-      amountafterpoint: this.amountafterpoint,
-
+    else if (this.excurrency == '') {
+      this.extra.presentToast('Select exchange amount')
     }
-    localStorage.setItem('amountdetail', JSON.stringify(amounts))
-    this.navCtrl.navigateForward('sendcurrency2');
-    // }
+    else if (this.email == '') {
+      this.extra.presentToast('Select email to send')
+    }
+    else if (this.country == '') {
+      this.extra.presentToast('Select country')
+    }
+    else {
+      let data = {
+
+        "from_users_customers_id": localStorage.getItem('user_id'),
+        "from_system_currencies_id": this.basecurrId,
+        "from_amount": this.totalamount,
+        "to_users_customers_id": this.users_customers_id,
+        "to_system_currencies_id": this.exchangecurrId,
+        "payment_method_id": 1,
+        "system_countries_id": this.countryID,
+        "system_currencies_id": this.currID
+      }
+      localStorage.setItem('transfer_currency', JSON.stringify(data));
+      let amounts = {
+        basecurrsymbol: this.currsymbol,
+        totalamount: this.totalamount,
+        excurrsymbol: this.excurrsymbol,
+        convertedamount: this.convertedamount,
+        amountafterpoint: this.amountafterpoint,
+
+      }
+      localStorage.setItem('amountdetail', JSON.stringify(amounts))
+      this.navCtrl.navigateForward('sendcurrency2');
+    }
 
 
 

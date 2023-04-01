@@ -7,6 +7,7 @@ import { Countries, Country } from "./interface";
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { ApiService } from '../services/api.service';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+// import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 import parsePhoneNumber from 'libphonenumber-js'
 @Component({
   selector: 'app-signup1',
@@ -38,6 +39,24 @@ export class Signup1Page implements OnInit {
   userprofile: any;
   countrycode: any = 'US';
   validnumber: any;
+
+  // cameraOptions: CameraOptions = {
+  //   quality: 50,
+  //   allowEdit: false,
+  //   correctOrientation: true,
+  //   destinationType: this.camera.DestinationType.DATA_URL,
+  //   encodingType: this.camera.EncodingType.JPEG,
+  //   mediaType: this.camera.MediaType.PICTURE
+  // }
+  // galleryOptions: CameraOptions = {
+  //   sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+  //   destinationType: this.camera.DestinationType.DATA_URL,
+  //   quality: 50,
+  //   allowEdit: false,
+  //   encodingType: this.camera.EncodingType.JPEG,
+  //   mediaType: this.camera.MediaType.PICTURE,
+  //   correctOrientation: true
+  // }
   constructor(public router: Router,
     public api: ApiService,
     private http: HttpClient,
@@ -179,51 +198,51 @@ export class Signup1Page implements OnInit {
     this.validnumber = phoneNumber!.isValid()
     console.log(this.validnumber);
 
-    if (this.profileimage == 'assets/signup/user.svg') {
-      this.rest.presentToast('Profile image Required')
-    } else
-      if (this.fname == '') {
-        if (this.customertype == 'Individual') {
-          this.rest.presentToast('First Name Required')
-        } else {
-          this.rest.presentToast('Company Name Required')
-        }
-      }
-      else if (this.sname == '') {
-        if (this.customertype == 'Individual') {
-          this.rest.presentToast('Surname Name Required')
-        } else {
-          this.rest.presentToast('Representative Name Required')
-        }
-      }
-      else if (this.num == '') {
-        this.rest.presentToast('Phone Number Required')
-      }
-      else if (this.email == '') {
-        this.rest.presentToast('Email Required')
+    // if (this.profileimage == 'assets/signup/user.svg') {
+    //   this.rest.presentToast('Profile image Required')
+    // } else
+    if (this.fname == '') {
+      if (this.customertype == 'Individual') {
+        this.rest.presentToast('First Name Required')
       } else {
-        if (!this.validateEmail(this.email)) {
-          this.rest.presentToast('Invalid Email address')
-        } else if (this.validnumber == false) {
+        this.rest.presentToast('Company Name Required')
+      }
+    }
+    else if (this.sname == '') {
+      if (this.customertype == 'Individual') {
+        this.rest.presentToast('Surname Name Required')
+      } else {
+        this.rest.presentToast('Representative Name Required')
+      }
+    }
+    else if (this.num == '') {
+      this.rest.presentToast('Phone Number Required')
+    }
+    else if (this.email == '') {
+      this.rest.presentToast('Email Required')
+    } else {
+      if (!this.validateEmail(this.email)) {
+        this.rest.presentToast('Invalid Email address')
+      } else if (this.validnumber == false) {
 
-          this.rest.presentToast("Phone number does't match with the country code")
-        } else {
-          localStorage.setItem('fname', this.fname);
-          localStorage.setItem('sname', this.sname);
-          localStorage.setItem('num', this.num);
-          localStorage.setItem('email', this.email);
+        this.rest.presentToast("Phone number does't match with the country code")
+      } else {
+        localStorage.setItem('fname', this.fname);
+        localStorage.setItem('sname', this.sname);
+        localStorage.setItem('num', this.num);
+        localStorage.setItem('email', this.email);
 
-          this.api.sendRequest('email_exist', { email: this.email }).subscribe((res: any) => {
-            if (res.status == 'success') {
-              this.navCtrl.navigateForward('signup2');
-            } else {
-              this.rest.presentToast(res.message)
-            }
-          })
-
-        }
+        this.api.sendRequest('email_exist', { email: this.email }).subscribe((res: any) => {
+          if (res.status == 'success') {
+            this.navCtrl.navigateForward('signup2');
+          } else {
+            this.rest.presentToast(res.message)
+          }
+        })
 
       }
+
+    }
 
   }
   goToSignin() {

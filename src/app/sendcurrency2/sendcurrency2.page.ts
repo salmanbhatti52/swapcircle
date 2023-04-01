@@ -44,7 +44,8 @@ export class Sendcurrency2Page implements OnInit {
     this.api.sendRequest('transfer_currency', localStorage.getItem('transfer_currency')).subscribe((res: any) => {
       console.log('response gte', res);
       if (res.status == 'success') {
-        this.navCtrl.navigateForward('sendcurrency2')
+        this.extra.presentToast('Currency transfer successfully')
+        this.navCtrl.navigateForward('home')
       } else {
         this.extra.presentToast(res.message)
       }

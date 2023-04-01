@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LoadingController, ToastController } from '@ionic/angular';
+import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -7,8 +7,11 @@ import { LoadingController, ToastController } from '@ionic/angular';
 export class ExtraService {
   toast: any;
   imgbaseURl: any;
+  role: any;
+  data: any;
   constructor(public toastCtrl: ToastController,
-    public loadingCtrl: LoadingController) { }
+    public loadingCtrl: LoadingController,
+    public alertController: AlertController) { }
 
   async presentToast(message: any) {
 
@@ -49,6 +52,24 @@ export class ExtraService {
     }).catch((error) => {
       console.log('error', error);
     });
+
+  }
+  async presentalert(message: any) {
+    const alert = await this.alertController.create({
+      message: message,
+      buttons: [
+        {
+          text: 'OK',
+          role: 'confirm',
+          handler: () => {
+
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+    this.data = await alert.onDidDismiss();
 
   }
 }

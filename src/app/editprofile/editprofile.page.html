@@ -44,22 +44,33 @@
       <div class="inputfieldtransparent"
         style="width: 100%; height: 64px; margin-top:0px; display: flex;border: 1px solid #969D9F !important;">
         <img style="margin: 17px 17px 17px 15px" src="/assets/signup/lock.svg" />
-        <input [(ngModel)]="oldpass" class="input EudoxusSansReg" type="password" placeholder="Old password" />
-        <img style="margin: 17px 17px 17px 15px" src="/assets/signup/closeeye.svg" />
+        <input [(ngModel)]="oldpass" class="input EudoxusSansReg" type="{{showPass ? 'text':'password' }}"
+          placeholder="Old password" />
+        <img style="margin: 17px 17px 17px 15px" src="/assets/signup/closeeye.svg" *ngIf="!showPass"
+          (click)="togglePass()" />
+        <img style="margin: 17px 17px 17px 15px" src="/assets/signup/eye.svg" *ngIf="showPass" (click)="togglePass()" />
       </div>
       <div class="inputfieldtransparent"
         style="width: 100%; height: 64px; margin-top: 20px; display: flex;border: 1px solid #969D9F !important;">
         <img style="margin: 17px 17px 17px 15px" src="/assets/signup/lock.svg" />
-        <input [(ngModel)]="newpass" class="input EudoxusSansReg" type="password" placeholder="New password" />
-        <img style="margin: 17px 17px 17px 15px" src="/assets/signup/closeeye.svg" />
+        <input [(ngModel)]="newpass" class="input EudoxusSansReg" type="{{shownewPass ? 'text':'password' }}"
+          placeholder="New password" />
+        <img style="margin: 17px 17px 17px 15px" src="/assets/signup/closeeye.svg" *ngIf="!shownewPass"
+          (click)="togglenewPass()" />
+        <img style="margin: 17px 17px 17px 15px" src="/assets/signup/eye.svg" *ngIf="shownewPass"
+          (click)="togglenewPass()" />
       </div>
 
 
       <div class="inputfieldtransparent"
         style="width: 100%; height: 64px; margin-top: 20px; display: flex;border: 1px solid #969D9F !important;">
         <img style="margin: 17px 17px 17px 15px" src="/assets/signup/lock.svg" />
-        <input [(ngModel)]="confirmpass" class="input EudoxusSansReg" type="password" placeholder="Confirm password" />
-        <img style="margin: 17px 17px 17px 15px" src="/assets/signup/closeeye.svg" />
+        <input [(ngModel)]="confirmpass" class="input EudoxusSansReg" type="{{showconfirmPass ? 'text':'password' }}"
+          placeholder="Confirm password" />
+        <img style="margin: 17px 17px 17px 15px" src="/assets/signup/closeeye.svg" *ngIf="!showconfirmPass"
+          (click)="toggleconfirmPass()" />
+        <img style="margin: 17px 17px 17px 15px" src="/assets/signup/eye.svg" *ngIf="showconfirmPass"
+          (click)="toggleconfirmPass()" />
       </div>
 
 

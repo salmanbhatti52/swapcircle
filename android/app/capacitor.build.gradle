@@ -14,9 +14,9 @@ dependencies {
     implementation project(':capacitor-haptics')
     implementation project(':capacitor-keyboard')
     implementation project(':capacitor-status-bar')
-    implementation "com.onesignal:OneSignal:4.8.2"
+    implementation "androidx.core:core:1.6.+"
 }
-apply from: "../../node_modules/onesignal-cordova-plugin/build-extras-onesignal.gradle"
+
 
 if (hasProperty('postBuildExtras')) {
   postBuildExtras()
