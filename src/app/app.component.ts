@@ -1,46 +1,37 @@
-import { Component } from '@angular/core';
-import { NavController, Platform } from '@ionic/angular';
+import { Component } from "@angular/core";
+import { NavController, Platform } from "@ionic/angular";
 // import OneSignal from 'onesignal-cordova-plugin';
 @Component({
-  selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss'],
+  selector: "app-root",
+  templateUrl: "app.component.html",
+  styleUrls: ["app.component.scss"],
 })
 export class AppComponent {
-  sender_id = '558453112065';
-  oneSignalAppId = '925e80ab-a9d8-4e29-9824-f1956346665c';
-  constructor(public navCtrl: NavController,
-    public platform: Platform) {
-
-
-  }
+  sender_id = "558453112065";
+  oneSignalAppId = "925e80ab-a9d8-4e29-9824-f1956346665c";
+  constructor(public navCtrl: NavController, public platform: Platform) {}
 
   ngOnInit() {
-
     this.platform.ready().then(() => {
       this.initializeApp();
-
-    })
-
+    });
   }
 
   initializeApp() {
-    console.log(localStorage.getItem('user_id'));
+    console.log(localStorage.getItem("user_id"));
 
-    if (localStorage.getItem('user_id') == '' || localStorage.getItem('user_id') == null) {
-      this.navCtrl.navigateRoot('getstart')
-    } else {
+    // if (localStorage.getItem('user_id') == '' || localStorage.getItem('user_id') == null) {
+    //   this.navCtrl.navigateRoot('getstart')
+    // } else {
 
-      this.navCtrl.navigateRoot('home');
-    }
-
+    //   this.navCtrl.navigateRoot('home');
+    // }
 
     // this.pushNotification()
   }
   // pushNotification() {
   //   console.log('push notification in function.....');
   //   OneSignal.setAppId("925e80ab-a9d8-4e29-9824-f1956346665c");
-
 
   //   OneSignal.setNotificationOpenedHandler((jsonData) => {
   //     console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
