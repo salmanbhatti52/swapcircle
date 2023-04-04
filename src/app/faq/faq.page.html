@@ -15,30 +15,17 @@
 
 <ion-content style="--background: #e9f5ec;">
   <div class="wrapper">
-    <div class="box">
+    <div class="box" *ngFor="let item of faqs">
       <div style="display: flex;justify-content: space-between;">
-        <div class="text EudoxusSansReg">Fusce volutpat lectus et nisl consecte?</div>
-        <img src="assets/imgs/add.svg" (click)="openclose()" *ngIf="show==false">
-        <img src="assets/imgs/remove.svg" (click)="openclose()" *ngIf="show==true">
+        <div class="text EudoxusSansReg">{{item.question}}</div>
+        <img src="assets/imgs/add.svg" (click)="openclose(item)" *ngIf="item.openanswer==false">
+        <img src="assets/imgs/remove.svg" (click)="openclose(item)" *ngIf="item.openanswer==true">
       </div>
-      <p class="EudoxusSansReg" *ngIf="show==false">Fusce volutpat lectus et nisl consectetur finibus. In vitae
-        scelerisque augue, in varius
-        eros.......
-      </p>
-      <p class="EudoxusSansReg" *ngIf="show==true">Fusce volutpat lectus et nisl consectetur finibus. In vitae
-        scelerisque augue, in
-        varius
-        eros. Nunc sapien diam, euismod et pretium id, volutpat et tortor. In vulputate lorem quis dui vestibulum,
-        vitae
-        imperdiet diam bibendum. Maecenas scelerisque orci a dolor vestibulum sagittis. Etiam quis finibus arcu, vel
-        efficitur diam. Curabitur felis eros, vestibulum sed nisi eu, sodales aliquet lacus. Mauris lacinia quam quis
-        feugiat laoreet. Etiam lobortis aliquet euismod. Nunc dictum, sapien at egestas rutrum, dui dui fringilla
-        erat,
-        a commodo augue augue vel magna. Sed tincidunt ante turpis, rhoncus commodo risus fringilla vel. Maecenas
-        lacinia nisl a sem ornare pharetra. Donec imperdiet justo et elementum iaculis.</p>
+
+      <p class="EudoxusSansReg" [class.active]="item.openanswer==true">{{item.answer}}</p>
     </div>
 
-    <div class="box">
+    <!-- <div class="box">
       <div style="display: flex;justify-content: space-between;">
         <div class="text EudoxusSansReg">Fusce volutpat lectus et nisl consecte?</div>
         <img src="assets/imgs/add.svg" (click)="openclose1()" *ngIf="show1==false">
@@ -59,7 +46,7 @@
         erat,
         a commodo augue augue vel magna. Sed tincidunt ante turpis, rhoncus commodo risus fringilla vel. Maecenas
         lacinia nisl a sem ornare pharetra. Donec imperdiet justo et elementum iaculis.</p>
-    </div>
+    </div> -->
   </div>
 
 </ion-content>

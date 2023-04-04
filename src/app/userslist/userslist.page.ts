@@ -38,10 +38,23 @@ export class UserslistPage implements OnInit {
   }
 
   goto(user: any) {
-    this.navCtrl.navigateForward(['chatdetail', {
-      otheruserid: user.users_customers_id,
-      otherusername: user.first_name
-    }])
+    let data = {
+      "requestType": "startChat",
+      "users_customers_id": localStorage.getItem('user_id'),
+      "other_users_customers_id": user.users_customers_id
+    }
+    this.api.sendRequest('user_chat_live', data).subscribe((res: any) => {
+      console.log('res---for check start chat', res);
+      if (res.status == 'success') {
+        this.navCtrl.navigateForward(['chatdetail', {
+          otheruserid: user.users_customers_id,
+          otherusername: user.first_name
+        }])
+      } else {
+        this.extra.presentToast(res.message)
+      }
+    })
+
   }
 
 

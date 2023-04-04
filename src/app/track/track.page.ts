@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { NavController } from "@ionic/angular";
 import { ApiService } from "../services/api.service";
 import { ExtraService } from "../services/extra.service";
+import { log } from "console";
 
 @Component({
   selector: "app-track",
@@ -15,14 +16,20 @@ export class TrackPage implements OnInit {
   requestsType: any;
   curr: any;
   symbol: any;
-  tosystemId: any;
-  fromsystemId: any;
+  fromsystemId: any = '2';
+  tosystemId: any = '11';
+
   amount: any;
+  currcode: any = 'USD';
+  tocurrcode: any = 'EUR';
+  convertedamount: any;
+  amountafterpoint: any;
+  amountshow = false
   constructor(
     public navCtrl: NavController,
     public api: ApiService,
     public extra: ExtraService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.getcurrencies();
@@ -60,7 +67,7 @@ export class TrackPage implements OnInit {
     this.api.getRequest("all_currencies").subscribe((res: any) => {
       console.log(res);
       this.curr = res.data;
-      this.curr.sort((a: any, b: any) => a.name.localeCompare(b.name));
+      this.curr.sort((a: any, b: any) => a.code.localeCompare(b.code));
 
       // console.log(this.exchangecurr);
     });
@@ -68,14 +75,57 @@ export class TrackPage implements OnInit {
 
   optionsFn(ev: any) {
     console.log(ev);
+    let val = ev.detail.value
+    this.currcode = val.code
+    this.fromsystemId = val.system_currencies_id;
+  }
 
-    this.fromsystemId = ev.detail.value;
-  }
-  choose(s: any) {
-    console.log(s);
-  }
   optionsFn2(ev: any) {
-    this.tosystemId = ev.detail.value;
+    console.log(ev);
+    let val = ev.detail.value
+    this.tocurrcode = val.code
+    this.tosystemId = val.system_currencies_id;
+  }
+
+  track() {
+    let datatosend = {
+      "from_system_currencies_id": this.fromsystemId,
+      "to_system_currencies_id": this.tosystemId,
+      "from_amount": this.amount
+    }
+    if (this.requestsType == "Buy") {
+      this.api.sendRequest('buy_currency_rate', datatosend).subscribe((res: any) => {
+        console.log('rate response====', res);
+        if (res.status == 'success') {
+          this.amountshow = true
+          let amt = res.data.converted_amount
+          let pp = amt.toFixed(2)
+          let instr = String(pp)
+          let p2 = instr.split('.')
+          this.convertedamount = p2[0]
+          let fixedto = p2[1]
+          console.log(this.convertedamount);
+
+          this.amountafterpoint = p2[1]
+        }
+      })
+    } else {
+      this.api.sendRequest('sell_currency_rate', datatosend).subscribe((res: any) => {
+        console.log('rate response====', res);
+        if (res.status == 'success') {
+          this.amountshow = true
+          let amt = res.data.converted_amount
+          let pp = amt.toFixed(2)
+          let instr = String(pp)
+          let p2 = instr.split('.')
+          this.convertedamount = p2[0]
+          let fixedto = p2[1]
+          console.log(this.convertedamount);
+
+          this.amountafterpoint = p2[1]
+        }
+      })
+    }
   }
   tabClick() {
     this.navCtrl.navigateRoot("track");

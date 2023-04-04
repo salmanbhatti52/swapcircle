@@ -1,3 +1,4 @@
+
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import SwiperCore, { Autoplay, Keyboard, Pagination, Scrollbar, Zoom, SwiperOptions } from 'swiper';
 import { IonicSlides, IonSlides, NavController } from '@ionic/angular';
@@ -6,6 +7,7 @@ import { IonModal } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
 import { ExtraService } from '../services/extra.service';
 import * as moment from 'moment';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -42,7 +44,8 @@ export class HomePage {
   showcurr = false;
   currencies = [{ curr: 'Euro' }, { curr: 'Dollar' }, { curr: 'INR' }];
   walletslist: any;
-  transarr: any = [];
+  // transarr: any = [];
+  transarr: any;
   // 18 loginid
   userloginId: any;
   currID: any;
@@ -129,6 +132,10 @@ export class HomePage {
   dismiss() {
     this.modal.dismiss()
   }
+
+  seewallets() {
+    this.navCtrl.navigateForward('walletslist')
+  }
   wallet() {
     this.navCtrl.navigateForward('createwallet')
   }
@@ -152,22 +159,26 @@ export class HomePage {
   gettransaction() {
     this.api.sendRequest('all_transactions', { "users_customers_id": localStorage.getItem('user_id') }).subscribe((resp: any) => {
       console.log('trans----', resp);
+
       if (resp.status == 'success') {
-        resp.data.forEach((ele: any) => {
-          // console.log(ele);
-          let obj = {
-            from_users_customers_id: ele.from_users_customers_id,
-            first_name: ele.from_users_customers.first_name,
-            last_name: ele.from_users_customers.last_name,
-            base_amount: ele.base_amount,
-            to_system_currencies: ele.to_system_currencies,
-            to_amount: ele.to_amount,
-            from_system_currencies: ele.from_system_currencies,
-            from_amount: ele.from_amount,
-            time: moment(ele.date_added).format('LT')
-          }
-          this.transarr.push(obj)
-        });
+        resp.data.date_added = moment(resp.data.date_added).format('LT');
+        console.log(resp.data.date_added)
+        this.transarr = resp.data
+        // resp.data.forEach((ele: any) => {
+        //   // console.log(ele);
+        //   let obj = {
+        //     from_users_customers_id: ele.from_users_customers_id,
+        //     first_name: ele.from_users_customers.first_name,
+        //     last_name: ele.from_users_customers.last_name,
+        //     base_amount: ele.base_amount,
+        //     to_system_currencies: ele.to_system_currencies,
+        //     to_amount: ele.to_amount,
+        //     from_system_currencies: ele.from_system_currencies,
+        //     from_amount: ele.from_amount,
+        //     time: moment(ele.date_added).format('LT')
+        //   }
+        //   this.transarr.push(obj)
+        // });
 
       }
       else {
@@ -177,7 +188,7 @@ export class HomePage {
   }
 
   goNext() {
-    this.navCtrl.navigateForward('createsawap')
+    this.navCtrl.navigateForward('createoffer')
   }
   noti() {
     this.navCtrl.navigateForward('notification');

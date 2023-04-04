@@ -1,0 +1,36 @@
+.wrapper{
+    width: 95%;
+    margin: 5% auto;
+}
+.flex-c{
+    display: flex;
+    justify-content: space-around;
+}
+.bg{
+    background: #fff;
+    padding: 12px;
+    text-align: center;
+    border-radius: 8px;
+}
+.img1{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.img1 img{
+    // width: 20px;
+    // border-radius: 90%;
+    // height: 20px;
+}
+.text1{
+    color: #21333B;
+    font-size: 15px;
+    font-weight: 500;
+}
+.text2{
+   
+    color: #000000;
+    font-size: 17px;
+    font-weight: 600;
+    margin: 6px 0px;
+}

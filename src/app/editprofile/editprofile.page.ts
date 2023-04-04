@@ -206,6 +206,7 @@ export class EditprofilePage implements OnInit {
 
       }, err => {
         console.log('error response--', err);
+        this.extra.presentToast("Something went wrong");
         this.extra.hideLoader()
       })
     }

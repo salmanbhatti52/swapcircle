@@ -32,6 +32,10 @@
           <img src="assets/imgs/messages-2.svg" (click)="chat()">
           <img src="assets/imgs/notification.svg" (click)="noti()">
         </div>
+        <div style="margin-left: -10%;margin-top: 2%;">
+          <ion-button class="btn1" (click)="seewallets()">See Wallets</ion-button>
+          <!-- <div class="cars_label">See Wallets</div> -->
+        </div>
       </ion-col>
     </ion-row>
   </ion-toolbar>
@@ -40,7 +44,8 @@
 <ion-content style="--background: #e9f5ec">
 
   <div class="wrapper EudoxusSansReg">
-    <div>
+
+    <!-- <div>
       <div style="width: 20%;float: left;">
         <div class="carItem_boxfixed" (click)="wallet()">
           <img src="assets/imgs/add-circle.svg" width="17">
@@ -67,9 +72,9 @@
         </swiper>
       </div>
       <div class="clear"></div>
-    </div>
+    </div> -->
 
-    <!-- <div style="display: flex;align-items: center;">
+    <div style="display: flex;align-items: center;">
 
       <div class="carItem_boxfixed" (click)="wallet()">
         <img src="assets/imgs/add-circle.svg" width="17">
@@ -96,7 +101,7 @@
 
       </div>
 
-    </div> -->
+    </div>
 
     <ion-segment [scrollable]="true" (ionChange)="segmentChanged($event)" #mySegment SwipedTabs>
       <ion-segment-button mode="ios" value="AllTransactions">
@@ -116,8 +121,15 @@
           <img src="{{item.img}}">
         </ion-col>
         <ion-col size="6.5">
-          <div class="text1">{{item.name}}</div>
+
+          <div class="text1">{{item.fromname}}</div>
+          <div class="text1">{{item.toname}}</div>
           <div class="text2">{{item.time}}</div>
+
+
+
+
+
         </ion-col>
         <ion-col size="3" style="text-align: end;
         right: 10px;">
@@ -130,17 +142,22 @@
           <img src="/assets/imgs/hlogo.svg" *ngIf="userloginId!=item.from_users_customers_id">
           <img src="/assets/imgs/hlogo1.svg" *ngIf="userloginId==item.from_users_customers_id">
         </ion-col>
-        <ion-col size="6.5">
-          <div *ngIf="userloginId!=item.from_users_customers_id">
-            <div class="text1">From {{item.first_name}} {{item.last_name}}
+        <ion-col size="5.5">
+          <div *ngIf="item.from_users_customers">
+            <div *ngIf="userloginId!=item.from_users_customers_id">
+              <div class="text1">From {{item.from_users_customers.first_name}} {{item.from_users_customers.last_name}}
+              </div>
             </div>
           </div>
-          <div *ngIf="userloginId==item.from_users_customers_id">
-            <div class="text1">To {{item.first_name}} {{item.last_name}}</div>
+          <div *ngIf="item.to_users_customers">
+            <div *ngIf="userloginId==item.from_users_customers_id">
+              <div class="text1">To {{item.to_users_customers.first_name}} {{item.to_users_customers.last_name}}</div>
+            </div>
           </div>
-          <div class="text2">Swap - {{item.time}}</div>
+
+          <!-- <div class="text2">Swap - {{item.time}}</div> -->
         </ion-col>
-        <ion-col size="3" style="text-align: end;
+        <ion-col size="4" style="text-align: end;
         right: 10px;">
           <div class="price">{{bcurrsymbol}}{{item.base_amount}}</div>
           <div style="color: #969D9F;

@@ -4,6 +4,9 @@ import { OverlayEventDetail } from '@ionic/core/components';
 import { IonModal } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
 import { ExtraService } from '../services/extra.service';
+import { ModalController } from '@ionic/angular';
+import { OfferpopupPage } from '../offerpopup/offerpopup.page';
+import { log } from 'console';
 @Component({
   selector: 'app-offer',
   templateUrl: './offer.page.html',
@@ -18,9 +21,28 @@ export class OfferPage implements OnInit {
   tact = false;
   title: any;
   reference = '';
+  offers: any;
+  userswapoffers: any;
+
+  isModalOpen = false;
+  currsymbol: any;
+  from_currency_symbol: any;
+  to_currency_symbol: any;
+  exchange_rate: any;
+  from_amount: any;
+  convertedamt: any;
+  basecurrID: any;
+  baseamt: any;
+  currID: any;
+  swap_offers_id: any;
+
+
   constructor(public navCtrl: NavController,
+    private modalCtrl: ModalController,
     public api: ApiService,
-    public extra: ExtraService) { }
+    public extra: ExtraService) {
+    this.getbasecurr()
+  }
 
   ionViewWillEnter() {
     if (this.requestsType) {
@@ -33,6 +55,7 @@ export class OfferPage implements OnInit {
 
       }
       if (this.requestsType === 'MyOffers') {
+        this.useroffers()
         this.mySegment.nativeElement.children[1].click();
 
       }
@@ -43,6 +66,16 @@ export class OfferPage implements OnInit {
 
     }
   }
+  getbasecurr() {
+    this.api.sendRequest('get_currencies_by_id', { "system_currencies_id": localStorage.getItem('systemcurr') }).subscribe((curr: any) => {
+      console.log(curr);
+
+      this.basecurrID = curr.data[0].system_currencies_id
+      this.currsymbol = curr.data[0].symbol
+      localStorage.setItem('basecurrsymbol', this.currsymbol)
+    })
+  }
+
   segmentChanged(ev: any) {
     console.log('requestType value', ev.detail.value);
     let data = ev.detail.value;
@@ -62,6 +95,7 @@ export class OfferPage implements OnInit {
     localStorage.setItem('requestType', this.requestsType);
   }
   ngOnInit() {
+    this.useroffers()
     this.reference = `ref-${Math.ceil(Math.random() * 10e13)}`;
   }
 
@@ -72,8 +106,82 @@ export class OfferPage implements OnInit {
   alloffers() {
     this.api.sendRequest('all_swap_offers', { "users_customers_id": localStorage.getItem('user_id') }).subscribe((res: any) => {
       console.log(res);
-
+      this.offers = res.data
     })
+  }
+  useroffers() {
+    this.api.sendRequest('user_swap_offers', { "users_customers_id": localStorage.getItem('user_id') }).subscribe((res: any) => {
+      console.log('user0ffers----', res);
+      this.userswapoffers = res.data
+    })
+  }
+  async onWillDismiss(f: any) {
+    // console.log(f);
+    if (f.detail.role == 'backdrop') {
+      this.isModalOpen = false
+    }
+    // const modal = await this.modalCtrl.create({
+    //   component: OfferpopupPage,
+    //   cssClass: 'offer-modal'
+    // });
+    // modal.present();
+
+    // const { data, role } = await modal.onWillDismiss();
+
+    // if (role === 'confirm') {
+    //   let message = `Hello, ${data}!`;
+    // }
+  }
+  setOpen(isOpen: boolean, f: any) {
+    this.isModalOpen = isOpen;
+    console.log(this.isModalOpen);
+
+    console.log(f)
+    this.swap_offers_id = f.swap_offers_id
+    this.from_currency_symbol = f.from_currency.symbol;
+    this.to_currency_symbol = f.to_currency.symbol
+    this.exchange_rate = f.exchange_rate
+    this.from_amount = f.from_amount
+    this.convertedamt = f.to_amount
+    this.currID = f.from_currency.system_currencies_id
+
+    this.exchangerate()
+  }
+  setClose(isOpen: boolean) {
+    this.isModalOpen = isOpen;
+    let data = {
+      "swap_offers_id": this.swap_offers_id,
+      "from_users_customers_id": localStorage.getItem('user_id')
+    }
+    this.api.sendRequest('swap_offer_request', data).subscribe((offer: any) => {
+      console.log('swap_offer====', offer);
+      this.extra.presentToast("Offer send successfully")
+    })
+  }
+
+  exchangerate() {
+    let datasend = {
+      "sender_currency_id": this.currID,
+      "receiver_currency_id": this.basecurrID,
+      "from_amount": this.from_amount
+    }
+
+    this.api.sendRequest('currency_converter', datasend).subscribe((p: any) => {
+      console.log(p);
+      let base_amt = p.data.converted_amount
+      this.baseamt = base_amt.toFixed(2)
+    })
+
+
+
+
+  }
+  seerequests(f: any) {
+    console.log(f);
+
+    this.navCtrl.navigateForward(['swapofferrequests', {
+      swap_offers_id: f.swap_offers_id
+    }])
   }
 
   setting() {

@@ -78,6 +78,7 @@ export class LoginscreenPage implements OnInit {
           localStorage.setItem('user_id', res.data.users_customers_id);
           this.navCtrl.navigateRoot('home');
         } else {
+          this.rest.hideLoader()
           this.rest.presentToast(res.message)
         }
 

@@ -165,6 +165,14 @@ const routes: Routes = [
     path: 'sawappopup',
     loadChildren: () => import('./sawappopup/sawappopup.module').then( m => m.SawappopupPageModule)
   },
+  {
+    path: 'walletslist',
+    loadChildren: () => import('./walletslist/walletslist.module').then( m => m.WalletslistPageModule)
+  },
+  {
+    path: 'swapofferrequests',
+    loadChildren: () => import('./swapofferrequests/swapofferrequests.module').then( m => m.SwapofferrequestsPageModule)
+  },
 ];
 
 @NgModule({

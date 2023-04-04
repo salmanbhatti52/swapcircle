@@ -33,7 +33,63 @@
     </ion-segment>
 
     <div *ngIf="requestsType=='AllOffers'">
-      <div class="box EudoxusSansReg">
+      <div class="box EudoxusSansReg" *ngFor="let f of offers">
+
+        <ion-row>
+          <ion-col size="6">
+            <div class="flex-c">
+              <div class="text1">{{f.from_currency.symbol}}1</div>
+              <img src="assets/imgs/reset.svg">
+              <div class="text1">{{f.to_currency.symbol}}{{f.exchange_rate}}</div>
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <div class="flex-c" style="margin-left: 30px;">
+              <div style="display: flex; align-items: center;">
+                <img src="assets/imgs/clock.svg" style="margin-right: 4px;">
+                <div class="text2">{{f.time_ago}}</div>
+              </div>
+              <img src="assets/imgs/heart.svg">
+            </div>
+          </ion-col>
+        </ion-row>
+        <hr style="background: #E9F5EC;
+          width: 92%;">
+        <ion-row style="align-items: center;
+          width: 95%;
+          margin: 0% auto;" (click)="setOpen(true,f)">
+          <ion-col size="3.5">
+            <div>
+              <div class="text3">You Pay</div>
+              <div class="text4"><span style="color: #4BD16F;">{{f.from_currency.symbol}}</span>{{f.from_amount}}
+              </div>
+            </div>
+          </ion-col>
+          <ion-col size="4.5">
+            <div style="display: flex;
+              align-items: center;
+              justify-content: space-evenly;">
+              <!-- <img src="assets/imgs/flagicon.svg"> -->
+              <img src="https://swap.eigix.net/public/{{f.from_currency.country.image}}" class="cimg">
+              <div style="font-weight: 500;
+                  font-size: 10px;color: #21333B;">{{f.from_currency.code}}/{{f.from_currency.code}}</div>
+              <!-- <img src="assets/imgs/flagicon1.svg"> -->
+              <img src="https://swap.eigix.net/public/{{f.to_currency.country.image}}" class="cimg">
+            </div>
+          </ion-col>
+          <ion-col size="4">
+            <div>
+              <div class="text3" style="text-align: end;">You Pay</div>
+              <div class="text4"><span style="color: #4BD16F;">{{f.to_currency.symbol}}</span>{{f.to_amount}}</div>
+            </div>
+          </ion-col>
+          <p class="para">(Inc. Service charges £10.00)</p>
+
+        </ion-row>
+
+
+      </div>
+      <!-- <div class="box EudoxusSansReg">
         <ion-row>
           <ion-col size="6">
             <div class="flex-c">
@@ -82,57 +138,7 @@
           <p class="para">(Inc. Service charges £10.00)</p>
 
         </ion-row>
-      </div>
-      <div class="box EudoxusSansReg">
-        <ion-row>
-          <ion-col size="6">
-            <div class="flex-c">
-              <div class="text1">£1</div>
-              <img src="assets/imgs/reset.svg">
-              <div class="text1">₦890.00</div>
-            </div>
-          </ion-col>
-          <ion-col size="6">
-            <div class="flex-c" style="margin-left: 30px;">
-              <div style="display: flex; align-items: center;">
-                <img src="assets/imgs/clock.svg" style="margin-right: 4px;">
-                <div class="text2">24 hrs ago</div>
-              </div>
-              <img src="assets/imgs/heart.svg">
-            </div>
-          </ion-col>
-        </ion-row>
-        <hr style="background: #E9F5EC;
-        width: 92%;">
-        <ion-row style="align-items: center;
-        width: 95%;
-        margin: 0% auto;">
-          <ion-col size="3.5">
-            <div>
-              <div class="text3">You Pay</div>
-              <div class="text4"><span style="color: #4BD16F;">£</span>1000.00</div>
-            </div>
-          </ion-col>
-          <ion-col size="4.5">
-            <div style="display: flex;
-            align-items: center;
-            justify-content: space-evenly;">
-              <img src="assets/imgs/flagicon.svg">
-              <div style="font-weight: 500;
-                font-size: 10px;color: #21333B;">GBP/NGN</div>
-              <img src="assets/imgs/flagicon1.svg">
-            </div>
-          </ion-col>
-          <ion-col size="4">
-            <div>
-              <div class="text3" style="text-align: end;">You Pay</div>
-              <div class="text4"><span style="color: #4BD16F;">₦</span>890,000.00</div>
-            </div>
-          </ion-col>
-          <p class="para">(Inc. Service charges £10.00)</p>
-
-        </ion-row>
-      </div>
+      </div> -->
     </div>
 
 
@@ -241,56 +247,59 @@
 
 
     <div *ngIf="requestsType=='MyOffers'">
-      <div class="box EudoxusSansReg" id="open-modal">
+      <div class="box EudoxusSansReg" *ngFor="let f of userswapoffers" (click)="seerequests(f)">
+
         <ion-row>
           <ion-col size="6">
             <div class="flex-c">
-              <div class="text1">£1</div>
+              <div class="text1">{{f.from_currency.symbol}}1</div>
               <img src="assets/imgs/reset.svg">
-              <div class="text1">₦890.00</div>
+              <div class="text1">{{f.to_currency.symbol}}{{f.exchange_rate}}</div>
             </div>
           </ion-col>
           <ion-col size="6">
             <div class="flex-c" style="margin-left: 30px;">
               <div style="display: flex; align-items: center;">
                 <img src="assets/imgs/clock.svg" style="margin-right: 4px;">
-                <div class="text2">24 hrs ago</div>
+                <div class="text2">{{f.time_ago}}</div>
               </div>
               <img src="assets/imgs/heart.svg">
             </div>
           </ion-col>
         </ion-row>
         <hr style="background: #E9F5EC;
-        width: 92%;">
+          width: 92%;">
         <ion-row style="align-items: center;
-        width: 95%;
-        margin: 0% auto;">
+          width: 95%;
+          margin: 0% auto;">
           <ion-col size="3.5">
             <div>
               <div class="text3">You Pay</div>
-              <div class="text4"><span style="color: #4BD16F;">£</span>1000.00</div>
+              <div class="text4"><span style="color: #4BD16F;">{{f.from_currency.symbol}}</span>{{f.from_amount}}
+              </div>
             </div>
           </ion-col>
           <ion-col size="4.5">
             <div style="display: flex;
-            align-items: center;
-            justify-content: space-evenly;">
-              <img src="assets/imgs/flagicon.svg">
+              align-items: center;
+              justify-content: space-evenly;">
+              <!-- <img src="assets/imgs/flagicon.svg"> -->
+              <img src="https://swap.eigix.net/public/{{f.from_currency.country.image}}" class="cimg">
               <div style="font-weight: 500;
-                font-size: 10px;color: #21333B;">GBP/NGN</div>
-              <img src="assets/imgs/flagicon1.svg">
+                  font-size: 10px;color: #21333B;">{{f.from_currency.code}}/{{f.from_currency.code}}</div>
+              <!-- <img src="assets/imgs/flagicon1.svg"> -->
+              <img src="https://swap.eigix.net/public/{{f.to_currency.country.image}}" class="cimg">
             </div>
           </ion-col>
           <ion-col size="4">
             <div>
               <div class="text3" style="text-align: end;">You Pay</div>
-              <div class="text4"><span style="color: #4BD16F;">₦</span>890,000.00</div>
+              <div class="text4"><span style="color: #4BD16F;">{{f.to_currency.symbol}}</span>{{f.to_amount}}</div>
             </div>
           </ion-col>
           <p class="para">(Inc. Service charges £10.00)</p>
 
         </ion-row>
-
 
 
       </div>
@@ -299,41 +308,64 @@
           Create Offer</ion-button>
       </div>
 
-      <ion-modal trigger="open-modal" id="example-modal" #modal>
-        <ng-template>
-          <div class="container">
-            <div style="display: flex;align-items: center;
-            justify-content: center;">
-              <div class="mtxt EudoxusSansReg">£1</div>
-              <img src="assets/imgs/reset1.svg" style="width: 40px;
-              height: 40px;
-              margin: 0% 5%;">
-              <div class="mtxt EudoxusSansReg">₦890.00</div>
+
+    </div>
+
+    <ion-modal id="example-modal" #modal [isOpen]="isModalOpen" (willDismiss)="onWillDismiss($event)">
+      <ng-template>
+        <div class="container">
+          <div style="display: flex;align-items: center;
+          justify-content: center;">
+            <div class="mtxt EudoxusSansReg">{{from_currency_symbol}}1</div>
+            <img src="assets/imgs/reset1.svg" style="width: 40px;
+            height: 40px;
+            margin: 0% 5%;">
+            <div class="mtxt EudoxusSansReg">{{to_currency_symbol}}{{exchange_rate}}</div>
+          </div>
+          <div style="display: flex;
+          flex-direction: column;
+          margin-top: 8%;">
+            <div class="c-flex">
+              <div class="mtxt1 EudoxusSansReg">Amount</div>
+              <div style="display: flex;
+              align-items: center;
+            ">
+                <img src="assets/imgs/curricon.svg">
+                <div class="label1 EudoxusSansReg">{{from_currency_symbol}}{{from_amount}}</div>
+              </div>
+
             </div>
-            <div style="display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 8%;">
-              <div class="c-flex"><img src="assets/imgs/curricon.svg">
-                <div class="label1 EudoxusSansReg">₦889.00</div>
+            <div class="c-flex">
+              <div class="mtxt1 EudoxusSansReg">Converted Amount</div>
+              <div style="display: flex;
+              align-items: center;
+             ">
+                <img src="assets/imgs/curricon2.svg">
+                <div class="label2 EudoxusSansReg">{{to_currency_symbol}}{{convertedamt}}</div>
               </div>
-              <div class="c-flex"><img src="assets/imgs/curricon2.svg">
-                <div class="label2 EudoxusSansReg">₦889.00</div>
-              </div>
-              <div class="c-flex"><img src="assets/imgs/curricon3.svg">
-                <div class="label3 EudoxusSansReg">₦889.00</div>
-              </div>
+
             </div>
-            <div style="text-align: center;">
-              <ion-button style="margin-top: 5%;" class="btnmodal EudoxusSansReg" (click)="dismiss()">
-                Accept Offer</ion-button>
+
+            <div class="c-flex">
+              <div class="mtxt1 EudoxusSansReg">Base Amount</div>
+              <div style="display: flex;
+              align-items: center;
+              ">
+                <img src="assets/imgs/curricon3.svg">
+                <div class="label3 EudoxusSansReg">{{currsymbol}}{{baseamt}}</div>
+              </div>
+
             </div>
 
           </div>
-        </ng-template>
-      </ion-modal>
-    </div>
+          <div style="text-align: center;">
+            <ion-button style="margin-top: 5%;" class="btnmodal EudoxusSansReg" (click)="setClose(false)">
+              Send Offer</ion-button>
+          </div>
 
+        </div>
+      </ng-template>
+    </ion-modal>
   </div>
 
 

@@ -26,7 +26,20 @@ ion-segment {
     margin-right: 2%;
   }
 }
-
+.btn1{
+  text-transform: none !important;
+    --background: #4BD16F;
+    opacity: 0.8;
+    --border-radius: 24px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    text-align: center;
+    letter-spacing: -0.3px;
+    color: #FFFFFF;
+    max-width: fit-content;
+    height: 25px;
+}
 .rowcls{
   background: #FFFFFF;
     border-radius: 25px;
@@ -63,6 +76,8 @@ ion-segment {
   background-color: white;
   padding: 8px 8px 8px 5px;
   box-shadow: 0px 0px 20px rgb(0 0 0 / 9%);
+  width: fit-content !important;
+  inline-size: max-content !important;
 }
 .cars_label{
   font-weight: 700;
@@ -94,6 +109,7 @@ ion-segment {
   display: flex;
   align-items: center;
   border: 1px dashed #4BD16F;
+  min-width: max-content;
 }
 .label{
   font-weight: 500;

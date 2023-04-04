@@ -67,11 +67,21 @@ ion-segment {
     color: #969D9F;
     margin-left: 4px;
   }
+  .cimg{
+    width: 20px;
+    border-radius: 90%;
+    height: 20px;
+  }
 
   ////modal 
   .mtxt{
     font-weight: 500;
     font-size: 27px;
+    color: #21333B
+  }
+  .mtxt1{
+    font-weight: 500;
+    font-size: 14px;
     color: #21333B
   }
   .label1{
@@ -99,6 +109,7 @@ ion-segment {
       display: flex;
       align-items: center;
       margin-bottom: 4%;
+      justify-content: space-between;
     }
  
   ///////

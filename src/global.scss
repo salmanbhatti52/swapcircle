@@ -257,6 +257,22 @@ ion-modal#example-modal h1 {
 ion-modal#example-modal .container {
   padding: 20px 15px;
 }
+.offer-modal{
+  --width: fit-content;
+  --min-width: 290px;
+  --height: 45%;
+  --border-radius:17px;
+  --box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.6) !important;
+  h1{
+    
+      margin: 20px 20px 10px 20px;
+    
+  }
+  .container {
+    padding: 20px 15px;
+  }
+}
 .btnmodal{
   text-transform:none !important;
   height: 64px;

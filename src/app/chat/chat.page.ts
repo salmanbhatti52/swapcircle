@@ -51,19 +51,6 @@ export class ChatPage implements OnInit {
     })
   }
   goto(user: any) {
-    // let data = {
-    //   "requestType": "startChat",
-    //   "users_customers_id": "2",
-    //   "other_users_customers_id": "1"
-    // }
-    // this.api.sendRequest('user_chat_live', data).subscribe((res: any) => {
-    //   console.log('res---for check start chat', res);
-    //   if (res.status == 'success') {
-    //     this.navCtrl.navigateForward('chatdetail')
-    //   } else {
-    //     this.extra.presentToast(res.message)
-    //   }
-    // })
 
     this.navCtrl.navigateForward(['chatdetail', {
       otheruserid: user.receiver_id,

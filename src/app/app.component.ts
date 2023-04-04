@@ -9,7 +9,7 @@ import { NavController, Platform } from "@ionic/angular";
 export class AppComponent {
   sender_id = "558453112065";
   oneSignalAppId = "925e80ab-a9d8-4e29-9824-f1956346665c";
-  constructor(public navCtrl: NavController, public platform: Platform) {}
+  constructor(public navCtrl: NavController, public platform: Platform) { }
 
   ngOnInit() {
     this.platform.ready().then(() => {

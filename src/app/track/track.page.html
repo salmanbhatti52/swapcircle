@@ -1,14 +1,12 @@
 <ion-header class="ion-no-border">
   <ion-toolbar style="--background: #e9f5ec">
-    <ion-title
-      style="
+    <ion-title style="
         font-weight: 700;
         font-size: 20px;
         line-height: 140%;
         color: #21333b;
         text-align: center;
-      "
-      >Track rates of currencies
+      ">Track rates of currencies
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -26,47 +24,30 @@
     <div class="main">
       <div class="container">
         <div class="flexc">
-          <div class="txt EudoxusSansReg">USD</div>
-          <img src="assets/imgs/doticons.svg" />
+          <div class="txt EudoxusSansReg">{{currcode}}</div>
+          <!-- <img src="assets/imgs/doticons.svg" /> -->
         </div>
-        <div
-          style="
+        <div style="
             display: flex;
             align-items: center;
             justify-content: space-between;
-          "
-        >
-          <div style="display: flex; align-items: center; position: relative">
-            <ion-list>
-              <ion-item lines="none">
-                <ion-select
-                  interface="popover"
-                  placeholder=""
-                  (ionChange)="optionsFn($event)"
-                >
-                  <ion-select-option
-                    *ngFor="let s of curr; let i=index"
-                    value="{{s.system_currencies_id}}"
-                    (click)="choose(s)"
-                    >{{s.code}}
-                    <span style="font-size: 12px; padding-left: 2px"
-                      >({{s.symbol}})</span
-                    >
-                  </ion-select-option>
-                </ion-select>
-              </ion-item>
-            </ion-list>
-            <!-- <div class="txt1">$156.<span style="opacity:47%;font-size: 18px;">50</span>
+          ">
+
+          <ion-list>
+            <ion-item lines="none">
+              <ion-select interface="popover" placeholder="$" (ionChange)="optionsFn($event)">
+                <ion-select-option *ngFor="let s of curr; let i=index" [value]="s">{{s.code}}
+                  <span style="font-size: 12px; padding-left: 2px">({{s.symbol}})</span>
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+          <!-- <div class="txt1">$156.<span style="opacity:47%;font-size: 18px;">50</span>
               <hr>
             </div> -->
-            <ion-input
-              type="text"
-              placeholder="enter amount"
-              class="txt1"
-              [(ngModel)]="amount"
-            ></ion-input>
-          </div>
-          <img src="assets/imgs/calculator.svg" />
+          <ion-input type="text" placeholder="enter amount" class="txt1" [(ngModel)]="amount"></ion-input>
+
+          <!-- <img src="assets/imgs/calculator.svg" /> -->
         </div>
 
         <div class="half-circle"></div>
@@ -74,56 +55,43 @@
 
       <div class="container1">
         <div class="flexc">
-          <div class="txt EudoxusSansReg">Euro</div>
+          <div class="txt EudoxusSansReg">{{tocurrcode}}</div>
           <img src="assets/imgs/doticons.svg" />
         </div>
-        <div
-          style="
+        <div style="
             display: flex;
             align-items: center;
             justify-content: space-between;
-          "
-        >
+          ">
           <div style="display: flex; align-items: center; position: relative">
             <ion-list>
               <ion-item lines="none">
-                <ion-select
-                  interface="popover"
-                  placeholder=""
-                  (ionChange)="optionsFn2($event)"
-                >
-                  <ion-select-option
-                    *ngFor="let s of curr; let i=index"
-                    value="{{s.system_currencies_id}}"
-                    >{{s.code}}
-                    <span style="font-size: 12px; padding-left: 2px"
-                      >({{s.symbol}})</span
-                    >
+                <ion-select interface="popover" placeholder="€" (ionChange)="optionsFn2($event)">
+                  <ion-select-option *ngFor="let s of curr; let i=index" [value]="s">{{s.code}}
+                    <span style="font-size: 12px; padding-left: 2px">({{s.symbol}})</span>
                   </ion-select-option>
                 </ion-select>
               </ion-item>
             </ion-list>
-            <div class="txt1 EudoxusSansReg">
-              $156.<span style="opacity: 47%; font-size: 18px">50</span>
+            <div class="txt1 EudoxusSansReg" *ngIf="amountshow==true">
+              {{convertedamount}}.<span style="opacity: 47%; font-size: 18px">{{amountafterpoint}}</span>
             </div>
           </div>
         </div>
 
         <div class="half-circle1"></div>
       </div>
-      <div class="imgdiv">
+      <div class="imgdiv" (click)="track()">
         <img src="assets/imgs/reset1.svg" />
       </div>
     </div>
 
-    <div
-      style="
+    <div style="
         display: flex;
         align-items: center;
         justify-content: space-around;
         margin: 8% 0%;
-      "
-    >
+      ">
       <div class="c-flex">
         <img src="assets/imgs/curricon.svg" />
         <div class="label1 EudoxusSansReg">₦889.00</div>
@@ -138,9 +106,7 @@
       </div>
     </div>
 
-    <div
-      style="display: flex; justify-content: space-between; margin-bottom: 3%"
-    >
+    <div style="display: flex; justify-content: space-between; margin-bottom: 3%">
       <div class="carItem_box">
         <div class="s-text EudoxusSansReg">Market Name</div>
 
@@ -158,9 +124,7 @@
       </div>
     </div>
 
-    <div
-      style="display: flex; justify-content: space-between; margin-bottom: 1%"
-    >
+    <div style="display: flex; justify-content: space-between; margin-bottom: 1%">
       <div class="carItem_box">
         <div class="s-text EudoxusSansReg">Market Name</div>
 
@@ -178,12 +142,7 @@
       </div>
     </div>
 
-    <ion-button
-      style="margin-top: 5%"
-      class="btnbggreen EudoxusSansReg"
-      (click)="goNext()"
-      >Buy APPL</ion-button
-    >
+    <ion-button style="margin-top: 5%" class="btnbggreen EudoxusSansReg" (click)="goNext()">Buy APPL</ion-button>
   </div>
 </ion-content>
 

@@ -1,5 +1,8 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../services/api.service';
+import { ExtraService } from '../services/extra.service';
+import { log } from 'console';
 
 @Component({
   selector: 'app-faq',
@@ -9,16 +12,37 @@ import { Component, OnInit } from '@angular/core';
 export class FaqPage implements OnInit {
   show = false;
   show1 = false;
-  constructor(public location: Location) { }
+  faqs: any = [];
+  constructor(public location: Location,
+    public api: ApiService,
+    public extra: ExtraService) { }
 
   ngOnInit() {
+    this.getfaq()
   }
 
-  openclose() {
-    if (this.show == false) {
-      this.show = true;
+  getfaq() {
+    this.api.getRequest('all_faqs').subscribe((res: any) => {
+      console.log('allfaqs', res);
+      res.data.forEach((ele: any) => {
+        let obj = {
+          faqs_id: ele.faqs_id,
+          question: ele.question,
+          answer: ele.answer,
+          openanswer: false
+        }
+        this.faqs.push(obj)
+      });
+
+    })
+  }
+  openclose(item: any) {
+    console.log(item);
+
+    if (item.openanswer == false) {
+      item.openanswer = true;
     } else {
-      this.show = false;
+      item.openanswer = false;
     }
   }
 
