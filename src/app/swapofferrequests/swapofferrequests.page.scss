@@ -49,3 +49,48 @@
   height: 25px;
 
 }
+.pp{
+  color:#EF3C3C;
+  font-size: 10px;
+  margin: 0px;
+  font-weight: 500;
+}
+
+// modal 
+.mtxt{
+  font-weight: 500;
+  font-size: 27px;
+  color: #21333B
+}
+.mtxt1{
+  font-weight: 500;
+  font-size: 14px;
+  color: #21333B
+}
+.label1{
+  font-weight: 500;
+  font-size: 14px;
+  margin-left: 5px;
+
+  color: #EF3C3C;
+  }
+ .label2 {
+    font-weight: 500;
+    font-size: 14px;
+    margin-left: 5px;
+
+    color:#4BD16F
+  }
+  .label3 {
+    font-weight: 500;
+    font-size: 14px;
+    margin-left: 5px;
+
+    color:#21333B
+  }
+  .c-flex{
+    display: flex;
+    align-items: center;
+    margin-bottom: 4%;
+    justify-content: space-between;
+  }

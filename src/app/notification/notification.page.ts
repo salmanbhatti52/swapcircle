@@ -36,7 +36,7 @@ export class NotificationPage implements OnInit {
             last_name: ele.notification_sender.last_name,
             message: ele.message,
             profile_pic: ele.notification_sender.profile_pic,
-            time: moment(d).fromNow()
+            time: moment(ele.date_added).fromNow()
           }
           this.noti.push(data)
         });

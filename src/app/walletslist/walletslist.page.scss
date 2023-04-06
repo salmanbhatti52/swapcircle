@@ -15,12 +15,13 @@
 .img1{
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
 }
 .img1 img{
     // width: 20px;
     // border-radius: 90%;
     // height: 20px;
+    margin-left: 4%;
 }
 .text1{
     color: #21333B;

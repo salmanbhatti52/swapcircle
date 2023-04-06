@@ -33,10 +33,10 @@
     </ion-segment>
 
     <div *ngIf="requestsType=='AllOffers'">
-      <div class="box EudoxusSansReg" *ngFor="let f of offers">
+      <div class="box EudoxusSansReg" *ngFor="let f of offers;let i=index;">
 
         <ion-row>
-          <ion-col size="6">
+          <ion-col size="6" (click)="setOpen(true,f)">
             <div class="flex-c">
               <div class="text1">{{f.from_currency.symbol}}1</div>
               <img src="assets/imgs/reset.svg">
@@ -49,7 +49,8 @@
                 <img src="assets/imgs/clock.svg" style="margin-right: 4px;">
                 <div class="text2">{{f.time_ago}}</div>
               </div>
-              <img src="assets/imgs/heart.svg">
+              <img src="assets/imgs/redheart.svg" (click)="removefav(f,i)" *ngIf="f.liked=='Yes'">
+              <img src="assets/imgs/heart.svg" (click)="addfav(f)" *ngIf="f.liked=='No'">
             </div>
           </ion-col>
         </ion-row>
@@ -69,11 +70,11 @@
             <div style="display: flex;
               align-items: center;
               justify-content: space-evenly;">
-              <!-- <img src="assets/imgs/flagicon.svg"> -->
+
               <img src="https://swap.eigix.net/public/{{f.from_currency.country.image}}" class="cimg">
               <div style="font-weight: 500;
-                  font-size: 10px;color: #21333B;">{{f.from_currency.code}}/{{f.from_currency.code}}</div>
-              <!-- <img src="assets/imgs/flagicon1.svg"> -->
+                  font-size: 10px;color: #21333B;">{{f.from_currency.code}}/{{f.to_currency.code}}</div>
+
               <img src="https://swap.eigix.net/public/{{f.to_currency.country.image}}" class="cimg">
             </div>
           </ion-col>
@@ -143,7 +144,60 @@
 
 
     <div *ngIf="requestsType=='Favorite'">
-      <div class="box EudoxusSansReg">
+      <div class="box EudoxusSansReg" *ngFor="let f of fav;let i=index;">
+        <ion-row>
+          <ion-col size="6">
+            <div class="flex-c">
+              <div class="text1">{{f.from_currency.symbol}}1</div>
+              <img src="assets/imgs/reset.svg">
+              <div class="text1">{{f.to_currency.symbol}}{{f.exchange_rate}}</div>
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <div class="flex-c" style="margin-left: 30px;">
+              <div style="display: flex; align-items: center;">
+                <img src="assets/imgs/clock.svg" style="margin-right: 4px;">
+                <div class="text2">{{f.time_ago}}</div>
+              </div>
+              <img src="assets/imgs/redheart.svg" (click)="removefav(f,i)">
+            </div>
+          </ion-col>
+        </ion-row>
+        <hr style="background: #E9F5EC;
+          width: 92%;">
+        <ion-row style="align-items: center;
+          width: 95%;
+          margin: 0% auto;">
+          <ion-col size="3.5">
+            <div>
+              <div class="text3">You Pay</div>
+              <div class="text4"><span style="color: #4BD16F;">{{f.from_currency.symbol}}</span>{{f.from_amount}}
+              </div>
+            </div>
+          </ion-col>
+          <ion-col size="4.5">
+            <div style="display: flex;
+              align-items: center;
+              justify-content: space-evenly;">
+
+              <img src="https://swap.eigix.net/public/{{f.from_currency.country.image}}" class="cimg">
+              <div style="font-weight: 500;
+                font-size: 10px;color: #21333B;">{{f.from_currency.code}}/{{f.to_currency.code}}</div>
+
+              <img src="https://swap.eigix.net/public/{{f.to_currency.country.image}}" class="cimg">
+            </div>
+          </ion-col>
+          <ion-col size="4">
+            <div>
+              <div class="text3" style="text-align: end;">You Pay</div>
+              <div class="text4"><span style="color: #4BD16F;">{{f.to_currency.symbol}}</span>{{f.to_amount}}</div>
+            </div>
+          </ion-col>
+          <p class="para">(Inc. Service charges £10.00)</p>
+
+        </ion-row>
+      </div>
+      <!-- <div class="box EudoxusSansReg">
         <ion-row>
           <ion-col size="6">
             <div class="flex-c">
@@ -192,57 +246,7 @@
           <p class="para">(Inc. Service charges £10.00)</p>
 
         </ion-row>
-      </div>
-      <div class="box EudoxusSansReg">
-        <ion-row>
-          <ion-col size="6">
-            <div class="flex-c">
-              <div class="text1">£1</div>
-              <img src="assets/imgs/reset.svg">
-              <div class="text1">₦890.00</div>
-            </div>
-          </ion-col>
-          <ion-col size="6">
-            <div class="flex-c" style="margin-left: 30px;">
-              <div style="display: flex; align-items: center;">
-                <img src="assets/imgs/clock.svg" style="margin-right: 4px;">
-                <div class="text2">24 hrs ago</div>
-              </div>
-              <img src="assets/imgs/redheart.svg">
-            </div>
-          </ion-col>
-        </ion-row>
-        <hr style="background: #E9F5EC;
-        width: 92%;">
-        <ion-row style="align-items: center;
-        width: 95%;
-        margin: 0% auto;">
-          <ion-col size="3.5">
-            <div>
-              <div class="text3">You Pay</div>
-              <div class="text4"><span style="color: #4BD16F;">£</span>1000.00</div>
-            </div>
-          </ion-col>
-          <ion-col size="4.5">
-            <div style="display: flex;
-            align-items: center;
-            justify-content: space-evenly;">
-              <img src="assets/imgs/flagicon.svg">
-              <div style="font-weight: 500;
-                font-size: 10px;color: #21333B;">GBP/NGN</div>
-              <img src="assets/imgs/flagicon1.svg">
-            </div>
-          </ion-col>
-          <ion-col size="4">
-            <div>
-              <div class="text3" style="text-align: end;">You Pay</div>
-              <div class="text4"><span style="color: #4BD16F;">₦</span>890,000.00</div>
-            </div>
-          </ion-col>
-          <p class="para">(Inc. Service charges £10.00)</p>
-
-        </ion-row>
-      </div>
+      </div> -->
     </div>
 
 

@@ -35,6 +35,7 @@ export class OfferPage implements OnInit {
   baseamt: any;
   currID: any;
   swap_offers_id: any;
+  fav: any;
 
 
   constructor(public navCtrl: NavController,
@@ -52,11 +53,11 @@ export class OfferPage implements OnInit {
       }
       if (this.requestsType === 'Favorite') {
         this.mySegment.nativeElement.children[1].click();
-
+        this.getfav()
       }
       if (this.requestsType === 'MyOffers') {
         this.useroffers()
-        this.mySegment.nativeElement.children[1].click();
+        this.mySegment.nativeElement.children[2].click();
 
       }
     } else {
@@ -82,11 +83,11 @@ export class OfferPage implements OnInit {
     this.requestsType = data
     if (ev.detail.value === 'AllOffers') {
       this.requestsType = 'AllOffers';
-
+      this.alloffers()
     }
     if (ev.detail.value === 'Favorite') {
       this.requestsType = 'Favorite';
-
+      this.getfav()
     }
     if (ev.detail.value === 'MyOffers') {
       this.requestsType = 'MyOffers';
@@ -105,7 +106,7 @@ export class OfferPage implements OnInit {
 
   alloffers() {
     this.api.sendRequest('all_swap_offers', { "users_customers_id": localStorage.getItem('user_id') }).subscribe((res: any) => {
-      console.log(res);
+      console.log('all offers', res);
       this.offers = res.data
     })
   }
@@ -175,12 +176,46 @@ export class OfferPage implements OnInit {
 
 
 
+
+  }
+  getfav() {
+    this.api.sendRequest('all_favorite_swaps_offers', { "users_customers_id": localStorage.getItem('user_id') }).subscribe((res: any) => {
+      console.log('get fav====', res);
+      this.fav = res.data
+    })
+  }
+
+  addfav(f: any) {
+    let data = {
+      "users_customers_id": localStorage.getItem('user_id'),
+      "swap_offers_id": f.swap_offers_id
+    }
+    this.api.sendRequest('add_favorite_swaps_offers', data).subscribe((fav: any) => {
+      console.log('fav========', fav);
+      if (fav.status == 'success') {
+        f.liked = "Yes"
+      }
+    })
+  }
+  removefav(f: any, i: any) {
+    console.log(i);
+
+    let data = {
+      "users_customers_id": localStorage.getItem('user_id'),
+      "swap_offers_id": f.swap_offers_id
+    }
+    this.api.sendRequest('remove_favorite_swaps_offers', data).subscribe((rem: any) => {
+      console.log('remove itm====', rem);
+      if (rem.status == 'success') {
+        this.fav.splice(i, 1)
+      }
+    })
   }
   seerequests(f: any) {
-    console.log(f);
+    // console.log(f);
 
     this.navCtrl.navigateForward(['swapofferrequests', {
-      swap_offers_id: f.swap_offers_id
+      swap_offers_obj: JSON.stringify(f)
     }])
   }
 
