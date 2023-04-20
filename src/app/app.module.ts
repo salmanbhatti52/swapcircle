@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from "@angular/common/http";
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Camera } from '@awesome-cordova-plugins/camera/ngx';
+import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
@@ -17,6 +18,7 @@ import { Camera } from '@awesome-cordova-plugins/camera/ngx';
     ReactiveFormsModule,
     FormsModule,
     Camera,
+    Clipboard,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent],

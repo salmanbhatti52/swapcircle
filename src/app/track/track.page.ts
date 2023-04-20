@@ -25,6 +25,12 @@ export class TrackPage implements OnInit {
   convertedamount: any;
   amountafterpoint: any;
   amountshow = false
+  currsymbol: any = '$';
+  tocurrsymbol: any = '€';
+  baseamt: any;
+  basecurrID: any;
+  basecurrsymbol: any;
+  resshow = false;
   constructor(
     public navCtrl: NavController,
     public api: ApiService,
@@ -36,6 +42,7 @@ export class TrackPage implements OnInit {
   }
 
   ionViewWillEnter() {
+    this.getbasecurr()
     if (this.requestsType) {
       if (this.requestsType === "Buy") {
         this.mySegment.nativeElement.children[0].click();
@@ -72,12 +79,23 @@ export class TrackPage implements OnInit {
       // console.log(this.exchangecurr);
     });
   }
+  getbasecurr() {
+    this.api.sendRequest('get_currencies_by_id', { "system_currencies_id": localStorage.getItem('systemcurr') }).subscribe((curr: any) => {
+      console.log(curr);
+
+      this.basecurrID = curr.data[0].system_currencies_id
+      this.basecurrsymbol = curr.data[0].symbol
+      localStorage.setItem('basecurrsymbol', this.currsymbol)
+    })
+  }
 
   optionsFn(ev: any) {
     console.log(ev);
     let val = ev.detail.value
     this.currcode = val.code
     this.fromsystemId = val.system_currencies_id;
+    this.currsymbol = val.symbol
+
   }
 
   optionsFn2(ev: any) {
@@ -85,9 +103,11 @@ export class TrackPage implements OnInit {
     let val = ev.detail.value
     this.tocurrcode = val.code
     this.tosystemId = val.system_currencies_id;
+    this.tocurrsymbol = val.symbol
   }
 
   track() {
+    this.extra.loadershow()
     let datatosend = {
       "from_system_currencies_id": this.fromsystemId,
       "to_system_currencies_id": this.tosystemId,
@@ -97,6 +117,7 @@ export class TrackPage implements OnInit {
       this.api.sendRequest('buy_currency_rate', datatosend).subscribe((res: any) => {
         console.log('rate response====', res);
         if (res.status == 'success') {
+          this.extra.hideLoader()
           this.amountshow = true
           let amt = res.data.converted_amount
           let pp = amt.toFixed(2)
@@ -106,13 +127,19 @@ export class TrackPage implements OnInit {
           let fixedto = p2[1]
           console.log(this.convertedamount);
 
-          this.amountafterpoint = p2[1]
+          this.amountafterpoint = p2[1];
+          this.exchangerate()
+        } else {
+          this.extra.hideLoader()
         }
+      }, err => {
+        this.extra.hideLoader()
       })
     } else {
       this.api.sendRequest('sell_currency_rate', datatosend).subscribe((res: any) => {
         console.log('rate response====', res);
         if (res.status == 'success') {
+          this.extra.hideLoader()
           this.amountshow = true
           let amt = res.data.converted_amount
           let pp = amt.toFixed(2)
@@ -123,9 +150,35 @@ export class TrackPage implements OnInit {
           console.log(this.convertedamount);
 
           this.amountafterpoint = p2[1]
+        } else {
+          this.extra.hideLoader()
         }
+      }, err => {
+        this.extra.hideLoader()
       })
     }
+  }
+  exchangerate() {
+    let datasend = {
+      "sender_currency_id": this.fromsystemId,
+      "receiver_currency_id": this.basecurrID,
+      "from_amount": this.amount
+    }
+
+    this.api.sendRequest('currency_converter', datasend).subscribe((p: any) => {
+      console.log(p);
+      if (p.status == 'success') {
+        this.resshow = true;
+        let base_amt = p.data.converted_amount
+        this.baseamt = base_amt.toFixed(2)
+      }
+
+    })
+
+
+
+
+
   }
   tabClick() {
     this.navCtrl.navigateRoot("track");

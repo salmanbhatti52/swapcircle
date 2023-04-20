@@ -14,7 +14,7 @@
 </ion-header>
 
 <ion-content style="--background: #e9f5ec;">
-  <div class="wrapper" *ngFor="let item of reqarr">
+  <div class="wrapper" *ngFor="let item of reqarr;let i=index;">
     <ion-row class="rowcls">
       <ion-col size="2.5">
         <img src="https://swap.eigix.net/public/{{item.user_data.profile_pic}}" style="border-radius:90%;
@@ -22,11 +22,16 @@
         width: 50px;">
       </ion-col>
       <ion-col size="6.3">
-        <div class="text1 EudoxusSansReg">{{item.user_data.first_name}}{{item.user_data.last_name}}</div>
+        <div style="display: inline-flex;
+        align-items: center;">
+          <div class="text1 EudoxusSansReg">{{item.user_data.first_name}}{{item.user_data.last_name}}</div>
+          <img src="assets/imgs/messages-2.svg" (click)="chat(item)" style="margin-left: 10%;">
+        </div>
+
       </ion-col>
       <ion-col size="3.2" style="text-align: end;">
         <ion-button class="btn1" (click)=" acceptrequest(true,item)">Accept</ion-button>
-        <!-- <ion-button class="btn2">Reject</ion-button> -->
+        <ion-button class="btn2" (click)="remove(item,i)">Remove</ion-button>
       </ion-col>
     </ion-row>
 

@@ -90,23 +90,23 @@
         display: flex;
         align-items: center;
         justify-content: space-around;
-        margin: 8% 0%;
-      ">
+        margin: 8% 0% 5% 0%;
+      " *ngIf="resshow==true">
       <div class="c-flex">
         <img src="assets/imgs/curricon.svg" />
-        <div class="label1 EudoxusSansReg">₦889.00</div>
+        <div class="label1 EudoxusSansReg">{{currsymbol}}{{amount}}</div>
       </div>
       <div class="c-flex">
         <img src="assets/imgs/curricon2.svg" />
-        <div class="label2 EudoxusSansReg">₦889.00</div>
+        <div class="label2 EudoxusSansReg">{{tocurrsymbol}}{{convertedamount}}.{{amountafterpoint}}</div>
       </div>
       <div class="c-flex">
         <img src="assets/imgs/curricon3.svg" />
-        <div class="label3 EudoxusSansReg">₦889.00</div>
+        <div class="label3 EudoxusSansReg">{{basecurrsymbol}}{{baseamt}}</div>
       </div>
     </div>
 
-    <div style="display: flex; justify-content: space-between; margin-bottom: 3%">
+    <div style="display: flex; justify-content: space-between; margin: 3% 0%">
       <div class="carItem_box">
         <div class="s-text EudoxusSansReg">Market Name</div>
 

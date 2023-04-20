@@ -26,6 +26,14 @@
         ]
         },
       {
+          "id": "cordova-clipboard.Clipboard",
+          "file": "plugins/cordova-clipboard/www/clipboard.js",
+          "pluginId": "cordova-clipboard",
+        "clobbers": [
+          "cordova.plugins.clipboard"
+        ]
+        },
+      {
           "id": "cordova-plugin-camera.camera",
           "file": "plugins/cordova-plugin-camera/www/Camera.js",
           "pluginId": "cordova-plugin-camera",
@@ -37,6 +45,7 @@
     module.exports.metadata =
     // TOP OF METADATA
     {
+      "cordova-clipboard": "1.3.0",
       "cordova-plugin-camera": "6.0.0"
     };
     // BOTTOM OF METADATA

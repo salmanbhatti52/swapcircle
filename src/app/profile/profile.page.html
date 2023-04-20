@@ -55,16 +55,38 @@
       </ion-col>
       <ion-col size="10" style="padding-left: 0px;">
         <div>
-          <p style="font-style: normal;
-          font-weight: 700;
-          font-size: 14px;
-          color: #4BD16F;" class="EudoxusSansReg">Referral Code</p>
+          <div style="display: flex;
+          align-items: center;
+          justify-content: space-between;" (click)="copy()">
+            <p style="font-style: normal;
+            font-weight: 700;
+            font-size: 14px;
+            color: #4BD16F;" class="EudoxusSansReg">Referral Code</p>
+            <div style="display: inline-flex;
+            align-items: center;
+            margin-right: 5%;">
+              <p style=" font-size: 14px;" class="EudoxusSansReg">{{referalcode}}</p>
+              <img src="assets/imgs/copy.png" alt="" style="height: 14px;
+              width: 18px;
+              margin-left: 10px;" *ngIf="!copied">
+              <img src="assets/imgs/copy2.png" alt="" style="height: 12px;
+               width: 16px;
+               margin-left: 10px;" *ngIf="copied">
+            </div>
 
+          </div>
 
-          <p style="font-weight: 500;
+          <div style="display: inline-flex;
+          align-items: center;
+          margin-top: 3px;">
+            <p style="font-weight: 500;
             font-size: 12px;
             color: #4BD16F;
             margin-top: 2%;" class="EudoxusSansReg">Share your friend get $20 of free stocks</p>
+            <ion-icon name="share-social-outline" style="margin-left: 5px;
+            margin-top: 5px;" (click)="socialshare()"></ion-icon>
+          </div>
+
 
 
         </div>

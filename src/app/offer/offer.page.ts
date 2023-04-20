@@ -84,6 +84,7 @@ export class OfferPage implements OnInit {
     if (ev.detail.value === 'AllOffers') {
       this.requestsType = 'AllOffers';
       this.alloffers()
+      this.getbasecurr()
     }
     if (ev.detail.value === 'Favorite') {
       this.requestsType = 'Favorite';
@@ -91,7 +92,7 @@ export class OfferPage implements OnInit {
     }
     if (ev.detail.value === 'MyOffers') {
       this.requestsType = 'MyOffers';
-
+      this.useroffers()
     }
     localStorage.setItem('requestType', this.requestsType);
   }

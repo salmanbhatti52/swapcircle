@@ -89,7 +89,7 @@ export class ChatdetailPage implements OnInit {
       "users_customers_id": localStorage.getItem('user_id'),
       "other_users_customers_id": this.other_users_customers_id
     }
-    this.api.sendRequest('user_chat_live', data).subscribe((res: any) => {
+    this.api.sendRequest('user_chat', data).subscribe((res: any) => {
       console.log("get msgs response----", res);
       this.extra.hideLoader()
       if (res.status == 'success') {

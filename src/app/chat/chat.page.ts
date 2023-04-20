@@ -36,7 +36,7 @@ export class ChatPage implements OnInit {
     let data = {
       "users_customers_id": localStorage.getItem('user_id')
     }
-    this.api.sendRequest('getAllChatLive', data).subscribe((res: any) => {
+    this.api.sendRequest('getAllChat', data).subscribe((res: any) => {
       console.log('res---', res);
       this.extra.hideLoader()
       if (res.status == 'success') {

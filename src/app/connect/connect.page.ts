@@ -2,6 +2,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import SwiperCore, { Autoplay, Keyboard, Pagination, Scrollbar, Zoom, SwiperOptions } from 'swiper';
 import { IonicSlides, IonSlides, NavController } from '@ionic/angular';
+import { ApiService } from '../services/api.service';
+import { ExtraService } from '../services/extra.service';
 SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, IonicSlides]);
 @Component({
   selector: 'app-connect',
@@ -11,11 +13,73 @@ SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, IonicSlides]);
 export class ConnectPage implements OnInit {
   @ViewChild('slides', { static: false }) slides!: IonSlides;
   tact = false;
-  constructor(public navCtrl: NavController) { }
+  cat: any;
+  popular_articles: any;
+  other_articles: any;
+  constructor(public navCtrl: NavController,
+    public api: ApiService,
+    public extra: ExtraService) { }
 
   ngOnInit() {
   }
+  ionViewWillEnter() {
+    this.getcategories();
+    this.popularconnects()
+    this.otherconnects()
+  }
 
+  getcategories() {
+    this.api.getRequest('connect_categories').subscribe((res: any) => {
+      console.log('cat====', res);
+      this.cat = res.data
+    })
+  }
+  popularconnects() {
+    this.api.sendRequest('popular_connect_articles', { "users_customers_id": localStorage.getItem('user_id') }).subscribe((res: any) => {
+      console.log('connect_articles====', res);
+      this.popular_articles = res.data
+    })
+  }
+
+  otherconnects() {
+    this.api.sendRequest('connect_articles', { "users_customers_id": localStorage.getItem('user_id') }).subscribe((res: any) => {
+      console.log('Other_connect_articles====', res);
+      this.other_articles = res.data
+    })
+  }
+
+  addfav(item: any) {
+
+    let data = {
+      "users_customers_id": localStorage.getItem('user_id'),
+      "connect_articles_id": item.connect_articles_id
+    }
+    this.api.sendRequest('add_favorite_connect_articles', data).subscribe((p: any) => {
+      console.log('fav========', p);
+      if (p.status == 'success') {
+        item.liked = "Yes"
+      }
+    })
+  }
+  removefav(item: any, i: any, type: any) {
+    console.log(type);
+
+    let data = {
+      "users_customers_id": localStorage.getItem('user_id'),
+      "connect_articles_id": item.connect_articles_id
+    }
+    this.api.sendRequest('remove_favorite_connect_articles', data).subscribe((rem: any) => {
+      console.log('remove itm====', rem);
+      if (rem.status == 'success') {
+        if (type == 'other') {
+          item.liked = "No"
+        }
+        else {
+          item.liked = "No"
+        }
+      }
+    })
+  }
   goto() {
     this.navCtrl.navigateForward('favorite');
   }

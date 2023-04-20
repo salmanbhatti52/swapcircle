@@ -123,5 +123,41 @@ export class SwapofferrequestsPage implements OnInit {
     }
 
   }
+  chat(user: any) {
+    console.log(user);
+
+    let data = {
+      "requestType": "startChat",
+      "users_customers_id": localStorage.getItem('user_id'),
+      "other_users_customers_id": user.user_data.users_customers_id
+    }
+    this.api.sendRequest('user_chat', data).subscribe((res: any) => {
+      console.log('res---for check start chat', res);
+      if (res.status == 'success') {
+        this.navCtrl.navigateForward(['chatdetail', {
+          otheruserid: user.user_data.users_customers_id,
+          otherusername: user.user_data.first_name
+
+        }])
+      } else {
+        this.extra.presentToast(res.message)
+      }
+    })
+
+  }
+
+  remove(item: any, index: any) {
+    console.log(item);
+
+    let data = {
+      "swap_offers_requests_id": item.swap_offers_requests_id
+    }
+    this.api.sendRequest('swap_offer_request_reject', data).subscribe((rem: any) => {
+      console.log('remove request====', rem);
+      if (rem.status == 'success') {
+        this.reqarr.splice(index, 1)
+      }
+    })
+  }
 
 }

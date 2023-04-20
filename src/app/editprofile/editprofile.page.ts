@@ -1,5 +1,5 @@
 import { ExtraService } from './../services/extra.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormControl, FormBuilder, FormGroup } from '@angular/forms';
@@ -28,10 +28,16 @@ export class EditprofilePage implements OnInit {
   showconfirmPass = false;
   constructor(public location: Location,
     public alertCtrl: AlertController,
+    public navCtrl: NavController,
     public rest: ApiService,
     public extra: ExtraService) { }
 
   ngOnInit() {
+
+
+
+  }
+  ionViewWillEnter() {
     this.userdetail = localStorage.getItem('userdeatil')
 
     this.user = JSON.parse(this.userdetail)
@@ -45,8 +51,6 @@ export class EditprofilePage implements OnInit {
       this.profileimage = 'https://swap.eigix.net/public/' + this.user.profile_pic
 
     }
-
-
   }
   togglePass() {
 
@@ -138,7 +142,7 @@ export class EditprofilePage implements OnInit {
         "first_name": localStorage.getItem('sname'),
         "last_name": localStorage.getItem('sname'),
         "phone": localStorage.getItem('num'),
-        "email": localStorage.getItem('email'),
+        "email": this.user.email,
         "location": localStorage.getItem('address'),
         "notifications": "Yes",
         "valid_document": this.validdocument,
@@ -190,7 +194,7 @@ export class EditprofilePage implements OnInit {
       this.extra.presentToast('Confirm password required')
     } else {
       let datatosend = {
-        "email": localStorage.getItem('email'),
+        "email": this.user.email,
         "old_password": this.oldpass,
         "password": this.newpass,
         "confirm_password": this.confirmpass
@@ -199,7 +203,8 @@ export class EditprofilePage implements OnInit {
         console.log('response--', res);
         this.extra.hideLoader()
         if (res.status == 'success') {
-
+          this.navCtrl.navigateRoot('home');
+          this.extra.presentToast('Password change successfully')
         } else {
           this.extra.presentToast(res.message)
         }

@@ -39,6 +39,7 @@ export class Signup1Page implements OnInit {
   userprofile: any;
   countrycode: any = 'US';
   validnumber: any;
+  referalcode: any;
 
   // cameraOptions: CameraOptions = {
   //   quality: 50,
@@ -231,6 +232,7 @@ export class Signup1Page implements OnInit {
         localStorage.setItem('sname', this.sname);
         localStorage.setItem('num', this.num);
         localStorage.setItem('email', this.email);
+        localStorage.setItem('refer_code', this.referalcode)
 
         this.api.sendRequest('email_exist', { email: this.email }).subscribe((res: any) => {
           if (res.status == 'success') {

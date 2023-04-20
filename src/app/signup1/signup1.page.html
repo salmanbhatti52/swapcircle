@@ -103,11 +103,19 @@
       <!-- input 4 -->
       <div class="inputfieldtransparent" style="width: 100%; height: 64px; margin-top: 20px; display: flex">
         <img style="margin: 17px 17px 17px 15px" src="/assets/signup/email.svg" />
-        <input [(ngModel)]="email" class="input EudoxusSansReg" type="text" placeholder="Email address" />
+        <input [(ngModel)]="email" class="input EudoxusSansReg" type="email" placeholder="Email address" />
       </div>
 
-
-
+      <div class="inputfieldtransparent" style="width: 100%; height: 64px; margin-top: 20px; display: flex">
+        <input [(ngModel)]="referalcode" class="input EudoxusSansReg" type="text" placeholder="Referral Code"
+          style="padding-left: 20px;">
+      </div>
+      <p style="font-size: 13px;
+      color: #969D9F !important;
+      text-align: left;
+      width: 100%;
+      margin-left: 10%;
+      margin-top: 1%;" class="EudoxusSansReg">Note:Optional</p>
       <ion-button style="margin: 50px 0px 15px 0px" class="btnbggreen EudoxusSansReg"
         (click)="goNext()">Next</ion-button>
 

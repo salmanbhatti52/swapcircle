@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
-
+import { NavController, ToastController } from '@ionic/angular';
+import { Share } from '@capacitor/share';
+import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -11,7 +12,11 @@ export class ProfilePage implements OnInit {
   userdetail: any;
   user: any;
   userprofile: any;
-  constructor(public navCtrl: NavController) { }
+  copied = false;
+  referalcode: any;
+  constructor(public navCtrl: NavController,
+    public toastController: ToastController,
+    private clipboard: Clipboard) { }
 
   ngOnInit() {
     this.userdetail = localStorage.getItem('userdeatil')
@@ -21,7 +26,38 @@ export class ProfilePage implements OnInit {
 
   }
   ionViewWillEnter() {
+    let myString: any = localStorage.getItem('user_id');
+    let encodedValue = btoa(myString);
+    this.referalcode = encodedValue;
+    console.log('dsads', this.referalcode);
     this.userprofile = localStorage.getItem('userprofile')
+  }
+
+  copy() {
+    // console.log(this.textTocopy);
+    this.clipboard.copy(this.referalcode);
+    this.presentToast();
+    this.copied = true;
+    setInterval(() => {
+      this.copied = false;
+    }, 3000);
+  }
+
+  async socialshare() {
+    await Share.share({
+      title: 'See cool stuff',
+      text: this.referalcode,
+      url: 'http://ionicframework.com/',
+      dialogTitle: 'Share with buddies',
+    });
+  }
+
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Coupon code copied!.',
+      duration: 2000
+    });
+    toast.present();
   }
 
   billing() {

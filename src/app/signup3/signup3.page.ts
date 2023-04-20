@@ -139,7 +139,8 @@ export class Signup3Page implements OnInit {
           "id_front_image": this.picurlfront,
           "id_back_image": this.picurlback,
           "date_expiry": this.datesendonapi,
-          "profile_pic": this.extra.imgbaseURl
+          "profile_pic": this.extra.imgbaseURl,
+          "refer_code_users_customers_id": localStorage.getItem('refer_code')
         }
       } else {
         datasend = {
@@ -157,7 +158,8 @@ export class Signup3Page implements OnInit {
           "id_front_image": this.picurlfront,
           "id_back_image": this.picurlback,
           "date_expiry": this.datesendonapi,
-          "profile_pic": this.extra.imgbaseURl
+          "profile_pic": this.extra.imgbaseURl,
+          "refer_code_users_customers_id": localStorage.getItem('refer_code')
         }
       }
 
