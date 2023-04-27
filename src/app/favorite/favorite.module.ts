@@ -7,14 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { FavoritePageRoutingModule } from './favorite-routing.module';
 
 import { FavoritePage } from './favorite.page';
-
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FavoritePageRoutingModule
+    FavoritePageRoutingModule,
+    Ng2SearchPipeModule
   ],
   declarations: [FavoritePage]
 })
-export class FavoritePageModule {}
+export class FavoritePageModule { }

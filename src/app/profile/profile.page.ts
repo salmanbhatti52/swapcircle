@@ -14,23 +14,33 @@ export class ProfilePage implements OnInit {
   userprofile: any;
   copied = false;
   referalcode: any;
+  first_name: any;
+  last_name: any;
+  email: any;
   constructor(public navCtrl: NavController,
     public toastController: ToastController,
     private clipboard: Clipboard) { }
 
   ngOnInit() {
+
+
+  }
+  ionViewWillEnter() {
     this.userdetail = localStorage.getItem('userdeatil')
     console.log(this.userdetail);
 
     this.user = JSON.parse(this.userdetail)
+    console.log(this.user);
+    this.userprofile = this.user.profile_pic
+    this.first_name = this.user.first_name
+    this.last_name = this.user.last_name
+    this.email = this.user.email
 
-  }
-  ionViewWillEnter() {
     let myString: any = localStorage.getItem('user_id');
     let encodedValue = btoa(myString);
     this.referalcode = encodedValue;
     console.log('dsads', this.referalcode);
-    this.userprofile = localStorage.getItem('userprofile')
+    // this.userprofile = localStorage.getItem('userprofile')
   }
 
   copy() {

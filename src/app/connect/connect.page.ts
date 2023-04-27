@@ -4,6 +4,7 @@ import SwiperCore, { Autoplay, Keyboard, Pagination, Scrollbar, Zoom, SwiperOpti
 import { IonicSlides, IonSlides, NavController } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
 import { ExtraService } from '../services/extra.service';
+import { Share } from '@capacitor/share';
 SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, IonicSlides]);
 @Component({
   selector: 'app-connect',
@@ -16,6 +17,8 @@ export class ConnectPage implements OnInit {
   cat: any;
   popular_articles: any;
   other_articles: any;
+  term: any;
+  searchbar = false;
   constructor(public navCtrl: NavController,
     public api: ApiService,
     public extra: ExtraService) { }
@@ -79,6 +82,21 @@ export class ConnectPage implements OnInit {
         }
       }
     })
+  }
+  search() {
+    if (this.searchbar == true) {
+      this.searchbar = false;
+    } else {
+      this.searchbar = true;
+    }
+  }
+  async socialshare(obj: any) {
+    await Share.share({
+      title: obj.title,
+      text: obj.description,
+      url: 'http://ionicframework.com/',
+      dialogTitle: 'Share with buddies',
+    });
   }
   goto() {
     this.navCtrl.navigateForward('favorite');

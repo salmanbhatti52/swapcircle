@@ -11,7 +11,7 @@
         color:#21333B;text-align: center;">Favorite</div>
       </ion-col>
       <ion-col size="2" style="text-align: end;">
-        <img src="assets/imgs/search-normal.svg" />
+        <img src="assets/imgs/search-normal.svg" (click)="search()">
       </ion-col>
     </ion-row>
   </ion-toolbar>
@@ -20,8 +20,26 @@
 <ion-content style="--background: #e9f5ec;">
 
   <div class="wrapper">
+    <ion-searchbar mode="ios" style="--border-radius: 28px" placeholder="Search" [(ngModel)]="term"
+      *ngIf="searchbar"></ion-searchbar>
     <ion-row>
-      <ion-col size="6">
+      <ion-col size="6" *ngFor="let item of fav_articles | filter:term;">
+        <div class="carItem_box2">
+          <div style="padding: 4px 8px 8px">
+            <img src="https://swap.eigix.net/public/{{item.image}}" style="width: 143px;
+            height: 119px;
+            border-radius: 12px;">
+            <div class="cars_label EudoxusSansReg">{{item.title}}</div>
+            <div class="s-text EudoxusSansReg" style="text-align: left;">{{item.description}}</div>
+          </div>
+          <hr style="background: #E9F5EC;width: 100%;">
+          <div>
+            <img src="assets/imgs/redheartround.svg">
+            <img src="assets/imgs/bookmark.svg" style="padding-left: 8px;" (click)="socialshare(item)">
+          </div>
+        </div>
+      </ion-col>
+      <!-- <ion-col size="6">
         <div class="carItem_box2">
           <div style="padding: 4px 8px 8px">
             <img src="assets/imgs/demo.png">
@@ -35,22 +53,7 @@
             <img src="assets/imgs/bookmark.svg" style="padding-left: 8px;">
           </div>
         </div>
-      </ion-col>
-      <ion-col size="6">
-        <div class="carItem_box2">
-          <div style="padding: 4px 8px 8px">
-            <img src="assets/imgs/demo.png">
-            <div class="cars_label EudoxusSansReg">Mobile Airtime</div>
-            <div class="s-text EudoxusSansReg" style="text-align: left;">Get discount form VTU airtime recharge on all
-              networks.</div>
-          </div>
-          <hr style="background: #E9F5EC;width: 100%;">
-          <div>
-            <img src="assets/imgs/redheartround.svg">
-            <img src="assets/imgs/bookmark.svg" style="padding-left: 8px;">
-          </div>
-        </div>
-      </ion-col>
+      </ion-col> -->
     </ion-row>
 
 

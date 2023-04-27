@@ -176,7 +176,7 @@
     </div>
 
     <div *ngIf="requestsType=='HotSwapOffers'">
-      <ion-row *ngFor="let item of trans1" class="rowcls" id="open-sawap-modal">
+      <!-- <ion-row *ngFor="let item of trans1" class="rowcls" id="open-sawap-modal">
         <ion-col size="2.5">
           <img src="{{item.img}}">
         </ion-col>
@@ -188,7 +188,7 @@
         right: 10px;">
           <div class="price" [class.red]="item.status=='to'">{{item.price}}</div>
         </ion-col>
-      </ion-row>
+      </ion-row> -->
       <ion-button style="margin-top: 5%;" class="btnbggreen EudoxusSansReg" (click)="goNext()">Create Offer</ion-button>
 
       <!-- modal open-modal -->

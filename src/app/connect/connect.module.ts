@@ -8,13 +8,15 @@ import { ConnectPageRoutingModule } from './connect-routing.module';
 
 import { ConnectPage } from './connect.page';
 import { SwiperModule } from 'swiper/angular';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     ConnectPageRoutingModule,
-    SwiperModule
+    SwiperModule,
+    Ng2SearchPipeModule
   ],
   declarations: [ConnectPage]
 })

@@ -10,7 +10,7 @@
         font-size: 20px;
         color:#21333B;text-align: center;"><span style="color: #4BD16F;">Swap Circle </span>Connect</div>
       </ion-col>
-      <ion-col size="2" style="text-align: end;">
+      <ion-col size="2" style="text-align: end;" (click)="search()">
         <img src="assets/imgs/search-normal.svg" />
       </ion-col>
     </ion-row>
@@ -18,13 +18,15 @@
 </ion-header>
 
 <ion-content style="--background: #e9f5ec;">
+  <ion-searchbar mode="ios" style="--border-radius: 28px" placeholder="Search" [(ngModel)]="term" *ngIf="searchbar">
+  </ion-searchbar>
   <swiper [config]="{slidesPerView:4.6, spaceBetween:6, initialSlide:0, speed:400}" [pagination]="false"
     style="padding: 8px;">
     <ng-template swiperSlide *ngFor="let item of cat">
       <div>
         <div class="carItem_box">
-          <img src="assets/imgs/gift.svg">
-
+          <img src="https://swap.eigix.net/public/{{item.icon}}" *ngIf="item.icon!=''">
+          <img src="assets/imgs/gift.svg" *ngIf="item.icon==''">
         </div>
         <div class="s-text EudoxusSansReg">{{item.name}}</div>
       </div>
@@ -80,7 +82,7 @@
   <div class="htext EudoxusSansReg">Most Popular</div>
   <swiper [config]="{slidesPerView:2.3, spaceBetween:9, initialSlide:0, speed:400}" [pagination]="false"
     style="padding: 8px 8px 8px 12px;">
-    <ng-template swiperSlide *ngFor="let item of popular_articles;let i=index;">
+    <ng-template swiperSlide *ngFor="let item of popular_articles | filter:term;let i=index;">
       <div class="carItem_box2">
         <div style="padding: 4px 8px 8px">
           <img src="https://swap.eigix.net/public/{{item.image}}" style="width: 143px;
@@ -93,7 +95,7 @@
         <div>
           <img src="assets/imgs/fillheart.svg" *ngIf="item.liked=='Yes'" (click)="removefav(item,i,'popular')">
           <img src="assets/imgs/heartround.svg" *ngIf="item.liked=='No'" (click)="addfav(item)">
-          <img src="assets/imgs/bookmark.svg" style="padding-left: 8px;">
+          <img src="assets/imgs/bookmark.svg" style="padding-left: 8px;" (click)="socialshare(item)">
         </div>
       </div>
     </ng-template>
@@ -132,7 +134,7 @@
     <div style=" font-weight: 700;
     font-size: 16px;
     color: #21333B;" class="EudoxusSansReg">Others</div>
-    <div class="box1" *ngFor="let item of other_articles;let i=index;">
+    <div class="box1" *ngFor="let item of other_articles| filter:term;let i=index;">
       <div style="position: relative;">
         <img src="https://swap.eigix.net/public/{{item.image}}" style="width:100%;
         height: 160px;
@@ -140,7 +142,7 @@
         <div style="position: absolute;
             top: 10px;
             right: 10px;">
-          <img src="assets/imgs/bookmark1.svg">
+          <img src="assets/imgs/bookmark1.svg" (click)="socialshare(item)">
           <img src="assets/imgs/fillheart.svg" style="padding-left: 8px;" *ngIf="item.liked=='Yes'">
           <img src="assets/imgs/heartround.svg" style="padding-left: 8px;" *ngIf="item.liked=='No'">
         </div>

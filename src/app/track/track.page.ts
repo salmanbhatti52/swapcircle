@@ -19,7 +19,7 @@ export class TrackPage implements OnInit {
   fromsystemId: any = '2';
   tosystemId: any = '11';
 
-  amount: any;
+  amount: any = '';
   currcode: any = 'USD';
   tocurrcode: any = 'EUR';
   convertedamount: any;
@@ -96,6 +96,7 @@ export class TrackPage implements OnInit {
     this.fromsystemId = val.system_currencies_id;
     this.currsymbol = val.symbol
 
+    this.track()
   }
 
   optionsFn2(ev: any) {
@@ -104,59 +105,69 @@ export class TrackPage implements OnInit {
     this.tocurrcode = val.code
     this.tosystemId = val.system_currencies_id;
     this.tocurrsymbol = val.symbol
+    this.track()
+  }
+  Enteramount(ev: any) {
+    console.log(ev.target.value);
+
+    this.amount = ev.target.value
+    this.track()
   }
 
   track() {
-    this.extra.loadershow()
-    let datatosend = {
-      "from_system_currencies_id": this.fromsystemId,
-      "to_system_currencies_id": this.tosystemId,
-      "from_amount": this.amount
-    }
-    if (this.requestsType == "Buy") {
-      this.api.sendRequest('buy_currency_rate', datatosend).subscribe((res: any) => {
-        console.log('rate response====', res);
-        if (res.status == 'success') {
-          this.extra.hideLoader()
-          this.amountshow = true
-          let amt = res.data.converted_amount
-          let pp = amt.toFixed(2)
-          let instr = String(pp)
-          let p2 = instr.split('.')
-          this.convertedamount = p2[0]
-          let fixedto = p2[1]
-          console.log(this.convertedamount);
+    if (this.amount != '') {
+      this.extra.loadershow()
+      let datatosend = {
+        "from_system_currencies_id": this.fromsystemId,
+        "to_system_currencies_id": this.tosystemId,
+        "from_amount": this.amount
+      }
+      if (this.requestsType == "Buy") {
+        this.api.sendRequest('buy_currency_rate', datatosend).subscribe((res: any) => {
+          console.log('rate response====', res);
+          if (res.status == 'success') {
+            this.extra.hideLoader()
+            this.amountshow = true
+            let amt = res.data.converted_amount
+            let pp = amt.toFixed(2)
+            let instr = String(pp)
+            let p2 = instr.split('.')
+            this.convertedamount = p2[0]
+            let fixedto = p2[1]
+            console.log(this.convertedamount);
 
-          this.amountafterpoint = p2[1];
-          this.exchangerate()
-        } else {
+            this.amountafterpoint = p2[1];
+            this.exchangerate()
+          } else {
+            this.extra.hideLoader()
+          }
+        }, err => {
           this.extra.hideLoader()
-        }
-      }, err => {
-        this.extra.hideLoader()
-      })
-    } else {
-      this.api.sendRequest('sell_currency_rate', datatosend).subscribe((res: any) => {
-        console.log('rate response====', res);
-        if (res.status == 'success') {
-          this.extra.hideLoader()
-          this.amountshow = true
-          let amt = res.data.converted_amount
-          let pp = amt.toFixed(2)
-          let instr = String(pp)
-          let p2 = instr.split('.')
-          this.convertedamount = p2[0]
-          let fixedto = p2[1]
-          console.log(this.convertedamount);
+        })
+      } else {
+        this.api.sendRequest('sell_currency_rate', datatosend).subscribe((res: any) => {
+          console.log('rate response====', res);
+          if (res.status == 'success') {
+            this.extra.hideLoader()
+            this.amountshow = true
+            let amt = res.data.converted_amount
+            let pp = amt.toFixed(2)
+            let instr = String(pp)
+            let p2 = instr.split('.')
+            this.convertedamount = p2[0]
+            let fixedto = p2[1]
+            console.log(this.convertedamount);
 
-          this.amountafterpoint = p2[1]
-        } else {
+            this.amountafterpoint = p2[1]
+          } else {
+            this.extra.hideLoader()
+          }
+        }, err => {
           this.extra.hideLoader()
-        }
-      }, err => {
-        this.extra.hideLoader()
-      })
+        })
+      }
     }
+
   }
   exchangerate() {
     let datasend = {

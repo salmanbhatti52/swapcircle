@@ -85,14 +85,16 @@ export class EditprofilePage implements OnInit {
               this.profileimage = res.dataUrl
               this.picurl = res.dataUrl
               // console.log('image uri==', res.dataUrl);
-              let picurl2 = this.picurl1.split(',');
+              let picurl2 = this.picurl.split(',');
               if (localStorage.getItem('customertype') == 'Company') {
                 this.validdocument = picurl2[1];
+                this.updateprofile()
               } else {
                 this.userprofile = picurl2[1];
+                this.updateprofile()
               }
 
-              this.updateprofile()
+
             })
           }
         },
@@ -111,14 +113,16 @@ export class EditprofilePage implements OnInit {
               this.picurl1 = res.dataUrl
               console.log('image uri==', res.dataUrl);
               let picurl2 = this.picurl1.split(',');
-              this.userprofile = picurl2[1]
+              // this.userprofile = picurl2[1]
 
               if (localStorage.getItem('customertype') == 'Company') {
                 this.validdocument = picurl2[1];
+                this.updateprofile()
               } else {
                 this.userprofile = picurl2[1];
+                this.updateprofile()
               }
-              this.updateprofile()
+
 
             })
 

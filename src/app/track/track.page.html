@@ -45,7 +45,8 @@
           <!-- <div class="txt1">$156.<span style="opacity:47%;font-size: 18px;">50</span>
               <hr>
             </div> -->
-          <ion-input type="text" placeholder="enter amount" class="txt1" [(ngModel)]="amount"></ion-input>
+          <ion-input type="number" placeholder="enter amount" class="txt1" [(ngModel)]="amount"
+            (ionInput)="Enteramount($event)"></ion-input>
 
           <!-- <img src="assets/imgs/calculator.svg" /> -->
         </div>
@@ -106,7 +107,7 @@
       </div>
     </div>
 
-    <div style="display: flex; justify-content: space-between; margin: 3% 0%">
+    <!-- <div style="display: flex; justify-content: space-between; margin: 3% 0%">
       <div class="carItem_box">
         <div class="s-text EudoxusSansReg">Market Name</div>
 
@@ -140,7 +141,7 @@
 
         <div class="cars_label EudoxusSansReg">₦890.00</div>
       </div>
-    </div>
+    </div> -->
 
     <ion-button style="margin-top: 5%" class="btnbggreen EudoxusSansReg" (click)="goNext()">Buy APPL</ion-button>
   </div>

@@ -49,9 +49,9 @@ export class ChatdetailPage implements OnInit {
 
     // // Get all  messages....
     this.getMessages();
-    // this.autoSaveInterval = setInterval(() => {
-    //   this.updateMessages();
-    // }, 2000);
+    this.autoSaveInterval = setInterval(() => {
+      this.updateMessages();
+    }, 2000);
   }
 
   userTyping(event: any) {
@@ -64,19 +64,19 @@ export class ChatdetailPage implements OnInit {
       "users_customers_id": localStorage.getItem('user_id'),
       "other_users_customers_id": this.other_users_customers_id
     }
-    this.api.sendRequest('user_chat_live', data).subscribe((res: any) => {
-      // console.log("get msgs response----", res);
+    this.api.sendRequest('user_chat', data).subscribe((res: any) => {
+      console.log("get msgs update response----", res);
       if (res.status == 'success') {
-        // res.data.forEach((ele: any) => {
-        //   console.log(ele);
-        //   let data = {
-        //     userloggedId: ele.users_data.users_customers_id,
-        //     message: ele.message,
-        //     time: ele.time
-        //   }
-        //   this.messages.push(data)
-        //   this.scrollDown();
-        // });
+        res.data.unread_messages.forEach((ele: any) => {
+          console.log(ele);
+          let data = {
+            userloggedId: ele.users_data.users_customers_id,
+            message: ele.message,
+            time: ele.time
+          }
+          this.messages.push(data)
+          this.scrollDown();
+        });
       }
 
     });
@@ -120,7 +120,7 @@ export class ChatdetailPage implements OnInit {
       "content": this.message,
       "messageType": "1"
     }
-    this.api.sendRequest('user_chat_live', fiedlstosend).subscribe((res: any) => {
+    this.api.sendRequest('user_chat', fiedlstosend).subscribe((res: any) => {
       console.log("send-msg-response", res);
       let datatosend = {
         userloggedId: localStorage.getItem('user_id'),
