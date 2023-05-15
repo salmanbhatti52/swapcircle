@@ -28,9 +28,9 @@
     </div>
 
     <div *ngIf="showcurr==true" class="sublist">
-      <div *ngFor="let list of currencies; let i=index" (click)="selectcurrency(list,i)">
+      <div *ngFor="let list of walletslist; let i=index" (click)="selectcurrency(list,i)">
         <div class="euro-text1 EudoxusSansReg">
-          {{list.curr}}
+          {{list.currency.name}} <span style="font-size: 12px;padding-left: 2px;">({{list.currency.code}})</span>
         </div>
       </div>
     </div>
@@ -51,7 +51,7 @@
 </ion-content>
 
 <ion-footer class="ion-no-border" style="background: #e9f5ec;">
-  <div style="width:93%;margin:0% auto 5%;">
+  <div style="width:93%;margin:0% auto 5%;" (click)="save()">
     <ion-button style="margin-top: 5%;" class="btnbggreen EudoxusSansReg">
       Save</ion-button>
   </div>

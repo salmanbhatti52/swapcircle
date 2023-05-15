@@ -50,6 +50,7 @@ export class HomePage {
   userloginId: any;
   currID: any;
   bcurrsymbol: any;
+  messagecount: any;
   constructor(public navCtrl: NavController,
     public api: ApiService,
     public extra: ExtraService) {
@@ -84,6 +85,15 @@ export class HomePage {
     }
 
     this.walletlist()
+    this.unreadmessagecount()
+  }
+  unreadmessagecount() {
+    this.api.sendRequest('unreaded_messages', { "users_customers_id": localStorage.getItem('user_id') }).subscribe((res: any) => {
+      console.log('message count====', res);
+      if (res.status == 'success') {
+        this.messagecount = res.data
+      }
+    })
   }
   segmentChanged(ev: any) {
     console.log('requestType value', ev.detail.value);
@@ -157,10 +167,12 @@ export class HomePage {
   }
 
   gettransaction() {
+    this.extra.loadershow()
     this.api.sendRequest('all_transactions', { "users_customers_id": localStorage.getItem('user_id') }).subscribe((resp: any) => {
       console.log('trans----', resp);
 
       if (resp.status == 'success') {
+        this.extra.hideLoader()
         resp.data.date_added = moment(resp.data.date_added).format('LT');
         console.log(resp.data.date_added)
         this.transarr = resp.data
@@ -182,8 +194,11 @@ export class HomePage {
 
       }
       else {
-        // this.extra.presentToast(resp.message)
+        this.extra.hideLoader()
+        this.extra.presentToast(resp.message)
       }
+    }, err => {
+      this.extra.hideLoader()
     })
   }
 

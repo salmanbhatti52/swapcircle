@@ -3,6 +3,7 @@ import { NavController } from "@ionic/angular";
 import { ApiService } from "../services/api.service";
 import { ExtraService } from "../services/extra.service";
 import { log } from "console";
+import { threadId } from "worker_threads";
 
 @Component({
   selector: "app-track",
@@ -116,6 +117,8 @@ export class TrackPage implements OnInit {
 
   track() {
     if (this.amount != '') {
+
+
       this.extra.loadershow()
       let datatosend = {
         "from_system_currencies_id": this.fromsystemId,

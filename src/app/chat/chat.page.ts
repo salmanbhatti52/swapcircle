@@ -54,8 +54,8 @@ export class ChatPage implements OnInit {
     console.log(user);
 
     this.navCtrl.navigateForward(['chatdetail', {
-      otheruserid: user.receiver_id,
-      otherusername: user.receiver_data.first_name
+      otheruserid: user.user_data.users_customers_id,
+      otherusername: user.user_data.first_name
     }])
   }
 

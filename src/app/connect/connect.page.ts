@@ -38,9 +38,13 @@ export class ConnectPage implements OnInit {
     })
   }
   popularconnects() {
+    this.extra.loadershow()
     this.api.sendRequest('popular_connect_articles', { "users_customers_id": localStorage.getItem('user_id') }).subscribe((res: any) => {
+      this.extra.hideLoader()
       console.log('connect_articles====', res);
       this.popular_articles = res.data
+    }, err => {
+      this.extra.hideLoader()
     })
   }
 

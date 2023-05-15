@@ -97,6 +97,6 @@ export class LoginscreenPage implements OnInit {
 
 
   goback() {
-    this.navCtrl.navigateRoot('onboard');
+    this.navCtrl.navigateRoot('getstart');
   }
 }

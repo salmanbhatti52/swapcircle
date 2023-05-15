@@ -2,6 +2,7 @@ import { ApiService } from './../services/api.service';
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
+import { ExtraService } from '../services/extra.service';
 @Component({
   selector: 'app-notification',
   templateUrl: './notification.page.html',
@@ -14,17 +15,20 @@ export class NotificationPage implements OnInit {
   noti: any = [];
   notilength: any;
   constructor(public location: Location,
-    public api: ApiService) { }
+    public api: ApiService,
+    public extra: ExtraService) { }
 
   ngOnInit() {
     this.getnotification()
   }
 
   getnotification() {
+    this.extra.loadershow()
     this.api.sendRequest('notifications', { "users_customers_id": localStorage.getItem('user_id') }).subscribe((res: any) => {
       console.log('response', res);
       this.notilength = res.data.length
       if (res.status == 'success') {
+        this.extra.hideLoader()
         let dd = moment(res.data.date_added).format('YYYY-MM-DD')
         const d = new Date(dd);
 
@@ -40,9 +44,13 @@ export class NotificationPage implements OnInit {
           }
           this.noti.push(data)
         });
+      } else {
+        this.extra.hideLoader()
       }
 
 
+    }, err => {
+      this.extra.hideLoader()
     })
   }
   goback() {

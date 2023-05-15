@@ -58,10 +58,17 @@ export class SwapofferrequestsPage implements OnInit {
     let datasend = {
       "swap_offers_id": swap_offers_id
     }
-
+    this.extra.loadershow()
     this.api.sendRequest('user_swap_offers_requests', datasend).subscribe((p: any) => {
       console.log(p);
-      this.reqarr = p.data
+      this.extra.hideLoader()
+      if (p.status == 'success') {
+        this.reqarr = p.data
+      } else {
+        this.extra.presentToast(p.message)
+      }
+
+
     })
   }
 

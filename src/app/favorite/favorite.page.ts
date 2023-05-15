@@ -1,4 +1,4 @@
-import { NavController } from '@ionic/angular';
+import { LoadingController, NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ApiService } from '../services/api.service';
@@ -15,6 +15,7 @@ export class FavoritePage implements OnInit {
   term: any;
   searchbar = false;
   constructor(public navCtrl: NavController,
+    public loadingCtrl: LoadingController,
     public location: Location,
     public api: ApiService,
     public extra: ExtraService) { }
@@ -28,12 +29,33 @@ export class FavoritePage implements OnInit {
   }
 
   favconnects() {
+    this.loadershow()
     this.api.sendRequest('favorite_connect_articles', { "users_customers_id": localStorage.getItem('user_id') }).subscribe((res: any) => {
+
       console.log('fav_articles====', res);
       this.fav_articles = res.data
+
+    }, err => {
+
     })
   }
+  removefav(item: any, index: any) {
+    console.log(item);
 
+    let data = {
+      "users_customers_id": localStorage.getItem('user_id'),
+      "connect_articles_id": item.connect_articles_id
+    }
+    this.api.sendRequest('remove_favorite_connect_articles', data).subscribe((res: any) => {
+      console.log(res);
+
+      if (res.status == 'success') {
+        this.extra.presentToast(res.message)
+        this.fav_articles.splice(index, 1)
+      }
+    })
+
+  }
   search() {
     if (this.searchbar == true) {
       this.searchbar = false;
@@ -63,6 +85,18 @@ export class FavoritePage implements OnInit {
   }
   tab4Click() {
     this.navCtrl.navigateRoot('profile');
+
+  }
+
+  async loadershow(content?: string) {
+
+    this.loadingCtrl.create({
+      cssClass: 'loadingdiv',
+      message: '',
+      duration: 2000
+    }).then((res) => {
+      res.present();
+    });
 
   }
 

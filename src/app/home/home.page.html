@@ -4,7 +4,7 @@
     margin: 0% auto;">
       <ion-col size="3">
         <img src="assets/signup/user.svg" *ngIf="user.profile_pic==null">
-        <img src="https://swap.eigix.net/public/{{user.profile_pic}}" *ngIf="user.profile_pic!=null"
+        <img src="https://portal.swapcircle.trade/public/{{user.profile_pic}}" *ngIf="user.profile_pic!=null"
           style="border-radius: 90%;width: 70px;height: 70px;">
       </ion-col>
       <ion-col size="6">
@@ -29,7 +29,11 @@
         align-items: center;
         justify-content: space-evenly;
         margin-top: 18%;">
-          <img src="assets/imgs/messages-2.svg" (click)="chat()">
+          <div style="position: relative;" (click)="chat()">
+            <img src="assets/imgs/messages-2.svg">
+            <ion-badge class="c-badge">{{messagecount}}</ion-badge>
+          </div>
+
           <img src="assets/imgs/notification.svg" (click)="noti()">
         </div>
         <div style="margin-left: -10%;margin-top: 2%;">
@@ -89,7 +93,7 @@
           <div class="carItem_box">
             <div style="display: flex;
               align-items: center;">
-              <img src="https://swap.eigix.net/public/{{item.currency.country.image}}">
+              <img src="https://portal.swapcircle.trade/public/{{item.currency.country.image}}">
               <div class="s-text EudoxusSansReg">{{item.currency.country.code}}</div>
             </div>
 
@@ -231,7 +235,7 @@
     </div>
 
     <div *ngIf="requestsType=='RateTable'">
-      <div class="box EudoxusSansReg">
+      <!-- <div class="box EudoxusSansReg">
         <ion-row>
           <ion-col size="6">
             <div class="flex-c">
@@ -260,7 +264,7 @@
             <div class="label3 EudoxusSansReg">₦889.00</div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
 
 

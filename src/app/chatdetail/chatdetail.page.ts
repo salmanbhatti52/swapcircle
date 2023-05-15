@@ -83,7 +83,7 @@ export class ChatdetailPage implements OnInit {
   }
 
   getMessages() {
-    // this.extra.loadershow()
+    this.extra.loadershow()
     let data = {
       "requestType": "getMessages",
       "users_customers_id": localStorage.getItem('user_id'),
@@ -94,9 +94,8 @@ export class ChatdetailPage implements OnInit {
       this.extra.hideLoader()
       if (res.status == 'success') {
         res.data.forEach((ele: any) => {
-
           let data = {
-            userloggedId: ele.users_data.users_customers_id,
+            userloggedId: ele.user_data.users_customers_id,
             message: ele.message,
             time: ele.time
           }

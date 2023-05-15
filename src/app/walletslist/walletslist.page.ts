@@ -23,12 +23,21 @@ export class WalletslistPage implements OnInit {
     this.location.back()
   }
   walletlist() {
+    this.extra.loadershow()
     let datasend = {
       "users_customers_id": localStorage.getItem('user_id'),
     }
     this.api.sendRequest('get_wallet', datasend).subscribe((response: any) => {
       console.log(response);
-      this.walletslist = response.data
+      if (response.status = 'success') {
+        this.extra.hideLoader()
+        this.walletslist = response.data
+      } else {
+        this.extra.hideLoader()
+      }
+
+    }, err => {
+      this.extra.hideLoader()
     })
   }
 

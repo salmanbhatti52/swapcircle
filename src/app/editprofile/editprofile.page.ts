@@ -48,7 +48,7 @@ export class EditprofilePage implements OnInit {
       this.profileimage = 'assets/imgs/userprofile.svg'
 
     } else {
-      this.profileimage = 'https://swap.eigix.net/public/' + this.user.profile_pic
+      this.profileimage = 'https://portal.swapcircle.trade/public/' + this.user.profile_pic
 
     }
   }

@@ -14,14 +14,23 @@
 </ion-header>
 
 <ion-content style="--background: #e9f5ec;">
+  <div *ngIf="datalength==0" style="font-weight: 500;
+  font-size: 20px;
+  color: #21333B;
+  text-align: center;
+  background: #fff;
+  padding: 20px;" class="EudoxusSansReg">No Data Found</div>
   <div class="wrapper">
-    <ion-row class="rowcls">
+
+    <ion-row class="rowcls" *ngFor="let item of accounts">
       <ion-col size="2.5">
-        <img src="assets/imgs/picon.svg">
+        <img src="https://portal.swapcircle.trade/public/{{item.user_data.profile_pic}}" style="border-radius: 90px;
+        width: 50px;
+        height: 50px;">
       </ion-col>
       <ion-col size="8">
-        <div class="text1 EudoxusSansReg">James Anderson</div>
-        <div class="text2 EudoxusSansReg">$ James3651</div>
+        <div class="text1 EudoxusSansReg">{{item.full_name}}</div>
+        <div class="text2 EudoxusSansReg">{{item.account_currency.symbol}} {{item.iban}}</div>
       </ion-col>
       <ion-col size="1.5" style="text-align: end;">
         <img src="assets/imgs/arrowforward.svg" style="margin-top: 3px;">

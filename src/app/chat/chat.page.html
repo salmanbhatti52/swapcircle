@@ -17,13 +17,13 @@
   <div class="wrapper">
     <ion-row class="rowcls" *ngFor="let item of chat" (click)="goto(item)">
       <ion-col size="2">
-        <img src="https://swap.eigix.net/public/{{item.receiver_data.profile_pic}}" style="border-radius: 90%;height: 45px;
-        width: 48px;" *ngIf="item.receiver_data.profile_pic!=null">
+        <img src="https://portal.swapcircle.trade/public/{{item.user_data.profile_pic}}" style="border-radius: 90%;height: 45px;
+        width: 48px;" *ngIf="item.user_data.profile_pic!=null">
         <img src="/src/assets/imgs/user.png" style="border-radius: 90%;
-        width: 48px;" *ngIf="item.receiver_data.profile_pic==null">
+        width: 48px;" *ngIf="item.user_data.profile_pic==null">
       </ion-col>
       <ion-col size="7">
-        <div class="text1 EudoxusSansReg">{{item.receiver_data.first_name}}</div>
+        <div class="text1 EudoxusSansReg">{{item.user_data.first_name}}</div>
         <div class="text2 EudoxusSansReg">{{item.last_message}}</div>
       </ion-col>
       <ion-col size="3">

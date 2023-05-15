@@ -106,15 +106,32 @@ export class OfferPage implements OnInit {
   }
 
   alloffers() {
+    // this.extra.loadershow()
     this.api.sendRequest('all_swap_offers', { "users_customers_id": localStorage.getItem('user_id') }).subscribe((res: any) => {
       console.log('all offers', res);
-      this.offers = res.data
+      if (res.status == "success") {
+        this.extra.hideLoader()
+        this.offers = res.data
+      } else {
+        this.extra.hideLoader()
+      }
+
+    }, err => {
+      this.extra.hideLoader()
     })
   }
   useroffers() {
+    this.extra.loadershow()
     this.api.sendRequest('user_swap_offers', { "users_customers_id": localStorage.getItem('user_id') }).subscribe((res: any) => {
       console.log('user0ffers----', res);
-      this.userswapoffers = res.data
+      if (res.status == "success") {
+        this.extra.hideLoader()
+        this.userswapoffers = res.data
+      } else {
+        this.extra.hideLoader()
+      }
+    }, err => {
+      this.extra.hideLoader()
     })
   }
   async onWillDismiss(f: any) {
@@ -180,9 +197,15 @@ export class OfferPage implements OnInit {
 
   }
   getfav() {
+    this.extra.loadershow
     this.api.sendRequest('all_favorite_swaps_offers', { "users_customers_id": localStorage.getItem('user_id') }).subscribe((res: any) => {
       console.log('get fav====', res);
-      this.fav = res.data
+      if (res.status == "success") {
+        this.extra.hideLoader()
+        this.fav = res.data
+      }
+    }, err => {
+      this.extra.hideLoader()
     })
   }
 

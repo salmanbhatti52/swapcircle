@@ -23,7 +23,7 @@
     <ion-searchbar mode="ios" style="--border-radius: 28px" placeholder="Search" [(ngModel)]="term"
       *ngIf="searchbar"></ion-searchbar>
     <ion-row>
-      <ion-col size="6" *ngFor="let item of fav_articles | filter:term;">
+      <ion-col size="6" *ngFor="let item of fav_articles| filter:term;let i=index;">
         <div class="carItem_box2">
           <div style="padding: 4px 8px 8px">
             <img src="https://swap.eigix.net/public/{{item.image}}" style="width: 143px;
@@ -34,26 +34,12 @@
           </div>
           <hr style="background: #E9F5EC;width: 100%;">
           <div>
-            <img src="assets/imgs/redheartround.svg">
+            <img src="assets/imgs/redheartround.svg" (click)="removefav(item,i)">
             <img src="assets/imgs/bookmark.svg" style="padding-left: 8px;" (click)="socialshare(item)">
           </div>
         </div>
       </ion-col>
-      <!-- <ion-col size="6">
-        <div class="carItem_box2">
-          <div style="padding: 4px 8px 8px">
-            <img src="assets/imgs/demo.png">
-            <div class="cars_label EudoxusSansReg">Mobile Airtime</div>
-            <div class="s-text EudoxusSansReg" style="text-align: left;">Get discount form VTU airtime recharge on all
-              networks.</div>
-          </div>
-          <hr style="background: #E9F5EC;width: 100%;">
-          <div>
-            <img src="assets/imgs/redheartround.svg">
-            <img src="assets/imgs/bookmark.svg" style="padding-left: 8px;">
-          </div>
-        </div>
-      </ion-col> -->
+
     </ion-row>
 
 
@@ -61,39 +47,42 @@
 
 </ion-content>
 <ion-footer>
-  <ion-tabs style="top: 10px !important">
-    <ion-fab vertical="bottom" horizontal="center" translucent="true">
-      <ion-fab-button (click)="tabClick()">
-        <img class="fabimg" src="assets/imgs/action.svg" />
-      </ion-fab-button>
-    </ion-fab>
+  <ion-footer>
+    <ion-tabs style="top: 10px !important">
+      <!-- <ion-fab vertical="bottom" horizontal="center" translucent="true">
+        <ion-fab-button (click)="tabClick()">
+          <img class="fabimg" src="assets/imgs/action.svg" />
+        </ion-fab-button>
+      </ion-fab> -->
 
-    <ion-tab-bar slot="bottom" class="ion-no-border">
-      <ion-tab-button (click)="tab1Click()">
-        <img src="assets/imgs/home.svg">
-        <ion-label class="tabtext EudoxusSansReg">Home</ion-label>
-      </ion-tab-button>
+      <ion-tab-bar slot="bottom" class="ion-no-border">
+        <ion-tab-button (click)="tab1Click()">
+          <img src="assets/imgs/home.svg">
+          <ion-label class="tabtext EudoxusSansReg">Home</ion-label>
+        </ion-tab-button>
 
-      <ion-tab-button (click)="tab2Click()">
-        <img src="assets/imgs/activity.svg">
-        <ion-label class="tabtext EudoxusSansReg">Offers</ion-label>
+        <ion-tab-button (click)="tab2Click()">
+          <img src="assets/imgs/activity.svg">
+          <ion-label class="tabtext EudoxusSansReg">Offers</ion-label>
 
-      </ion-tab-button>
+        </ion-tab-button>
 
-      <ion-tab-button (click)="tab2Click()">
-        <ion-label class="tacttext EudoxusSansReg">Track</ion-label>
-      </ion-tab-button>
+        <ion-tab-button (click)="tabClick()">
+          <img src="assets/imgs/track1.svg">
+          <ion-label class="tabtext EudoxusSansReg">Track</ion-label>
+        </ion-tab-button>
 
-      <ion-tab-button (click)="tab3Click()" tab="tab4">
-        <img src="assets/imgs/contacta.svg">
-        <ion-label class="tabtextActive EudoxusSansReg">Connect</ion-label>
-        <img class="tabline" src="assets/imgs/tabline.svg">
-      </ion-tab-button>
+        <ion-tab-button (click)="tab3Click()">
+          <img src="assets/imgs/contacta.svg">
+          <ion-label class="tabtextActive EudoxusSansReg">Connect</ion-label>
+          <img class="tabline" src="assets/imgs/tabline.svg">
+        </ion-tab-button>
 
-      <ion-tab-button (click)="tab4Click()" tab="tab5">
-        <img src="assets/imgs/profile.svg" style="opacity: 46%" />
-        <ion-label class="tabtext EudoxusSansReg">Profile</ion-label>
-      </ion-tab-button>
-    </ion-tab-bar>
-  </ion-tabs>
+        <ion-tab-button (click)="tab4Click()">
+          <img src="assets/imgs/profile.svg">
+          <ion-label class="tabtext EudoxusSansReg">Profile</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </ion-footer>
 </ion-footer>

@@ -4,7 +4,8 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
   providedIn: 'root'
 })
 export class ApiService {
-  baseURL = 'https://swap.eigix.net/api'
+  // baseURL = 'https://swap.eigix.net/api'
+  baseURL = 'https://portal.swapcircle.trade/api'
   constructor(public http: HttpClient) { }
 
   sendRequest(action: any, data?: any) {

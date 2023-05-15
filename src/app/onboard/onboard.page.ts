@@ -36,6 +36,9 @@ export class OnboardPage implements OnInit {
 
   ngOnInit() { }
 
+  skip() {
+    this.router.navigate(['getstart']);
+  }
   goToSignup() {
     this.router.navigate(['getstart']);
   }
