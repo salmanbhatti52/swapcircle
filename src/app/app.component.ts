@@ -20,12 +20,12 @@ export class AppComponent {
   initializeApp() {
     console.log(localStorage.getItem("user_id"));
 
-    // if (localStorage.getItem('user_id') == '' || localStorage.getItem('user_id') == null) {
-    //   this.navCtrl.navigateRoot('onboard')
-    // } else {
+    if (localStorage.getItem('user_id') == '' || localStorage.getItem('user_id') == null) {
+      this.navCtrl.navigateRoot('onboard')
+    } else {
 
-    //   this.navCtrl.navigateRoot('home');
-    // }
+      this.navCtrl.navigateRoot('home');
+    }
 
     // this.pushNotification()
   }

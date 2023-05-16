@@ -235,6 +235,15 @@ export class SendcurrencyPage implements OnInit {
           console.log(p4);
           this.convertedamount = p4[0]
           this.amountafterpoint = p4[1]
+        } else {
+          // this.excurrsymbol = ''
+          // this.convertedrate = ''
+          // this.convertedrate = ''
+          // this.excurrsymbol = ''
+          // this.convertedamount = ''
+          // this.amountafterpoint = ''
+          this.amountshow = false;
+          this.extra.presentToast(p.message)
         }
 
 

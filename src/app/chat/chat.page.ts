@@ -63,5 +63,11 @@ export class ChatPage implements OnInit {
     this.navCtrl.navigateForward('userslist')
   }
 
+  handleImgError(ev: any) {
+    const source = ev.srcElement;
+    const imgSrc = `assets/imgs/placeholder.jpg`;
+    source.src = imgSrc;
+  }
+
 
 }

@@ -93,6 +93,7 @@ export class ChatdetailPage implements OnInit {
       console.log("get msgs response----", res);
       this.extra.hideLoader()
       if (res.status == 'success') {
+        this.scrollDown()
         res.data.forEach((ele: any) => {
           let data = {
             userloggedId: ele.user_data.users_customers_id,

@@ -18,7 +18,7 @@
     <ion-row class="rowcls" *ngFor="let item of chat" (click)="goto(item)">
       <ion-col size="2">
         <img src="https://portal.swapcircle.trade/public/{{item.user_data.profile_pic}}" style="border-radius: 90%;height: 45px;
-        width: 48px;" *ngIf="item.user_data.profile_pic!=null">
+        width: 48px;" *ngIf="item.user_data.profile_pic!=null" (error)="handleImgError($event)">
         <img src="/src/assets/imgs/user.png" style="border-radius: 90%;
         width: 48px;" *ngIf="item.user_data.profile_pic==null">
       </ion-col>
