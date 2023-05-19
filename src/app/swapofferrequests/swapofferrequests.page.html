@@ -17,9 +17,9 @@
   <div class="wrapper" *ngFor="let item of reqarr;let i=index;">
     <ion-row class="rowcls">
       <ion-col size="2.5">
-        <img src="https://swap.eigix.net/public/{{item.user_data.profile_pic}}" style="border-radius:90%;
+        <img src="https://portal.swapcircle.trade/public/{{item.user_data.profile_pic}}" style="border-radius:90%;
         height: 50px;
-        width: 50px;">
+        width: 50px;" (error)="handleImgError($event)">
       </ion-col>
       <ion-col size="6.3">
         <div style="display: inline-flex;

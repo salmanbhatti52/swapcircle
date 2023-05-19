@@ -106,6 +106,7 @@ export class OfferPage implements OnInit {
   }
 
   alloffers() {
+    this.offers = []
     // this.extra.loadershow()
     this.api.sendRequest('all_swap_offers', { "users_customers_id": localStorage.getItem('user_id') }).subscribe((res: any) => {
       console.log('all offers', res);
@@ -121,6 +122,7 @@ export class OfferPage implements OnInit {
     })
   }
   useroffers() {
+    this.userswapoffers = []
     this.extra.loadershow()
     this.api.sendRequest('user_swap_offers', { "users_customers_id": localStorage.getItem('user_id') }).subscribe((res: any) => {
       console.log('user0ffers----', res);
@@ -197,6 +199,7 @@ export class OfferPage implements OnInit {
 
   }
   getfav() {
+    this.fav = []
     this.extra.loadershow
     this.api.sendRequest('all_favorite_swaps_offers', { "users_customers_id": localStorage.getItem('user_id') }).subscribe((res: any) => {
       console.log('get fav====', res);

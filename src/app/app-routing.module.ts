@@ -173,6 +173,10 @@ const routes: Routes = [
     path: 'swapofferrequests',
     loadChildren: () => import('./swapofferrequests/swapofferrequests.module').then( m => m.SwapofferrequestsPageModule)
   },
+  {
+    path: 'deleteaccount',
+    loadChildren: () => import('./deleteaccount/deleteaccount.module').then( m => m.DeleteaccountPageModule)
+  },
 ];
 
 @NgModule({

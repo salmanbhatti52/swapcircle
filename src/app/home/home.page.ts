@@ -51,6 +51,7 @@ export class HomePage {
   currID: any;
   bcurrsymbol: any;
   messagecount: any;
+  textshow: any;
   constructor(public navCtrl: NavController,
     public api: ApiService,
     public extra: ExtraService) {
@@ -62,8 +63,19 @@ export class HomePage {
     this.systemsettings()
     this.bcurrsymbol = localStorage.getItem('basecurrsymbol')
 
-    let date = moment('2023-03-27 05:00:19').format('LT');
-    console.log(date);
+
+    const currentHour = new Date().getHours();
+
+    if (currentHour >= 5 && currentHour < 12) {
+      console.log("Good Morning");
+      this.textshow = "Good Morning"
+    } else if (currentHour >= 12 && currentHour < 18) {
+      console.log("Good Afternoon");
+      this.textshow = "Good Afternoon"
+    } else {
+      console.log("Good Evening");
+      this.textshow = "Good Evening"
+    }
 
   }
 
@@ -167,7 +179,8 @@ export class HomePage {
   }
 
   gettransaction() {
-    this.extra.loadershow()
+    this.transarr = []
+    this.extra.loadershow();
     this.api.sendRequest('all_transactions', { "users_customers_id": localStorage.getItem('user_id') }).subscribe((resp: any) => {
       console.log('trans----', resp);
 

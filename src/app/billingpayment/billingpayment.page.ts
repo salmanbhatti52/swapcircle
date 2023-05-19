@@ -19,9 +19,12 @@ export class BillingpaymentPage implements OnInit {
     public extra: ExtraService) { }
 
   ngOnInit() {
-    this.getaccounts()
+
   }
 
+  ionViewWillEnter() {
+    this.getaccounts()
+  }
   getaccounts() {
     let datasend = {
       "users_customers_id": localStorage.getItem('user_id'),

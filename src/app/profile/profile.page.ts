@@ -92,6 +92,10 @@ export class ProfilePage implements OnInit {
   goto() {
     this.navCtrl.navigateForward('editprofile');
   }
+
+  delete() {
+    this.navCtrl.navigateForward('deleteaccount');
+  }
   tabClick() {
     this.navCtrl.navigateRoot('track');
   }

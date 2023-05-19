@@ -1,0 +1,39 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar style="--background: #e9f5ec;">
+    <ion-row style="width:95%;margin: 0% auto;">
+      <ion-col size="2">
+        <img src="assets/imgs/arrow_back_ios_new.svg" style="margin-top: 3px" (click)="goback()">
+      </ion-col>
+      <ion-col size="8">
+        <div style="font-weight: 700;
+      font-size: 20px;color: #21333B;text-align: center;" class="EudoxusSansReg">Delete Account</div>
+      </ion-col>
+      <ion-col size="2"></ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="--background: #e9f5ec;">
+  <div class="wrapper">
+    <div class="text EudoxusSansReg">Why do you want to delete your SwapCircle account?</div>
+
+    <div class="text1 EudoxusSansReg">Delete Reason</div>
+    <div class="inputfieldtransparent"
+      style="width: 100%; height: 64px; margin-bottom:20px; display: flex;border: 1.5px solid #969D9F !important;">
+      <input [(ngModel)]="delreason" class="input EudoxusSansReg" type="text" placeholder="" />
+    </div>
+
+    <div class="text1 EudoxusSansReg">Comments</div>
+    <ion-textarea rows="5" cols="5" class="desc-area sf_pro_display"
+      placeholder="Please provide additional information here..." [(ngModel)]="desc"></ion-textarea>
+  </div>
+
+</ion-content>
+
+<ion-footer class="ion-no-border" style="background: #e9f5ec;">
+  <div style="width:93%;margin:0% auto 5%;">
+    <ion-button style="margin-top: 5%;" class="btnbggreen EudoxusSansReg" (click)="delete()">
+      Delete</ion-button>
+  </div>
+
+</ion-footer>

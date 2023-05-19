@@ -156,6 +156,17 @@
       </ion-row>
       <ion-row style="align-items: center;
       width: 95%;
+      margin: 4% auto;" (click)="delete()">
+        <ion-col size="10" class="textimgdiv">
+          <img src="assets/imgs/picon3.svg">
+          <p class="p1">Delete Account</p>
+        </ion-col>
+        <ion-col size="2" class="icon-right">
+          <img src="assets/imgs/chevron-right.svg">
+        </ion-col>
+      </ion-row>
+      <ion-row style="align-items: center;
+      width: 95%;
       margin: 4% auto;" (click)="logout()">
         <ion-col size="10" class="textimgdiv">
           <img src="assets/imgs/picon3.svg">
@@ -183,7 +194,7 @@
       border-radius: 24px;
       width: 92%;
       margin: 10% auto;
-      align-items: center;">
+      align-items: center;" (click)="feedback()">
       <ion-col size="2.5">
         <img src="assets/imgs/headphone.svg">
       </ion-col>

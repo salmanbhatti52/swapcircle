@@ -167,4 +167,10 @@ export class SwapofferrequestsPage implements OnInit {
     })
   }
 
+  handleImgError(ev: any) {
+    const source = ev.srcElement;
+    const imgSrc = `assets/imgs/placeholder.jpg`;
+    source.src = imgSrc;
+  }
+
 }

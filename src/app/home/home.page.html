@@ -16,10 +16,11 @@
           <div style="display: flex;
           align-items: center;
           margin-top: 5%;">
-            <img src="assets/imgs/sun.svg">
+            <img src="assets/imgs/sun.svg" *ngIf="textshow=='Good Morning' || textshow=='Good Afternoon'">
+            <img src="assets/imgs/moon.png" *ngIf="textshow=='Good Evening'">
             <p style="font-weight: 400;
             font-size: 14px;
-            color: #6C727F;" class="EudoxusSansReg">Good Morning</p>
+            color: #6C727F;" class="EudoxusSansReg">{{textshow}}</p>
           </div>
 
         </div>
@@ -114,9 +115,9 @@
       <ion-segment-button checked mode="ios" value="HotSwapOffers">
         <ion-label>🔥 Hot Swap Offers</ion-label>
       </ion-segment-button>
-      <ion-segment-button checked mode="ios" value="RateTable">
+      <!-- <ion-segment-button checked mode="ios" value="RateTable">
         <ion-label>Rate Table</ion-label>
-      </ion-segment-button>
+      </ion-segment-button> -->
     </ion-segment>
 
     <div *ngIf="requestsType=='AllTransactions'">
@@ -234,8 +235,8 @@
       </ion-modal>
     </div>
 
-    <div *ngIf="requestsType=='RateTable'">
-      <!-- <div class="box EudoxusSansReg">
+    <!-- <div *ngIf="requestsType=='RateTable'">
+      <div class="box EudoxusSansReg">
         <ion-row>
           <ion-col size="6">
             <div class="flex-c">
@@ -264,8 +265,8 @@
             <div class="label3 EudoxusSansReg">₦889.00</div>
           </div>
         </div>
-      </div> -->
-    </div>
+      </div>
+    </div> -->
 
 
 

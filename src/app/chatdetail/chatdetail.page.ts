@@ -122,13 +122,17 @@ export class ChatdetailPage implements OnInit {
     }
     this.api.sendRequest('user_chat', fiedlstosend).subscribe((res: any) => {
       console.log("send-msg-response", res);
-      let datatosend = {
-        userloggedId: localStorage.getItem('user_id'),
-        message: this.message,
-        time: time,
+      if (res.status == 'success') {
+        this.scrollDown()
+        let datatosend = {
+          userloggedId: localStorage.getItem('user_id'),
+          message: this.message,
+          time: time,
+        }
+        this.messages.push(datatosend);
+        this.message = ''
       }
-      this.messages.push(datatosend);
-      this.message = ''
+
     });
 
   }

@@ -21,8 +21,12 @@ export class ChatPage implements OnInit {
     public extra: ExtraService) { }
 
   ngOnInit() {
-    this.getchat()
 
+
+  }
+
+  ionViewWillEnter() {
+    this.getchat()
   }
 
   goback() {
