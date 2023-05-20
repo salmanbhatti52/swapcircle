@@ -31,6 +31,10 @@ export class ConnectPage implements OnInit {
     this.otherconnects()
   }
 
+  All() {
+    this.popularconnects()
+    this.otherconnects()
+  }
   getcategories() {
     this.api.getRequest('connect_categories').subscribe((res: any) => {
       console.log('cat====', res);
@@ -52,6 +56,40 @@ export class ConnectPage implements OnInit {
     this.api.sendRequest('connect_articles', { "users_customers_id": localStorage.getItem('user_id') }).subscribe((res: any) => {
       console.log('Other_connect_articles====', res);
       this.other_articles = res.data
+    })
+  }
+  otherconnectsBycategory(item: any) {
+    this.other_articles = []
+    let data = {
+      "users_customers_id": localStorage.getItem('user_id'),
+      "connect_categories_id": item.connect_categories_id
+    }
+
+    this.api.sendRequest('connect_articles_by_category', data).subscribe((res: any) => {
+      console.log('Other_connect_articles====', res);
+      if (res.status == 'success') {
+        this.other_articles = res.data
+        this.popularconnectBycategory(item.connect_categories_id)
+      } else {
+        this.popularconnectBycategory(item.connect_categories_id)
+        this.extra.presentToast(res.message)
+      }
+
+    })
+  }
+  popularconnectBycategory(connect_categories_id: any) {
+    this.popular_articles = []
+    let data = {
+      "users_customers_id": localStorage.getItem('user_id'),
+      "connect_categories_id": connect_categories_id
+    }
+    this.api.sendRequest('popular_connect_articles_by_category', data).subscribe((res: any) => {
+      console.log('Other_connect_articles====', res);
+      if (res.status == 'success') {
+        this.popular_articles = res.data
+      } else {
+        this.extra.presentToast(res.message)
+      }
     })
   }
 

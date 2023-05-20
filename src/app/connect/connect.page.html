@@ -22,9 +22,18 @@
   </ion-searchbar>
   <swiper [config]="{slidesPerView:4.6, spaceBetween:6, initialSlide:0, speed:400}" [pagination]="false"
     style="padding: 8px;">
+    <ng-template swiperSlide>
+      <div>
+        <div class="carItem_box" (click)="All()">
+          <img src="assets/imgs/all.png">
+        </div>
+        <div class="s-text EudoxusSansReg">All</div>
+      </div>
+
+    </ng-template>
     <ng-template swiperSlide *ngFor="let item of cat">
       <div>
-        <div class="carItem_box">
+        <div class="carItem_box" (click)="otherconnectsBycategory(item)">
           <img src="https://portal.swapcircle.trade/public/{{item.icon}}" *ngIf="item.icon!=''">
           <img src="assets/imgs/gift.svg" *ngIf="item.icon==''">
         </div>

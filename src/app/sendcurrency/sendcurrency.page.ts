@@ -270,7 +270,6 @@ export class SendcurrencyPage implements OnInit {
     }
     else {
       let data = {
-
         "from_users_customers_id": localStorage.getItem('user_id'),
         "from_system_currencies_id": this.basecurrId,
         "from_amount": this.totalamount,

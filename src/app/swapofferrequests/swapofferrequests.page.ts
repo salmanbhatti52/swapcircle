@@ -69,6 +69,9 @@ export class SwapofferrequestsPage implements OnInit {
       }
 
 
+    }, err => {
+      this.extra.presentToast('Something went wrong');
+      this.extra.hideLoader()
     })
   }
 
