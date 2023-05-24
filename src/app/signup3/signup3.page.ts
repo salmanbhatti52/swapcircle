@@ -37,72 +37,90 @@ export class Signup3Page implements OnInit {
   ngOnInit() { }
 
   async chooseImage(type: any) {
+    await Camera.getPhoto({
+      quality: 90,
+      allowEditing: false,
+      resultType: CameraResultType.DataUrl,
+      source: CameraSource.Photos
+    }).then(res => {
 
-    let confirm = await this.alertCtrl.create({
-      header: 'Upload Image',
-      cssClass: 'camera-alert',
-      buttons: [
-        {
-          text: 'Camera',
-          handler: async () => {
-            console.log('came inside Camera');
-            const image = await Camera.getPhoto({
-              quality: 75,
-              allowEditing: false,
-              resultType: CameraResultType.DataUrl,
-              source: CameraSource.Camera
-            }).then(res => {
-              if (type == 'frontside') {
-                this.frontimage = res.dataUrl
-                this.picurl1 = res.dataUrl
-                let picurl2 = this.picurl1.split(',');
-                this.picurlfront = picurl2[1]
-              } else {
-                this.backimage = res.dataUrl
-                this.picurl1 = res.dataUrl
-                let picurl2 = this.picurl1.split(',');
-                this.picurlback = picurl2[1]
-              }
-
-
-
-
-            })
-          }
-        },
-        {
-          text: 'Gallery',
-          handler: async () => {
-            console.log('came inside yes');
-
-            const image = await Camera.getPhoto({
-              quality: 75,
-              allowEditing: false,
-              resultType: CameraResultType.DataUrl,
-              source: CameraSource.Photos,
-            }).then(res => {
-              if (type == 'frontside') {
-                this.frontimage = res.dataUrl
-                this.picurl1 = res.dataUrl
-                let picurl2 = this.picurl1.split(',');
-                this.picurlfront = picurl2[1]
-              } else {
-                this.backimage = res.dataUrl
-                this.picurl1 = res.dataUrl
-                let picurl2 = this.picurl1.split(',');
-                this.picurlback = picurl2[1]
-              }
-
-
-            })
-
-
-
-          }
-        },
-      ]
+      if (type == 'frontside') {
+        this.frontimage = res.dataUrl
+        this.picurl1 = res.dataUrl
+        let picurl2 = this.picurl1.split(',');
+        this.picurlfront = picurl2[1]
+      } else {
+        this.backimage = res.dataUrl
+        this.picurl1 = res.dataUrl
+        let picurl2 = this.picurl1.split(',');
+        this.picurlback = picurl2[1]
+      }
     })
-    await confirm.present();
+    // let confirm = await this.alertCtrl.create({
+    //   header: 'Upload Image',
+    //   cssClass: 'camera-alert',
+    //   buttons: [
+    //     {
+    //       text: 'Camera',
+    //       handler: async () => {
+    //         console.log('came inside Camera');
+    //         const image = await Camera.getPhoto({
+    //           quality: 75,
+    //           allowEditing: false,
+    //           resultType: CameraResultType.DataUrl,
+    //           source: CameraSource.Camera
+    //         }).then(res => {
+    //           if (type == 'frontside') {
+    //             this.frontimage = res.dataUrl
+    //             this.picurl1 = res.dataUrl
+    //             let picurl2 = this.picurl1.split(',');
+    //             this.picurlfront = picurl2[1]
+    //           } else {
+    //             this.backimage = res.dataUrl
+    //             this.picurl1 = res.dataUrl
+    //             let picurl2 = this.picurl1.split(',');
+    //             this.picurlback = picurl2[1]
+    //           }
+
+
+
+
+    //         })
+    //       }
+    //     },
+    //     {
+    //       text: 'Gallery',
+    //       handler: async () => {
+    //         console.log('came inside yes');
+
+    //         const image = await Camera.getPhoto({
+    //           quality: 75,
+    //           allowEditing: false,
+    //           resultType: CameraResultType.DataUrl,
+    //           source: CameraSource.Photos,
+    //         }).then(res => {
+    //           if (type == 'frontside') {
+    //             this.frontimage = res.dataUrl
+    //             this.picurl1 = res.dataUrl
+    //             let picurl2 = this.picurl1.split(',');
+    //             this.picurlfront = picurl2[1]
+    //           } else {
+    //             this.backimage = res.dataUrl
+    //             this.picurl1 = res.dataUrl
+    //             let picurl2 = this.picurl1.split(',');
+    //             this.picurlback = picurl2[1]
+    //           }
+
+
+    //         })
+
+
+
+    //       }
+    //     },
+    //   ]
+    // })
+    // await confirm.present();
 
   }
 

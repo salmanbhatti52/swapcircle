@@ -84,7 +84,7 @@
 
       <!-- input 1 -->
       <ion-datetime class="item-picker" style="margin: 10px auto 8px; color: black" presentation="date"
-        *ngIf="showPicker" #datetime [value]="dateValue" min="{{displayDate}}" size="cover"
+        *ngIf="showPicker" #datetime [value]="dateValue" min="{{displayDate}}" max="2040" size="cover"
         (ionChange)="DChanged(datetime.value)" showDefaultButtons="true" (ionCancel)="showPicker=false"></ion-datetime>
 
       <p style="margin-top: 20px; text-align: left" class="desc3 EudoxusSansReg">
