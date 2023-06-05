@@ -8,6 +8,7 @@ import { SafeResourceUrl } from '@angular/platform-browser';
 import { ApiService } from '../services/api.service';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 // import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
+
 import parsePhoneNumber from 'libphonenumber-js'
 @Component({
   selector: 'app-signup1',
@@ -131,80 +132,32 @@ export class Signup1Page implements OnInit {
 
   }
   async chooseImage() {
-    await Camera.getPhoto({
-      quality: 90,
-      allowEditing: false,
-      resultType: CameraResultType.DataUrl,
-      source: CameraSource.Photos
-    }).then(res => {
-
-      this.profileimage = res.dataUrl
-      this.picurl1 = res.dataUrl
-      // console.log('image uri==', res.dataUrl);
-      let picurl2 = this.picurl1.split(',');
+    const permissions = await Camera.requestPermissions();
+    console.log('permissions.photos', permissions.photos);
+    if (permissions.photos === 'denied' || permissions.camera === 'denied') {
+      //Popover asking them to click `Allow` on the native permission dialog
 
 
-      this.userprofile = picurl2[1];
-      this.rest.imgbaseURl = this.userprofile
-    })
-    // let confirm = await this.alertCtrl.create({
-    //   header: 'Upload Image',
-    //   cssClass: 'camera-alert',
-    //   buttons: [
-    //     {
-    //       text: 'Camera',
-    //       handler: async () => {
-    //         console.log('came inside Camera');
-    //         const image = await Camera.getPhoto({
-    //           quality: 75,
-    //           allowEditing: false,
-    //           resultType: CameraResultType.DataUrl,
-    //           source: CameraSource.Camera
-    //         }).then(res => {
-    //           this.profileimage = res.dataUrl
-    //           this.picurl1 = res.dataUrl
-    //           // console.log('image uri==', res.dataUrl);
-    //           let picurl2 = this.picurl1.split(',');
+    } else {
+      await Camera.getPhoto({
+        quality: 90,
+        allowEditing: false,
+        resultType: CameraResultType.DataUrl,
+        source: CameraSource.Photos
+      }).then(res => {
+
+        this.profileimage = res.dataUrl
+        this.picurl1 = res.dataUrl
+        // console.log('image uri==', res.dataUrl);
+        let picurl2 = this.picurl1.split(',');
 
 
-    //           this.userprofile = picurl2[1];
-    //           this.rest.imgbaseURl = this.userprofile
+        this.userprofile = picurl2[1];
+        this.rest.imgbaseURl = this.userprofile
+      })
 
+    }
 
-    //         })
-    //       }
-    //     },
-    //     {
-    //       text: 'Gallery',
-    //       handler: async () => {
-    //         console.log('came inside yes');
-
-    //         const image = await Camera.getPhoto({
-    //           quality: 75,
-    //           allowEditing: false,
-    //           resultType: CameraResultType.DataUrl,
-    //           source: CameraSource.Photos,
-    //         }).then(res => {
-    //           this.profileimage = res.dataUrl
-    //           this.picurl1 = res.dataUrl
-
-    //           let picurl2 = this.picurl1.split(',');
-
-
-
-    //           this.userprofile = picurl2[1];
-
-    //           this.rest.imgbaseURl = this.userprofile
-
-    //         })
-
-
-
-    //       }
-    //     },
-    //   ]
-    // })
-    // await confirm.present();
 
   }
 

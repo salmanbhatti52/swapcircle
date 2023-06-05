@@ -67,90 +67,34 @@ export class EditprofilePage implements OnInit {
   }
 
   async chooseImage() {
-    await Camera.getPhoto({
-      quality: 90,
-      allowEditing: false,
-      resultType: CameraResultType.DataUrl,
-      source: CameraSource.Photos
-    }).then(res => {
-
-      this.profileimage = res.dataUrl
-      this.picurl = res.dataUrl
-      // console.log('image uri==', res.dataUrl);
-      let picurl2 = this.picurl.split(',');
-      if (localStorage.getItem('customertype') == 'Company') {
-        this.validdocument = picurl2[1];
-        this.updateprofile()
-      } else {
-        this.userprofile = picurl2[1];
-        this.updateprofile()
-      }
-    })
-    // let confirm = await this.alertCtrl.create({
-    //   header: 'Upload Image',
-    //   cssClass: 'camera-alert',
-    //   buttons: [
-    //     {
-    //       text: 'Camera',
-    //       handler: async () => {
-    //         console.log('came inside Camera');
-    //         const image = await Camera.getPhoto({
-    //           quality: 75,
-    //           allowEditing: false,
-    //           resultType: CameraResultType.DataUrl,
-    //           source: CameraSource.Camera
-    //         }).then(res => {
-    //           this.profileimage = res.dataUrl
-    //           this.picurl = res.dataUrl
-    //           // console.log('image uri==', res.dataUrl);
-    //           let picurl2 = this.picurl.split(',');
-    //           if (localStorage.getItem('customertype') == 'Company') {
-    //             this.validdocument = picurl2[1];
-    //             this.updateprofile()
-    //           } else {
-    //             this.userprofile = picurl2[1];
-    //             this.updateprofile()
-    //           }
+    const permissions = await Camera.requestPermissions();
+    console.log('permissions.photos', permissions.photos);
+    if (permissions.photos === 'denied' || permissions.camera === 'denied') {
+      //Popover asking them to click `Allow` on the native permission dialog
 
 
-    //         })
-    //       }
-    //     },
-    //     {
-    //       text: 'Gallery',
-    //       handler: async () => {
-    //         console.log('came inside yes');
+    } else {
+      await Camera.getPhoto({
+        quality: 90,
+        allowEditing: false,
+        resultType: CameraResultType.DataUrl,
+        source: CameraSource.Photos
+      }).then(res => {
 
-    //         const image = await Camera.getPhoto({
-    //           quality: 75,
-    //           allowEditing: false,
-    //           resultType: CameraResultType.DataUrl,
-    //           source: CameraSource.Photos,
-    //         }).then(res => {
-    //           this.profileimage = res.dataUrl
-    //           this.picurl1 = res.dataUrl
-    //           console.log('image uri==', res.dataUrl);
-    //           let picurl2 = this.picurl1.split(',');
-    //           // this.userprofile = picurl2[1]
+        this.profileimage = res.dataUrl
+        this.picurl = res.dataUrl
+        // console.log('image uri==', res.dataUrl);
+        let picurl2 = this.picurl.split(',');
+        if (localStorage.getItem('customertype') == 'Company') {
+          this.validdocument = picurl2[1];
+          this.updateprofile()
+        } else {
+          this.userprofile = picurl2[1];
+          this.updateprofile()
+        }
+      })
+    }
 
-    //           if (localStorage.getItem('customertype') == 'Company') {
-    //             this.validdocument = picurl2[1];
-    //             this.updateprofile()
-    //           } else {
-    //             this.userprofile = picurl2[1];
-    //             this.updateprofile()
-    //           }
-
-
-    //         })
-
-
-
-    //       }
-    //     },
-    //   ]
-    // })
-    // await confirm.present();
 
   }
 

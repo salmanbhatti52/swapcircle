@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { NavController, Platform } from "@ionic/angular";
 // import OneSignal from 'onesignal-cordova-plugin';
+
 @Component({
   selector: "app-root",
   templateUrl: "app.component.html",
