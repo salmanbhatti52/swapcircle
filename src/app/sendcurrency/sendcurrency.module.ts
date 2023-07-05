@@ -7,14 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { SendcurrencyPageRoutingModule } from './sendcurrency-routing.module';
 
 import { SendcurrencyPage } from './sendcurrency.page';
-
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SendcurrencyPageRoutingModule
+    SendcurrencyPageRoutingModule,
+    Ng2SearchPipeModule
   ],
   declarations: [SendcurrencyPage]
 })
-export class SendcurrencyPageModule {}
+export class SendcurrencyPageModule { }

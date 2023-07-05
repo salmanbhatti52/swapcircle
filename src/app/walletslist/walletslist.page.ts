@@ -11,6 +11,7 @@ import { NavController } from '@ionic/angular';
 })
 export class WalletslistPage implements OnInit {
   walletslist: any;
+  walletlength: any;
   constructor(public api: ApiService,
     public extra: ExtraService,
     public navCtrl: NavController,
@@ -29,9 +30,11 @@ export class WalletslistPage implements OnInit {
     }
     this.api.sendRequest('get_wallet', datasend).subscribe((response: any) => {
       console.log(response);
+      this.walletslist = response.data
+      this.walletlength = this.walletslist.length
       if (response.status = 'success') {
         this.extra.hideLoader()
-        this.walletslist = response.data
+
       } else {
         this.extra.hideLoader()
       }

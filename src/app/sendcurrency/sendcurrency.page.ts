@@ -65,7 +65,7 @@ export class SendcurrencyPage implements OnInit {
   getbasecurr() {
     this.api.sendRequest('get_currencies_by_id', { "system_currencies_id": localStorage.getItem('systemcurr') }).subscribe((curr: any) => {
       console.log(curr);
-      this.basecurrency = curr.data[0].name + '(' + curr.data[0].code + ')'
+      this.basecurrency = curr.data[0].symbol + " " + '-' + " " + curr.data[0].code
       this.currID = curr.data[0].system_currencies_id
       this.currsymbol = curr.data[0].symbol
       localStorage.setItem('basecurrsymbol', this.currsymbol)
@@ -105,11 +105,14 @@ export class SendcurrencyPage implements OnInit {
 
 
   openList() {
-
-    if (this.showcurr == true) {
-      this.showcurr = false;
+    if (this.walletslist.length == 0) {
+      this.presentAlert()
     } else {
-      this.showcurr = true;
+      if (this.showcurr == true) {
+        this.showcurr = false;
+      } else {
+        this.showcurr = true;
+      }
     }
   }
 
@@ -294,6 +297,16 @@ export class SendcurrencyPage implements OnInit {
 
 
 
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+
+      message: 'No currency exist',
+      buttons: ['OK'],
+    });
+
+    await alert.present();
   }
 
 }

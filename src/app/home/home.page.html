@@ -141,7 +141,12 @@
           <div class="price" [class.red]="item.status=='to'">{{item.price}}</div>
         </ion-col>
       </ion-row> -->
-
+      <div *ngIf="errortext==true" style="font-weight: 500;
+      font-size: 20px;
+      color: #21333B;
+      text-align: center;
+      background: #fff;
+      padding: 20px;margin-top: 5%;" class="EudoxusSansReg">{{errorshow}}</div>
       <ion-row *ngFor="let item of transarr" class="rowcls">
         <ion-col size="2.5">
           <img src="/assets/imgs/hlogo.svg" *ngIf="userloginId!=item.from_users_customers_id">

@@ -42,3 +42,8 @@ input::placeholder {
     border-radius: 24px 24px 0px 0px;
     margin-bottom: 0%;
   }
+
+  ion-searchbar{
+    --background: transparent;
+    --icon-color: transparent;
+  }

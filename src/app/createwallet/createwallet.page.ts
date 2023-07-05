@@ -45,6 +45,11 @@ export class CreatewalletPage implements OnInit {
       this.showexccurr = true;
     }
   }
+  onSearch(searchTerm: any) {
+    // Perform your logic here with the search term
+    console.log('Search term:', searchTerm);
+    this.showexccurr = true;
+  }
   selectcurrency(list: any, index: any) {
     this.basecurrency = list.curr
     this.showcurr = false;

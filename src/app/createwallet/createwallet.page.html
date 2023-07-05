@@ -41,7 +41,9 @@
     <div class="inputfieldtransparent " style="width:100%;border: 1.5px solid #969D9F !important;"
       (click)="openexcList()" [class.active]="showexccurr==true">
       <div style="display: flex;">
-        <input [(ngModel)]="excurrency" class="input EudoxusSansReg" type="text" placeholder="EURO" readonly>
+        <!-- <input [(ngModel)]="excurrency" class="input EudoxusSansReg" type="text" placeholder="EURO" readonly> -->
+        <ion-searchbar mode="ios" (input)="onSearch($event)" placeholder="Search" [(ngModel)]="excurrency"
+          class="custom-search"></ion-searchbar>
         <ion-icon style="margin: 17px 17px 17px 15px;color: #4BD16F;font-size: 30px;"
           name="chevron-down-outline"></ion-icon>
       </div>
@@ -49,9 +51,9 @@
     </div>
 
     <div *ngIf="showexccurr==true" class="sublist" style="height: 150px;overflow: scroll;">
-      <div *ngFor="let list of exchangecurr; let i=index" (click)="selectexcurrency(list,i)">
+      <div *ngFor="let list of exchangecurr| filter:excurrency; let i=index" (click)="selectexcurrency(list,i)">
         <div class="euro-text1 EudoxusSansReg">
-          {{list.name}} <span style="font-size: 12px;padding-left: 2px;">({{list.code}})</span>
+          {{list.country.name}} <span style="font-size: 12px;padding-left: 2px;">({{list.code}})</span>
         </div>
       </div>
     </div>

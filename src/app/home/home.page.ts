@@ -52,6 +52,9 @@ export class HomePage {
   bcurrsymbol: any;
   messagecount: any;
   textshow: any;
+  errortext = false;
+  errorshow: any;
+  intervalId: any;
   constructor(public navCtrl: NavController,
     public api: ApiService,
     public extra: ExtraService) {
@@ -81,6 +84,10 @@ export class HomePage {
 
 
   ionViewWillEnter() {
+    this.api.sendRequest('users_customers_profile', { "users_customers_id": localStorage.getItem('user_id') }).subscribe((p) => {
+      console.log('profiledasds----', p);
+
+    })
     if (this.requestsType) {
       if (this.requestsType === 'AllTransactions') {
         this.mySegment.nativeElement.children[0].click();
@@ -98,6 +105,28 @@ export class HomePage {
 
     this.walletlist()
     this.unreadmessagecount()
+
+    this.api.sendRequest('users_customers_activity_interval', { "users_customers_id": localStorage.getItem('user_id') }).subscribe((res: any) => {
+      console.log('users_customers_activity_interval', res);
+
+      if (res.status == 'success') {
+        this.intervalId = setInterval(() => {
+          this.api.sendRequest('users_customers_last_activity', { "users_customers_id": localStorage.getItem('user_id') }).subscribe((res: any) => {
+            console.log('users_customers_last_activity', res);
+            if (res.status == 'success') {
+
+            }
+          })
+          // Code to be executed every 1 minute
+          console.log('This code will run every 1 minute');
+        }, 60000); // 60,000 milliseconds = 1 minute
+
+      } else {
+        localStorage.removeItem('user_id');
+        clearInterval(this.intervalId);
+        this.navCtrl.navigateRoot('loginscreen')
+      }
+    })
   }
   unreadmessagecount() {
     this.api.sendRequest('unreaded_messages', { "users_customers_id": localStorage.getItem('user_id') }).subscribe((res: any) => {
@@ -208,7 +237,9 @@ export class HomePage {
       }
       else {
         this.extra.hideLoader()
-        this.extra.presentToast(resp.message)
+        // this.extra.presentToast(resp.message)
+        this.errortext = true
+        this.errorshow = resp.message
       }
     }, err => {
       this.extra.hideLoader()

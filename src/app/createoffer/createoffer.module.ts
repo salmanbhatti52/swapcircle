@@ -7,14 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { CreateofferPageRoutingModule } from './createoffer-routing.module';
 
 import { CreateofferPage } from './createoffer.page';
-
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CreateofferPageRoutingModule
+    CreateofferPageRoutingModule,
+    Ng2SearchPipeModule
   ],
   declarations: [CreateofferPage]
 })
-export class CreateofferPageModule {}
+export class CreateofferPageModule { }

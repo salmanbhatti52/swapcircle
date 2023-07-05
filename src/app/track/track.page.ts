@@ -112,7 +112,7 @@ export class TrackPage implements OnInit {
     console.log(ev.target.value);
 
     this.amount = ev.target.value
-    this.track()
+    // this.track()
   }
 
   track() {

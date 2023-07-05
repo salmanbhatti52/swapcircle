@@ -39,10 +39,14 @@ export class CreateofferPage implements OnInit {
   }
 
   openList() {
-    if (this.showcurr == true) {
-      this.showcurr = false;
+    if (this.walletslist.length == 0) {
+      this.presentAlert()
     } else {
-      this.showcurr = true;
+      if (this.showcurr == true) {
+        this.showcurr = false;
+      } else {
+        this.showcurr = true;
+      }
     }
   }
 
@@ -66,12 +70,18 @@ export class CreateofferPage implements OnInit {
   }
 
   walletlist() {
+    this.extra.loadershow()
     let datasend = {
       "users_customers_id": localStorage.getItem('user_id'),
     }
     this.api.sendRequest('get_wallet', datasend).subscribe((response: any) => {
       console.log('get_wallet=========', response);
-      this.walletslist = response.data
+      if (response.status == 'success') {
+        this.walletslist = response.data
+        this.extra.hideLoader()
+      } else {
+        this.extra.hideLoader()
+      }
     })
   }
   getcurrencies() {
@@ -139,5 +149,15 @@ export class CreateofferPage implements OnInit {
     await alert.present();
 
 
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+
+      message: 'No wallet amount exist',
+      buttons: ['OK'],
+    });
+
+    await alert.present();
   }
 }

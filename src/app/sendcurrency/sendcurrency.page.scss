@@ -62,3 +62,8 @@ input::placeholder {
   .input{
     --padding-start: 20px;
   }
+
+  ion-searchbar{
+    --background: transparent;
+    --icon-color: transparent;
+  }

@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
 import { ExtraService } from '../services/extra.service';
 
@@ -22,16 +22,18 @@ export class CreatesawapPage implements OnInit {
   currsymbol: any;
   currID: any;
   fromcurrency: any = '';
-  fromwalletamount: any;
-  towalletamount: any;
+  fromwalletamount: any = '';
+  towalletamount: any = '';
   fromamount = false;
   Toamount = false;
   fromwalletId: any;
   towalletId: any;
+  term: any;
   constructor(public location: Location,
     public api: ApiService,
     public extra: ExtraService,
-    public navCtrl: NavController) { }
+    public navCtrl: NavController,
+    public alert: AlertController) { }
 
   ngOnInit() {
     this.getbasecurr()
@@ -48,7 +50,7 @@ export class CreatesawapPage implements OnInit {
     this.api.sendRequest('get_currencies_by_id', { "system_currencies_id": localStorage.getItem('systemcurr') }).subscribe((curr: any) => {
       console.log(curr);
       // this.basecurrency = curr.data[0].name + '(' + curr.data[0].code + ')'
-      this.basecurrency = '(' + curr.data[0].symbol + ')' + curr.data[0].name
+      this.basecurrency = curr.data[0].symbol + " " + '-' + " " + curr.data[0].code
       this.currID = curr.data[0].system_currencies_id
       this.currsymbol = curr.data[0].symbol
 
@@ -65,21 +67,40 @@ export class CreatesawapPage implements OnInit {
   }
 
   openList() {
-    if (this.showcurr == true) {
-      this.showcurr = false;
+    if (this.walletslist.length == 0) {
+      this.presentAlert()
     } else {
-      this.showcurr = true;
-      this.fromamount = false;
+      if (this.showcurr == true) {
+        this.showcurr = false;
+      } else {
+        this.showcurr = true;
+        this.fromamount = false;
+      }
     }
+
   }
 
   openexcList() {
-    if (this.showexccurr == true) {
-      this.showexccurr = false;
+    if (this.walletslist.length == 0) {
+      this.presentAlert()
     } else {
-      this.showexccurr = true;
-      this.Toamount = false;
+      if (this.showexccurr == true) {
+        this.showexccurr = false;
+      } else {
+        this.showexccurr = true;
+        this.Toamount = false;
+      }
     }
+  }
+  onSearch(searchTerm: any) {
+    // Perform your logic here with the search term
+    console.log('Search term:', searchTerm);
+    this.showcurr = true;
+  }
+  onSearch2(searchTerm: any) {
+    // Perform your logic here with the search term
+    console.log('Search term:', searchTerm);
+    this.showexccurr = true;
   }
   selectcurrency(list: any, index: any) {
     console.log(list);
@@ -151,6 +172,16 @@ export class CreatesawapPage implements OnInit {
         this.extra.presentToast('Something went wrong')
       })
     }
+  }
+
+  async presentAlert() {
+    const alert = await this.alert.create({
+
+      message: 'No wallet exist',
+      buttons: ['OK'],
+    });
+
+    await alert.present();
   }
 
 }
