@@ -58,12 +58,15 @@ export class HomePage {
   constructor(public navCtrl: NavController,
     public api: ApiService,
     public extra: ExtraService) {
+    this.systemsettings()
     this.userdetail = localStorage.getItem('userdeatil')
     console.log(this.userdetail);
-
+    ///show floating btn
+    this.extra.btnshow = true;
+    /////
     this.user = JSON.parse(this.userdetail);
     this.userloginId = this.user.users_customers_id
-    this.systemsettings()
+
     this.bcurrsymbol = localStorage.getItem('basecurrsymbol')
 
 
@@ -84,7 +87,7 @@ export class HomePage {
 
 
   ionViewWillEnter() {
-    this.api.sendRequest('users_customers_profile', { "users_customers_id": localStorage.getItem('user_id') }).subscribe((p) => {
+    this.api.sendRequest('users_customers_profile', { "users_customers_id": localStorage.getItem('user_Id') }).subscribe((p) => {
       console.log('profiledasds----', p);
 
     })
@@ -106,30 +109,30 @@ export class HomePage {
     this.walletlist()
     this.unreadmessagecount()
 
-    this.api.sendRequest('users_customers_activity_interval', { "users_customers_id": localStorage.getItem('user_id') }).subscribe((res: any) => {
-      console.log('users_customers_activity_interval', res);
+    // this.api.sendRequest('users_customers_activity_interval', { "users_customers_id": localStorage.getItem('user_Id') }).subscribe((res: any) => {
+    //   console.log('users_customers_activity_interval', res);
 
-      if (res.status == 'success') {
-        this.intervalId = setInterval(() => {
-          this.api.sendRequest('users_customers_last_activity', { "users_customers_id": localStorage.getItem('user_id') }).subscribe((res: any) => {
-            console.log('users_customers_last_activity', res);
-            if (res.status == 'success') {
+    //   if (res.status == 'success') {
+    //     this.intervalId = setInterval(() => {
+    //       this.api.sendRequest('users_customers_last_activity', { "users_customers_id": localStorage.getItem('user_Id') }).subscribe((res: any) => {
+    //         console.log('users_customers_last_activity', res);
+    //         if (res.status == 'success') {
 
-            }
-          })
-          // Code to be executed every 1 minute
-          console.log('This code will run every 1 minute');
-        }, 60000); // 60,000 milliseconds = 1 minute
+    //         }
+    //       })
+    //       // Code to be executed every 1 minute
+    //       console.log('This code will run every 1 minute');
+    //     }, 60000); // 60,000 milliseconds = 1 minute
 
-      } else {
-        localStorage.removeItem('user_id');
-        clearInterval(this.intervalId);
-        this.navCtrl.navigateRoot('loginscreen')
-      }
-    })
+    //   } else {
+    //     localStorage.removeItem('user_id');
+    //     clearInterval(this.intervalId);
+    //     this.navCtrl.navigateRoot('loginscreen')
+    //   }
+    // })
   }
   unreadmessagecount() {
-    this.api.sendRequest('unreaded_messages', { "users_customers_id": localStorage.getItem('user_id') }).subscribe((res: any) => {
+    this.api.sendRequest('unreaded_messages', { "users_customers_id": localStorage.getItem('user_Id') }).subscribe((res: any) => {
       console.log('message count====', res);
       if (res.status == 'success') {
         this.messagecount = res.data
@@ -172,7 +175,7 @@ export class HomePage {
   }
   walletlist() {
     let datasend = {
-      "users_customers_id": localStorage.getItem('user_id'),
+      "users_customers_id": localStorage.getItem('user_Id'),
     }
     this.api.sendRequest('get_wallet', datasend).subscribe((response: any) => {
       console.log(response);
@@ -210,7 +213,7 @@ export class HomePage {
   gettransaction() {
     this.transarr = []
     this.extra.loadershow();
-    this.api.sendRequest('all_transactions', { "users_customers_id": localStorage.getItem('user_id') }).subscribe((resp: any) => {
+    this.api.sendRequest('all_transactions', { "users_customers_id": localStorage.getItem('user_Id') }).subscribe((resp: any) => {
       console.log('trans----', resp);
 
       if (resp.status == 'success') {

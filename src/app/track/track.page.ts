@@ -22,16 +22,26 @@ export class TrackPage implements OnInit {
 
   amount: any = '';
   currcode: any = 'USD';
+  // currcode: any;
   tocurrcode: any = 'EUR';
   convertedamount: any;
   amountafterpoint: any;
   amountshow = false
   currsymbol: any = '$';
+  // currsymbol: any;
   tocurrsymbol: any = '€';
   baseamt: any;
   basecurrID: any;
   basecurrsymbol: any;
   resshow = false;
+  searchTerm: any;
+  term: any;
+
+  isModalOpen = false;
+  Tocurrmodalopen = false;
+  currval: any;
+  adminrate: any;
+
   constructor(
     public navCtrl: NavController,
     public api: ApiService,
@@ -115,6 +125,29 @@ export class TrackPage implements OnInit {
     // this.track()
   }
 
+  openmodal() {
+    this.term = ''
+    this.isModalOpen = true
+  }
+  closemodal(val: any) {
+    console.log(val);
+    this.currcode = val.code
+    this.currsymbol = val.symbol
+    this.fromsystemId = val.system_currencies_id;
+    this.isModalOpen = false
+  }
+  Tocurrmodel() {
+    this.term = ''
+    this.Tocurrmodalopen = true
+  }
+  closeTocurrmodal(val: any) {
+    console.log(val);
+    this.tocurrcode = val.code
+    this.tocurrsymbol = val.symbol
+    this.tosystemId = val.system_currencies_id;
+    this.Tocurrmodalopen = false
+  }
+
   track() {
     if (this.amount != '') {
 
@@ -140,6 +173,7 @@ export class TrackPage implements OnInit {
             console.log(this.convertedamount);
 
             this.amountafterpoint = p2[1];
+            this.adminrate = res.data.admin_rate_amount
             this.exchangerate()
           } else {
             this.extra.hideLoader()
@@ -162,6 +196,15 @@ export class TrackPage implements OnInit {
             console.log(this.convertedamount);
 
             this.amountafterpoint = p2[1]
+
+            //admin rate///
+            this.adminrate = res.data.admin_rate_amount
+            // let amt1 = res.data.admin_rate_amount
+            // let pp1 = amt1.toFixed(2)
+            // let instr1 = String(pp1)
+            // let p21 = instr.split('.')
+            // this.admin_rate_amount = p21[0];
+            // this.amountafterpoint = p21[1]
           } else {
             this.extra.hideLoader()
           }

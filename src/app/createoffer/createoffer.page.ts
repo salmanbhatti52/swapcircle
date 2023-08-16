@@ -72,7 +72,7 @@ export class CreateofferPage implements OnInit {
   walletlist() {
     this.extra.loadershow()
     let datasend = {
-      "users_customers_id": localStorage.getItem('user_id'),
+      "users_customers_id": localStorage.getItem('user_Id'),
     }
     this.api.sendRequest('get_wallet', datasend).subscribe((response: any) => {
       console.log('get_wallet=========', response);
@@ -105,7 +105,7 @@ export class CreateofferPage implements OnInit {
   createoffer() {
 
     let data = {
-      "users_customers_id": localStorage.getItem('user_id'),
+      "users_customers_id": localStorage.getItem('user_Id'),
       "from_system_currencies_id": this.currId,
       "to_system_currencies_id": this.tocurrId,
       "from_amount": this.totalamount,

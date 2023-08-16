@@ -74,7 +74,7 @@ export class CreatewalletPage implements OnInit {
 
   save() {
     let datasend = {
-      "users_customers_id": localStorage.getItem('user_id'),
+      "users_customers_id": localStorage.getItem('user_Id'),
       "system_currencies_id": this.currencyID
     }
     this.api.sendRequest('create_wallet', datasend).subscribe((response: any) => {

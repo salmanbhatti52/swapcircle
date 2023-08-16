@@ -25,8 +25,8 @@ export class ChatdetailPage implements OnInit {
     public route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.loggedid = localStorage.getItem('user_id')
-    console.log('users_customers_id', localStorage.getItem('user_id'));
+    this.loggedid = localStorage.getItem('user_Id')
+    console.log('users_customers_id', localStorage.getItem('user_Id'));
 
     this.other_users_customers_id = this.route.snapshot.params['otheruserid'];
     console.log('other_users_customers_id', this.other_users_customers_id);
@@ -61,7 +61,7 @@ export class ChatdetailPage implements OnInit {
   updateMessages() {
     let data = {
       "requestType": "updateMessages",
-      "users_customers_id": localStorage.getItem('user_id'),
+      "users_customers_id": localStorage.getItem('user_Id'),
       "other_users_customers_id": this.other_users_customers_id
     }
     this.api.sendRequest('user_chat', data).subscribe((res: any) => {
@@ -86,7 +86,7 @@ export class ChatdetailPage implements OnInit {
     this.extra.loadershow()
     let data = {
       "requestType": "getMessages",
-      "users_customers_id": localStorage.getItem('user_id'),
+      "users_customers_id": localStorage.getItem('user_Id'),
       "other_users_customers_id": this.other_users_customers_id
     }
     this.api.sendRequest('user_chat', data).subscribe((res: any) => {
@@ -115,7 +115,7 @@ export class ChatdetailPage implements OnInit {
     let fiedlstosend = {
       "requestType": "sendMessage",
       "sender_type": "Users",
-      "users_customers_id": localStorage.getItem('user_id'),
+      "users_customers_id": localStorage.getItem('user_Id'),
       "other_users_customers_id": this.other_users_customers_id,
       "content": this.message,
       "messageType": "1"
@@ -125,7 +125,7 @@ export class ChatdetailPage implements OnInit {
       if (res.status == 'success') {
         this.scrollDown()
         let datatosend = {
-          userloggedId: localStorage.getItem('user_id'),
+          userloggedId: localStorage.getItem('user_Id'),
           message: this.message,
           time: time,
         }

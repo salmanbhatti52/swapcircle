@@ -19,6 +19,8 @@ export class ConnectPage implements OnInit {
   other_articles: any;
   term: any;
   searchbar = false;
+  activeIndex: number | null = null;
+  firstactive = true;
   constructor(public navCtrl: NavController,
     public api: ApiService,
     public extra: ExtraService) { }
@@ -32,6 +34,8 @@ export class ConnectPage implements OnInit {
   }
 
   All() {
+    this.firstactive = true
+    this.activeIndex = -1
     this.popularconnects()
     this.otherconnects()
   }
@@ -43,7 +47,7 @@ export class ConnectPage implements OnInit {
   }
   popularconnects() {
     this.extra.loadershow()
-    this.api.sendRequest('popular_connect_articles', { "users_customers_id": localStorage.getItem('user_id') }).subscribe((res: any) => {
+    this.api.sendRequest('popular_connect_articles', { "users_customers_id": localStorage.getItem('user_Id') }).subscribe((res: any) => {
       this.extra.hideLoader()
       console.log('connect_articles====', res);
       this.popular_articles = res.data
@@ -53,15 +57,17 @@ export class ConnectPage implements OnInit {
   }
 
   otherconnects() {
-    this.api.sendRequest('connect_articles', { "users_customers_id": localStorage.getItem('user_id') }).subscribe((res: any) => {
+    this.api.sendRequest('connect_articles', { "users_customers_id": localStorage.getItem('user_Id') }).subscribe((res: any) => {
       console.log('Other_connect_articles====', res);
       this.other_articles = res.data
     })
   }
-  otherconnectsBycategory(item: any) {
+  otherconnectsBycategory(item: any, index: any) {
+    this.firstactive = false
+    this.activeIndex = index;
     this.other_articles = []
     let data = {
-      "users_customers_id": localStorage.getItem('user_id'),
+      "users_customers_id": localStorage.getItem('user_Id'),
       "connect_categories_id": item.connect_categories_id
     }
 
@@ -80,7 +86,7 @@ export class ConnectPage implements OnInit {
   popularconnectBycategory(connect_categories_id: any) {
     this.popular_articles = []
     let data = {
-      "users_customers_id": localStorage.getItem('user_id'),
+      "users_customers_id": localStorage.getItem('user_Id'),
       "connect_categories_id": connect_categories_id
     }
     this.api.sendRequest('popular_connect_articles_by_category', data).subscribe((res: any) => {
@@ -96,7 +102,7 @@ export class ConnectPage implements OnInit {
   addfav(item: any) {
 
     let data = {
-      "users_customers_id": localStorage.getItem('user_id'),
+      "users_customers_id": localStorage.getItem('user_Id'),
       "connect_articles_id": item.connect_articles_id
     }
     this.api.sendRequest('add_favorite_connect_articles', data).subscribe((p: any) => {
@@ -110,7 +116,7 @@ export class ConnectPage implements OnInit {
     console.log(type);
 
     let data = {
-      "users_customers_id": localStorage.getItem('user_id'),
+      "users_customers_id": localStorage.getItem('user_Id'),
       "connect_articles_id": item.connect_articles_id
     }
     this.api.sendRequest('remove_favorite_connect_articles', data).subscribe((rem: any) => {

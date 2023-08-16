@@ -9,6 +9,8 @@ export class ExtraService {
   imgbaseURl: any;
   role: any;
   data: any;
+
+  btnshow = false;
   constructor(public toastCtrl: ToastController,
     public loadingCtrl: LoadingController,
     public alertController: AlertController) { }

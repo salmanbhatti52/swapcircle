@@ -21,9 +21,9 @@ export class AppComponent {
   }
 
   initializeApp() {
-    console.log(localStorage.getItem("user_id"));
+    console.log(localStorage.getItem('user_Id'));
 
-    if (localStorage.getItem('user_id') == '' || localStorage.getItem('user_id') == null) {
+    if (localStorage.getItem('user_Id') == '' || localStorage.getItem('user_Id') == null) {
       this.navCtrl.navigateRoot('onboard')
     } else {
 
@@ -53,4 +53,9 @@ export class AppComponent {
   //   })
 
   // }
+  handleSharedButtonClick() {
+    // Handle the shared button click action here
+    this.navCtrl.navigateForward('createsawap');
+    console.log('Shared button clicked!');
+  }
 }

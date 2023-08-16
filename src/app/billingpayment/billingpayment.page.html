@@ -14,14 +14,75 @@
 </ion-header>
 
 <ion-content style="--background: #e9f5ec;">
-  <div *ngIf="datalength==0" style="font-weight: 500;
+  <div *ngIf="errtextshow==true" style="font-weight: 500;
   font-size: 20px;
   color: #21333B;
   text-align: center;
-  background: #fff;
-  padding: 20px;" class="EudoxusSansReg">No Data Found</div>
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);" class="EudoxusSansReg">{{errtext}}</div>
   <div class="wrapper">
+    <div style="margin-top: 3%;
+    margin-left: 3%;font-size: 16px;
+    color: #121826" class="EudoxusSansReg">Select payment option</div>
+    <ion-list lines="none" style="background:none;">
+      <ion-item lines="none" class="EudoxusSansReg">
+        <ion-select interface="action-sheet" placeholder="Select option" style="width: 100%;
+        height: 64px;" (ionChange)="selectpaymentmethod($event)">
+          <ion-select-option value="Offline">Offline payment</ion-select-option>
+          <ion-select-option value="Online">Online payment</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
 
+
+    <div style="font-size: 20px;
+    color: #21333B;
+    text-align: center;margin-top: 5%;" *ngIf="payment=='Online'">In processing</div>
+
+    <div *ngIf="payment=='Offline'">
+      <div style="text-align: center;">
+        <img src="assets/imgs/placeholder.jpg" style=" border-radius: 90%;
+          width: 128px;
+          height: 128px;" (click)="chooseimage()" *ngIf="recieptimage==''">
+        <img src="{{recieptimage}}" style=" border-radius: 90%;
+        width: 128px;
+        height: 128px;" *ngIf="recieptimage!=''">
+      </div>
+
+      <div style="margin-top: 3%;
+        margin-left: 3%;font-size: 16px;
+        color: #121826" class="EudoxusSansReg">Select Bank</div>
+      <ion-list lines="none" style="background:none;">
+        <ion-item lines="none" class="EudoxusSansReg">
+          <ion-select interface="action-sheet" placeholder="Select option" style="width: 100%;
+            height: 64px;">
+            <ion-select-option value="TideBank">Tide Bank</ion-select-option>
+            <ion-select-option value="WiseBank(In USA)">Wise Bank (In USA) </ion-select-option>
+            <ion-select-option value="WiseBank(Outside USA)">Wise Bank (Outside USA)</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+
+      <div class="text1 EudoxusSansReg">Amount</div>
+      <div class="inputfieldtransparent"
+        style="width: 100%; height: 64px; margin-bottom:20px; display: flex;border: 1.5px solid #969D9F !important;">
+        <input [(ngModel)]="amount" class="input EudoxusSansReg" type="number" placeholder="Account holder name" />
+      </div>
+
+      <div class="text1 EudoxusSansReg">Description</div>
+      <div class="inputfieldtransparent"
+        style="width: 100%; margin-bottom:20px; display: flex;border: 1.5px solid #969D9F !important;">
+        <ion-textarea rows="4" cols="5" class="input EudoxusSansReg" type="text" placeholder="Account holder name"
+          [(ngModel)]="desc"></ion-textarea>
+      </div>
+    </div>
+
+
+    <!-- <div style="margin: 3% 0% 3% 0%;font-size: 16px;
+    color: #121826" class="EudoxusSansReg">Accounts</div>
     <ion-row class="rowcls" *ngFor="let item of accounts">
       <ion-col size="2.5">
         <img src="https://portal.swapcircle.trade/public/{{item.user_data.profile_pic}}" style="border-radius: 90px;
@@ -35,15 +96,15 @@
       <ion-col size="1.5" style="text-align: end;">
         <img src="assets/imgs/arrowforward.svg" style="margin-top: 3px;">
       </ion-col>
-    </ion-row>
+    </ion-row> -->
 
   </div>
 
 </ion-content>
 <ion-footer class="ion-no-border" style="background: #e9f5ec;">
   <div style="width:93%;margin:0% auto 5%;">
-    <ion-button style="margin-top: 5%;" class="btnbggreen EudoxusSansReg" (click)="addaccount()">
-      Add Account</ion-button>
+    <ion-button style="margin-top: 5%;" class="btnbggreen EudoxusSansReg" (click)="send()">
+      Send</ion-button>
   </div>
 
 </ion-footer>

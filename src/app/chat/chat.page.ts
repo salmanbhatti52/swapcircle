@@ -35,10 +35,10 @@ export class ChatPage implements OnInit {
 
   getchat() {
     // 2
-    // localStorage.getItem('user_id')
+    // localStorage.getItem('user_Id')
     // this.extra.loadershow()
     let data = {
-      "users_customers_id": localStorage.getItem('user_id')
+      "users_customers_id": localStorage.getItem('user_Id')
     }
     this.api.sendRequest('getAllChat', data).subscribe((res: any) => {
       console.log('res---', res);

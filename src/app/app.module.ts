@@ -11,8 +11,9 @@ import { HttpClientModule } from "@angular/common/http";
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Camera } from '@awesome-cordova-plugins/camera/ngx';
 import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
+import { FloatingButtonComponent } from './floating-button/floating-button.component';
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, FloatingButtonComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
   providers: [
     ReactiveFormsModule,

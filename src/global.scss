@@ -310,3 +310,19 @@ ion-modal#example-modal .container {
 .custom-search .searchbar-clear-icon {
   display: none;
 }
+.searchbar-search-icon { display:none; width:0; height:0; }
+.searchbar-left-aligned.sc-ion-searchbar-ios-h .searchbar-input.sc-ion-searchbar-ios {
+  padding-left: 8px;
+  color: #969D9F;
+  font-size: 16px !important;
+}
+ion-searchbar{
+  font-family: "EudoxusSansReg" !important;
+}
+.sc-ion-searchbar-ios-h {
+  --placeholder-opacity: 1 !important;
+}
+
+.custom-select .select-text {
+  margin-right: 20px; /* Adjust this value as needed */
+}

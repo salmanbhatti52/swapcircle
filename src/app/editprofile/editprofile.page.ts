@@ -26,6 +26,7 @@ export class EditprofilePage implements OnInit {
   showPass = false;
   shownewPass = false;
   showconfirmPass = false;
+  time: any;
   constructor(public location: Location,
     public alertCtrl: AlertController,
     public navCtrl: NavController,
@@ -103,7 +104,7 @@ export class EditprofilePage implements OnInit {
     this.extra.loadershow()
     if (localStorage.getItem('customertype') == 'Company') {
       datasend = {
-        "users_customers_id": localStorage.getItem('user_id'),
+        "users_customers_id": localStorage.getItem('user_Id'),
         "company_name": localStorage.getItem('fname'),
         "first_name": localStorage.getItem('sname'),
         "last_name": localStorage.getItem('sname'),
@@ -117,7 +118,7 @@ export class EditprofilePage implements OnInit {
     } else {
 
       datasend = {
-        "users_customers_id": localStorage.getItem('user_id'),
+        "users_customers_id": localStorage.getItem('user_Id'),
         "first_name": this.user.first_name,
         "last_name": this.user.last_name,
         "phone": this.user.phone,
@@ -147,6 +148,8 @@ export class EditprofilePage implements OnInit {
       this.extra.hideLoader()
     })
   }
+
+
   goback() {
     this.location.back()
   }

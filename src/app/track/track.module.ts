@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { TrackPageRoutingModule } from './track-routing.module';
 
 import { TrackPage } from './track.page';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TrackPageRoutingModule
+    TrackPageRoutingModule,
+    Ng2SearchPipeModule
   ],
   declarations: [TrackPage]
 })
-export class TrackPageModule {}
+export class TrackPageModule { }

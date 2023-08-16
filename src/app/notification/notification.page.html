@@ -17,9 +17,12 @@
   <div *ngIf="notilength==0" style="font-weight: 500;
   font-size: 20px;
   color: #21333B;
+  position: absolute;
   text-align: center;
-  background: #fff;
-  padding: 20px;" class="EudoxusSansReg">No Notification Found</div>
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);" class="EudoxusSansReg">No Notification Found</div>
   <div class="wrapper">
 
     <ion-row class="rowcls" *ngFor="let item of noti">

@@ -16,7 +16,7 @@
 <ion-content style="--background: #e9f5ec;">
   <div class="wrapper">
 
-    <div class="text EudoxusSansReg">From Account</div>
+    <div class="text EudoxusSansReg">Read From Wallet</div>
     <div class="inputfieldtransparent " style="width:100%;border: 1.5px solid #969D9F !important;" (click)="openList()"
       [class.active]="showcurr==true">
       <div style="display: flex;">
@@ -69,7 +69,7 @@
       <input [(ngModel)]="excahngerate" class="input EudoxusSansReg" type="number" placeholder="Enter Amount" />
     </div>
 
-    <div class="text1 EudoxusSansReg">Expires In</div>
+    <div class="text1 EudoxusSansReg">Date and Time Entry</div>
     <div class="inputfieldtransparent"
       style="width: 100%; height: 64px; margin-bottom:20px; display: flex;border: 1.5px solid #969D9F !important;">
       <input [(ngModel)]="ExpiresIn" class="input EudoxusSansReg" type="number" placeholder="Enter time in hours" />
@@ -83,7 +83,7 @@
 <ion-footer class="ion-no-border" style="background: #e9f5ec;">
   <div style="width:93%;margin:0% auto 5%;">
     <ion-button style="margin-top: 5%;" class="btnbggreen EudoxusSansReg" (click)="createoffer()">
-      Save</ion-button>
+      Create Offer</ion-button>
   </div>
 
 </ion-footer>

@@ -24,7 +24,7 @@ export class NotificationPage implements OnInit {
 
   getnotification() {
     this.extra.loadershow()
-    this.api.sendRequest('notifications', { "users_customers_id": localStorage.getItem('user_id') }).subscribe((res: any) => {
+    this.api.sendRequest('notifications', { "users_customers_id": localStorage.getItem('user_Id') }).subscribe((res: any) => {
       console.log('response', res);
       this.notilength = res.data.length
       if (res.status == 'success') {

@@ -24,6 +24,21 @@
       <ion-toggle class="ctoggle" (ionChange)="changed($event)" *ngIf="notichecked=='false'"></ion-toggle>
       <ion-toggle class="ctoggle" (ionChange)="changed($event)" *ngIf="notichecked=='true'" checked></ion-toggle>
     </div>
+
+    <div class="text3 EudoxusSansReg">Session Expired</div>
+
+    <ion-list lines="none" style=" width: 100%;background: none;margin-top:3%;">
+      <ion-item lines="none" class="EudoxusSansReg">
+        <ion-select interface="action-sheet" placeholder="Choose Time Interval" style="width: 100%;
+        height: 64px;--placeholder-opacity: 1 !important;" (ionChange)="handleChange($event)">
+          <ion-select-option value="1">1 minute</ion-select-option>
+          <ion-select-option value="2">2 minute</ion-select-option>
+          <ion-select-option value="3">3 minute</ion-select-option>
+          <ion-select-option value="4">4 minute</ion-select-option>
+          <ion-select-option value="5">5 minute</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
   </div>
 
 

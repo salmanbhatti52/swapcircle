@@ -18,6 +18,8 @@ export class TransactionPage implements OnInit {
   user: any;
   userloginId: any;
   bcurrsymbol: any;
+  errortext: boolean = false;
+  errorshow: any;
   constructor(public location: Location,
     public api: ApiService,
     public extra: ExtraService) { }
@@ -37,13 +39,14 @@ export class TransactionPage implements OnInit {
   }
 
   gettransaction() {
-    this.api.sendRequest('all_transactions', { "users_customers_id": localStorage.getItem('user_id') }).subscribe((resp: any) => {
+    this.api.sendRequest('all_transactions', { "users_customers_id": localStorage.getItem('user_Id') }).subscribe((resp: any) => {
       console.log('trans----', resp);
       if (resp.status == 'success') {
         this.transarr = resp.data
       }
       else {
-        this.extra.presentToast(resp.message)
+        this.errortext = true
+        this.errorshow = resp.message
       }
     })
   }

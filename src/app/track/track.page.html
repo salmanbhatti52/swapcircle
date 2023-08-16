@@ -33,15 +33,19 @@
             justify-content: space-between;
           ">
 
-          <ion-list>
-            <ion-item lines="none">
-              <ion-select interface="popover" placeholder="$" (ionChange)="optionsFn($event)">
+          <div style="display: flex;
+          align-items: center;" (click)="openmodal()">
+            <div class="txt3" placeholder="select curr">{{currsymbol}}
+            </div>
+            <ion-icon name="caret-down-outline" style="padding: 2px 27px 0px;"></ion-icon>
+          </div>
+
+          <!-- <ion-select interface="popover" placeholder="$" (ionChange)="optionsFn($event)">
                 <ion-select-option *ngFor="let s of curr; let i=index" [value]="s">{{s.code}}
                   <span style="font-size: 12px; padding-left: 2px">({{s.symbol}})</span>
                 </ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-list>
+              </ion-select> -->
+
           <!-- <div class="txt1">$156.<span style="opacity:47%;font-size: 18px;">50</span>
               <hr>
             </div> -->
@@ -59,25 +63,18 @@
           <div class="txt EudoxusSansReg">{{tocurrcode}}</div>
           <img src="assets/imgs/doticons.svg" />
         </div>
-        <div style="
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-          ">
-          <div style="display: flex; align-items: center; position: relative">
-            <ion-list>
-              <ion-item lines="none">
-                <ion-select interface="popover" placeholder="€" (ionChange)="optionsFn2($event)">
-                  <ion-select-option *ngFor="let s of curr; let i=index" [value]="s">{{s.code}}
-                    <span style="font-size: 12px; padding-left: 2px">({{s.symbol}})</span>
-                  </ion-select-option>
-                </ion-select>
-              </ion-item>
-            </ion-list>
-            <div class="txt1 EudoxusSansReg" *ngIf="amountshow==true">
+        <div>
+          <div style="display: flex;
+          align-items: center;" (click)="Tocurrmodel()">
+            <div class="txt3" placeholder="select curr">{{tocurrsymbol}}
+            </div>
+            <ion-icon name="caret-down-outline" style="padding: 2px 27px 0px;"></ion-icon>
+            <div class="txt1 EudoxusSansReg" *ngIf="amountshow==true" style="width: 50%;">
               {{convertedamount}}.<span style="opacity: 47%; font-size: 18px">{{amountafterpoint}}</span>
             </div>
           </div>
+
+
         </div>
 
         <div class="half-circle1"></div>
@@ -87,7 +84,23 @@
       </div>
     </div>
 
-    <div style="
+    <div *ngIf="amountshow==true" style="margin: 3% 1%;">
+      <div style="display: flex;align-items: center;justify-content: space-between;">
+        <div style="color: #4BD16F;font-size:16px;">Live rate</div>
+        <div class="txt1 EudoxusSansReg" style="width: 50%;">
+          {{convertedamount}}.<span style="opacity: 47%; font-size: 18px">{{amountafterpoint}}</span>
+        </div>
+      </div>
+      <div style="display: flex;align-items: center;justify-content: space-between;">
+        <div style="color: #4BD16F;font-size:16px;">Admin rate</div>
+        <div class="txt1 EudoxusSansReg" style="width: 50%;">
+          {{adminrate}}
+        </div>
+      </div>
+    </div>
+
+
+    <!-- <div style="
         display: flex;
         align-items: center;
         justify-content: space-around;
@@ -105,7 +118,7 @@
         <img src="assets/imgs/curricon3.svg" />
         <div class="label3 EudoxusSansReg">{{basecurrsymbol}}{{baseamt}}</div>
       </div>
-    </div>
+    </div> -->
 
     <!-- <div style="display: flex; justify-content: space-between; margin: 3% 0%">
       <div class="carItem_box">
@@ -146,6 +159,44 @@
     <ion-button style="margin-top: 5%" class="btnbggreen EudoxusSansReg" (click)="track()">Convert
       Currency</ion-button>
   </div>
+  <!-- fromcurr -->
+  <ion-modal #modal trigger="open-modal" [initialBreakpoint]="0.75" [isOpen]="isModalOpen">
+    <ng-template>
+      <ion-content>
+        <ion-searchbar placeholder="Search" [(ngModel)]="term"></ion-searchbar>
+        <ion-list>
+          <ion-item *ngFor="let s of curr | filter:term;let i=index;" (click)="closemodal(s)">
+            <ion-label>
+              <h2>{{s.code}}</h2>
+              <span style="font-size: 12px; padding-left: 2px">({{s.symbol}})</span>
+            </ion-label>
+          </ion-item>
+
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+
+
+  <!-- Tocurr -->
+  <ion-modal #modal trigger="open-modal" [initialBreakpoint]="0.75" [isOpen]="Tocurrmodalopen">
+    <ng-template>
+      <ion-content>
+        <ion-searchbar placeholder="Search" [(ngModel)]="term"></ion-searchbar>
+        <ion-list>
+          <ion-item *ngFor="let s of curr | filter:term;let i=index;" (click)="closeTocurrmodal(s)">
+            <ion-label>
+              <h2>{{s.code}}</h2>
+              <span style="font-size: 12px; padding-left: 2px">({{s.symbol}})</span>
+            </ion-label>
+          </ion-item>
+
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
 </ion-content>
 
 <ion-footer>

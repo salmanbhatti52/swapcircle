@@ -14,6 +14,15 @@
 </ion-header>
 
 <ion-content style="--background: #e9f5ec">
+  <div *ngIf="errortext==true" style="font-weight: 500;
+      font-size: 20px;
+      color: #21333B;
+      text-align: center;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);" class="EudoxusSansReg">{{errorshow}}</div>
   <div class="wrapper">
     <ion-row *ngFor="let item of transarr" class="rowcls">
       <ion-col size="2.5">

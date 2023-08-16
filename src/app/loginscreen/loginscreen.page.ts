@@ -75,7 +75,7 @@ export class LoginscreenPage implements OnInit {
         if (res.status == 'success') {
           this.rest.hideLoader()
           localStorage.setItem('userdeatil', JSON.stringify(res.data))
-          localStorage.setItem('user_id', res.data.users_customers_id);
+          localStorage.setItem('user_Id', res.data.users_customers_id);
           this.navCtrl.navigateRoot('home');
         } else {
           this.rest.hideLoader()

@@ -38,7 +38,7 @@
           <img src="assets/imgs/notification.svg" (click)="noti()">
         </div>
         <div style="margin-left: -10%;margin-top: 2%;">
-          <ion-button class="btn1" (click)="seewallets()">See Wallets</ion-button>
+          <ion-button class="btn1" (click)="seewallets()">Fund Wallets</ion-button>
           <!-- <div class="cars_label">See Wallets</div> -->
         </div>
       </ion-col>
@@ -145,8 +145,11 @@
       font-size: 20px;
       color: #21333B;
       text-align: center;
-      background: #fff;
-      padding: 20px;margin-top: 5%;" class="EudoxusSansReg">{{errorshow}}</div>
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);" class="EudoxusSansReg">{{errorshow}}</div>
       <ion-row *ngFor="let item of transarr" class="rowcls">
         <ion-col size="2.5">
           <img src="/assets/imgs/hlogo.svg" *ngIf="userloginId!=item.from_users_customers_id">

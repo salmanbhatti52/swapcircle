@@ -138,7 +138,7 @@ export class SwapofferrequestsPage implements OnInit {
 
     let data = {
       "requestType": "startChat",
-      "users_customers_id": localStorage.getItem('user_id'),
+      "users_customers_id": localStorage.getItem('user_Id'),
       "other_users_customers_id": user.user_data.users_customers_id
     }
     this.api.sendRequest('user_chat', data).subscribe((res: any) => {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, ToastController } from '@ionic/angular';
 import { Share } from '@capacitor/share';
 import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
+import { ExtraService } from '../services/extra.service';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -19,7 +20,8 @@ export class ProfilePage implements OnInit {
   email: any;
   constructor(public navCtrl: NavController,
     public toastController: ToastController,
-    private clipboard: Clipboard) { }
+    private clipboard: Clipboard,
+    public extra: ExtraService) { }
 
   ngOnInit() {
 
@@ -36,7 +38,7 @@ export class ProfilePage implements OnInit {
     this.last_name = this.user.last_name
     this.email = this.user.email
 
-    let myString: any = localStorage.getItem('user_id');
+    let myString: any = localStorage.getItem('user_Id');
     let encodedValue = btoa(myString);
     this.referalcode = encodedValue;
     console.log('dsads', this.referalcode);
@@ -86,7 +88,8 @@ export class ProfilePage implements OnInit {
     this.navCtrl.navigateForward('feedback');
   }
   logout() {
-    localStorage.removeItem('user_id');
+    localStorage.removeItem('user_Id');
+    this.extra.btnshow = false;
     this.navCtrl.navigateRoot('loginscreen')
   }
   goto() {

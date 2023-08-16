@@ -73,7 +73,7 @@ export class SendcurrencyPage implements OnInit {
   }
   walletlist() {
     let datasend = {
-      "users_customers_id": localStorage.getItem('user_id'),
+      "users_customers_id": localStorage.getItem('user_Id'),
     }
     this.api.sendRequest('get_wallet', datasend).subscribe((response: any) => {
       console.log('get_wallet=========', response);
@@ -273,7 +273,7 @@ export class SendcurrencyPage implements OnInit {
     }
     else {
       let data = {
-        "from_users_customers_id": localStorage.getItem('user_id'),
+        "from_users_customers_id": localStorage.getItem('user_Id'),
         "from_system_currencies_id": this.basecurrId,
         "from_amount": this.totalamount,
         "to_users_customers_id": this.users_customers_id,

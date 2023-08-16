@@ -187,7 +187,7 @@ export class Signup3Page implements OnInit {
         this.extra.hideLoader()
         if (res.status == 'success') {
           localStorage.setItem('userdeatil', JSON.stringify(res.data));
-          localStorage.setItem('user_id', res.data.users_customers_id);
+          localStorage.setItem('user_Id', res.data.users_customers_id);
           localStorage.setItem('status', res.data.status);
           this.navCtrl.navigateForward('signup5')
         } else {

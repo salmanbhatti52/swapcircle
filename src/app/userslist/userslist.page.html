@@ -17,7 +17,7 @@
   <div class="wrapper">
     <ion-row class="rowcls" *ngFor="let item of userlist" (click)="goto(item)">
       <ion-col size="2">
-        <img src="https://swap.eigix.net/public/{{item.profile_pic}}" style="border-radius: 90%;height: 45px;
+        <img src="https://portal.swapcircle.trade/public/{{item.profile_pic}}" style="border-radius: 90%;height: 45px;
         width: 48px;
         object-fit: cover;" *ngIf="item.profile_pic!=null" (error)="handleImgError($event)">
         <img src="assets/imgs/user.png" style="border-radius: 90%;

@@ -26,7 +26,7 @@ ion-segment {
     border: 1.5px solid #4BD16F;
     position: relative;
     border-radius: 20px;
-    padding: 10px 15px 20px 15px;
+    padding: 10px 15px 30px 15px;
   }
   .half-circle{
     width: 55px;
@@ -73,8 +73,12 @@ ion-segment {
 .txt{
     font-weight: 700;
     font-size: 16px;
-    line-height: 26px;
     color: #121826;
+}
+.txt3{
+  font-weight: 700;
+  font-size: 16px;
+  color: #121826;
 }  
 ion-list{
     background: transparent !important;
@@ -94,8 +98,7 @@ ion-select::part(icon) {
 .txt1{
     font-style: normal;
     font-weight: 700;
-    font-size: 24px;
-    line-height: 34px;
+    font-size: 21px;
     color: #121826;
 }
 hr{
@@ -110,7 +113,7 @@ hr{
 }
 .imgdiv{
     position: absolute;
-    top: 41%;
+    top: 45%;
     right: 43%;
 }
 

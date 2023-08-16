@@ -30,7 +30,7 @@ export class AddaccountPage implements OnInit {
   walletlist() {
     this.extra.loadershow()
     let datasend = {
-      "users_customers_id": localStorage.getItem('user_id'),
+      "users_customers_id": localStorage.getItem('user_Id'),
     }
     this.api.sendRequest('get_wallet', datasend).subscribe((response: any) => {
       console.log('get_wallet=========', response);
@@ -47,7 +47,7 @@ export class AddaccountPage implements OnInit {
 
   save() {
     let data = {
-      "users_customers_id": localStorage.getItem('user_id'),
+      "users_customers_id": localStorage.getItem('user_Id'),
       "system_currencies_id": this.currencyId,
       "full_name": this.holdername,
       "iban": this.iban

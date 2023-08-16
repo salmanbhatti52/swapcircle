@@ -108,7 +108,7 @@ export class OfferPage implements OnInit {
   alloffers() {
     this.offers = []
     // this.extra.loadershow()
-    this.api.sendRequest('all_swap_offers', { "users_customers_id": localStorage.getItem('user_id') }).subscribe((res: any) => {
+    this.api.sendRequest('all_swap_offers', { "users_customers_id": localStorage.getItem('user_Id') }).subscribe((res: any) => {
       console.log('all offers', res);
       if (res.status == "success") {
         this.extra.hideLoader()
@@ -124,7 +124,7 @@ export class OfferPage implements OnInit {
   useroffers() {
     this.userswapoffers = []
     this.extra.loadershow()
-    this.api.sendRequest('user_swap_offers', { "users_customers_id": localStorage.getItem('user_id') }).subscribe((res: any) => {
+    this.api.sendRequest('user_swap_offers', { "users_customers_id": localStorage.getItem('user_Id') }).subscribe((res: any) => {
       console.log('user0ffers----', res);
       if (res.status == "success") {
         this.extra.hideLoader()
@@ -172,7 +172,7 @@ export class OfferPage implements OnInit {
     this.isModalOpen = isOpen;
     let data = {
       "swap_offers_id": this.swap_offers_id,
-      "from_users_customers_id": localStorage.getItem('user_id')
+      "from_users_customers_id": localStorage.getItem('user_Id')
     }
     this.api.sendRequest('swap_offer_request', data).subscribe((offer: any) => {
       console.log('swap_offer====', offer);
@@ -201,7 +201,7 @@ export class OfferPage implements OnInit {
   getfav() {
     this.fav = []
     this.extra.loadershow
-    this.api.sendRequest('all_favorite_swaps_offers', { "users_customers_id": localStorage.getItem('user_id') }).subscribe((res: any) => {
+    this.api.sendRequest('all_favorite_swaps_offers', { "users_customers_id": localStorage.getItem('user_Id') }).subscribe((res: any) => {
       console.log('get fav====', res);
       if (res.status == "success") {
         this.extra.hideLoader()
@@ -214,7 +214,7 @@ export class OfferPage implements OnInit {
 
   addfav(f: any) {
     let data = {
-      "users_customers_id": localStorage.getItem('user_id'),
+      "users_customers_id": localStorage.getItem('user_Id'),
       "swap_offers_id": f.swap_offers_id
     }
     this.api.sendRequest('add_favorite_swaps_offers', data).subscribe((fav: any) => {
@@ -228,7 +228,7 @@ export class OfferPage implements OnInit {
     console.log(i);
 
     let data = {
-      "users_customers_id": localStorage.getItem('user_id'),
+      "users_customers_id": localStorage.getItem('user_Id'),
       "swap_offers_id": f.swap_offers_id
     }
     this.api.sendRequest('remove_favorite_swaps_offers', data).subscribe((rem: any) => {

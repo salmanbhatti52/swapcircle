@@ -9,15 +9,45 @@
     align-items: center;
     margin-bottom: 12px;
 }
-.text1{
-    font-size: 16px;
-    font-weight: 700;
-    color: #121826;
+// .text1{
+//     font-size: 16px;
+//     font-weight: 700;
+//     color: #121826;
     
+// }
+.text1{
+    font-weight: 500;
+    font-size: 15px;
+    color: #000;
+    margin-bottom: 10px;
+    margin-left: 3px;
+    margin-top: 20px;
 }
+
+input{
+    padding-left: 20px;
+}
+input::placeholder {
+    color: #21333B !important;
+    opacity: 0.5;
+  }
+  .euro-text1 {
+    color: #21333B;
+    font-size: 16px;
+    margin-top: 10px;
+  }
 .text2{
     font-size: 12px;
     font-weight: 700;
     color: #121826;
     margin-top: 3px;
+}
+ion-item{
+    --background:none;
+    border-radius: 24px;
+    color: #121826 !important;
+    border: 1px solid #969D9F;
+}
+ion-select{
+    color: #969D9F
 }

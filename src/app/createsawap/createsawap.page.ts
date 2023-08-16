@@ -58,7 +58,7 @@ export class CreatesawapPage implements OnInit {
   }
   walletlist() {
     let datasend = {
-      "users_customers_id": localStorage.getItem('user_id'),
+      "users_customers_id": localStorage.getItem('user_Id'),
     }
     this.api.sendRequest('get_wallet', datasend).subscribe((response: any) => {
       console.log('get_wallet=========', response);
@@ -96,11 +96,19 @@ export class CreatesawapPage implements OnInit {
     // Perform your logic here with the search term
     console.log('Search term:', searchTerm);
     this.showcurr = true;
+    if (searchTerm.inputType == 'deleteContentBackward') {
+      this.fromamount = false;
+
+    }
   }
   onSearch2(searchTerm: any) {
     // Perform your logic here with the search term
     console.log('Search term:', searchTerm);
     this.showexccurr = true;
+    if (searchTerm.inputType == 'deleteContentBackward') {
+      this.Toamount = false;
+
+    }
   }
   selectcurrency(list: any, index: any) {
     console.log(list);
@@ -141,7 +149,9 @@ export class CreatesawapPage implements OnInit {
         })
       }
 
+
     }
+
   }
 
   save() {
@@ -154,7 +164,7 @@ export class CreatesawapPage implements OnInit {
       this.extra.presentToast('Select currency for To account')
     } else {
       let data = {
-        "users_customers_id": localStorage.getItem('user_id'),
+        "users_customers_id": localStorage.getItem('user_Id'),
         "from_users_customers_wallets_id": this.fromwalletId,
         "to_users_customers_wallets_id": this.towalletId,
         "amount_from": this.totalamount,

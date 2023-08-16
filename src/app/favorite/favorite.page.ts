@@ -30,7 +30,7 @@ export class FavoritePage implements OnInit {
 
   favconnects() {
     this.loadershow()
-    this.api.sendRequest('favorite_connect_articles', { "users_customers_id": localStorage.getItem('user_id') }).subscribe((res: any) => {
+    this.api.sendRequest('favorite_connect_articles', { "users_customers_id": localStorage.getItem('user_Id') }).subscribe((res: any) => {
 
       console.log('fav_articles====', res);
       this.fav_articles = res.data
@@ -43,7 +43,7 @@ export class FavoritePage implements OnInit {
     console.log(item);
 
     let data = {
-      "users_customers_id": localStorage.getItem('user_id'),
+      "users_customers_id": localStorage.getItem('user_Id'),
       "connect_articles_id": item.connect_articles_id
     }
     this.api.sendRequest('remove_favorite_connect_articles', data).subscribe((res: any) => {

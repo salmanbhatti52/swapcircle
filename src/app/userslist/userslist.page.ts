@@ -31,7 +31,7 @@ export class UserslistPage implements OnInit {
 
   users() {
 
-    this.api.sendRequest('all_users', { 'users_customers_id': localStorage.getItem('user_id') }).subscribe((res: any) => {
+    this.api.sendRequest('all_users', { 'users_customers_id': localStorage.getItem('user_Id') }).subscribe((res: any) => {
       console.log(res);
       this.userlist = res.data
     })
@@ -40,7 +40,7 @@ export class UserslistPage implements OnInit {
   goto(user: any) {
     let data = {
       "requestType": "startChat",
-      "users_customers_id": localStorage.getItem('user_id'),
+      "users_customers_id": localStorage.getItem('user_Id'),
       "other_users_customers_id": user.users_customers_id
     }
     this.api.sendRequest('user_chat_live', data).subscribe((res: any) => {
