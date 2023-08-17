@@ -58,7 +58,7 @@
       <ion-list lines="none" style="background:none;">
         <ion-item lines="none" class="EudoxusSansReg">
           <ion-select interface="action-sheet" placeholder="Select option" style="width: 100%;
-            height: 64px;">
+            height: 64px;" (ionChange)="selectbank($event)">
             <ion-select-option value="TideBank">Tide Bank</ion-select-option>
             <ion-select-option value="WiseBank(In USA)">Wise Bank (In USA) </ion-select-option>
             <ion-select-option value="WiseBank(Outside USA)">Wise Bank (Outside USA)</ion-select-option>
@@ -69,18 +69,19 @@
       <div class="text1 EudoxusSansReg">Amount</div>
       <div class="inputfieldtransparent"
         style="width: 100%; height: 64px; margin-bottom:20px; display: flex;border: 1.5px solid #969D9F !important;">
-        <input [(ngModel)]="amount" class="input EudoxusSansReg" type="number" placeholder="Account holder name" />
+        <input [(ngModel)]="amount" class="input EudoxusSansReg" type="number" placeholder="Amount" />
       </div>
 
       <div class="text1 EudoxusSansReg">Description</div>
       <div class="inputfieldtransparent"
         style="width: 100%; margin-bottom:20px; display: flex;border: 1.5px solid #969D9F !important;">
-        <ion-textarea rows="4" cols="5" class="input EudoxusSansReg" type="text" placeholder="Account holder name"
+        <ion-textarea rows="4" cols="5" class="input EudoxusSansReg" type="text" placeholder="Description"
           [(ngModel)]="desc"></ion-textarea>
       </div>
     </div>
 
-
+    <div class="EudoxusSansReg text1">Note:<span  style="color: #EF3C3C;
+      font-size: 14px;">{{instructions}}</span></div>
     <!-- <div style="margin: 3% 0% 3% 0%;font-size: 16px;
     color: #121826" class="EudoxusSansReg">Accounts</div>
     <ion-row class="rowcls" *ngFor="let item of accounts">

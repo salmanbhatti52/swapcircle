@@ -25,9 +25,9 @@
   transform: translateY(-50%);" class="EudoxusSansReg">No Wallet Found</div>
   <div class="wrapper">
 
-    <ion-row (click)="presentAlert()">
+    <ion-row >
       <ion-col size="6" *ngFor="let item of walletslist">
-        <div class="bg EudoxusSansReg">
+        <div class="bg EudoxusSansReg" (click)="presentAlert(item)">
           <div class="img1">
             <div class="text1">{{item.currency.country.code}}</div>
             <img src="https://portal.swapcircle.trade/public/{{item.currency.country.image}}">

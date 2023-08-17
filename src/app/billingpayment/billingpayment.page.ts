@@ -4,6 +4,7 @@ import { NavController } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
 import { ExtraService } from '../services/extra.service';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-billingpayment',
   templateUrl: './billingpayment.page.html',
@@ -15,21 +16,32 @@ export class BillingpaymentPage implements OnInit {
   errtext: any;
   errtextshow = false;
   payment: any;
-  amount: any;
-  desc: any;
+  amount: any='';
+  desc: any='';
   recieptimage: any = '';
   validreciept: any;
+  bankname: any='';
+  wallet_id: any;
+  instructions: any;
   constructor(public location: Location,
     public navCtrl: NavController,
     public api: ApiService,
-    public extra: ExtraService) { }
+    public extra: ExtraService,
+    public route:ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.queryParams.subscribe((params:any) => {
+      if (params && params.key) {
+        this.wallet_id= params.key;
+        // Use the value as needed
+      }
+    });
 
   }
 
   ionViewWillEnter() {
     this.getaccounts()
+    this.systemsettings()
   }
   getaccounts() {
     let datasend = {
@@ -80,8 +92,54 @@ export class BillingpaymentPage implements OnInit {
     console.log(ev);
     this.payment = ev.detail.value
   }
+  selectbank(ev: any){
+    console.log(ev);
+    this.bankname = ev.detail.value
+  }
   send() {
+    if(this.validreciept==''){
+      this.extra.presentToast('please upload reciept of payemnt')
+    }
+   else if(this.bankname==''){
+      this.extra.presentToast('please select bank name')
+    }
+   else if(this.amount==''){
+      this.extra.presentToast('please enter amount')
+    }
+  else if(this.desc==''){
+      this.extra.presentToast('please enter some description')
+    }else{
+      let data={
+        "users_customers_id":localStorage.getItem('user_Id'),
+        "users_customers_wallets_id":this.wallet_id,
+        "bank_name":this.bankname,
+        "amount":this.amount,
+        "description":this.desc,
+        "image":this.validreciept
+      }
+      this.api.sendRequest('fund_wallet_request',data).subscribe((res:any)=>{
+          console.log('fund response',res);
+          this.extra.presentToast('Your request sent to admin successfully!')
+          this.navCtrl.navigateRoot('home')
+      })
+    }
+    
+  }
 
+  systemsettings() {
+    this.api.getRequest('system_settings').subscribe((res: any) => {
+      console.log(res);
+
+      res.data.map((value: any, index: any) => {
+        if (
+          value.type == "transfer_instructions"
+        ) {
+          this.instructions  = value.description
+         
+        }
+      });
+      
+    })
   }
 
 }

@@ -70,14 +70,33 @@
     </div>
 
     <div class="text1 EudoxusSansReg">Date and Time Entry</div>
-    <div class="inputfieldtransparent"
-      style="width: 100%; height: 64px; margin-bottom:20px; display: flex;border: 1.5px solid #969D9F !important;">
-      <input [(ngModel)]="ExpiresIn" class="input EudoxusSansReg" type="number" placeholder="Enter time in hours" />
+    <div class="inputfieldtransparent" (click)="setOpen(true)"
+      style="width: 100%; height: 64px; margin-bottom:20px; display: flex;border: 1.5px solid #969D9F !important;padding: 22px 22px;
+    color: #969D9F;">
+      {{formattedDateTime}}
     </div>
   </div>
 
 
-
+  <ion-modal [isOpen]="isModalOpen" [initialBreakpoint]="0.75" >
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="end">
+            <ion-button (click)="setOpen(false)">Close</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-datetime
+      [(ngModel)]="selectedDateTime"
+      doneText="Done"
+      cancelText="Cancel"
+    ></ion-datetime>
+    
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>
 
 <ion-footer class="ion-no-border" style="background: #e9f5ec;">

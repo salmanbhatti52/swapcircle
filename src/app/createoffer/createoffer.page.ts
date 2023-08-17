@@ -1,14 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { Location } from '@angular/common';
 import { ApiService } from '../services/api.service';
 import { ExtraService } from '../services/extra.service';
-import { AlertController, NavController } from '@ionic/angular';
+import { AlertController, ModalController, NavController } from '@ionic/angular';
+import { format, parseISO, getDate, getMonth, getYear } from 'date-fns';
+import * as moment from 'moment';
 @Component({
   selector: 'app-createoffer',
   templateUrl: './createoffer.page.html',
   styleUrls: ['./createoffer.page.scss'],
 })
 export class CreateofferPage implements OnInit {
+ 
   basecurrency: any;
   excurrency: any;
   totalamount: any;
@@ -22,11 +25,16 @@ export class CreateofferPage implements OnInit {
   currId: any;
   tocurrId: any;
   systemcurrID: any;
+  selectedDateTime:any
+  formattedDateTime:any='Select Date and Time';
+  parsedDate: any;
+  isModalOpen = false;
   constructor(public location: Location,
     public api: ApiService,
     public extra: ExtraService,
     public alertController: AlertController,
-    public navCtrl: NavController) { }
+    public navCtrl: NavController,
+    public modal:ModalController) { }
 
   ngOnInit() {
     this.walletlist()
@@ -38,6 +46,13 @@ export class CreateofferPage implements OnInit {
     this.location.back()
   }
 
+
+  setOpen(isOpen: boolean) {
+    this.isModalOpen = isOpen;
+    const date = new Date(this.selectedDateTime);
+    this.formattedDateTime=moment(date).format('yyyy-MM-DD H:mm:ss');
+  }
+  
   openList() {
     if (this.walletslist.length == 0) {
       this.presentAlert()
@@ -70,7 +85,7 @@ export class CreateofferPage implements OnInit {
   }
 
   walletlist() {
-    this.extra.loadershow()
+    // this.extra.loadershow()
     let datasend = {
       "users_customers_id": localStorage.getItem('user_Id'),
     }
@@ -103,7 +118,7 @@ export class CreateofferPage implements OnInit {
   }
 
   createoffer() {
-
+   
     let data = {
       "users_customers_id": localStorage.getItem('user_Id'),
       "from_system_currencies_id": this.currId,
@@ -111,7 +126,7 @@ export class CreateofferPage implements OnInit {
       "from_amount": this.totalamount,
       "exchange_rate": this.excahngerate,
       "system_currencies_id": this.systemcurrID,
-      "expiry_time": this.ExpiresIn
+      "expiry_time": this.formattedDateTime
     }
     this.presentalert("You Offer " + this.totalamount + " " + this.basecurrency + " against " + this.excurrency + " with exchange rate " + this.excahngerate + ". Are you sure you want to create this offer?", data)
   }

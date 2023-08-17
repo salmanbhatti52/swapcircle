@@ -45,7 +45,7 @@ export class WalletslistPage implements OnInit {
     })
   }
 
-  async presentAlert() {
+  async presentAlert(val:any) {
     const alert = await this.alertController.create({
       header: 'Are you sure to fund your wallet?',
       cssClass: 'custom-alert',
@@ -61,7 +61,14 @@ export class WalletslistPage implements OnInit {
           text: 'Yes',
           cssClass: 'alert-button-confirm',
           handler: () => {
-            this.navCtrl.navigateRoot('billingpayment')
+            
+            this.navCtrl.navigateRoot('billingpayment',{
+              queryParams: {
+                // You can pass any values you want as query parameters
+                key: val.users_customers_wallets_id,
+                // You can add more properties here
+              }
+            })
           },
         },
       ],

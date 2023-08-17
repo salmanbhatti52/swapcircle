@@ -176,6 +176,10 @@ export class TrackPage implements OnInit {
             this.adminrate = res.data.admin_rate_amount
             this.exchangerate()
           } else {
+            this.amountshow=false;
+            this.convertedamount = '' 
+            this.amountafterpoint = ''
+            this.extra.presentToast(res.message)
             this.extra.hideLoader()
           }
         }, err => {
@@ -206,6 +210,10 @@ export class TrackPage implements OnInit {
             // this.admin_rate_amount = p21[0];
             // this.amountafterpoint = p21[1]
           } else {
+            this.amountshow=false;
+            this.convertedamount = '' 
+            this.amountafterpoint = ''
+            this.extra.presentToast(res.message)
             this.extra.hideLoader()
           }
         }, err => {
