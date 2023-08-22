@@ -2,7 +2,7 @@ import { ApiService } from './../services/api.service';
 import { ExtraService } from './../services/extra.service';
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { NavController } from '@ionic/angular';
-
+import { FingerprintAIO } from '@ionic-native/fingerprint-aio/ngx';
 @Component({
   selector: 'app-loginscreen',
   templateUrl: './loginscreen.page.html',
@@ -18,7 +18,8 @@ export class LoginscreenPage implements OnInit {
   showcPass = false;
   constructor(public navCtrl: NavController,
     public rest: ExtraService,
-    public api: ApiService) { }
+    public api: ApiService,
+    public faio: FingerprintAIO,) { }
 
   ngOnInit() {
   }
@@ -76,6 +77,8 @@ export class LoginscreenPage implements OnInit {
           this.rest.hideLoader()
           localStorage.setItem('userdeatil', JSON.stringify(res.data))
           localStorage.setItem('user_Id', res.data.users_customers_id);
+           localStorage.setItem('email', res.data.email);
+          localStorage.setItem('password', this.pass1);
           this.navCtrl.navigateRoot('home');
         } else {
           this.rest.hideLoader()
@@ -88,6 +91,33 @@ export class LoginscreenPage implements OnInit {
 
     }
 
+  }
+  async fflogin() {
+    this.faio.isAvailable().then(
+      () => {
+        this.faio
+          .show({
+            cancelButtonTitle: 'Cancel',
+            description: 'Some biometric description',
+            disableBackup: true,
+            // title: 'Scanner Title',
+            fallbackButtonTitle: 'FB Back Button',
+            // subtitle: 'This SubTitle'
+          })
+          .then(
+            (result: any) => {
+              console.log(result);
+             
+            },
+            (err) => {
+              this.rest.presentToast(JSON.stringify(err));
+            }
+          );
+      },
+      (err) => {
+        this.rest.presentToast('finger print no avaibale---' + err);
+      }
+    );
   }
 
   togglePass() {

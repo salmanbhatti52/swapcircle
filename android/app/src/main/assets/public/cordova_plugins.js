@@ -34,6 +34,14 @@
         ]
         },
       {
+          "id": "cordova-plugin-fingerprint-aio.Fingerprint",
+          "file": "plugins/cordova-plugin-fingerprint-aio/www/Fingerprint.js",
+          "pluginId": "cordova-plugin-fingerprint-aio",
+        "clobbers": [
+          "Fingerprint"
+        ]
+        },
+      {
           "id": "cordova-plugin-camera.camera",
           "file": "plugins/cordova-plugin-camera/www/Camera.js",
           "pluginId": "cordova-plugin-camera",
@@ -46,7 +54,8 @@
     // TOP OF METADATA
     {
       "cordova-clipboard": "1.3.0",
-      "cordova-plugin-camera": "6.0.0"
+      "cordova-plugin-camera": "6.0.0",
+      "cordova-plugin-fingerprint-aio": "5.0.1"
     };
     // BOTTOM OF METADATA
     });

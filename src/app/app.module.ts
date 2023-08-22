@@ -12,6 +12,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Camera } from '@awesome-cordova-plugins/camera/ngx';
 import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
 import { FloatingButtonComponent } from './floating-button/floating-button.component';
+import { FingerprintAIO } from '@ionic-native/fingerprint-aio/ngx';
 @NgModule({
   declarations: [AppComponent, FloatingButtonComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
@@ -20,6 +21,7 @@ import { FloatingButtonComponent } from './floating-button/floating-button.compo
     FormsModule,
     Camera,
     Clipboard,
+    FingerprintAIO,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent],

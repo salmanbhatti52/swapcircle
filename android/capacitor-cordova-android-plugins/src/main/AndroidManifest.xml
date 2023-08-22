@@ -6,6 +6,7 @@ xmlns:amazon="http://schemas.amazon.com/apk/res/android">
 <provider android:name="org.apache.cordova.camera.FileProvider" android:authorities="${applicationId}.cordova.plugin.camera.provider" android:exported="false" android:grantUriPermissions="true">
   <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/camera_provider_paths"/>
 </provider>
+<activity android:name="de.niklasmerz.cordova.biometric.BiometricActivity" android:theme="@style/TransparentTheme" android:exported="false"/>
 </application>
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 <queries>
@@ -23,4 +24,6 @@ xmlns:amazon="http://schemas.amazon.com/apk/res/android">
     <data android:scheme="content" android:mimeType="image/*"/>
   </intent>
 </queries>
+<uses-permission android:name="android.permission.USE_BIOMETRIC"/>
+<uses-permission android:name="android.permission.USE_FINGERPRINT"/>
 </manifest>

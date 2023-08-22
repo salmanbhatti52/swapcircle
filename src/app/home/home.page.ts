@@ -1,7 +1,7 @@
 
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import SwiperCore, { Autoplay, Keyboard, Pagination, Scrollbar, Zoom, SwiperOptions } from 'swiper';
-import { IonicSlides, IonSlides, NavController } from '@ionic/angular';
+import { AlertController, IonicSlides, IonSlides, NavController } from '@ionic/angular';
 SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, IonicSlides]);
 import { IonModal } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
@@ -57,7 +57,9 @@ export class HomePage {
   intervalId: any;
   constructor(public navCtrl: NavController,
     public api: ApiService,
-    public extra: ExtraService) {
+    public extra: ExtraService,
+    public alert:AlertController
+    ) {
     this.systemsettings()
     this.userdetail = localStorage.getItem('userdeatil')
     console.log(this.userdetail);
@@ -108,7 +110,7 @@ export class HomePage {
 
     this.walletlist()
     this.unreadmessagecount()
-
+    this.alertbox()
     // this.api.sendRequest('users_customers_activity_interval', { "users_customers_id": localStorage.getItem('user_Id') }).subscribe((res: any) => {
     //   console.log('users_customers_activity_interval', res);
 
@@ -130,6 +132,36 @@ export class HomePage {
     //     this.navCtrl.navigateRoot('loginscreen')
     //   }
     // })
+  }
+
+  async alertbox() {
+    const fp = localStorage.getItem('fingerprint');
+    console.log('sASAsaSA', fp);
+    if (fp == null) {
+      const alert = await this.alert.create({
+        header: 'Do you want to add Finger Print/Face ID login',
+        cssClass: 'fgprintcls',
+        buttons: [
+          {
+            text: 'Yes',
+            role: 'confirm',
+            handler: () => {
+              localStorage.setItem('fingerprint', 'true');
+              this.api.fpval = 'true';
+            },
+          },
+          {
+            text: 'No',
+            role: 'cancel',
+            handler: () => {
+              localStorage.setItem('fingerprint', 'false');
+              this.api.fpval = 'false';
+            },
+          },
+        ],
+      });
+      await alert.present();
+    }
   }
   unreadmessagecount() {
     this.api.sendRequest('unreaded_messages', { "users_customers_id": localStorage.getItem('user_Id') }).subscribe((res: any) => {
