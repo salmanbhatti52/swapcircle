@@ -16,6 +16,9 @@ export class LoginscreenPage implements OnInit {
   pass1: any;
   showPass = false;
   showcPass = false;
+  fingerprintlogo=false;
+  getuserEmail: any;
+  getuserPassword: any;
   constructor(public navCtrl: NavController,
     public rest: ExtraService,
     public api: ApiService,
@@ -38,6 +41,16 @@ export class LoginscreenPage implements OnInit {
       this.mySegment.nativeElement.children[0].click();
 
     }
+    //////////////////
+    if (localStorage.getItem('fingerprint') == 'true') {
+      this.fingerprintlogo = true;
+    } else {
+      this.fingerprintlogo = false;
+    }
+    this.getuserEmail = localStorage.getItem('email');
+    this.getuserPassword = localStorage.getItem('password');
+    console.log('email', localStorage.getItem('email'));
+    console.log('password', localStorage.getItem('password'));
   }
   segmentChanged(ev: any) {
     console.log('requestType value', ev.detail.value);
@@ -107,14 +120,34 @@ export class LoginscreenPage implements OnInit {
           .then(
             (result: any) => {
               console.log(result);
-             
+              let data = {
+                // localStorage.getItem('onesignalId')
+                "one_signal_id": '123',
+                "email": this.getuserEmail,
+                "password": this.getuserPassword
+              }
+              this.api.sendRequest('signin', data).subscribe((res: any) => {
+                console.log('response--', res);
+                if (res.status == 'success') {
+                  this.rest.hideLoader()
+                  localStorage.setItem('userdeatil', JSON.stringify(res.data))
+                  localStorage.setItem('user_Id', res.data.users_customers_id);
+                  this.navCtrl.navigateRoot('home');
+                } else {
+                  this.rest.hideLoader()
+                  this.rest.presentToast(res.message)
+                }
+        
+              }, err => {
+                this.rest.hideLoader()
+              })
             },
-            (err) => {
+            (err:any) => {
               this.rest.presentToast(JSON.stringify(err));
             }
           );
       },
-      (err) => {
+      (err:any) => {
         this.rest.presentToast('finger print no avaibale---' + err);
       }
     );

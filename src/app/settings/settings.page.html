@@ -25,6 +25,16 @@
       <ion-toggle class="ctoggle" (ionChange)="changed($event)" *ngIf="notichecked=='true'" checked></ion-toggle>
     </div>
 
+    <div class="flex-c">
+      <div>
+        <div class="text1">Face Id/Biometric</div>
+        <div class="text2">Enable Face Id/Biometric</div>
+      </div>
+
+      <ion-toggle class="ctoggle" (ionChange)="changedId($event)" checked *ngIf="api.fpval=='true'"></ion-toggle>
+      <ion-toggle class="ctoggle" (ionChange)="changedId($event)" *ngIf="api.fpval=='false'"></ion-toggle>
+    </div>
+
     <div class="text3 EudoxusSansReg">Session Expired</div>
 
     <ion-list lines="none" style=" width: 100%;background: none;margin-top:3%;">

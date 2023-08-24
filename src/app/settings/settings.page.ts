@@ -11,8 +11,10 @@ import { NavController } from '@ionic/angular';
 })
 export class SettingsPage implements OnInit {
   notichecked = 'false';
+  Idchecked='false';
   number: any;
   time: any;
+  fp:any;
   constructor(public location: Location,
     public api: ApiService,
     public extra: ExtraService,
@@ -23,6 +25,9 @@ export class SettingsPage implements OnInit {
   }
 
   ionViewWillEnter() {
+    this.fp = localStorage.getItem('fingerprint');
+    console.log('fingerprint====', this.fp);
+    this.api.fpval = this.fp
     this.getuser()
 
   }
@@ -50,6 +55,18 @@ export class SettingsPage implements OnInit {
       console.log('reeer', res);
 
     })
+  }
+  changedId(ev: any) {
+    console.log(ev);
+    
+    if (ev.detail.checked == true) {
+
+      this.api.fpval = 'true'
+      localStorage.setItem('fingerprint', 'true')
+    } else {
+      this.api.fpval = 'false';
+      localStorage.setItem('fingerprint', 'false')
+    }
   }
 
   handleChange(ev: any) {
