@@ -23,12 +23,12 @@ export class AppComponent {
   initializeApp() {
     console.log(localStorage.getItem('user_Id'));
 
-    // if (localStorage.getItem('user_Id') == '' || localStorage.getItem('user_Id') == null) {
-    //   this.navCtrl.navigateRoot('onboard')
-    // } else {
+    if (localStorage.getItem('user_Id') == '' || localStorage.getItem('user_Id') == null) {
+      this.navCtrl.navigateRoot('onboard')
+    } else {
 
-    //   this.navCtrl.navigateRoot('home');
-    // }
+      this.navCtrl.navigateRoot('home');
+    }
 
     // this.pushNotification()
   }
