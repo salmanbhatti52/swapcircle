@@ -72,8 +72,8 @@ export class ProfilePage implements OnInit {
     toast.present();
   }
 
-  billing() {
-    this.navCtrl.navigateForward('billingpayment');
+  addpayout() {
+    this.navCtrl.navigateForward('addaccount');
   }
   transaction() {
     this.navCtrl.navigateForward('transaction');
