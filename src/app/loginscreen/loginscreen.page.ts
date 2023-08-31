@@ -16,7 +16,7 @@ export class LoginscreenPage implements OnInit {
   pass1: any;
   showPass = false;
   showcPass = false;
-  fingerprintlogo=false;
+  fingerprint = false;
   getuserEmail: any;
   getuserPassword: any;
   constructor(public navCtrl: NavController,
@@ -43,9 +43,9 @@ export class LoginscreenPage implements OnInit {
     }
     //////////////////
     if (localStorage.getItem('fingerprint') == 'true') {
-      this.fingerprintlogo = true;
+      this.fingerprint = true;
     } else {
-      this.fingerprintlogo = false;
+      this.fingerprint = false;
     }
     this.getuserEmail = localStorage.getItem('email');
     this.getuserPassword = localStorage.getItem('password');
@@ -90,7 +90,7 @@ export class LoginscreenPage implements OnInit {
           this.rest.hideLoader()
           localStorage.setItem('userdeatil', JSON.stringify(res.data))
           localStorage.setItem('user_Id', res.data.users_customers_id);
-           localStorage.setItem('email', res.data.email);
+          localStorage.setItem('email', res.data.email);
           localStorage.setItem('password', this.pass1);
           this.navCtrl.navigateRoot('home');
         } else {
@@ -137,17 +137,17 @@ export class LoginscreenPage implements OnInit {
                   this.rest.hideLoader()
                   this.rest.presentToast(res.message)
                 }
-        
+
               }, err => {
                 this.rest.hideLoader()
               })
             },
-            (err:any) => {
+            (err: any) => {
               this.rest.presentToast(JSON.stringify(err));
             }
           );
       },
-      (err:any) => {
+      (err: any) => {
         this.rest.presentToast('finger print no avaibale---' + err);
       }
     );

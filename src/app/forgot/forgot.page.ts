@@ -2,6 +2,7 @@ import { NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from './../services/api.service';
 import { ExtraService } from './../services/extra.service';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-forgot',
   templateUrl: './forgot.page.html',
@@ -11,11 +12,15 @@ export class ForgotPage implements OnInit {
   email: any = ''
   constructor(public navCtrl: NavController,
     public rest: ExtraService,
-    public api: ApiService) { }
+    public api: ApiService,
+    public location: Location) { }
 
   ngOnInit() {
   }
 
+  goback() {
+    this.location.back()
+  }
   goNext() {
     let data = {
       "email": this.email,

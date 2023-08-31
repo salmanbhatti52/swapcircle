@@ -46,22 +46,18 @@
     <!-- input 2 -->
 
     <p class="p1 EudoxusSansReg" (click)="forgot()">Forgot password?</p>
-    <div *ngIf="fingerprintlogo==false">
+    <div *ngIf="fingerprint==false">
       <ion-button style="margin: 50px 0px 15px 0px" class="btnbggreen EudoxusSansReg"
-      (click)="goNext()">Login</ion-button>
+        (click)="goNext()">Login</ion-button>
     </div>
-    
-    <ion-row *ngIf="fingerprintlogo==true" style="align-items: center;">
+
+    <ion-row *ngIf="fingerprint==true" style="align-items: center;">
       <ion-col size="11">
         <ion-button style="margin: 50px 0px 15px 0px" class="btnbggreen EudoxusSansReg"
-        (click)="goNext()">Login</ion-button>
+          (click)="goNext()">Login</ion-button>
       </ion-col>
       <ion-col size="1" style="padding-top: 40px; text-align: center">
-        <ion-icon
-          name="finger-print-outline"
-          style="font-size: 30px; color: gray"
-          (click)="fflogin()"
-        ></ion-icon>
+        <ion-icon name="finger-print-outline" style="font-size: 30px; color: gray" (click)="fflogin()"></ion-icon>
       </ion-col>
     </ion-row>
 
