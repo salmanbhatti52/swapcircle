@@ -1,4 +1,4 @@
-import { AlertController, NavController } from '@ionic/angular';
+import { AlertController, ModalController, NavController } from '@ionic/angular';
 import { ExtraService } from './../services/extra.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -41,6 +41,9 @@ export class Signup1Page implements OnInit {
   countrycode: any = 'US';
   validnumber: any;
   referalcode: any;
+  selectedItem: any;
+  isModalOpen = false;
+  term: any;
 
   // cameraOptions: CameraOptions = {
   //   quality: 50,
@@ -64,6 +67,7 @@ export class Signup1Page implements OnInit {
     private http: HttpClient,
     public rest: ExtraService,
     public navCtrl: NavController,
+    public modal: ModalController,
     public alertCtrl: AlertController) { }
 
   ngOnInit() {
@@ -86,44 +90,90 @@ export class Signup1Page implements OnInit {
     this.showflags = true
     // this.setItems();
   }
+  openmodal() {
+    this.isModalOpen = true
+  }
   setItems() {
     this.http.get('assets/countries.json').toPromise().then(
       (res: any) => {
         this.allItems = res.countries;
-        this.items = this.allItems;
+
+        let dataArrayWithPlus = this.allItems.map((item: any) => ({
+          ...item, // Copy all existing properties from the original object
+
+          callingCodes: `+${item.callingCodes}` // Add '+' to the countryCode
+        }));
+        this.items = dataArrayWithPlus;
         console.log(this.items);
 
       }
     );
   }
 
-  filterItems(ev: any) {
-    let val = ev.target.value;
+  // filterItems(ev: any) {
+  //   let val = ev.target.value;
 
-    if (val && val.trim() !== '') {
-      val = val.toLowerCase();
-      this.items = this.items.filter((item) => {
-        return item.name.toLowerCase().includes(val)
-          || item.nativeName.includes(val)
-          || item.capital.toLowerCase().includes(val);
-      });
-    } else {
-      this.items = this.allItems;
-    }
+  //   if (val && val.trim() !== '') {
+  //     val = val.toLowerCase();
+  //     this.items = this.items.filter((item) => {
+  //       return item.name.toLowerCase().includes(val)
+  //         || item.nativeName.includes(val)
+  //         || item.capital.toLowerCase().includes(val);
+  //     });
+  //   } else {
+  //     this.items = this.allItems;
+  //   }
 
-  }
+  // }
   viewDetails(item: any) {
-    // console.log('code===', item.callingCodes[0])
+    // console.log('code===', item.callingCodes)
     this.flaglist = false
     this.flagimage = item.flag
     this.showimage = true;
     this.upicon = false;
     this.nationality = item.name
-    this.callingcode = '+' + item.callingCodes[0];
+    this.callingcode = item.callingCodes;
     console.log('code===', this.callingcode)
     this.countrycode = item.alpha2Code
+    this.modal.dismiss()
+    this.isModalOpen = false
   }
 
+  onInputChanged(ev: any) {
+    const inputValue = (ev.target as HTMLInputElement).value;
+
+    // Your logic here to handle the input value change
+    console.log(`Input value changed to: ${inputValue}`);
+    const userInputNumber = inputValue
+
+
+    if (userInputNumber) {
+
+      const item = this.items.find((i: any) =>
+
+        i.callingCodes === userInputNumber
+      );
+
+
+      if (item) {
+        console.log(item);
+
+        this.flagimage = item.flag
+        this.showimage = true;
+        this.callingcode = item.callingCodes;
+
+
+
+      }
+      else {
+        this.flagimage = '';
+        this.callingcode = '';
+        this.selectedItem = null;
+      }
+    } else {
+      this.selectedItem = null;
+    }
+  }
   updateList(ev: any) {
     console.log(ev);
 

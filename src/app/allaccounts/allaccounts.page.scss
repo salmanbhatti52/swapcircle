@@ -1,7 +1,14 @@
 .wrapper{
-    width: 90%;
-    margin:10% auto;
-}   
+    width: 93%;
+    margin: 5% auto;
+}
+.rowcls{
+    background: #FFFFFF;
+    border-radius: 25px;
+    padding: 5px 10px;
+    align-items: center;
+    margin-bottom: 12px;
+}
 .text{
     font-weight: 500;
     font-size: 15px;
@@ -13,11 +20,14 @@
     font-weight: 500;
     font-size: 15px;
     color: #000;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     margin-left: 3px;
-    margin-top: 20px;
+    margin-top: 15px;
 }
-.sublist{
+.active{
+    border-radius: 24px 24px 0px 0px;
+  }
+  .sublist{
     padding-left: 20px;
     height: 150px;
     overflow: scroll;
@@ -37,9 +47,14 @@ input::placeholder {
     font-size: 16px;
     margin-top: 10px;
   }
-  .active{
-    border-radius: 24px 24px 0px 0px;
-  }
+.text2{
+    font-size: 12px;
+    font-weight: 700;
+    color: #121826;
+    margin-top: 3px;
+}
+
+  
   .desc-area{
     font-size: 13px;
     --background:none !important;
@@ -54,3 +69,4 @@ input::placeholder {
     --background: transparent;
     --icon-color: transparent;
   }
+

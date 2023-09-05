@@ -66,7 +66,7 @@
       <div class="inputfieldtransparent" style="width: 100%; height: 64px; margin-top: 20px; display: flex">
 
         <div style="align-items: center;display: flex;
-        padding: 8px 5px 6px 15px;" (click)="openfflaglist()">
+        padding: 8px 5px 6px 15px;" (click)="openmodal()" id="open-modal">
           <div class="text1">
             <img src="assets/imgs/flag1.svg" *ngIf="showimage==false">
             <img src="{{flagimage}}" *ngIf="showimage==true" style="width:30px;height: 18px;border-radius: 90px;">
@@ -78,25 +78,13 @@
             <ion-icon name="caret-up-outline" class="cicon"></ion-icon>
           </div>
         </div>
-        <input [(ngModel)]="callingcode" class="input EudoxusSansReg" type="tel" style="width: 50px!important;">
+        <input [(ngModel)]="callingcode" class="input EudoxusSansReg" type="tel" style="width: 50px!important;"
+          (input)="onInputChanged($event)">
         <input [(ngModel)]="num" class="input EudoxusSansReg" type="tel" placeholder="Phone number" id="fname"
           (ionChange)="updateList($event)">
       </div>
       <!-- flag list shown -->
-      <div *ngIf="flaglist==true" style="width: 100%;">
-        <ion-list style="height: 150px;overflow: scroll;">
-          <ion-item *ngFor="let item of items" (click)="viewDetails(item)">
-            <ion-avatar item-start>
-              <img [src]="item.flag" style="width: 30px;
-              height: 30px;">
 
-            </ion-avatar>
-            <div style="font-size: 13px;
-            color: #969D9F !important;
-            margin-top: -6px;">{{item.callingCodes[0]}}</div>
-          </ion-item>
-        </ion-list>
-      </div>
       <!-- flag list shown -->
 
 
@@ -151,4 +139,28 @@
       </div>
     </div>
   </div>
+
+  <!-- <div *ngIf="countrylist==true"> -->
+  <ion-modal #modal trigger="open-modal" [initialBreakpoint]="0.75" [isOpen]="isModalOpen">
+    <ng-template>
+      <ion-content>
+        <ion-searchbar placeholder="Search" [(ngModel)]="term"></ion-searchbar>
+        <!-- <div *ngIf="flaglist==true" style="width: 100%;"> -->
+        <ion-list>
+          <ion-item *ngFor="let item of items| filter:term;" (click)="viewDetails(item)">
+            <ion-avatar item-start>
+              <img [src]="item.flag" style="width: 30px; height: 30px;">
+
+            </ion-avatar>
+            <div style="font-size: 13px;
+              color: #969D9F !important;
+              margin-top: -6px;">{{item.callingCodes}}
+            </div>
+          </ion-item>
+        </ion-list>
+        <!-- </div> -->
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+  <!-- </div> -->
 </ion-content>

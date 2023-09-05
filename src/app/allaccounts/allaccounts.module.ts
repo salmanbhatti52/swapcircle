@@ -4,18 +4,18 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { Signup1PageRoutingModule } from './signup1-routing.module';
+import { AllaccountsPageRoutingModule } from './allaccounts-routing.module';
 
-import { Signup1Page } from './signup1.page';
+import { AllaccountsPage } from './allaccounts.page';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    Signup1PageRoutingModule,
+    AllaccountsPageRoutingModule,
     Ng2SearchPipeModule
   ],
-  declarations: [Signup1Page]
+  declarations: [AllaccountsPage]
 })
-export class Signup1PageModule { }
+export class AllaccountsPageModule { }

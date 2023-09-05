@@ -23,3 +23,14 @@
   color: #D3D5DA;
   font-size: 12px;
 }
+.item.item-input {
+	border: none;
+	position: relative;
+    
+    left: 0px;
+    top: 135px;
+    background-color: transparent;
+    width:100%;
+}
+.item.item-input span{width:auto;}
+.item.item-input input{width:68%;}

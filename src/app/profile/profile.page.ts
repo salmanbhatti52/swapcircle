@@ -73,7 +73,7 @@ export class ProfilePage implements OnInit {
   }
 
   addpayout() {
-    this.navCtrl.navigateForward('addaccount');
+    this.navCtrl.navigateForward('allaccounts');
   }
   transaction() {
     this.navCtrl.navigateForward('transaction');

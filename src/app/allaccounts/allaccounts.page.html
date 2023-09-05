@@ -1,0 +1,123 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar style="--background: #e9f5ec;">
+    <ion-row style="width:95%;margin: 0% auto;">
+      <ion-col size="2">
+        <img src="assets/imgs/arrow_back_ios_new.svg" style="margin-top: 3px" (click)="goback()">
+      </ion-col>
+      <ion-col size="8">
+        <div style="font-weight: 700;
+      font-size: 20px;color: #21333B;text-align: center;" class="EudoxusSansReg">Accounts</div>
+      </ion-col>
+      <ion-col size="2"></ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content style="--background: #e9f5ec;">
+  <div *ngIf="errtextshow==true" style="font-weight: 500;
+  font-size: 20px;
+  color: #21333B;
+  text-align: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);" class="EudoxusSansReg">{{errtext}}</div>
+  <div class="wrapper">
+    <ion-row class="rowcls" *ngFor="let item of accounts" (click)="setOpen(item)">
+      <ion-col size="2.5">
+        <img src="https://portal.swapcircle.trade/public/{{item.user_data.profile_pic}}" style="border-radius: 90px;
+        width: 50px;
+        height: 50px;">
+      </ion-col>
+      <ion-col size="7.5" style="padding-top: 0px">
+        <div class="text1 EudoxusSansReg">{{item.full_name}}</div>
+        <div class="text2 EudoxusSansReg">{{item.account_currency.symbol}} {{item.iban}}</div>
+      </ion-col>
+      <ion-col size="2" style="text-align: end;">
+        <img src="assets/imgs/cash-withdrawal.png" style="margin-top: 3px;">
+        <!-- <ion-button expand="full">WithDraw</ion-button> -->
+      </ion-col>
+    </ion-row>
+
+  </div>
+  <ion-modal [isOpen]="isModalOpen">
+    <ng-template>
+      <ion-header class="ion-no-border">
+        <ion-toolbar style="--background: #e9f5ec;">
+          <ion-row style="width:95%;margin: 0% auto;">
+            <ion-col size="2">
+              <!-- <ion-icon name="create-outline" style="font-size: 22px;color: #4BD16F;" (click)="edit()"></ion-icon> -->
+            </ion-col>
+            <ion-col size="8" style="padding-top: 3px">
+              <div style="font-weight: 700;
+            font-size: 20px;color: #21333B;text-align: center;" class="EudoxusSansReg">Account Detail</div>
+            </ion-col>
+            <ion-col size="2" style="text-align: end;">
+              <ion-icon name="close-circle-outline" (click)="setclose()"
+                style="font-size: 22px;color: #4BD16F;"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content class="ion-padding" style="--background: #e9f5ec;">
+        <div class="text EudoxusSansReg">Currency</div>
+        <div class="inputfieldtransparent " style="width:100%;border: 1.5px solid #969D9F !important;"
+          (click)="openList()" [class.active]="showcurr==true">
+          <div style="display: flex;">
+            <ion-searchbar mode="ios" (input)="onSearch($event)" placeholder="Search" [(ngModel)]="currency"
+              class="custom-search"></ion-searchbar>
+
+            <ion-icon style="margin: 17px 17px 17px 15px;color: #4BD16F;font-size: 30px;"
+              name="chevron-down-outline"></ion-icon>
+          </div>
+
+        </div>
+
+        <div *ngIf="showcurr==true" class="sublist">
+          <div *ngFor="let list of walletslist| filter:currency; let i=index" (click)="selectcurrency(list,i)">
+            <div class="euro-text1 EudoxusSansReg">
+              {{list.currency.name}} <span style="font-size: 12px;padding-left: 2px;">({{list.currency.code}})</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="text1 EudoxusSansReg">Bank Name</div>
+        <div class="inputfieldtransparent"
+          style="width: 100%; height: 64px; margin-bottom:20px; display: flex;border: 1.5px solid #969D9F !important;">
+          <input [(ngModel)]="bankname" class="input EudoxusSansReg" type="text" placeholder="Bank name" readonly>
+        </div>
+
+        <div class="text1 EudoxusSansReg">Account number</div>
+        <div class="inputfieldtransparent"
+          style="width: 100%; height: 64px; margin-bottom:20px; display: flex;border: 1.5px solid #969D9F !important;">
+          <input [(ngModel)]="accountnumber" class="input EudoxusSansReg" type="text" placeholder="************"
+            readonly>
+        </div>
+
+        <div class="text1 EudoxusSansReg">Amount</div>
+        <div class="inputfieldtransparent"
+          style="width: 100%; height: 64px; margin-bottom:20px; display: flex;border: 1.5px solid #969D9F !important;">
+          <input [(ngModel)]="amount" class="input EudoxusSansReg" type="text" placeholder="0">
+        </div>
+
+        <div class="text1 EudoxusSansReg">Account Notes</div>
+        <ion-textarea rows="5" cols="5" class="desc-area sf_pro_display" placeholder="Account Notes"
+          [(ngModel)]="desc"></ion-textarea>
+
+        <div style="width:93%;margin:0% auto 5%;" (click)="withdraw()">
+          <ion-button style="margin-top: 5%;" class="btnbggreen EudoxusSansReg">
+            WithDraw</ion-button>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>
+
+<ion-footer class="ion-no-border" style="background: #e9f5ec;">
+  <div style="width:93%;margin:0% auto 5%;">
+    <ion-button style="margin-top: 5%;" class="btnbggreen EudoxusSansReg" (click)="goto()">
+      Add Account</ion-button>
+  </div>

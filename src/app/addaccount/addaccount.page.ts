@@ -14,10 +14,14 @@ export class AddaccountPage implements OnInit {
   holdername: any;
   iban: any;
 
+  bankname: any;
+  accountnumber: any;
   showcurr = false;
   currencies = [{ curr: 'Euro' }, { curr: 'Dollar' }, { curr: 'INR' }]
   walletslist: any;
   currencyId: any;
+  desc: any;
+  branchcode: any;
   constructor(public location: Location,
     public api: ApiService,
     public navCtrl: NavController,
@@ -29,10 +33,7 @@ export class AddaccountPage implements OnInit {
 
   walletlist() {
     this.extra.loadershow()
-    let datasend = {
-      "users_customers_id": localStorage.getItem('user_Id'),
-    }
-    this.api.sendRequest('get_wallet', datasend).subscribe((response: any) => {
+    this.api.getRequest('all_currencies').subscribe((response: any) => {
       console.log('get_wallet=========', response);
       this.extra.hideLoader()
       this.walletslist = response.data
@@ -40,9 +41,18 @@ export class AddaccountPage implements OnInit {
   }
   selectcurrency(list: any, index: any) {
     console.log(list);
-
-    this.currencyId = list.currency.system_currencies_id
+    this.currency = list.code
+    this.currencyId = list.system_currencies_id
     this.showcurr = false;
+  }
+  onSearch(searchTerm: any) {
+    // Perform your logic here with the search term
+    console.log('Search term:', searchTerm);
+    this.showcurr = true;
+    if (searchTerm.inputType == 'deleteContentBackward') {
+
+
+    }
   }
 
   save() {
@@ -50,6 +60,9 @@ export class AddaccountPage implements OnInit {
       "users_customers_id": localStorage.getItem('user_Id'),
       "system_currencies_id": this.currencyId,
       "full_name": this.holdername,
+      "bank_name": this.bankname,
+      "branch_code": this.branchcode,
+      "account_no": this.accountnumber,
       "iban": this.iban
     }
     this.extra.loadershow()
@@ -58,7 +71,7 @@ export class AddaccountPage implements OnInit {
       if (res.status == 'success') {
         this.extra.hideLoader()
         this.extra.presentToast('Account add successfully');
-        this.navCtrl.navigateForward('billingpayment')
+        this.navCtrl.navigateForward('allaccounts');
       } else {
         this.extra.presentToast(res.message);
       }
