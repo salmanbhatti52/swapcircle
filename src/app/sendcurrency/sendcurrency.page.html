@@ -35,7 +35,8 @@
       <div style="display: flex;">
         <!-- <input [(ngModel)]="fromcurrency" class="input EudoxusSansReg" type="text" placeholder="Select Currency"
           readonly> -->
-        <ion-searchbar mode="ios" placeholder="Search" [(ngModel)]="fromcurrency" class="custom-search"></ion-searchbar>
+        <ion-searchbar mode="ios" placeholder="Search" (input)="onSearch($event)" [(ngModel)]="fromcurrency"
+          class="custom-search"></ion-searchbar>
         <ion-icon style="margin: 17px 17px 17px 15px;color: #4BD16F;font-size: 30px;"
           name="chevron-down-outline"></ion-icon>
       </div>
@@ -63,7 +64,8 @@
       (click)="openexcList()" [class.active]="showexccurr==true">
       <div style="display: flex;">
         <!-- <input [(ngModel)]="excurrency" class="input EudoxusSansReg" type="text" placeholder="Select Currency" readonly> -->
-        <ion-searchbar mode="ios" placeholder="Search" [(ngModel)]="excurrency" class="custom-search"></ion-searchbar>
+        <ion-searchbar mode="ios" placeholder="Search" (input)="onSearch2($event)" [(ngModel)]="excurrency"
+          class="custom-search"></ion-searchbar>
         <ion-icon style="margin: 17px 17px 17px 15px;color: #4BD16F;font-size: 30px;"
           name="chevron-down-outline"></ion-icon>
       </div>
@@ -97,7 +99,7 @@
 
     <div class="text1 EudoxusSansReg">Send to</div>
     <div class="inputfieldtransparent"
-      style="width: 100%; height: 64px; display: flex;border: 1.5px solid #969D9F !important;"
+      style="width: 100%; height: 64px; display: flex;margin-bottom: 20px;border: 1.5px solid #969D9F !important;"
       [class.active]="emailsshow==true">
       <ion-input [(ngModel)]="email" class="input EudoxusSansReg" type="text" placeholder="Enter Email"
         (ionInput)="eventHandler($event)"></ion-input>

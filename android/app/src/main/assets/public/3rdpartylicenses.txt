@@ -211,6 +211,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 
+flutterwave-angular-v3
+MIT
+
 ionic-loader
 
 libphonenumber-js

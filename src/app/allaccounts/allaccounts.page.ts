@@ -135,7 +135,7 @@ export class AllaccountsPage implements OnInit {
     const alert = await this.alertController.create({
       header: 'WithDraw Request',
       message: 'WithDraw will be completed after admin approvel!',
-      cssClass: 'custom-alert',
+      cssClass: 'custom-alert2',
       buttons: [
         {
           text: 'OK',

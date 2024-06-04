@@ -163,24 +163,7 @@ export class CreatesawapPage implements OnInit {
     } else if (this.excurrency == '') {
       this.extra.presentToast('Select currency for To account')
     } else {
-      let data = {
-        "users_customers_id": localStorage.getItem('user_Id'),
-        "from_users_customers_wallets_id": this.fromwalletId,
-        "to_users_customers_wallets_id": this.towalletId,
-        "amount_from": this.totalamount,
-        "system_currencies_id": localStorage.getItem('systemcurr')
-      }
-      this.api.sendRequest('wallet_swap', data).subscribe((res: any) => {
-        console.log('wallet response=====', res);
-        if (res.status == 'success') {
-          this.extra.presentToast('Amount transfer successfully');
-          this.navCtrl.navigateForward('home')
-        } else {
-          this.extra.presentToast(res.message)
-        }
-      }, err => {
-        this.extra.presentToast('Something went wrong')
-      })
+      this.Alerboxt()
     }
   }
 
@@ -189,6 +172,52 @@ export class CreatesawapPage implements OnInit {
 
       message: 'No wallet exist',
       buttons: ['OK'],
+    });
+
+    await alert.present();
+  }
+
+  async Alerboxt() {
+    const alert = await this.alert.create({
+      message: 'Are you sure to transfer' + ' ' + this.fromcurrency + this.totalamount + ' ' + 'to account' + ' ' + this.excurrency,
+      cssClass: 'custom-alert',
+      buttons: [
+        {
+          text: 'Yes',
+          cssClass: 'alert-button-confirm',
+          handler: () => {
+            let data = {
+              "users_customers_id": localStorage.getItem('user_Id'),
+              "from_users_customers_wallets_id": this.fromwalletId,
+              "to_users_customers_wallets_id": this.towalletId,
+              "amount_from": this.totalamount,
+              "system_currencies_id": localStorage.getItem('systemcurr')
+            }
+            this.extra.loadershow()
+            this.api.sendRequest('wallet_swap', data).subscribe((res: any) => {
+              console.log('wallet response=====', res);
+              if (res.status == 'success') {
+                this.extra.hideLoader()
+                this.extra.presentToast('Amount transfer successfully');
+                this.navCtrl.navigateForward('home')
+              } else {
+                this.extra.presentToast(res.message)
+              }
+            }, err => {
+              this.extra.presentToast('Something went wrong')
+            })
+          },
+        },
+        {
+          text: 'No',
+          cssClass: 'alert-button-confirm',
+          handler: () => {
+
+          },
+        },
+      ]
+
+
     });
 
     await alert.present();

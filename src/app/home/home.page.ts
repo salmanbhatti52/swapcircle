@@ -58,8 +58,8 @@ export class HomePage {
   constructor(public navCtrl: NavController,
     public api: ApiService,
     public extra: ExtraService,
-    public alert:AlertController
-    ) {
+    public alert: AlertController
+  ) {
     this.systemsettings()
     this.userdetail = localStorage.getItem('userdeatil')
     console.log(this.userdetail);
@@ -140,7 +140,7 @@ export class HomePage {
     if (fp == null) {
       const alert = await this.alert.create({
         header: 'Do you want to add Finger Print/Face ID login',
-        cssClass: 'fgprintcls',
+        cssClass: 'custom-alert',
         buttons: [
           {
             text: 'Yes',

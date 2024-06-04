@@ -181,6 +181,10 @@ const routes: Routes = [
     path: 'allaccounts',
     loadChildren: () => import('./allaccounts/allaccounts.module').then( m => m.AllaccountsPageModule)
   },
+  {
+    path: 'payment',
+    loadChildren: () => import('./payment/payment.module').then( m => m.PaymentPageModule)
+  },
 ];
 
 @NgModule({

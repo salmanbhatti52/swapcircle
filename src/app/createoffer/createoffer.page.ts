@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Location } from '@angular/common';
 import { ApiService } from '../services/api.service';
 import { ExtraService } from '../services/extra.service';
@@ -11,7 +11,7 @@ import * as moment from 'moment';
   styleUrls: ['./createoffer.page.scss'],
 })
 export class CreateofferPage implements OnInit {
- 
+
   basecurrency: any;
   excurrency: any;
   totalamount: any;
@@ -25,8 +25,8 @@ export class CreateofferPage implements OnInit {
   currId: any;
   tocurrId: any;
   systemcurrID: any;
-  selectedDateTime:any
-  formattedDateTime:any='Select Date and Time';
+  selectedDateTime: any
+  formattedDateTime: any = 'Select Date and Time';
   parsedDate: any;
   isModalOpen = false;
   constructor(public location: Location,
@@ -34,7 +34,7 @@ export class CreateofferPage implements OnInit {
     public extra: ExtraService,
     public alertController: AlertController,
     public navCtrl: NavController,
-    public modal:ModalController) { }
+    public modal: ModalController) { }
 
   ngOnInit() {
     this.walletlist()
@@ -50,9 +50,9 @@ export class CreateofferPage implements OnInit {
   setOpen(isOpen: boolean) {
     this.isModalOpen = isOpen;
     const date = new Date(this.selectedDateTime);
-    this.formattedDateTime=moment(date).format('yyyy-MM-DD H:mm:ss');
+    this.formattedDateTime = moment(date).format('yyyy-MM-DD H:mm:ss');
   }
-  
+
   openList() {
     if (this.walletslist.length == 0) {
       this.presentAlert()
@@ -118,7 +118,7 @@ export class CreateofferPage implements OnInit {
   }
 
   createoffer() {
-   
+
     let data = {
       "users_customers_id": localStorage.getItem('user_Id'),
       "from_system_currencies_id": this.currId,
@@ -135,9 +135,10 @@ export class CreateofferPage implements OnInit {
   async presentalert(message: any, data: any) {
     const alert = await this.alertController.create({
       message: message,
+      cssClass: 'custom-alert',
       buttons: [
         {
-          text: 'OK',
+          text: 'Yes',
           role: 'confirm',
           handler: () => {
             this.api.sendRequest('swap_offer', data).subscribe((rsp: any) => {
@@ -171,6 +172,7 @@ export class CreateofferPage implements OnInit {
 
       message: 'No wallet amount exist',
       buttons: ['OK'],
+      cssClass: 'custom-alert2',
     });
 
     await alert.present();

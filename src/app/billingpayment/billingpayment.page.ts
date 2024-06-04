@@ -92,6 +92,9 @@ export class BillingpaymentPage implements OnInit {
   selectpaymentmethod(ev: any) {
     console.log(ev);
     this.payment = ev.detail.value
+    if (this.payment == 'Online') {
+      this.navCtrl.navigateForward('payment')
+    }
   }
   selectbank(ev: any) {
     console.log(ev);
@@ -132,9 +135,9 @@ export class BillingpaymentPage implements OnInit {
   }
   async presentAlert() {
     const alert = await this.alertController.create({
-      header: 'Payment Pending',
-      message: 'Transaction will be completed after admin approvel!',
-      cssClass: 'custom-alert',
+      header: '"Payment Pending"',
+      message: 'Transaction will be completed once validated​',
+      cssClass: 'custom-alert2',
       buttons: [
         {
           text: 'OK',

@@ -1,0 +1,29 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar style="--background: #e9f5ec;">
+    <ion-row style="width:95%;margin: 0% auto;">
+      <ion-col size="2">
+        <img src="assets/imgs/arrow_back_ios_new.svg" style="margin-top: 3px" (click)="goback()">
+      </ion-col>
+      <ion-col size="8">
+        <div style="font-weight: 700;
+      font-size: 20px;color: #21333B;text-align: center;" class="EudoxusSansReg">Payment</div>
+      </ion-col>
+      <ion-col size="2"></ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="--background: #e9f5ec;">
+  <div class="wrapper">
+    <div class="text1 EudoxusSansReg">Amount</div>
+    <div class="inputfieldtransparent"
+      style="width: 100%; height: 64px; margin-bottom:20px; display: flex;border: 1.5px solid #969D9F !important;">
+      <input [(ngModel)]="depositamount" class="input EudoxusSansReg" type="number" placeholder="Amount">
+    </div>
+    <flutterwave-make-payment [public_key]="publicKey" [amount]=depositamount currency="NGN" payment_options="card"
+      redirect_url="" text="Pay Now" [customer]="customerDetails" [customizations]="customizations" [meta]="meta"
+      [tx_ref]="generateReference()" (callback)="makePaymentCallback($event)" (close)="closedPaymentModal()">
+    </flutterwave-make-payment>
+  </div>
+
+</ion-content>

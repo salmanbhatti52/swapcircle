@@ -38,9 +38,9 @@
     </ion-list>
 
 
-    <div style="font-size: 20px;
+    <!-- <div style="font-size: 20px;
     color: #21333B;
-    text-align: center;margin-top: 5%;" *ngIf="payment=='Online'">In processing</div>
+    text-align: center;margin-top: 5%;" *ngIf="payment=='Online'">In processing</div> -->
 
     <div *ngIf="payment=='Offline'">
       <div style="text-align: center;">
@@ -50,6 +50,11 @@
         <img src="{{recieptimage}}" style=" border-radius: 90%;
         width: 128px;
         height: 128px;" *ngIf="recieptimage!=''">
+        <div style="margin-top: 3%;
+         margin-left: 3%;font-size: 16px;
+         color: #121826" class="EudoxusSansReg">
+          Upload evidence of payment​
+        </div>
       </div>
 
       <div style="margin-top: 3%;

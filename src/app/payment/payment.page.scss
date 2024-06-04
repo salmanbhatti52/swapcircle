@@ -1,0 +1,21 @@
+.wrapper{
+    width: 93%;
+    margin: 5% auto;
+}
+
+.text1{
+    font-weight: 500;
+    font-size: 15px;
+    color: #000;
+    margin-bottom: 10px;
+    margin-left: 3px;
+    margin-top: 20px;
+}
+
+input{
+    padding-left: 20px;
+}
+input::placeholder {
+    color: #21333B !important;
+    opacity: 0.5;
+  }

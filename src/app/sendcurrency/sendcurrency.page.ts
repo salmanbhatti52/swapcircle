@@ -100,7 +100,23 @@ export class SendcurrencyPage implements OnInit {
   }
 
 
+  onSearch(searchTerm: any) {
+    // Perform your logic here with the search term
+    console.log('Search term:', searchTerm);
+    this.showcurr = true;
+    if (searchTerm.inputType == 'deleteContentBackward') {
 
+
+    }
+  }
+  onSearch2(searchTerm: any) {
+    // Perform your logic here with the search term
+    console.log('Search term:', searchTerm);
+    this.showexccurr = true;
+    if (searchTerm.inputType == 'deleteContentBackward') {
+
+    }
+  }
 
 
 
@@ -163,6 +179,7 @@ export class SendcurrencyPage implements OnInit {
   async selectemail(item: any, i: any) {
     const alert = await this.alertController.create({
       message: 'Are you sure to select this email?',
+      cssClass: 'custom-alert',
       buttons: [
         {
           text: 'Cancel',
@@ -173,7 +190,7 @@ export class SendcurrencyPage implements OnInit {
           },
         },
         {
-          text: 'OK',
+          text: 'Yes',
           role: 'confirm',
           handler: () => {
             localStorage.setItem('recieverdetail', JSON.stringify(item))
@@ -268,9 +285,9 @@ export class SendcurrencyPage implements OnInit {
     else if (this.email == '') {
       this.extra.presentToast('Select email to send')
     }
-    else if (this.country == '') {
-      this.extra.presentToast('Select country')
-    }
+    // else if (this.country == '') {
+    //   this.extra.presentToast('Select country')
+    // }
     else {
       let data = {
         "from_users_customers_id": localStorage.getItem('user_Id'),
@@ -303,6 +320,7 @@ export class SendcurrencyPage implements OnInit {
     const alert = await this.alertController.create({
 
       message: 'No currency exist',
+      cssClass: 'custom-alert2',
       buttons: ['OK'],
     });
 

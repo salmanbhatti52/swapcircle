@@ -13,9 +13,10 @@ import { Camera } from '@awesome-cordova-plugins/camera/ngx';
 import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
 import { FloatingButtonComponent } from './floating-button/floating-button.component';
 import { FingerprintAIO } from '@ionic-native/fingerprint-aio/ngx';
+import { FlutterwaveModule } from "flutterwave-angular-v3"
 @NgModule({
   declarations: [AppComponent, FloatingButtonComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, FlutterwaveModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
   providers: [
     ReactiveFormsModule,
     FormsModule,
