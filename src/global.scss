@@ -355,7 +355,11 @@ ion-searchbar{
 }
 
 //////alert2////////
+/// 
 .custom-alert2 .alert-wrapper.sc-ion-alert-md {
+  border-radius: 10px !important;
+}
+.custom-alert2 .alert-wrapper.sc-ion-alert-ios {
   border-radius: 10px !important;
 }
 .custom-alert2 .alert-head.sc-ion-alert-md {
@@ -364,22 +368,76 @@ ion-searchbar{
   font-size: 18px !important;
   font-family: "EudoxusSansReg" !important;
 }
-.custom-alert2 .alert-message.sc-ion-alert-md{
-  padding:5px 24px!important;
-  color: #969D9F !important;
-  font-size: 17px !important;
+
+.custom-alert2 .alert-head.sc-ion-alert-ios {
+  padding-bottom:0px !important;
+  padding-top: 15px !important;
+  font-size: 18px !important;
   font-family: "EudoxusSansReg" !important;
 }
+
+.custom-alert2 .alert-title.sc-ion-alert-md {
+  color: var(--ion-text-color, #000);
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+  font-weight: 600;
+}
+
+.custom-alert2 .alert-title.sc-ion-alert-ios {
+  color: var(--ion-text-color, #000);
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+  font-weight: 600;
+}
+
+.custom-alert2 .alert-message.sc-ion-alert-md {
+  padding: 5px 5px !important;
+  color: #969d9f !important;
+  font-size: 14px !important;
+  font-family: EudoxusSansReg !important;
+  margin: 10px 10px 15px;
+  text-align: left;
+}
+
+.custom-alert2 .alert-message.sc-ion-alert-ios {
+  padding: 5px 5px !important;
+  color: #969d9f !important;
+  font-size: 14px !important;
+  font-family: EudoxusSansReg !important;
+  margin: 10px 10px 15px;
+  text-align: left;
+}
+
 .custom-alert2 .alert-button-group.sc-ion-alert-md {
   display: flex !important;
   justify-content: center !important;
 }
+
+.custom-alert2 .alert-button-group.sc-ion-alert-ios {
+  display: flex !important;
+  justify-content: center !important;
+}
+
 .custom-alert2 .alert-button.sc-ion-alert-md {
   background:#4BD16F !important;
   color: #FFFFFF !important;
   width: 100% !important;
   margin: 5px 5px !important;
 }
+
+.custom-alert2 .alert-button.sc-ion-alert-ios {
+  background:#4BD16F !important;
+  color: #FFFFFF !important;
+  width: 100% !important;
+  margin: 5px 5px !important;
+}
+
 .alert-button-inner.sc-ion-alert-md {
+  justify-content: center !important;
+}
+
+.alert-button-inner.sc-ion-alert-ios {
   justify-content: center !important;
 }

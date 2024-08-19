@@ -49,19 +49,19 @@ export class OfferPage implements OnInit {
     if (this.requestsType) {
       if (this.requestsType === 'AllOffers') {
         this.mySegment.nativeElement.children[0].click();
-
+        this.alloffers();
       }
       if (this.requestsType === 'Favorite') {
         this.mySegment.nativeElement.children[1].click();
-        this.getfav()
+        this.getfav();
       }
       if (this.requestsType === 'MyOffers') {
-        this.useroffers()
+        this.useroffers();
         this.mySegment.nativeElement.children[2].click();
 
       }
     } else {
-      this.alloffers()
+      this.alloffers();
       this.requestsType = 'AllOffers';
       this.mySegment.nativeElement.children[0].click();
 
@@ -101,9 +101,9 @@ export class OfferPage implements OnInit {
     this.reference = `ref-${Math.ceil(Math.random() * 10e13)}`;
   }
 
-  dismiss() {
-    this.modal.dismiss()
-  }
+  // dismiss() {
+  //   this.modal.dismiss()
+  // }
 
   alloffers() {
     this.offers = []
@@ -121,6 +121,7 @@ export class OfferPage implements OnInit {
       this.extra.hideLoader()
     })
   }
+
   useroffers() {
     this.userswapoffers = []
     this.extra.loadershow()
@@ -192,12 +193,8 @@ export class OfferPage implements OnInit {
       let base_amt = p.data.converted_amount
       this.baseamt = base_amt.toFixed(2)
     })
-
-
-
-
-
   }
+
   getfav() {
     this.fav = []
     this.extra.loadershow
@@ -224,6 +221,8 @@ export class OfferPage implements OnInit {
       }
     })
   }
+
+  
   removefav(f: any, i: any) {
     console.log(i);
 
@@ -257,19 +256,19 @@ export class OfferPage implements OnInit {
     this.navCtrl.navigateForward('createoffer');
   }
   tabClick() {
-    this.navCtrl.navigateRoot('track');
+    this.navCtrl.navigateForward('track');
   }
   tab1Click() {
-    this.navCtrl.navigateRoot('home');
+    this.navCtrl.navigateForward('home');
   }
   tab2Click() {
-    this.navCtrl.navigateRoot('offer');
+    this.navCtrl.navigateForward('offer');
   }
   tab3Click() {
-    this.navCtrl.navigateRoot('connect');
+    this.navCtrl.navigateForward('connect');
   }
   tab4Click() {
-    this.navCtrl.navigateRoot('profile');
+    this.navCtrl.navigateForward('profile');
   }
 
 

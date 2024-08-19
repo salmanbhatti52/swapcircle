@@ -135,7 +135,7 @@ export class BillingpaymentPage implements OnInit {
   }
   async presentAlert() {
     const alert = await this.alertController.create({
-      header: '"Payment Pending"',
+      header: 'Payment Pending',
       message: 'Transaction will be completed once validated​',
       cssClass: 'custom-alert2',
       buttons: [

@@ -67,6 +67,11 @@ export class TrackPage implements OnInit {
     }
   }
   segmentChanged(ev: any) {
+    this.amount = '';
+    this.convertedamount = '';
+    this.amountafterpoint = '';
+    this.adminrate = '';
+    this.amountshow = false;
     console.log("requestType value", ev.detail.value);
     let data = ev.detail.value;
     this.requestsType = data;
@@ -158,9 +163,11 @@ export class TrackPage implements OnInit {
         "to_system_currencies_id": this.tosystemId,
         "from_amount": this.amount
       }
+      
       if (this.requestsType == "Buy") {
+        console.log("requestsType: ",this.requestsType);
         this.api.sendRequest('buy_currency_rate', datatosend).subscribe((res: any) => {
-          console.log('rate response====', res);
+          console.log('buy rate response====', res);
           if (res.status == 'success') {
             this.extra.hideLoader()
             this.amountshow = true
@@ -173,7 +180,7 @@ export class TrackPage implements OnInit {
             console.log(this.convertedamount);
 
             this.amountafterpoint = p2[1];
-            this.adminrate = res.data.admin_rate_amount
+            this.adminrate = res.data.admin_rate_amount.toFixed(2);
             this.exchangerate()
           } else {
             this.amountshow=false;
@@ -182,10 +189,13 @@ export class TrackPage implements OnInit {
             this.extra.presentToast(res.message)
             this.extra.hideLoader()
           }
-        }, err => {
+        }, (err:any) => {
+          console.log("err in buying: ",err);
+          
           this.extra.hideLoader()
         })
       } else {
+        console.log("requestsType: ",this.requestsType);
         this.api.sendRequest('sell_currency_rate', datatosend).subscribe((res: any) => {
           console.log('rate response====', res);
           if (res.status == 'success') {
@@ -202,7 +212,7 @@ export class TrackPage implements OnInit {
             this.amountafterpoint = p2[1]
 
             //admin rate///
-            this.adminrate = res.data.admin_rate_amount
+            this.adminrate = res.data.admin_rate_amount.toFixed(2);
             // let amt1 = res.data.admin_rate_amount
             // let pp1 = amt1.toFixed(2)
             // let instr1 = String(pp1)
@@ -216,7 +226,9 @@ export class TrackPage implements OnInit {
             this.extra.presentToast(res.message)
             this.extra.hideLoader()
           }
-        }, err => {
+        },(err:any) => {
+          console.log("err in selling: ",err);
+          
           this.extra.hideLoader()
         })
       }
@@ -246,18 +258,18 @@ export class TrackPage implements OnInit {
 
   }
   tabClick() {
-    this.navCtrl.navigateRoot("track");
+    this.navCtrl.navigateForward("track");
   }
   tab1Click() {
-    this.navCtrl.navigateRoot("home");
+    this.navCtrl.navigateForward("home");
   }
   tab2Click() {
-    this.navCtrl.navigateRoot("offer");
+    this.navCtrl.navigateForward("offer");
   }
   tab3Click() {
-    this.navCtrl.navigateRoot("connect");
+    this.navCtrl.navigateForward("connect");
   }
   tab4Click() {
-    this.navCtrl.navigateRoot("profile");
+    this.navCtrl.navigateForward("profile");
   }
 }

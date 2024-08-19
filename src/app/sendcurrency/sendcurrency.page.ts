@@ -43,6 +43,9 @@ export class SendcurrencyPage implements OnInit {
   amountshow = false;
   currID: any;
   walletslist: any;
+  otherUserWallets:any = [];
+  walletAvailable: boolean = true;
+  availableWallets:string = '';
 
   constructor(public location: Location,
     private http: HttpClient,
@@ -158,6 +161,10 @@ export class SendcurrencyPage implements OnInit {
     this.exchangecurrId = list.system_currencies_id
     this.showexccurr = false;
     if (this.excurrency != '') {
+      console.log("excurrency: ",this.excurrency);
+      console.log('list excurrency: ',list);
+      
+      
       this.exchangerate()
     }
   }
@@ -193,8 +200,9 @@ export class SendcurrencyPage implements OnInit {
           text: 'Yes',
           role: 'confirm',
           handler: () => {
-            localStorage.setItem('recieverdetail', JSON.stringify(item))
-            this.email = item.email
+            localStorage.setItem('recieverdetail', JSON.stringify(item));
+            this.email = item.email;
+            this.otherUserWallets = item.users_customers_wallets;
             this.users_customers_id = item.users_customers_id
             this.emailsshow = false;
           },
@@ -203,10 +211,15 @@ export class SendcurrencyPage implements OnInit {
     });
 
     await alert.present();
+
+    
+    
   }
   eventHandler(ev: any) {
     console.log(ev.target.value);
     this.api.sendRequest('all_users_suggested', { "email": ev.target.value }).subscribe((res: any) => {
+      console.log('all_user_info',res);
+      
       if (res.status == 'success') {
         this.emailsshow = true
         console.log(res);
@@ -284,32 +297,66 @@ export class SendcurrencyPage implements OnInit {
     }
     else if (this.email == '') {
       this.extra.presentToast('Select email to send')
+     
     }
     // else if (this.country == '') {
     //   this.extra.presentToast('Select country')
     // }
     else {
-      let data = {
-        "from_users_customers_id": localStorage.getItem('user_Id'),
-        "from_system_currencies_id": this.basecurrId,
-        "from_amount": this.totalamount,
-        "to_users_customers_id": this.users_customers_id,
-        "to_system_currencies_id": this.exchangecurrId,
-        "payment_method_id": 1,
-        "system_countries_id": this.countryID,
-        "system_currencies_id": this.currID
-      }
-      localStorage.setItem('transfer_currency', JSON.stringify(data));
-      let amounts = {
-        basecurrsymbol: this.currsymbol,
-        totalamount: this.totalamount,
-        excurrsymbol: this.excurrsymbol,
-        convertedamount: this.convertedamount,
-        amountafterpoint: this.amountafterpoint,
-
-      }
-      localStorage.setItem('amountdetail', JSON.stringify(amounts))
-      this.navCtrl.navigateForward('sendcurrency2');
+       // if(this.excurrency != ''){
+        this.walletAvailable =  this.otherUserWallets.some((wallet:any,index:number)=> {
+          if(wallet.system_currencies.name === this.excurrency){
+            console.log("system_currencies.name: ",wallet.system_currencies.name);
+            console.log("excurrency: ",this.excurrency);
+            return true;
+          }else{
+            return false;
+          }
+          
+  
+        });
+        this.availableWallets = 'Available wallets are ';
+        this.otherUserWallets.forEach((wallet:any,index:number) => {
+          if(this.otherUserWallets.length>1){
+            if( index == this.otherUserWallets.length-1){
+              this.availableWallets += ''+ wallet.system_currencies.name + '.'
+            }else{
+              this.availableWallets +=  wallet.system_currencies.name + ', '
+            }
+          }else if(this.otherUserWallets.length>0){
+            this.availableWallets += wallet.system_currencies.name + '.'
+          }
+          
+        });
+        // this.otherUserWallets.
+        if(!this.walletAvailable){
+          this.extra.presentToast('Selected Exchange Wallet is not available.');
+        }else{
+          let data = {
+            "from_users_customers_id": localStorage.getItem('user_Id'),
+            "from_system_currencies_id": this.basecurrId,
+            "from_amount": this.totalamount,
+            "to_users_customers_id": this.users_customers_id,
+            "to_system_currencies_id": this.exchangecurrId,
+            "payment_method_id": 1,
+            "system_countries_id": this.countryID,
+            "system_currencies_id": this.currID
+          }
+          localStorage.setItem('transfer_currency', JSON.stringify(data));
+          let amounts = {
+            basecurrsymbol: this.currsymbol,
+            totalamount: this.totalamount,
+            excurrsymbol: this.excurrsymbol,
+            convertedamount: this.convertedamount,
+            amountafterpoint: this.amountafterpoint,
+    
+          }
+          localStorage.setItem('amountdetail', JSON.stringify(amounts))
+          this.navCtrl.navigateForward('sendcurrency2');
+        }
+        
+      // }
+      
     }
 
 

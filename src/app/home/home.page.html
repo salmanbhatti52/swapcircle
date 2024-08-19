@@ -188,7 +188,65 @@
       </ion-fab>
     </div>
 
-    <div *ngIf="requestsType=='HotSwapOffers'">
+    <div style="max-height: 350px;
+    overflow: scroll;" *ngIf="requestsType=='HotSwapOffers'">
+      <div class="box EudoxusSansReg" *ngFor="let f of offers;let i=index;">
+
+        <ion-row>
+          <ion-col size="6" (click)="setOpen(true,f)">
+            <div class="flex-c">
+              <div class="text1_cr">{{f.from_currency.symbol}}1</div>
+              <img src="assets/imgs/reset.svg">
+              <div class="text1_cr">{{f.to_currency.symbol}}{{f.exchange_rate}}</div>
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <div class="flex-c" style="margin-left: 30px;">
+              <div style="display: flex; align-items: center;">
+                <img src="assets/imgs/clock.svg" style="margin-right: 4px;">
+                <div class="text2_cr">{{f.time_ago}}</div>
+              </div>
+              <img src="assets/imgs/redheart.svg" (click)="removefav(f,i)" *ngIf="f.liked=='Yes'">
+              <img src="assets/imgs/heart.svg" (click)="addfav(f)" *ngIf="f.liked=='No'">
+            </div>
+          </ion-col>
+        </ion-row>
+        <hr style="background: #E9F5EC;
+          width: 92%;">
+        <ion-row style="align-items: center;
+          width: 95%;
+          margin: 0% auto;" (click)="setOpen(true,f)">
+          <ion-col size="3.5">
+            <div>
+              <div class="text3">You Pay</div>
+              <div class="text4"><span style="color: #4BD16F;">{{f.from_currency.symbol}}</span>{{f.from_amount}}
+              </div>
+            </div>
+          </ion-col>
+          <ion-col size="4.5">
+            <div style="display: flex;
+              align-items: center;
+              justify-content: space-evenly;">
+
+              <img src="https://portal.swapcircle.trade/public/{{f.from_currency.country.image}}" class="cimg">
+              <div style="font-weight: 500;
+                  font-size: 10px;color: #21333B;">{{f.from_currency.code}}/{{f.to_currency.code}}</div>
+
+              <img src="https://portal.swapcircle.trade/public/{{f.to_currency.country.image}}" class="cimg">
+            </div>
+          </ion-col>
+          <ion-col size="4">
+            <div>
+              <div class="text3" style="text-align: end;">You Pay</div>
+              <div class="text4"><span style="color: #4BD16F;">{{f.to_currency.symbol}}</span>{{f.to_amount}}</div>
+            </div>
+          </ion-col>
+          <!-- <p class="para">(Inc. Service charges £10.00)</p> -->
+
+        </ion-row>
+
+
+      </div>
       <!-- <ion-row *ngFor="let item of trans1" class="rowcls" id="open-sawap-modal">
         <ion-col size="2.5">
           <img src="{{item.img}}">
@@ -202,7 +260,7 @@
           <div class="price" [class.red]="item.status=='to'">{{item.price}}</div>
         </ion-col>
       </ion-row> -->
-      <ion-button style="margin-top: 5%;" class="btnbggreen EudoxusSansReg" (click)="goNext()">Create Offer</ion-button>
+      
 
       <!-- modal open-modal -->
       <ion-modal trigger="open-sawap-modal" id="example-modal" #modal>
@@ -242,6 +300,11 @@
         </ng-template>
       </ion-modal>
     </div>
+    <!-- style="margin-top: 5%;position: absolute;
+    bottom: 90px;
+    left: 13px;
+    width: 92%;" -->
+    <ion-button  style="margin-top: 5%;" class="btnbggreen EudoxusSansReg" (click)="goNext()">Create Offer</ion-button>
 
     <!-- <div *ngIf="requestsType=='RateTable'">
       <div class="box EudoxusSansReg">
@@ -276,7 +339,61 @@
       </div>
     </div> -->
 
+    <ion-modal id="example-modal" #modal [isOpen]="isModalOpen" (willDismiss)="onWillDismiss($event)">
+      <ng-template>
+        <div class="container">
+          <div style="display: flex;align-items: center;
+          justify-content: center;">
+            <div class="mtxt_offer EudoxusSansReg">{{from_currency_symbol}}1</div>
+            <img src="assets/imgs/reset1.svg" style="width: 40px;
+            height: 40px;
+            margin: 0% 5%;">
+            <div class="mtxt_offer EudoxusSansReg">{{to_currency_symbol}}{{exchange_rate}}</div>
+          </div>
+          <div style="display: flex;
+          flex-direction: column;
+          margin-top: 8%;">
+            <div class="c-flex">
+              <div class="mtxt1 EudoxusSansReg">Amount</div>
+              <div style="display: flex;
+              align-items: center;
+            ">
+                <img src="assets/imgs/curricon.svg">
+                <div class="label1 EudoxusSansReg">{{from_currency_symbol}}{{from_amount}}</div>
+              </div>
 
+            </div>
+            <div class="c-flex">
+              <div class="mtxt1 EudoxusSansReg">Converted Amount</div>
+              <div style="display: flex;
+              align-items: center;
+             ">
+                <img src="assets/imgs/curricon2.svg">
+                <div class="label2 EudoxusSansReg">{{to_currency_symbol}}{{convertedamt}}</div>
+              </div>
+
+            </div>
+
+            <div class="c-flex">
+              <div class="mtxt1 EudoxusSansReg">Base Amount</div>
+              <div style="display: flex;
+              align-items: center;
+              ">
+                <img src="assets/imgs/curricon3.svg">
+                <div class="label3 EudoxusSansReg">{{currsymbol}}{{baseamt}}</div>
+              </div>
+
+            </div>
+
+          </div>
+          <div style="text-align: center;">
+            <ion-button style="margin-top: 5%;" class="btnmodal EudoxusSansReg" (click)="setClose(false)">
+              Send Offer</ion-button>
+          </div>
+
+        </div>
+      </ng-template>
+    </ion-modal>
 
   </div>
 

@@ -25,7 +25,7 @@
   transform: translateY(-50%);" class="EudoxusSansReg">{{errtext}}</div>
   <div class="wrapper">
     <div style="margin-top: 3%;
-    margin-left: 3%;font-size: 16px;
+    font-size: 16px;margin-bottom: 10px;
     color: #121826" class="EudoxusSansReg">Select payment option</div>
     <ion-list lines="none" style="background:none;">
       <ion-item lines="none" class="EudoxusSansReg">
@@ -43,7 +43,7 @@
     text-align: center;margin-top: 5%;" *ngIf="payment=='Online'">In processing</div> -->
 
     <div *ngIf="payment=='Offline'">
-      <div style="text-align: center;">
+      <div style="text-align: center;margin-top: 10px;" >
         <img src="assets/imgs/placeholder.jpg" style=" border-radius: 90%;
           width: 128px;
           height: 128px;" (click)="chooseimage()" *ngIf="recieptimage==''">
@@ -58,7 +58,7 @@
       </div>
 
       <div style="margin-top: 3%;
-        margin-left: 3%;font-size: 16px;
+        font-size: 16px;margin-bottom: 10px;
         color: #121826" class="EudoxusSansReg">Select Bank</div>
       <ion-list lines="none" style="background:none;">
         <ion-item lines="none" class="EudoxusSansReg">
@@ -85,8 +85,8 @@
       </div>
     </div>
 
-    <div class="EudoxusSansReg text1">Note:<span style="color: #EF3C3C;
-      font-size: 14px;">{{instructions}}</span></div>
+    <!-- <div class="EudoxusSansReg text1">Note:<span style="color: #EF3C3C;
+      font-size: 14px;">{{instructions}}</span></div> -->
     <!-- <div style="margin: 3% 0% 3% 0%;font-size: 16px;
     color: #121826" class="EudoxusSansReg">Accounts</div>
     <ion-row class="rowcls" *ngFor="let item of accounts">

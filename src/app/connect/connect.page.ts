@@ -150,19 +150,19 @@ export class ConnectPage implements OnInit {
     this.navCtrl.navigateForward('favorite');
   }
   tabClick() {
-    this.navCtrl.navigateRoot('track');
+    this.navCtrl.navigateForward('track');
   }
   tab1Click() {
-    this.navCtrl.navigateRoot('home');
+    this.navCtrl.navigateForward('home');
   }
   tab2Click() {
-    this.navCtrl.navigateRoot('offer');
+    this.navCtrl.navigateForward('offer');
   }
   tab3Click() {
-    this.navCtrl.navigateRoot('connect');
+    this.navCtrl.navigateForward('connect');
   }
   tab4Click() {
-    this.navCtrl.navigateRoot('profile');
+    this.navCtrl.navigateForward('profile');
 
   }
 

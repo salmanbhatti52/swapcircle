@@ -112,7 +112,12 @@
         </div>
       </div>
     </div>
-    <div class="text EudoxusSansReg">Select Country</div>
+
+    <div *ngIf="!walletAvailable">
+      <div><span style="color: red;">Note: </span>{{availableWallets}}</div>
+    </div>
+    <div ></div>
+    <!-- <div class="text EudoxusSansReg">Select Country</div>
     <div class="inputfieldtransparent " style="width:100%;border: 1.5px solid #969D9F !important;"
       (click)="openCountryList()" [class.active]="showcountry==true">
       <div style="display: flex;">
@@ -120,8 +125,9 @@
         <ion-icon style="margin: 17px 17px 17px 15px;color: #4BD16F;font-size: 30px;"
           name="chevron-down-outline"></ion-icon>
       </div>
+    </div> -->
+
       <!-- <img style="margin: 17px 17px 17px 15px" src="/assets/signup/closeeye.svg" /> -->
-    </div>
 
     <div *ngIf="showcountry==true" class="sublist" style="height: 150px;overflow: scroll;">
       <div *ngFor="let list of items; let i=index" (click)="selectcountry(list,i)">

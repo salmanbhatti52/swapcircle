@@ -20,7 +20,8 @@ export class HomePage {
   private mySegment!: ElementRef;
 
   @ViewChild(IonModal) modal!: IonModal;
-  requestsType: any;
+  @ViewChild(IonModal) modal1!:IonModal;
+  requestsType: any = 'HotSwapOffers';
   t1 = true;
   t2 = false;
   t3 = false;
@@ -55,11 +56,26 @@ export class HomePage {
   errortext = false;
   errorshow: any;
   intervalId: any;
+  offers: any = [];
+  isModalOpen = false;
+  basecurrID: any;
+  from_amount: any;
+  baseamt: any;
+  from_currency_symbol: any;
+  to_currency_symbol: any;
+  exchange_rate: any;
+  convertedamt: any;
+  swap_offers_id: any;
+  fav: any;
+  currsymbol: any;
+
+
   constructor(public navCtrl: NavController,
     public api: ApiService,
     public extra: ExtraService,
     public alert: AlertController
   ) {
+    this.getbasecurr();
     this.systemsettings()
     this.userdetail = localStorage.getItem('userdeatil')
     console.log(this.userdetail);
@@ -87,6 +103,16 @@ export class HomePage {
 
   }
 
+  getbasecurr() {
+    this.api.sendRequest('get_currencies_by_id', { "system_currencies_id": localStorage.getItem('systemcurr') }).subscribe((curr: any) => {
+      console.log(curr);
+
+      this.basecurrID = curr.data[0].system_currencies_id
+      this.currsymbol = curr.data[0].symbol
+      localStorage.setItem('basecurrsymbol', this.currsymbol)
+    })
+  }
+
 
   ionViewWillEnter() {
     this.api.sendRequest('users_customers_profile', { "users_customers_id": localStorage.getItem('user_Id') }).subscribe((p) => {
@@ -100,12 +126,12 @@ export class HomePage {
       }
       if (this.requestsType === 'HotSwapOffers') {
         this.mySegment.nativeElement.children[1].click();
-
+        // this.alloffers();
       }
     } else {
       this.requestsType = 'AllTransactions';
       this.mySegment.nativeElement.children[0].click();
-
+      // this.gettransaction();
     }
 
     this.walletlist()
@@ -134,6 +160,103 @@ export class HomePage {
     // })
   }
 
+  alloffers() {
+    this.offers = []
+    this.extra.loadershow();
+    this.api.sendRequest('all_swap_offers', { "users_customers_id": localStorage.getItem('user_Id') }).subscribe((res: any) => {
+      console.log('all offers', res);
+      this.extra.hideLoader();
+
+      if (res.status == "success") {
+        this.extra.hideLoader()
+        this.offers = res.data
+      } else {
+        this.extra.hideLoader()
+      }
+
+    }, err => {
+      this.extra.hideLoader()
+    })
+  }
+
+  setOpen(isOpen: boolean, f: any) {
+    this.isModalOpen = isOpen;
+    console.log(this.isModalOpen);
+
+    console.log(f)
+    this.swap_offers_id = f.swap_offers_id
+    this.from_currency_symbol = f.from_currency.symbol;
+    this.to_currency_symbol = f.to_currency.symbol
+    this.exchange_rate = f.exchange_rate
+    this.from_amount = f.from_amount
+    this.convertedamt = f.to_amount
+    
+    this.currID = f.from_currency.system_currencies_id
+
+    this.exchangerate()
+  }
+
+  setClose(isOpen: boolean) {
+    this.isModalOpen = isOpen;
+    let data = {
+      "swap_offers_id": this.swap_offers_id,
+      "from_users_customers_id": localStorage.getItem('user_Id')
+    }
+    this.api.sendRequest('swap_offer_request', data).subscribe((offer: any) => {
+      console.log('swap_offer====', offer);
+      this.extra.presentToast("Offer send successfully")
+    })
+  }
+
+  async onWillDismiss(f: any) {
+    if (f.detail.role == 'backdrop') {
+      this.isModalOpen = false
+    }
+  }
+
+  removefav(f: any, i: any) {
+    console.log(i);
+
+    let data = {
+      "users_customers_id": localStorage.getItem('user_Id'),
+      "swap_offers_id": f.swap_offers_id
+    }
+    this.api.sendRequest('remove_favorite_swaps_offers', data).subscribe((rem: any) => {
+      console.log('remove itm====', rem);
+      if (rem.status == 'success') {
+        this.fav.splice(i, 1)
+      }
+    })
+  }
+
+  addfav(f: any) {
+    let data = {
+      "users_customers_id": localStorage.getItem('user_Id'),
+      "swap_offers_id": f.swap_offers_id
+    }
+    this.api.sendRequest('add_favorite_swaps_offers', data).subscribe((fav: any) => {
+      console.log('fav========', fav);
+      if (fav.status == 'success') {
+        f.liked = "Yes"
+      }
+    })
+  }
+
+  exchangerate() {
+    let datasend = {
+      "sender_currency_id": this.currID,
+      "receiver_currency_id": this.basecurrID,
+      "from_amount": this.from_amount
+    }
+    console.log("currency_converter_payloads:",datasend);
+    
+    this.api.sendRequest('currency_converter', datasend).subscribe((p: any) => {
+      console.log(p);
+      let base_amt = p.data.converted_amount
+      this.baseamt = base_amt.toFixed(2)
+    })
+  }
+  
   async alertbox() {
     const fp = localStorage.getItem('fingerprint');
     console.log('sASAsaSA', fp);
@@ -181,7 +304,7 @@ export class HomePage {
     }
     if (ev.detail.value === 'HotSwapOffers') {
       this.requestsType = 'HotSwapOffers';
-
+      this.alloffers();
     }
     if (ev.detail.value === 'RateTable') {
       this.requestsType = 'RateTable';
@@ -247,9 +370,9 @@ export class HomePage {
     this.extra.loadershow();
     this.api.sendRequest('all_transactions', { "users_customers_id": localStorage.getItem('user_Id') }).subscribe((resp: any) => {
       console.log('trans----', resp);
-
+      this.extra.hideLoader();
       if (resp.status == 'success') {
-        this.extra.hideLoader()
+        
         resp.data.date_added = moment(resp.data.date_added).format('LT');
         console.log(resp.data.date_added)
         this.transarr = resp.data
@@ -291,19 +414,19 @@ export class HomePage {
     this.navCtrl.navigateForward('chat');
   }
   tabClick() {
-    this.navCtrl.navigateRoot('track');
+    this.navCtrl.navigateForward('track');
   }
   tab1Click() {
 
   }
   tab2Click() {
-    this.navCtrl.navigateRoot('offer');
+    this.navCtrl.navigateForward('offer');
   }
   tab3Click() {
-    this.navCtrl.navigateRoot('connect');
+    this.navCtrl.navigateForward('connect');
   }
   tab4Click() {
-    this.navCtrl.navigateRoot('profile');
+    this.navCtrl.navigateForward('profile');
   }
 
   tab5Click() { }

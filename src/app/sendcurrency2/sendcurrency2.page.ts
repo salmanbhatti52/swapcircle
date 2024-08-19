@@ -42,6 +42,8 @@ export class Sendcurrency2Page implements OnInit {
 
   next() {
     this.extra.loadershow()
+    console.log('payloads: ',localStorage.getItem('transfer_currency'));
+    
     this.api.sendRequest('transfer_currency', localStorage.getItem('transfer_currency')).subscribe((res: any) => {
       console.log('response gte', res);
       if (res.status == 'success') {
