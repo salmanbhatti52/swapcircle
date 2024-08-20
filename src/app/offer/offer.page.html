@@ -201,8 +201,8 @@
     </div>
 
 
-    <div *ngIf="requestsType=='MyOffers'">
-      <div class="box EudoxusSansReg" *ngFor="let f of userswapoffers" (click)="seerequests(f)">
+    <div style="min-height: 60vh;max-height: 60vh;overflow: scroll;" *ngIf="requestsType=='MyOffers'">
+      <div  class="box EudoxusSansReg" *ngFor="let f of userswapoffers" (click)="seerequests(f)">
 
         <ion-row>
           <ion-col size="6">
@@ -258,14 +258,11 @@
 
 
       </div>
-      <div style="width:93%;margin:0% auto 5%;">
-        <ion-button style="margin-top: 5%;" class="btnbggreen EudoxusSansReg" (click)="createoffer()">
-          Create Offer</ion-button>
-      </div>
-
-
     </div>
-
+    <div style="width:93%;margin:0% auto 5%;" *ngIf="requestsType=='MyOffers'">
+      <ion-button style="margin-top: 5%;" class="btnbggreen EudoxusSansReg" (click)="createoffer()">
+        Create Offer</ion-button>
+    </div>
     <ion-modal id="example-modal" #modal [isOpen]="isModalOpen" (willDismiss)="onWillDismiss($event)">
       <ng-template>
         <div class="container">

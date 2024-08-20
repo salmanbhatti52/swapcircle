@@ -224,7 +224,8 @@ export class HomePage {
     this.api.sendRequest('remove_favorite_swaps_offers', data).subscribe((rem: any) => {
       console.log('remove itm====', rem);
       if (rem.status == 'success') {
-        this.fav.splice(i, 1)
+        // this.fav.splice(i, 1);
+        f.liked = 'No';
       }
     })
   }

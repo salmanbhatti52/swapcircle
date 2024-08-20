@@ -204,6 +204,7 @@ export class CreatesawapPage implements OnInit {
                 this.extra.presentToast(res.message)
               }
             }, err => {
+              this.extra.hideLoader();
               this.extra.presentToast('Something went wrong')
             })
           },

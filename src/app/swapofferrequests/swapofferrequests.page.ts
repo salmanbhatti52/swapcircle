@@ -37,7 +37,7 @@ export class SwapofferrequestsPage implements OnInit {
 
   ionViewWillEnter() {
     this.swap_offers_obj = JSON.parse(this.activated.snapshot.params['swap_offers_obj'])
-    console.log(this.swap_offers_obj);
+    console.log("swap_offers_obj: ",this.swap_offers_obj);
     this.swap_offers_id = this.swap_offers_obj.swap_offers_id
     this.getbasecurr()
     this.getrequests(this.swap_offers_id)
