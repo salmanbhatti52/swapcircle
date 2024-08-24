@@ -233,10 +233,18 @@ export class OfferPage implements OnInit {
     this.api.sendRequest('remove_favorite_swaps_offers', data).subscribe((rem: any) => {
       console.log('remove itm====', rem);
       if (rem.status == 'success') {
-        // this.fav.splice(i, 1)
-        f.liked='No';
+        if(f.liked=='Yes'){
+          f.liked='No';
+        }else{
+          this.fav.splice(i, 1)
+        }
+        
       }
     })
+  }
+
+  ionViewWillLeave(){
+    this.api.offers = this.offers;
   }
   seerequests(f: any) {
     // console.log(f);

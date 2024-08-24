@@ -7,6 +7,8 @@ export class ApiService {
   // baseURL = 'https://swap.eigix.net/api'
   baseURL = 'https://portal.swapcircle.trade/api';
   fpval:any;
+
+  offers = [];
   constructor(public http: HttpClient) { }
 
   sendRequest(action: any, data?: any) {

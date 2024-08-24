@@ -115,6 +115,7 @@ export class HomePage {
 
 
   ionViewWillEnter() {
+    this.offers = this.api.offers;
     this.api.sendRequest('users_customers_profile', { "users_customers_id": localStorage.getItem('user_Id') }).subscribe((p) => {
       console.log('profiledasds----', p);
 

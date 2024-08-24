@@ -212,6 +212,14 @@ ion-segment {
   .c-flex{
     display: flex;
     align-items: center;
+    margin-bottom: 4%;
+    justify-content: space-between;
+  }
+
+  .cimg{
+    width: 20px;
+    border-radius: 90%;
+    height: 20px;
   }
 
   ion-badge{
