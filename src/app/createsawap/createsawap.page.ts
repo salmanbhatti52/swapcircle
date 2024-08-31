@@ -37,7 +37,10 @@ export class CreatesawapPage implements OnInit {
 
   ngOnInit() {
     this.getbasecurr()
-    this.walletlist()
+    this.walletslist = this.api.wallets;
+    console.log("walletslist: ",this.walletslist);
+    
+    // this.walletlist()
   }
 
 
@@ -193,6 +196,8 @@ export class CreatesawapPage implements OnInit {
               "amount_from": this.totalamount,
               "system_currencies_id": localStorage.getItem('systemcurr')
             }
+            console.log(data);
+            
             this.extra.loadershow()
             this.api.sendRequest('wallet_swap', data).subscribe((res: any) => {
               console.log('wallet response=====', res);

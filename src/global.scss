@@ -135,11 +135,11 @@ ion-toolbar{
 .btnbggreen{
   text-transform:none !important;
   height: 64px;
-      --background: #4BD16F;
+  --background: #4BD16F;
 
-      --background-activated: #43af60;
-      --background-focused: #43af60;
-      --background-hover: #43af60;
+  // --background-activated: #43af60;
+  // --background-focused: #43af60;
+  // --background-hover: #43af60;
 
     opacity: 0.8;
     --border-radius: 24px;

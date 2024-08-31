@@ -94,11 +94,11 @@
           <div class="carItem_box">
             <div style="display: flex;
               align-items: center;">
-              <img src="https://portal.swapcircle.trade/public/{{item.currency.country.image}}">
-              <div class="s-text EudoxusSansReg">{{item.currency.country.code}}</div>
+              <img src="https://portal.swapcircle.trade/public/{{item?.currency?.country?.image}}">
+              <div class="s-text EudoxusSansReg">{{item?.currency?.country?.code}}</div>
             </div>
 
-            <div class="cars_label EudoxusSansReg">{{item.currency.symbol}}{{item.wallet_amount}}</div>
+            <div class="cars_label EudoxusSansReg">{{item?.currency?.symbol}}{{item?.wallet_amount}}</div>
 
           </div>
         </div>
@@ -305,7 +305,7 @@
     bottom: 90px;
     left: 13px;
     width: 92%;" -->
-    <ion-button  style="margin-top: 5%;" class="btnbggreen EudoxusSansReg" (click)="goNext()">Create Offer</ion-button>
+    <ion-button *ngIf="requestsType=='HotSwapOffers'"  style="margin-top: 5%;" class="btnbggreen EudoxusSansReg" (click)="goNext()">Create Offer</ion-button>
 
     <!-- <div *ngIf="requestsType=='RateTable'">
       <div class="box EudoxusSansReg">

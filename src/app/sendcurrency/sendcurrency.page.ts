@@ -12,7 +12,7 @@ import { ExtraService } from '../services/extra.service';
 export class SendcurrencyPage implements OnInit {
   // allItems: any = [];
   // public items: any = [];
-  items: any;
+  countriesList: any;
   basecurrency: any = '';
   fromcurrency: any = ''
   excurrency: any = '';
@@ -89,15 +89,17 @@ export class SendcurrencyPage implements OnInit {
       this.currencies = res.data
       this.currencies.sort((a: any, b: any) => a.name.localeCompare(b.name))
 
-      // console.log(this.exchangecurr);
+      console.log("currencies: ",this.currencies);
 
     })
   }
   getcountries() {
     this.api.getRequest('all_countries').subscribe((res: any) => {
       console.log(res);
-      this.items = res.data
-      this.items.sort((a: any, b: any) => a.name.localeCompare(b.name))
+      this.countriesList   = res.data
+      this.countriesList.sort((a: any, b: any) => a.name.localeCompare(b.name));
+      console.log("countriesList: ",this.countriesList);
+      
     })
 
   }

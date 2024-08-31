@@ -6,8 +6,8 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 export class ApiService {
   // baseURL = 'https://swap.eigix.net/api'
   baseURL = 'https://portal.swapcircle.trade/api';
-  fpval:any;
-
+  fingerPrintVal:any;
+  wallets = [];
   offers = [];
   constructor(public http: HttpClient) { }
 

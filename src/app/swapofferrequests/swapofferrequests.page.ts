@@ -123,6 +123,9 @@ export class SwapofferrequestsPage implements OnInit {
         this.extra.presentToast('Request accept successfully');
         this.navCtrl.navigateForward('offer')
       }
+      if(p.status == 'error'){
+        this.extra.presentToast(p.message);
+      }
     })
   }
 
@@ -166,6 +169,9 @@ export class SwapofferrequestsPage implements OnInit {
       console.log('remove request====', rem);
       if (rem.status == 'success') {
         this.reqarr.splice(index, 1)
+      }
+      if(rem.status == 'error'){
+        this.extra.presentToast(rem.message);
       }
     })
   }

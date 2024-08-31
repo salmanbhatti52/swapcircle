@@ -68,6 +68,7 @@ export class HomePage {
   swap_offers_id: any;
   fav: any;
   currsymbol: any;
+  toSystemCurrenciesId: any;
 
 
   constructor(public navCtrl: NavController,
@@ -193,7 +194,7 @@ export class HomePage {
     this.convertedamt = f.to_amount
     
     this.currID = f.from_currency.system_currencies_id
-
+    this.toSystemCurrenciesId = f.to_system_currencies_id;
     this.exchangerate()
   }
 
@@ -203,9 +204,14 @@ export class HomePage {
       "swap_offers_id": this.swap_offers_id,
       "from_users_customers_id": localStorage.getItem('user_Id')
     }
-    this.api.sendRequest('swap_offer_request', data).subscribe((offer: any) => {
-      console.log('swap_offer====', offer);
-      this.extra.presentToast("Offer send successfully")
+    this.api.sendRequest('swap_offer_request', data).subscribe((res: any) => {
+      console.log('swap_offer====', res);
+      if(res.status=='success'){
+        this.extra.presentToast("Offer send successfully")
+      }else{
+        this.extra.presentToast(res.message);
+      }
+      
     })
   }
 
@@ -248,7 +254,8 @@ export class HomePage {
     let datasend = {
       "sender_currency_id": this.currID,
       "receiver_currency_id": this.basecurrID,
-      "from_amount": this.from_amount
+      "from_amount": this.from_amount,
+      // " ":this.toSystemCurrenciesId
     }
     console.log("currency_converter_payloads:",datasend);
     
@@ -272,7 +279,7 @@ export class HomePage {
             role: 'confirm',
             handler: () => {
               localStorage.setItem('fingerprint', 'true');
-              this.api.fpval = 'true';
+              this.api.fingerPrintVal = 'true';
             },
           },
           {
@@ -280,7 +287,7 @@ export class HomePage {
             role: 'cancel',
             handler: () => {
               localStorage.setItem('fingerprint', 'false');
-              this.api.fpval = 'false';
+              this.api.fingerPrintVal = 'false';
             },
           },
         ],
@@ -336,7 +343,8 @@ export class HomePage {
     }
     this.api.sendRequest('get_wallet', datasend).subscribe((response: any) => {
       console.log(response);
-      this.walletslist = response.data
+      this.walletslist = response.data;
+      this.api.wallets = this.walletslist;
     })
   }
 

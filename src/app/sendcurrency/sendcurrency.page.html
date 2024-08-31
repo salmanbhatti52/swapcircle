@@ -46,8 +46,8 @@
     <div *ngIf="showcurr==true" class="sublist" style="height: 150px;overflow: scroll;">
       <div *ngFor="let list of walletslist| filter:fromcurrency; let i=index" (click)="selectcurrency(list,i)">
         <div class="euro-text1 EudoxusSansReg">
-          {{list.currency.symbol}} <b style="font-weight: 400;
-          padding: 0px 1px;">-</b><span style="font-size: 12px;padding-left: 2px;">{{list.currency.code}}</span>
+          {{list?.currency?.symbol}} <b style="font-weight: 400;
+          padding: 0px 1px;">-</b><span class="euro-text1">{{list?.currency?.country?.name}} </span><span style="font-size: 12px;padding-left: 2px;">({{list?.currency?.code}})</span>
         </div>
       </div>
     </div>
@@ -76,7 +76,7 @@
       <div *ngFor="let list of currencies| filter:excurrency; let i=index" (click)="selectexcurrency(list,i)">
         <div class="euro-text1 EudoxusSansReg">
           {{list.symbol}} <b style="font-weight: 400;
-          padding: 0px 1px;">-</b><span style="font-size: 12px;padding-left: 2px;">{{list.code}}</span>
+          padding: 0px 1px;">-</b><span class="euro-text1">{{list?.country?.name}} </span><span style="font-size: 12px;padding-left: 2px;">({{list.code}})</span>
         </div>
       </div>
     </div>
@@ -130,7 +130,7 @@
       <!-- <img style="margin: 17px 17px 17px 15px" src="/assets/signup/closeeye.svg" /> -->
 
     <div *ngIf="showcountry==true" class="sublist" style="height: 150px;overflow: scroll;">
-      <div *ngFor="let list of items; let i=index" (click)="selectcountry(list,i)">
+      <div *ngFor="let list of countriesList; let i=index" (click)="selectcountry(list,i)">
         <div class="euro-text1 EudoxusSansReg">
           {{list.name}}
         </div>

@@ -27,7 +27,7 @@ export class SettingsPage implements OnInit {
   ionViewWillEnter() {
     this.fp = localStorage.getItem('fingerprint');
     console.log('fingerprint====', this.fp);
-    this.api.fpval = this.fp
+    this.api.fingerPrintVal = this.fp
     this.getuser()
 
   }
@@ -61,10 +61,10 @@ export class SettingsPage implements OnInit {
     
     if (ev.detail.checked == true) {
 
-      this.api.fpval = 'true'
+      this.api.fingerPrintVal = 'true'
       localStorage.setItem('fingerprint', 'true')
     } else {
-      this.api.fpval = 'false';
+      this.api.fingerPrintVal = 'false';
       localStorage.setItem('fingerprint', 'false')
     }
   }

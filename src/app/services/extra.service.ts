@@ -40,7 +40,7 @@ export class ExtraService {
     this.loadingCtrl.create({
       cssClass: 'loadingdiv',
       message: '',
-      // duration: 2000
+      duration: 3000
     }).then((res) => {
       res.present();
     });

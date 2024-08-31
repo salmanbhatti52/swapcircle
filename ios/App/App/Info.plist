@@ -26,6 +26,8 @@
 		<string>LaunchScreen</string>
 		<key>UIMainStoryboardFile</key>
 		<string>Main</string>
+		<key>NSCameraUsageDescription</key>
+		<string>Need to access camera to capture and upload picture</string>
 
 		<key>NSPhotoLibraryUsageDescription</key>
 		<string>Need to access photo library to allow user to upload profile picture. User profile

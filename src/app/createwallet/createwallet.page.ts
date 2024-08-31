@@ -80,7 +80,7 @@ export class CreatewalletPage implements OnInit {
     this.api.sendRequest('create_wallet', datasend).subscribe((response: any) => {
       console.log(response);
       if (response.status == "success") {
-        this.extra.presentToast('Wallet create successfully')
+        this.extra.presentToast('Wallet created successfully')
         this.navCtrl.navigateRoot('home')
       }
 

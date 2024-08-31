@@ -24,6 +24,14 @@ ion-segment {
       margin-right: 5%;
     }
   }
+
+  .dot{
+    background-color: red;
+    width: 7px;
+    height: 7px;
+    border-radius: 90px;
+  }
+
   .box{
     background: #FFFFFF;
     border-radius: 16px;

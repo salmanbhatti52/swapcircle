@@ -19,7 +19,9 @@ export class WalletslistPage implements OnInit {
     public alertController: AlertController) { }
 
   ngOnInit() {
-    this.walletlist()
+    this.walletslist = this.api.wallets;
+    this.walletlength = this.walletslist.length
+    // this.walletlist()
   }
   goback() {
     this.location.back()

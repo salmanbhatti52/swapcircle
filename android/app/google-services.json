@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "869462972334",
+    "project_id": "swapcircle-e3bb6",
+    "storage_bucket": "swapcircle-e3bb6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:869462972334:android:f11fbfb8815111c8785a3f",
+        "android_client_info": {
+          "package_name": "com.swapcircle.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD792Te5HC_VXstBYou1722yLefeVDXkYo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

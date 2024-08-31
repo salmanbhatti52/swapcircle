@@ -218,7 +218,7 @@
                 <img src="assets/imgs/clock.svg" style="margin-right: 4px;">
                 <div class="text2">{{f.time_ago}}</div>
               </div>
-              <!-- <img src="assets/imgs/heart.svg"> -->
+              <div *ngIf="f.total_requests>0" class="dot" ></div>
             </div>
           </ion-col>
         </ion-row>

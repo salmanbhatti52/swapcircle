@@ -48,6 +48,64 @@
         "clobbers": [
           "navigator.camera"
         ]
+        },
+      {
+          "id": "onesignal-cordova-plugin.OneSignalPlugin",
+          "file": "plugins/onesignal-cordova-plugin/dist/index.js",
+          "pluginId": "onesignal-cordova-plugin",
+        "clobbers": [
+          "OneSignal"
+        ]
+        },
+      {
+          "id": "onesignal-cordova-plugin.NotificationReceivedEvent",
+          "file": "plugins/onesignal-cordova-plugin/dist/NotificationReceivedEvent.js",
+          "pluginId": "onesignal-cordova-plugin"
+        },
+      {
+          "id": "onesignal-cordova-plugin.OSNotification",
+          "file": "plugins/onesignal-cordova-plugin/dist/OSNotification.js",
+          "pluginId": "onesignal-cordova-plugin"
+        },
+      {
+          "id": "onesignal-cordova-plugin.UserNamespace",
+          "file": "plugins/onesignal-cordova-plugin/dist/UserNamespace.js",
+          "pluginId": "onesignal-cordova-plugin"
+        },
+      {
+          "id": "onesignal-cordova-plugin.PushSubscriptionNamespace",
+          "file": "plugins/onesignal-cordova-plugin/dist/PushSubscriptionNamespace.js",
+          "pluginId": "onesignal-cordova-plugin"
+        },
+      {
+          "id": "onesignal-cordova-plugin.DebugNamespace",
+          "file": "plugins/onesignal-cordova-plugin/dist/DebugNamespace.js",
+          "pluginId": "onesignal-cordova-plugin"
+        },
+      {
+          "id": "onesignal-cordova-plugin.InAppMessagesNamespace",
+          "file": "plugins/onesignal-cordova-plugin/dist/InAppMessagesNamespace.js",
+          "pluginId": "onesignal-cordova-plugin"
+        },
+      {
+          "id": "onesignal-cordova-plugin.SessionNamespace",
+          "file": "plugins/onesignal-cordova-plugin/dist/SessionNamespace.js",
+          "pluginId": "onesignal-cordova-plugin"
+        },
+      {
+          "id": "onesignal-cordova-plugin.LocationNamespace",
+          "file": "plugins/onesignal-cordova-plugin/dist/LocationNamespace.js",
+          "pluginId": "onesignal-cordova-plugin"
+        },
+      {
+          "id": "onesignal-cordova-plugin.NotificationsNamespace",
+          "file": "plugins/onesignal-cordova-plugin/dist/NotificationsNamespace.js",
+          "pluginId": "onesignal-cordova-plugin"
+        },
+      {
+          "id": "onesignal-cordova-plugin.LiveActivitiesNamespace",
+          "file": "plugins/onesignal-cordova-plugin/dist/LiveActivitiesNamespace.js",
+          "pluginId": "onesignal-cordova-plugin"
         }
     ];
     module.exports.metadata =
@@ -55,7 +113,8 @@
     {
       "cordova-clipboard": "1.3.0",
       "cordova-plugin-camera": "6.0.0",
-      "cordova-plugin-fingerprint-aio": "5.0.1"
+      "cordova-plugin-fingerprint-aio": "5.0.1",
+      "onesignal-cordova-plugin": "5.2.4"
     };
     // BOTTOM OF METADATA
     });

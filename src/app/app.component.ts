@@ -1,8 +1,8 @@
 import { Component } from "@angular/core";
 import { NavController, Platform } from "@ionic/angular";
-// import OneSignal from 'onesignal-cordova-plugin';
 import { ApiService } from "./services/api.service";
-
+// import OneSignal from 'onesignal-cordova-plugin';
+import OneSignal from 'onesignal-cordova-plugin';
 @Component({
   selector: "app-root",
   templateUrl: "app.component.html",
@@ -30,29 +30,27 @@ export class AppComponent {
       this.navCtrl.navigateRoot('home');
     }
 
-    // this.pushNotification()
+    this.pushNotification()
   }
-  // pushNotification() {
-  //   console.log('push notification in function.....');
-  //   OneSignal.setAppId("925e80ab-a9d8-4e29-9824-f1956346665c");
+  
+  pushNotification() {
+    // Remove this method to stop OneSignal Debugging
+    OneSignal.Debug.setLogLevel(6)
+    
+    // Replace YOUR_ONESIGNAL_APP_ID with your OneSignal App ID
+    OneSignal.initialize("3e72c5cc-01d7-4486-90cd-95a58b7a8d7a");
 
-  //   OneSignal.setNotificationOpenedHandler((jsonData) => {
-  //     console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
-  //   });
+    OneSignal.Notifications.addEventListener('click', async (e) => {
+      let clickData = await e.notification;
+      console.log("Notification Clicked : " + clickData);
+    })
 
-  //   OneSignal.promptForPushNotificationsWithUserResponse((accepted) => {
-  //     console.log('accepted response----', accepted);
+    OneSignal.Notifications.requestPermission(true).then((success: Boolean) => {
+      console.log("Notification permission granted " + success);
+    });
 
-  //   })
-  //   OneSignal.addSubscriptionObserver(async (event: any) => {
-  //     console.log('addSubscriptionObserver response----', event);
-  //     await OneSignal.getDeviceState((res) => {
-  //       console.log('getDeviceState response----', res);
-  //       localStorage.setItem('onesignalId', res.userId)
-  //     })
-  //   })
+  }
 
-  // }
   handleSharedButtonClick() {
     // Handle the shared button click action here
     this.navCtrl.navigateForward('createsawap');

@@ -53,6 +53,19 @@ export class CreateofferPage implements OnInit {
     this.formattedDateTime = moment(date).format('yyyy-MM-DD H:mm:ss');
   }
 
+  onSearch(searchTerm: any) {
+    // Perform your logic here with the search term
+    console.log('Search term:', searchTerm);
+    this.showcurr = true;
+  }
+
+  onSearch2(searchTerm: any) {
+    // Perform your logic here with the search term
+    console.log('Search term:', searchTerm);
+    this.showexccurr = true;
+
+  }
+
   openList() {
     if (this.walletslist.length == 0) {
       this.presentAlert()
