@@ -147,7 +147,7 @@ export class CreateofferPage implements OnInit {
 
   async presentalert(message: any, data: any) {
     const alert = await this.alertController.create({
-      message: message,
+      subHeader: message,
       cssClass: 'custom-alert',
       buttons: [
         {

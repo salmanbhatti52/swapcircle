@@ -50,7 +50,7 @@
               <hr>
             </div> -->
           <ion-input type="number" placeholder="enter amount" class="txt1" [(ngModel)]="amount"
-            (ionInput)="Enteramount($event)"></ion-input>
+            (ionInput)="enteramount($event)"></ion-input>
 
           <!-- <img src="assets/imgs/calculator.svg" /> -->
         </div>
@@ -160,15 +160,15 @@
       Currency</ion-button>
   </div>
   <!-- fromcurr -->
-  <ion-modal #modal trigger="open-modal" [initialBreakpoint]="0.75" [isOpen]="isModalOpen">
+  <ion-modal #modal trigger="open-modal" [initialBreakpoint]="0.75" [isOpen]="isModalOpen" (willDismiss)="dismissModal()">
     <ng-template>
       <ion-content>
         <ion-searchbar placeholder="Search" [(ngModel)]="term"></ion-searchbar>
         <ion-list>
           <ion-item *ngFor="let s of curr | filter:term;let i=index;" (click)="closemodal(s)">
             <ion-label>
-              <h2>{{s.code}}</h2>
-              <span style="font-size: 12px; padding-left: 2px">({{s.symbol}})</span>
+              <h2>{{s?.country?.name}} ({{s?.code}})</h2>
+              <span style="font-size: 12px; padding-left: 2px">({{s?.symbol}})</span>
             </ion-label>
           </ion-item>
 
@@ -180,15 +180,15 @@
 
 
   <!-- Tocurr -->
-  <ion-modal #modal trigger="open-modal" [initialBreakpoint]="0.75" [isOpen]="Tocurrmodalopen">
+  <ion-modal #modal trigger="open-modal" [initialBreakpoint]="0.75" [isOpen]="Tocurrmodalopen" (willDismiss)="dismissCurrModal()">
     <ng-template>
       <ion-content>
         <ion-searchbar placeholder="Search" [(ngModel)]="term"></ion-searchbar>
         <ion-list>
           <ion-item *ngFor="let s of curr | filter:term;let i=index;" (click)="closeTocurrmodal(s)">
             <ion-label>
-              <h2>{{s.code}}</h2>
-              <span style="font-size: 12px; padding-left: 2px">({{s.symbol}})</span>
+              <h2>{{s?.country?.name}} ({{s?.code}})</h2>
+              <span style="font-size: 12px; padding-left: 2px">({{s?.symbol}})</span>
             </ion-label>
           </ion-item>
 

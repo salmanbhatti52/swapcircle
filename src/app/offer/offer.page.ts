@@ -42,14 +42,14 @@ export class OfferPage implements OnInit {
     private modalCtrl: ModalController,
     public api: ApiService,
     public extra: ExtraService) {
-    this.getbasecurr()
+    // this.getbasecurr()
   }
 
   ionViewWillEnter() {
     if (this.requestsType) {
       if (this.requestsType === 'AllOffers') {
         this.mySegment.nativeElement.children[0].click();
-        this.alloffers();
+        // this.alloffers();
       }
       if (this.requestsType === 'Favorite') {
         this.mySegment.nativeElement.children[1].click();
@@ -61,12 +61,13 @@ export class OfferPage implements OnInit {
 
       }
     } else {
-      this.alloffers();
+      // this.alloffers();
       this.requestsType = 'AllOffers';
       this.mySegment.nativeElement.children[0].click();
 
     }
   }
+
   getbasecurr() {
     this.api.sendRequest('get_currencies_by_id', { "system_currencies_id": localStorage.getItem('systemcurr') }).subscribe((curr: any) => {
       console.log(curr);
@@ -97,7 +98,7 @@ export class OfferPage implements OnInit {
     localStorage.setItem('requestType', this.requestsType);
   }
   ngOnInit() {
-    this.useroffers()
+    // this.useroffers()
     this.reference = `ref-${Math.ceil(Math.random() * 10e13)}`;
   }
 
@@ -107,7 +108,7 @@ export class OfferPage implements OnInit {
 
   alloffers() {
     this.offers = []
-    // this.extra.loadershow()
+    this.extra.loadershow()
     this.api.sendRequest('all_swap_offers', { "users_customers_id": localStorage.getItem('user_Id') }).subscribe((res: any) => {
       console.log('all offers', res);
       if (res.status == "success") {
@@ -197,7 +198,7 @@ export class OfferPage implements OnInit {
 
   getfav() {
     this.fav = []
-    this.extra.loadershow
+    this.extra.loadershow();
     this.api.sendRequest('all_favorite_swaps_offers', { "users_customers_id": localStorage.getItem('user_Id') }).subscribe((res: any) => {
       console.log('get fav====', res);
       if (res.status == "success") {

@@ -1,8 +1,9 @@
 import { ApiService } from './../services/api.service';
 import { ExtraService } from './../services/extra.service';
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, Platform } from '@ionic/angular';
 import { FingerprintAIO } from '@ionic-native/fingerprint-aio/ngx';
+import OneSignal from 'onesignal-cordova-plugin';
 @Component({
   selector: 'app-loginscreen',
   templateUrl: './loginscreen.page.html',
@@ -19,14 +20,25 @@ export class LoginscreenPage implements OnInit {
   fingerprint = false;
   getuserEmail: any;
   getuserPassword: any;
+  oneSignalId: any;
   constructor(public navCtrl: NavController,
     public rest: ExtraService,
     public api: ApiService,
-    public faio: FingerprintAIO,) { }
+    public faio: FingerprintAIO,
+    public platform:Platform) { }
 
   ngOnInit() {
+    // setTimeout(async () => {
+      // await 
+      
+    //  }, 3000);
   }
+
   ionViewWillEnter() {
+    if(this.platform.is('cordova')){
+      this.getOneSignalUserAndExternalIds();
+    }
+
     if (this.requestsType) {
       if (this.requestsType === 'Individual') {
         this.mySegment.nativeElement.children[0].click();
@@ -52,6 +64,30 @@ export class LoginscreenPage implements OnInit {
     console.log('email', localStorage.getItem('email'));
     console.log('password', localStorage.getItem('password'));
   }
+
+  async getOneSignalUserAndExternalIds() {
+    
+    // Fetch OneSignal ID (Player ID)
+     this.oneSignalId = await OneSignal.User.getOnesignalId();
+    if (this.oneSignalId) {
+      console.log('OneSignal ID (User ID):', this.oneSignalId);
+    } else {
+      console.log('OneSignal ID is null. Ensure the user is subscribed.');
+    }
+
+    // Fetch External ID (if set)
+    const externalId = await OneSignal.User.getExternalId();
+    if (externalId) {
+      console.log('External ID:', externalId);
+    } else {
+      console.log('External ID is null. Ensure it has been set.');
+    }
+
+    let id = await  OneSignal.User.pushSubscription.getIdAsync();
+    console.log("subscription id: ",id);
+    
+  }
+
   segmentChanged(ev: any) {
     console.log('requestType value', ev.detail.value);
     let data = ev.detail.value;
@@ -73,28 +109,39 @@ export class LoginscreenPage implements OnInit {
 
   goNext() {
     let data = {
-      // localStorage.getItem('onesignalId')
-      "one_signal_id": '123',
+      "one_signal_id": this.oneSignalId ,
       "email": this.email,
       "password": this.pass1
     }
+    console.log("login data: ",data);
+    
     if (this.email == '') {
       this.rest.presentToast('Email is Required')
     } else if (this.pass1 == '') {
       this.rest.presentToast('Password is Required')
     } else {
-      this.rest.loadershow()
+      this.rest.loadershow();
       this.api.sendRequest('signin', data).subscribe((res: any) => {
+        this.rest.hideLoader();
         console.log('response--', res);
         if (res.status == 'success') {
-          this.rest.hideLoader()
-          localStorage.setItem('userdeatil', JSON.stringify(res.data))
-          localStorage.setItem('user_Id', res.data.users_customers_id);
-          localStorage.setItem('email', res.data.email);
-          localStorage.setItem('password', this.pass1);
-          this.navCtrl.navigateRoot('home');
+          if(res.data.users_customers_type == this.requestsType){
+            localStorage.setItem('userdeatil', JSON.stringify(res.data))
+            localStorage.setItem('user_Id', res.data.users_customers_id);
+            // if(localStorage.getItem('sessionTimer')!= null || localStorage.getItem('sessionTimer')!= undefined){
+            //   localStorage.removeItem('sessionTimer');
+            // }
+            if(this.platform.is('cordova')){
+              OneSignal.login(res.data.users_customers_id);
+            }
+            localStorage.setItem('email', res.data.email);
+            localStorage.setItem('password', this.pass1);
+            this.navCtrl.navigateRoot('home');
+          }else{
+            this.rest.presentToast('Please select the correct user type for login');
+          }
+          
         } else {
-          this.rest.hideLoader()
           this.rest.presentToast(res.message)
         }
 
@@ -105,13 +152,14 @@ export class LoginscreenPage implements OnInit {
     }
 
   }
+  
   async fflogin() {
     this.faio.isAvailable().then(
       () => {
         this.faio
           .show({
             cancelButtonTitle: 'Cancel',
-            description: 'Some biometric description',
+            description: 'Sign in with biometrics',
             disableBackup: true,
             // title: 'Scanner Title',
             fallbackButtonTitle: 'FB Back Button',
@@ -121,8 +169,7 @@ export class LoginscreenPage implements OnInit {
             (result: any) => {
               console.log(result);
               let data = {
-                // localStorage.getItem('onesignalId')
-                "one_signal_id": '123',
+                "one_signal_id": this.oneSignalId,
                 "email": this.getuserEmail,
                 "password": this.getuserPassword
               }
@@ -132,6 +179,12 @@ export class LoginscreenPage implements OnInit {
                   this.rest.hideLoader()
                   localStorage.setItem('userdeatil', JSON.stringify(res.data))
                   localStorage.setItem('user_Id', res.data.users_customers_id);
+                  // if(localStorage.getItem('sessionTimer')!= null || localStorage.getItem('sessionTimer')!= undefined){
+                  //   localStorage.removeItem('sessionTimer');
+                  // }
+                  if(this.platform.is('cordova')){
+                    OneSignal.login(res.data.users_customers_id);
+                  }
                   this.navCtrl.navigateRoot('home');
                 } else {
                   this.rest.hideLoader()
@@ -143,12 +196,12 @@ export class LoginscreenPage implements OnInit {
               })
             },
             (err: any) => {
-              this.rest.presentToast(JSON.stringify(err));
+              this.rest.presentToast(err.message);
             }
           );
       },
       (err: any) => {
-        this.rest.presentToast('finger print no avaibale---' + err);
+        this.rest.presentToast('No Fingerprint found on your device.');
       }
     );
   }

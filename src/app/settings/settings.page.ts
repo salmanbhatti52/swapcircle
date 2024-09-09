@@ -15,6 +15,7 @@ export class SettingsPage implements OnInit {
   number: any;
   time: any;
   fp:any;
+  disableSelect = true;
   constructor(public location: Location,
     public api: ApiService,
     public extra: ExtraService,
@@ -69,21 +70,47 @@ export class SettingsPage implements OnInit {
     }
   }
 
-  handleChange(ev: any) {
+  cancelTimer(ev:any){
     console.log(ev);
-    this.time = ev.detail.value
+    // localStorage.removeItem('sessionTimer');
+  }
 
-    let data = {
-      users_customers_id: localStorage.getItem('user_Id'),
-      activity_interval: this.time
-    }
-    this.api.sendRequest('update_activity_interval', data).subscribe((res: any) => {
-      console.log('reeer', res);
-      if (res.status == 'success') {
-        this.extra.presentToast('Session expire time is selected');
-        this.navCtrl.navigateRoot('home')
+  handleChange(ev: any) {
+    if(this.extra.sessionExpiryTime == null){
+      console.log(ev);
+      this.time = ev.detail.value;
+      localStorage.setItem('sessionTimer',this.time);
+      this.extra.sessionExpiryTime = this.time;
+      if(this.extra.sessionExpiryTime == 1)
+        this.extra.presentToast(`Your session will expire in ${this.extra.sessionExpiryTime} minute.`);
+      else{
+        this.extra.presentToast(`Your session will expire in ${this.extra.sessionExpiryTime} minutes.`);
       }
-    })
+      this.extra.startSessionTimer();
+    }else{
+      // ev.detail.value = this.extra.sessionExpiryTime;
+      // if(this.extra.sessionExpiryTime == 1){
+      //   this.extra.presentToast(`You have already set an expiry session for ${this.extra.sessionExpiryTime} minute.`);
+      // }else{
+      //   this.extra.presentToast(`You have already set an expiry session for ${this.extra.sessionExpiryTime} minutes.`);
+      // }
+
+    }
+    
+    
+    // let data = {
+    //   users_customers_id: localStorage.getItem('user_Id'),
+    //   activity_interval: this.time
+    // }
+
+    // this.api.sendRequest('update_activity_interval', data).subscribe((res: any) => {
+    //   console.log('reeer', res);
+    //   if (res.status == 'success') {
+    //     this.extra.presentToast('Session expire time is selected');
+    //     this.navCtrl.navigateRoot('home')
+    //   }
+    // })
+    
   }
 
 }

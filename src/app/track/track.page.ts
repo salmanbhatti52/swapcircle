@@ -49,10 +49,11 @@ export class TrackPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getcurrencies();
+    
   }
 
   ionViewWillEnter() {
+    this.getcurrencies();
     this.getbasecurr()
     if (this.requestsType) {
       if (this.requestsType === "Buy") {
@@ -66,6 +67,7 @@ export class TrackPage implements OnInit {
       this.mySegment.nativeElement.children[0].click();
     }
   }
+
   segmentChanged(ev: any) {
     this.amount = '';
     this.convertedamount = '';
@@ -83,9 +85,11 @@ export class TrackPage implements OnInit {
     }
     localStorage.setItem("requestType", this.requestsType);
   }
+
   goNext() {
     this.navCtrl.navigateForward("billingpayment");
   }
+
   getcurrencies() {
     this.api.getRequest("all_currencies").subscribe((res: any) => {
       console.log(res);
@@ -95,6 +99,7 @@ export class TrackPage implements OnInit {
       // console.log(this.exchangecurr);
     });
   }
+
   getbasecurr() {
     this.api.sendRequest('get_currencies_by_id', { "system_currencies_id": localStorage.getItem('systemcurr') }).subscribe((curr: any) => {
       console.log(curr);
@@ -105,25 +110,26 @@ export class TrackPage implements OnInit {
     })
   }
 
-  optionsFn(ev: any) {
-    console.log(ev);
-    let val = ev.detail.value
-    this.currcode = val.code
-    this.fromsystemId = val.system_currencies_id;
-    this.currsymbol = val.symbol
+  // optionsFn(ev: any) {
+  //   console.log(ev);
+  //   let val = ev.detail.value
+  //   this.currcode = val.code
+  //   this.fromsystemId = val.system_currencies_id;
+  //   this.currsymbol = val.symbol
 
-    this.track()
-  }
+  //   this.track()
+  // }
 
-  optionsFn2(ev: any) {
-    console.log(ev);
-    let val = ev.detail.value
-    this.tocurrcode = val.code
-    this.tosystemId = val.system_currencies_id;
-    this.tocurrsymbol = val.symbol
-    this.track()
-  }
-  Enteramount(ev: any) {
+  // optionsFn2(ev: any) {
+  //   console.log(ev);
+  //   let val = ev.detail.value
+  //   this.tocurrcode = val.code
+  //   this.tosystemId = val.system_currencies_id;
+  //   this.tocurrsymbol = val.symbol
+  //   this.track()
+  // }
+
+  enteramount(ev: any) {
     console.log(ev.target.value);
 
     this.amount = ev.target.value
@@ -134,6 +140,13 @@ export class TrackPage implements OnInit {
     this.term = ''
     this.isModalOpen = true
   }
+
+  dismissModal(){
+    console.log('dismiss 1');
+    
+    this.isModalOpen = false;
+  }
+
   closemodal(val: any) {
     console.log(val);
     this.currcode = val.code
@@ -141,10 +154,18 @@ export class TrackPage implements OnInit {
     this.fromsystemId = val.system_currencies_id;
     this.isModalOpen = false
   }
+
   Tocurrmodel() {
     this.term = ''
     this.Tocurrmodalopen = true
   }
+
+  dismissCurrModal(){
+    console.log('dismiss 2');
+    
+    this.Tocurrmodalopen = false;
+  }
+
   closeTocurrmodal(val: any) {
     console.log(val);
     this.tocurrcode = val.code
@@ -181,7 +202,7 @@ export class TrackPage implements OnInit {
 
             this.amountafterpoint = p2[1];
             this.adminrate = res.data.admin_rate_amount.toFixed(2);
-            this.exchangerate()
+            // this.exchangerate()
           } else {
             this.amountshow=false;
             this.convertedamount = '' 
@@ -197,7 +218,7 @@ export class TrackPage implements OnInit {
       } else {
         console.log("requestsType: ",this.requestsType);
         this.api.sendRequest('sell_currency_rate', datatosend).subscribe((res: any) => {
-          console.log('rate response====', res);
+          console.log('sell rate response====', res);
           if (res.status == 'success') {
             this.extra.hideLoader()
             this.amountshow = true
@@ -235,6 +256,7 @@ export class TrackPage implements OnInit {
     }
 
   }
+
   exchangerate() {
     let datasend = {
       "sender_currency_id": this.fromsystemId,
@@ -252,11 +274,8 @@ export class TrackPage implements OnInit {
 
     })
 
-
-
-
-
   }
+
   tabClick() {
     this.navCtrl.navigateForward("track");
   }

@@ -69,15 +69,15 @@ export class HomePage {
   fav: any;
   currsymbol: any;
   toSystemCurrenciesId: any;
-
+  isAllOfferFunctionCalled = false;
 
   constructor(public navCtrl: NavController,
     public api: ApiService,
     public extra: ExtraService,
     public alert: AlertController
   ) {
-    this.getbasecurr();
     this.systemsettings()
+    
     this.userdetail = localStorage.getItem('userdeatil')
     console.log(this.userdetail);
     ///show floating btn
@@ -124,17 +124,28 @@ export class HomePage {
     if (this.requestsType) {
       if (this.requestsType === 'AllTransactions') {
         this.mySegment.nativeElement.children[0].click();
-        this.gettransaction()
+        this.gettransaction();
+        console.log('call trans 1');
       }
       if (this.requestsType === 'HotSwapOffers') {
         this.mySegment.nativeElement.children[1].click();
-        // this.alloffers();
+        // if(this.offers.length != 0){
+        if(this.isAllOfferFunctionCalled == false){
+          this.isAllOfferFunctionCalled = true;
+          this.alloffers();
+        }
+          
+        // }
+        
+        console.log('call 1');
+        
       }
-    } else {
-      this.requestsType = 'AllTransactions';
-      this.mySegment.nativeElement.children[0].click();
-      // this.gettransaction();
-    }
+    } 
+    // else {
+    //   this.requestsType = 'AllTransactions';
+    //   // this.mySegment.nativeElement.children[0].click();
+    //   // this.gettransaction();
+    // }
 
     this.walletlist()
     this.unreadmessagecount()
@@ -175,7 +186,7 @@ export class HomePage {
       } else {
         this.extra.hideLoader()
       }
-
+      this.isAllOfferFunctionCalled = false;
     }, err => {
       this.extra.hideLoader()
     })
@@ -295,6 +306,7 @@ export class HomePage {
       await alert.present();
     }
   }
+  
   unreadmessagecount() {
     this.api.sendRequest('unreaded_messages', { "users_customers_id": localStorage.getItem('user_Id') }).subscribe((res: any) => {
       console.log('message count====', res);
@@ -303,17 +315,24 @@ export class HomePage {
       }
     })
   }
+
   segmentChanged(ev: any) {
     console.log('requestType value', ev.detail.value);
     let data = ev.detail.value;
     this.requestsType = data
     if (ev.detail.value === 'AllTransactions') {
       this.requestsType = 'AllTransactions';
+      console.log('call trans 2');
+
       this.gettransaction()
     }
-    if (ev.detail.value === 'HotSwapOffers') {
+    if (ev.detail.value === 'HotSwapOffers' ) {
       this.requestsType = 'HotSwapOffers';
-      this.alloffers();
+      console.log('call 2');
+      if(this.isAllOfferFunctionCalled == false){
+        this.isAllOfferFunctionCalled = true;
+        this.alloffers();
+      }
     }
     if (ev.detail.value === 'RateTable') {
       this.requestsType = 'RateTable';
@@ -334,6 +353,7 @@ export class HomePage {
           localStorage.setItem('systemcurr', this.currID)
         }
       });
+      this.getbasecurr();
       console.log(this.currID);
     })
   }

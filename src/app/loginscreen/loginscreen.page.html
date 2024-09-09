@@ -51,13 +51,13 @@
         (click)="goNext()">Login</ion-button>
     </div>
 
-    <ion-row *ngIf="fingerprint==true" style="align-items: center;">
-      <ion-col size="11">
-        <ion-button style="margin: 50px 0px 15px 0px" class="btnbggreen EudoxusSansReg"
+    <ion-row *ngIf="fingerprint==true" style="align-items: center;margin: 50px 0px 15px 0px">
+      <ion-col size="9.2">
+        <ion-button class="btnbggreen EudoxusSansReg"
           (click)="goNext()">Login</ion-button>
       </ion-col>
-      <ion-col size="1" style="padding-top: 40px; text-align: center">
-        <ion-icon name="finger-print-outline" style="font-size: 30px; color: gray" (click)="fflogin()"></ion-icon>
+      <ion-col size="2.8" style=" text-align: center">
+        <ion-icon  name="finger-print-outline" style="font-size: 43px; color: gray" (click)="fflogin()"></ion-icon>
       </ion-col>
     </ion-row>
 

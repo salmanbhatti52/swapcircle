@@ -29,11 +29,11 @@
       <ion-col size="6" *ngFor="let item of walletslist">
         <div class="bg EudoxusSansReg" (click)="presentAlert(item)">
           <div class="img1">
-            <div class="text1">{{item.currency.country.code}}</div>
-            <img src="https://portal.swapcircle.trade/public/{{item.currency.country.image}}">
+            <div class="text1">{{item?.currency?.country?.code}}</div>
+            <img src="https://portal.swapcircle.trade/public/{{item?.currency?.country?.image}}">
           </div>
 
-          <div class="text2">{{item.currency.symbol}}{{item.wallet_amount}}</div>
+          <div class="text2">{{item?.currency?.symbol}}{{item?.wallet_amount}}</div>
 
         </div>
       </ion-col>

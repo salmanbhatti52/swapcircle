@@ -187,7 +187,7 @@ export class SendcurrencyPage implements OnInit {
 
   async selectemail(item: any, i: any) {
     const alert = await this.alertController.create({
-      message: 'Are you sure to select this email?',
+      subHeader: 'Are you sure to select this email?',
       cssClass: 'custom-alert',
       buttons: [
         {

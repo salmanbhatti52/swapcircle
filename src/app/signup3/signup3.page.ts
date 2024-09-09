@@ -2,11 +2,12 @@ import { ExtraService } from '../services/extra.service';
 import { Signup4Page } from './../signup4/signup4.page';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, ModalController, NavController } from '@ionic/angular';
+import { AlertController, ModalController, NavController, Platform } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { format } from 'date-fns';
 import * as moment from 'moment';
+import OneSignal from 'onesignal-cordova-plugin';
 @Component({
   selector: 'app-signup3',
   templateUrl: './signup3.page.html',
@@ -27,14 +28,45 @@ export class Signup3Page implements OnInit {
   displayDate: any = moment().format();
   datesendonapi: any;
   idchoose: any = '';
+  oneSignalId: any;
   constructor(public router: Router,
     public navCtrl: NavController,
     public modal: ModalController,
     public alertCtrl: AlertController,
     public extra: ExtraService,
-    public rest: ApiService) { }
+    public rest: ApiService,
+    public platform:Platform) { }
 
   ngOnInit() { }
+
+  ionViewWillEnter(){
+    if(this.platform.is('cordova')){
+      this.getOneSignalUserAndExternalIds();
+    }
+  }
+
+  async getOneSignalUserAndExternalIds() {
+    
+    // Fetch OneSignal ID (Player ID)
+     this.oneSignalId = await OneSignal.User.getOnesignalId();
+    if (this.oneSignalId) {
+      console.log('OneSignal ID (User ID):', this.oneSignalId);
+    } else {
+      console.log('OneSignal ID is null. Ensure the user is subscribed.');
+    }
+
+    // Fetch External ID (if set)
+    const externalId = await OneSignal.User.getExternalId();
+    if (externalId) {
+      console.log('External ID:', externalId);
+    } else {
+      console.log('External ID is null. Ensure it has been set.');
+    }
+
+    let id = await  OneSignal.User.pushSubscription.getIdAsync();
+    console.log("subscription id: ",id);
+    
+  }
 
   async chooseImage(type: any) {
     await Camera.getPhoto({
@@ -56,72 +88,7 @@ export class Signup3Page implements OnInit {
         this.picurlback = picurl2[1]
       }
     })
-    // let confirm = await this.alertCtrl.create({
-    //   header: 'Upload Image',
-    //   cssClass: 'camera-alert',
-    //   buttons: [
-    //     {
-    //       text: 'Camera',
-    //       handler: async () => {
-    //         console.log('came inside Camera');
-    //         const image = await Camera.getPhoto({
-    //           quality: 75,
-    //           allowEditing: false,
-    //           resultType: CameraResultType.DataUrl,
-    //           source: CameraSource.Camera
-    //         }).then(res => {
-    //           if (type == 'frontside') {
-    //             this.frontimage = res.dataUrl
-    //             this.picurl1 = res.dataUrl
-    //             let picurl2 = this.picurl1.split(',');
-    //             this.picurlfront = picurl2[1]
-    //           } else {
-    //             this.backimage = res.dataUrl
-    //             this.picurl1 = res.dataUrl
-    //             let picurl2 = this.picurl1.split(',');
-    //             this.picurlback = picurl2[1]
-    //           }
-
-
-
-
-    //         })
-    //       }
-    //     },
-    //     {
-    //       text: 'Gallery',
-    //       handler: async () => {
-    //         console.log('came inside yes');
-
-    //         const image = await Camera.getPhoto({
-    //           quality: 75,
-    //           allowEditing: false,
-    //           resultType: CameraResultType.DataUrl,
-    //           source: CameraSource.Photos,
-    //         }).then(res => {
-    //           if (type == 'frontside') {
-    //             this.frontimage = res.dataUrl
-    //             this.picurl1 = res.dataUrl
-    //             let picurl2 = this.picurl1.split(',');
-    //             this.picurlfront = picurl2[1]
-    //           } else {
-    //             this.backimage = res.dataUrl
-    //             this.picurl1 = res.dataUrl
-    //             let picurl2 = this.picurl1.split(',');
-    //             this.picurlback = picurl2[1]
-    //           }
-
-
-    //         })
-
-
-
-    //       }
-    //     },
-    //   ]
-    // })
-    // await confirm.present();
-
+    
   }
 
   handleChange(ev: any) {
@@ -129,6 +96,7 @@ export class Signup3Page implements OnInit {
     this.idchoose = ev
     this.show = true
   }
+
   goNext() {
     let datasend;
     if (this.Id == '') {
@@ -142,7 +110,7 @@ export class Signup3Page implements OnInit {
       this.extra.loadershow()
       if (localStorage.getItem('customertype') == 'Company') {
         datasend = {
-          "one_signal_id": '123',
+          "one_signal_id": this.oneSignalId,
           "id_number": this.Id,
           "users_customers_type": localStorage.getItem('customertype'),
           "company_name": localStorage.getItem('fname'),
@@ -162,7 +130,7 @@ export class Signup3Page implements OnInit {
         }
       } else {
         datasend = {
-          "one_signal_id": "123",
+          "one_signal_id": this.oneSignalId,
           "id_number": this.Id,
           "users_customers_type": localStorage.getItem('customertype'),
           "first_name": localStorage.getItem('fname'),
@@ -181,6 +149,7 @@ export class Signup3Page implements OnInit {
         }
       }
 
+    console.log("signup data: ",datasend);
 
       this.rest.sendRequest('signup', datasend).subscribe((res: any) => {
         console.log('response--', res);

@@ -29,14 +29,14 @@ export class FavoritePage implements OnInit {
   }
 
   favconnects() {
-    this.loadershow()
+    this.extra.loadershow();
     this.api.sendRequest('favorite_connect_articles', { "users_customers_id": localStorage.getItem('user_Id') }).subscribe((res: any) => {
-
+      this.extra.hideLoader();
       console.log('fav_articles====', res);
       this.fav_articles = res.data
 
     }, err => {
-
+      this.extra.hideLoader();
     })
   }
   removefav(item: any, index: any) {
@@ -64,12 +64,18 @@ export class FavoritePage implements OnInit {
     }
   }
   async socialshare(obj: any) {
-    await Share.share({
-      title: obj.title,
-      text: obj.description,
-      url: 'http://ionicframework.com/',
-      dialogTitle: 'Share with buddies',
-    });
+    try {
+      await Share.share({
+        title: obj.title,
+        text: obj.description,
+        url: 'http://ionicframework.com/',
+        dialogTitle: 'Share with buddies',
+      });
+    } catch (error) {
+      console.log('share error: ',error);
+      this.extra.presentToast(error);
+    }
+    
   }
   tabClick() {
     this.navCtrl.navigateRoot('track');
@@ -88,16 +94,16 @@ export class FavoritePage implements OnInit {
 
   }
 
-  async loadershow(content?: string) {
+  // async loadershow(content?: string) {
 
-    this.loadingCtrl.create({
-      cssClass: 'loadingdiv',
-      message: '',
-      duration: 2000
-    }).then((res) => {
-      res.present();
-    });
+  //   this.loadingCtrl.create({
+  //     cssClass: 'loadingdiv',
+  //     message: '',
+  //     duration: 2000
+  //   }).then((res) => {
+  //     res.present();
+  //   });
 
-  }
+  // }
 
 }

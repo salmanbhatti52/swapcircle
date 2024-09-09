@@ -182,43 +182,22 @@ export class CreatesawapPage implements OnInit {
 
   async Alerboxt() {
     const alert = await this.alert.create({
-      message: 'Are you sure to transfer' + ' ' + this.fromcurrency + this.totalamount + ' ' + 'to account' + ' ' + this.excurrency,
+      header: 'Are you sure to transfer' + ' ' + this.fromcurrency + this.totalamount + ' ' + 'to account' + ' ' + this.excurrency,
       cssClass: 'custom-alert',
       buttons: [
         {
           text: 'Yes',
           cssClass: 'alert-button-confirm',
           handler: () => {
-            let data = {
-              "users_customers_id": localStorage.getItem('user_Id'),
-              "from_users_customers_wallets_id": this.fromwalletId,
-              "to_users_customers_wallets_id": this.towalletId,
-              "amount_from": this.totalamount,
-              "system_currencies_id": localStorage.getItem('systemcurr')
-            }
-            console.log(data);
-            
-            this.extra.loadershow()
-            this.api.sendRequest('wallet_swap', data).subscribe((res: any) => {
-              console.log('wallet response=====', res);
-              if (res.status == 'success') {
-                this.extra.hideLoader()
-                this.extra.presentToast('Amount transfer successfully');
-                this.navCtrl.navigateForward('home')
-              } else {
-                this.extra.presentToast(res.message)
-              }
-            }, err => {
-              this.extra.hideLoader();
-              this.extra.presentToast('Something went wrong')
-            })
+            alert.dismiss();
+            this.swapWalletAmount();
           },
         },
         {
           text: 'No',
           cssClass: 'alert-button-confirm',
           handler: () => {
-
+            alert.dismiss();
           },
         },
       ]
@@ -229,4 +208,32 @@ export class CreatesawapPage implements OnInit {
     await alert.present();
   }
 
+  swapWalletAmount(){
+    let data = {
+      "users_customers_id": localStorage.getItem('user_Id'),
+      "from_users_customers_wallets_id": this.fromwalletId,
+      "to_users_customers_wallets_id": this.towalletId,
+      "amount_from": this.totalamount,
+      "system_currencies_id": localStorage.getItem('systemcurr')
+    }
+    console.log(data);
+    
+    this.extra.loadershow()
+    this.api.sendRequest('wallet_swap', data).subscribe((res: any) => {
+      console.log('wallet response=====', res);
+      if (res.status == 'success') {
+        this.extra.hideLoader()
+        this.extra.presentToast('Amount transfer successfully');
+        this.navCtrl.navigateForward('home')
+      } else {
+        this.extra.presentToast(res.message)
+      }
+    }, err => {
+      this.extra.hideLoader();
+      this.extra.presentToast('Something went wrong')
+    })
+  }
+
 }
+
+

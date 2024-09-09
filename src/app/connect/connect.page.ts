@@ -139,12 +139,18 @@ export class ConnectPage implements OnInit {
     }
   }
   async socialshare(obj: any) {
-    await Share.share({
-      title: obj.title,
-      text: obj.description,
-      url: 'http://ionicframework.com/',
-      dialogTitle: 'Share with buddies',
-    });
+    try {
+      await Share.share({
+        title: obj.title,
+        text: obj.description,
+        url: 'http://ionicframework.com/',
+        dialogTitle: 'Share with buddies',
+      });
+    } catch (error) {
+      console.log('share error: ',error);
+      this.extra.presentToast(error)
+    }
+    
   }
   goto() {
     this.navCtrl.navigateForward('favorite');

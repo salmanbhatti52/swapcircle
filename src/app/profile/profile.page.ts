@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, ToastController } from '@ionic/angular';
+import { NavController, Platform, ToastController } from '@ionic/angular';
 import { Share } from '@capacitor/share';
 import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
 import { ExtraService } from '../services/extra.service';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -18,10 +19,12 @@ export class ProfilePage implements OnInit {
   first_name: any;
   last_name: any;
   email: any;
+  userid: any;
   constructor(public navCtrl: NavController,
     public toastController: ToastController,
     private clipboard: Clipboard,
-    public extra: ExtraService) { }
+    public extra: ExtraService,
+  public platform:Platform) { }
 
   ngOnInit() {
 
@@ -33,6 +36,9 @@ export class ProfilePage implements OnInit {
 
     this.user = JSON.parse(this.userdetail)
     console.log(this.user);
+    this.userid = this.user.users_customers_id;
+    console.log("userId: ",this.userid);
+    
     this.userprofile = this.user.profile_pic
     this.first_name = this.user.first_name
     this.last_name = this.user.last_name
@@ -89,7 +95,11 @@ export class ProfilePage implements OnInit {
   }
   logout() {
     localStorage.removeItem('user_Id');
+    localStorage.removeItem('sessionTimer');
+    this.extra.sessionExpiryTime = null;
+
     this.extra.btnshow = false;
+    this.extra.clearTimer();
     this.navCtrl.navigateRoot('loginscreen')
   }
   goto() {
