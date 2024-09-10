@@ -108,7 +108,7 @@ export class Signup3Page implements OnInit {
     else if (this.expiry == '') {
       this.extra.presentToast('Select Expiry Date')
     } else {
-      this.extra.loadershow()
+      this.extra.loadershowContinuous()
       if (localStorage.getItem('customertype') == 'Company') {
         datasend = {
           "one_signal_id": this.oneSignalSubscriptionId,

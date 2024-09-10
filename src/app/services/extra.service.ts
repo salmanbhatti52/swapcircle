@@ -51,6 +51,18 @@ export class ExtraService {
 
   }
 
+  async loadershowContinuous(content?: string) {
+
+    this.loadingCtrl.create({
+      cssClass: 'loadingdiv',
+      message: '',
+      // duration: 3000
+    }).then((res) => {
+      res.present();
+    });
+
+  }
+
   hideLoader() {
 
     this.loadingCtrl.dismiss().then((res) => {
