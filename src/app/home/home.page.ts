@@ -271,7 +271,7 @@ export class HomePage {
     console.log("currency_converter_payloads:",datasend);
     
     this.api.sendRequest('currency_converter', datasend).subscribe((p: any) => {
-      console.log(p);
+      console.log('curr converter: ',p);
       let base_amt = p.data.converted_amount
       this.baseamt = base_amt.toFixed(2)
     })

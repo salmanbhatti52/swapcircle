@@ -41,21 +41,25 @@ export class Sendcurrency2Page implements OnInit {
   }
 
   next() {
-    this.extra.loadershow()
+    this.extra.loadershow();
     console.log('payloads: ',localStorage.getItem('transfer_currency'));
     
     this.api.sendRequest('transfer_currency', localStorage.getItem('transfer_currency')).subscribe((res: any) => {
+      this.extra.hideLoader()
       console.log('response gte', res);
       if (res.status == 'success') {
-        this.extra.hideLoader()
         this.extra.presentToast('Currency transfer successfully')
         this.navCtrl.navigateForward('home')
       } else {
-        this.extra.hideLoader()
         this.extra.presentToast(res.message)
+        this.navCtrl.navigateForward('home')
+
       }
     }, err => {
+      
+      this.extra.presentToast(`Error: ${err}`);
       this.extra.hideLoader()
+      this.navCtrl.navigateForward('home')
     })
   }
 

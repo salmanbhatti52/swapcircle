@@ -3,6 +3,7 @@ import { NavController, Platform, ToastController } from '@ionic/angular';
 import { Share } from '@capacitor/share';
 import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
 import { ExtraService } from '../services/extra.service';
+import OneSignal from 'onesignal-cordova-plugin';
 
 @Component({
   selector: 'app-profile',
@@ -97,7 +98,9 @@ export class ProfilePage implements OnInit {
     localStorage.removeItem('user_Id');
     localStorage.removeItem('sessionTimer');
     this.extra.sessionExpiryTime = null;
-
+    // if(this.platform.is('cordova')){
+    //   OneSignal.logout();
+    // }
     this.extra.btnshow = false;
     this.extra.clearTimer();
     this.navCtrl.navigateRoot('loginscreen')

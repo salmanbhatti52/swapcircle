@@ -160,8 +160,12 @@ export class CreateofferPage implements OnInit {
                 this.extra.presentToast('Offer created successfully');
                 this.navCtrl.navigateForward('home');
               } else {
-                this.extra.presentToast(rsp.message)
+                this.extra.presentToast(rsp.message);
+                this.navCtrl.navigateForward('home');
               }
+            },(err:any)=>{
+              this.extra.presentToast(`Error: ${err}`);
+                this.navCtrl.navigateForward('home');
             })
           },
         },

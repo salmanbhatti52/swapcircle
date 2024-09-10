@@ -56,6 +56,7 @@ export class AppComponent {
     
     // Replace YOUR_ONESIGNAL_APP_ID with your OneSignal App ID
     OneSignal.initialize("3e72c5cc-01d7-4486-90cd-95a58b7a8d7a");
+    
     // OneSignal.
     OneSignal.Notifications.addEventListener('click', async (e) => {
       let clickData = await e.notification;

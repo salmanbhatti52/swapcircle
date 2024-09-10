@@ -21,6 +21,7 @@ export class LoginscreenPage implements OnInit {
   getuserEmail: any;
   getuserPassword: any;
   oneSignalId: any;
+  oneSignalSubscriptionId: any;
   constructor(public navCtrl: NavController,
     public rest: ExtraService,
     public api: ApiService,
@@ -34,9 +35,9 @@ export class LoginscreenPage implements OnInit {
     //  }, 3000);
   }
 
-  ionViewWillEnter() {
+  async ionViewWillEnter() {
     if(this.platform.is('cordova')){
-      this.getOneSignalUserAndExternalIds();
+     await this.getOneSignalUserAndExternalIds();
     }
 
     if (this.requestsType) {
@@ -76,15 +77,15 @@ export class LoginscreenPage implements OnInit {
     }
 
     // Fetch External ID (if set)
-    const externalId = await OneSignal.User.getExternalId();
-    if (externalId) {
-      console.log('External ID:', externalId);
-    } else {
-      console.log('External ID is null. Ensure it has been set.');
-    }
+    // const externalId = await OneSignal.User.getExternalId();
+    // if (externalId) {
+    //   console.log('External ID:', externalId);
+    // } else {
+    //   console.log('External ID is null. Ensure it has been set.');
+    // }
 
-    let id = await  OneSignal.User.pushSubscription.getIdAsync();
-    console.log("subscription id: ",id);
+    this.oneSignalSubscriptionId = await  OneSignal.User.pushSubscription.getIdAsync();
+    console.log("subscription id: ",this.oneSignalSubscriptionId);
     
   }
 
@@ -97,7 +98,7 @@ export class LoginscreenPage implements OnInit {
 
     }
     if (ev.detail.value === 'Corporate') {
-      this.requestsType = 'Corporate';
+      this.requestsType = 'Company';
 
     }
     localStorage.setItem('requestType', this.requestsType);
@@ -109,7 +110,7 @@ export class LoginscreenPage implements OnInit {
 
   goNext() {
     let data = {
-      "one_signal_id": this.oneSignalId ,
+      "one_signal_id": this.oneSignalSubscriptionId ,
       "email": this.email,
       "password": this.pass1
     }
@@ -131,9 +132,9 @@ export class LoginscreenPage implements OnInit {
             // if(localStorage.getItem('sessionTimer')!= null || localStorage.getItem('sessionTimer')!= undefined){
             //   localStorage.removeItem('sessionTimer');
             // }
-            if(this.platform.is('cordova')){
-              OneSignal.login(res.data.users_customers_id);
-            }
+            // if(this.platform.is('cordova')){
+            //   OneSignal.login(res.data.users_customers_id);
+            // }
             localStorage.setItem('email', res.data.email);
             localStorage.setItem('password', this.pass1);
             this.navCtrl.navigateRoot('home');
@@ -169,7 +170,7 @@ export class LoginscreenPage implements OnInit {
             (result: any) => {
               console.log(result);
               let data = {
-                "one_signal_id": this.oneSignalId,
+                "one_signal_id": this.oneSignalSubscriptionId,
                 "email": this.getuserEmail,
                 "password": this.getuserPassword
               }
@@ -182,9 +183,9 @@ export class LoginscreenPage implements OnInit {
                   // if(localStorage.getItem('sessionTimer')!= null || localStorage.getItem('sessionTimer')!= undefined){
                   //   localStorage.removeItem('sessionTimer');
                   // }
-                  if(this.platform.is('cordova')){
-                    OneSignal.login(res.data.users_customers_id);
-                  }
+                  // if(this.platform.is('cordova')){
+                  //   OneSignal.login(res.data.users_customers_id);
+                  // }
                   this.navCtrl.navigateRoot('home');
                 } else {
                   this.rest.hideLoader()

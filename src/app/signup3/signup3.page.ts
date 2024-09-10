@@ -29,6 +29,7 @@ export class Signup3Page implements OnInit {
   datesendonapi: any;
   idchoose: any = '';
   oneSignalId: any;
+  oneSignalSubscriptionId: any;
   constructor(public router: Router,
     public navCtrl: NavController,
     public modal: ModalController,
@@ -39,9 +40,9 @@ export class Signup3Page implements OnInit {
 
   ngOnInit() { }
 
-  ionViewWillEnter(){
+  async ionViewWillEnter(){
     if(this.platform.is('cordova')){
-      this.getOneSignalUserAndExternalIds();
+      await this.getOneSignalUserAndExternalIds();
     }
   }
 
@@ -55,16 +56,16 @@ export class Signup3Page implements OnInit {
       console.log('OneSignal ID is null. Ensure the user is subscribed.');
     }
 
-    // Fetch External ID (if set)
-    const externalId = await OneSignal.User.getExternalId();
-    if (externalId) {
-      console.log('External ID:', externalId);
-    } else {
-      console.log('External ID is null. Ensure it has been set.');
-    }
+    // // Fetch External ID (if set)
+    // const externalId = await OneSignal.User.getExternalId();
+    // if (externalId) {
+    //   console.log('External ID:', externalId);
+    // } else {
+    //   console.log('External ID is null. Ensure it has been set.');
+    // }
 
-    let id = await  OneSignal.User.pushSubscription.getIdAsync();
-    console.log("subscription id: ",id);
+    this.oneSignalSubscriptionId = await  OneSignal.User.pushSubscription.getIdAsync();
+    console.log("subscription id: ",this.oneSignalSubscriptionId);
     
   }
 
@@ -110,7 +111,7 @@ export class Signup3Page implements OnInit {
       this.extra.loadershow()
       if (localStorage.getItem('customertype') == 'Company') {
         datasend = {
-          "one_signal_id": this.oneSignalId,
+          "one_signal_id": this.oneSignalSubscriptionId,
           "id_number": this.Id,
           "users_customers_type": localStorage.getItem('customertype'),
           "company_name": localStorage.getItem('fname'),
@@ -130,7 +131,7 @@ export class Signup3Page implements OnInit {
         }
       } else {
         datasend = {
-          "one_signal_id": this.oneSignalId,
+          "one_signal_id": this.oneSignalSubscriptionId,
           "id_number": this.Id,
           "users_customers_type": localStorage.getItem('customertype'),
           "first_name": localStorage.getItem('fname'),
@@ -153,13 +154,15 @@ export class Signup3Page implements OnInit {
 
       this.rest.sendRequest('signup', datasend).subscribe((res: any) => {
         console.log('response--', res);
-        this.extra.hideLoader()
+        
         if (res.status == 'success') {
+          this.extra.hideLoader()
           localStorage.setItem('userdeatil', JSON.stringify(res.data));
           localStorage.setItem('user_Id', res.data.users_customers_id);
           localStorage.setItem('status', res.data.status);
           this.navCtrl.navigateForward('signup5')
         } else {
+          this.extra.hideLoader()
           this.extra.presentToast(res.message)
         }
 

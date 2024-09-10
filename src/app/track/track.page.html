@@ -160,9 +160,9 @@
       Currency</ion-button>
   </div>
   <!-- fromcurr -->
-  <ion-modal #modal trigger="open-modal" [initialBreakpoint]="0.75" [isOpen]="isModalOpen" (willDismiss)="dismissModal()">
+  <ion-modal #modal trigger="open-modal"  [initialBreakpoint]="1" [breakpoints]="[1]" [isOpen]="isModalOpen" (willDismiss)="dismissModal()">
     <ng-template>
-      <ion-content>
+      <ion-content class="ion-padding" scroll-y="true">
         <ion-searchbar placeholder="Search" [(ngModel)]="term"></ion-searchbar>
         <ion-list>
           <ion-item *ngFor="let s of curr | filter:term;let i=index;" (click)="closemodal(s)">
@@ -180,7 +180,7 @@
 
 
   <!-- Tocurr -->
-  <ion-modal #modal trigger="open-modal" [initialBreakpoint]="0.75" [isOpen]="Tocurrmodalopen" (willDismiss)="dismissCurrModal()">
+  <ion-modal #modal trigger="open-modal" [initialBreakpoint]="1" [breakpoints]="[1]" [isOpen]="Tocurrmodalopen" (willDismiss)="dismissCurrModal()">
     <ng-template>
       <ion-content>
         <ion-searchbar placeholder="Search" [(ngModel)]="term"></ion-searchbar>

@@ -200,9 +200,10 @@ export class OfferPage implements OnInit {
     this.fav = []
     this.extra.loadershow();
     this.api.sendRequest('all_favorite_swaps_offers', { "users_customers_id": localStorage.getItem('user_Id') }).subscribe((res: any) => {
+      this.extra.hideLoader();
       console.log('get fav====', res);
       if (res.status == "success") {
-        this.extra.hideLoader()
+        
         this.fav = res.data
       }
     }, err => {
