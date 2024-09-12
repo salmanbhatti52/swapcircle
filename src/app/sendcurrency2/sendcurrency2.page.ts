@@ -48,7 +48,8 @@ export class Sendcurrency2Page implements OnInit {
       this.extra.hideLoader()
       console.log('response gte', res);
       if (res.status == 'success') {
-        this.extra.presentToast('Currency transfer successfully')
+        this.extra.presentToast('Currency transfer successfully');
+        // this.sendTestNotification();
         this.navCtrl.navigateForward('home')
       } else {
         this.extra.presentToast(res.message)
@@ -62,5 +63,13 @@ export class Sendcurrency2Page implements OnInit {
       this.navCtrl.navigateForward('home')
     })
   }
+
+  // sendTestNotification(){
+  //   this.api.sendNotification().subscribe((res:any)=>{
+  //     console.log('Notification sent successfully:', res);
+  //   },(error:any)=>{
+  //     console.error('Error sending notification:', error);
+  //   })
+  // }
 
 }

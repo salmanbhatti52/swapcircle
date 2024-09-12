@@ -129,9 +129,6 @@ export class LoginscreenPage implements OnInit {
           if(res.data.users_customers_type == this.requestsType){
             localStorage.setItem('userdeatil', JSON.stringify(res.data))
             localStorage.setItem('user_Id', res.data.users_customers_id);
-            // if(localStorage.getItem('sessionTimer')!= null || localStorage.getItem('sessionTimer')!= undefined){
-            //   localStorage.removeItem('sessionTimer');
-            // }
             // if(this.platform.is('cordova')){
             //   OneSignal.login(res.data.users_customers_id);
             // }
@@ -180,9 +177,6 @@ export class LoginscreenPage implements OnInit {
                   this.rest.hideLoader()
                   localStorage.setItem('userdeatil', JSON.stringify(res.data))
                   localStorage.setItem('user_Id', res.data.users_customers_id);
-                  // if(localStorage.getItem('sessionTimer')!= null || localStorage.getItem('sessionTimer')!= undefined){
-                  //   localStorage.removeItem('sessionTimer');
-                  // }
                   // if(this.platform.is('cordova')){
                   //   OneSignal.login(res.data.users_customers_id);
                   // }

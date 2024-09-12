@@ -9,8 +9,8 @@ import OneSignal from 'onesignal-cordova-plugin';
   styleUrls: ["app.component.scss"],
 })
 export class AppComponent {
-  sender_id = "558453112065";
-  oneSignalAppId = "925e80ab-a9d8-4e29-9824-f1956346665c";
+  // sender_id = "558453112065";
+  // oneSignalAppId = "925e80ab-a9d8-4e29-9824-f1956346665c";
   intervalId: any;
   constructor(public navCtrl: NavController, public platform: Platform, public api: ApiService) { }
 
