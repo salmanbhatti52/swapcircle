@@ -31,7 +31,7 @@ export class ForgotPage implements OnInit {
       this.api.sendRequest('forgot_password', data).subscribe((res: any) => {
         console.log('response--', res);
         if (res.status == 'success') {
-          this.navCtrl.navigateRoot('otp');
+          this.navCtrl.navigateForward('otp');
           localStorage.setItem('emailonforgot', this.email);
           localStorage.setItem('otp', res.data.otp);
           this.rest.presentToast(res.data.message);
